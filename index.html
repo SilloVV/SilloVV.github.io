@@ -5,130 +5,427 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wassil NAKIB Portfolio</title>
     <link rel="icon" type="image/x-icon"  href="/assets/icons/favicon.ico">
-    <script src="/js/color-mode.js" defer></script>
+    <script src="/js/main.js" defer></script>
     <script src="/js/project-slideshow.js" defer></script>
     <link rel="stylesheet" href="/css/style.css">
     
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
 </head>
 <body>
+
     
     
 
     <div  id="hero">
-        <h5>Je suis</h5>
-        <h1 id="nom" >Wassil NAKIB </h1>
-        <h1 id="sillow" style="display: none;">'Sillow'</h1>
-        <p>Computer & robotics Engineering Student </p>
+        <div class="hero-content">
+            <div class="hero-greeting">
+                <span class="wave-emoji">👋</span>
+                <h5>Salut, je suis</h5>
+            </div>
+            <div class="hero-name">
+                <h1 id="nom">Wassil NAKIB</h1>
+                <h1 id="sillow" style="display: none;">'Sillow'</h1>
+            </div>
+            <div class="hero-title">
+                <p>Ingénieur Machine Learning & DevOps</p>
+                <div class="hero-tags">
+                    <span class="hero-tag">🤖 Intelligence Artificielle (GenAI/Machine Learning)  </span>
+                    <span class="hero-tag">⚙️ DevOps & Infrastructure</span>
+                </div>
+            </div>
+        </div>
         <!-- Block Element modifier-->
         <div id="hero_animation">
             <div id="hero__animation__img">
             </div>
-
         </div>
     </div>
 
     <div id="cvscroller" style="display: none;">
-        <div id="closeb" onclick="close_cv()">X</div>
-        <div class="cv">
-            <div class="cv-content">
-            <img src="./docs/CV.jpg" alt="img1 du cv">
+        <div id="closeb-cv" class="closeb" onclick="closeCurrentSection()">×</div>
+        <div class="cv-container">
+            <!-- Header -->
+            <div class="cv-header">
+                <h1 class="cv-name">NAKIB Wassil</h1>
+                <h2 class="cv-title">Ingénieur Machine Learning Junior / DevOps</h2>
+                <div class="cv-contact">
+                    <span>+33 7 81 41 56 22</span> • 
+                    <span>Permis B & Véhiculé</span> • 
+                    <span>wnakib21@gmail.com</span> • 
+                    <span>Français</span>
+                </div>
+                <div class="cv-availability">
+                    Disponible à partir de début novembre 2025, mobile à l'échelle nationale et internationale
+                </div>
+            </div>
+
+            <!-- Profil -->
+            <div class="cv-section">
+                <h3 class="cv-section-title">Profil</h3>
+                <p>Je termine actuellement mon stage de fin d'études, où je travaille sur le développement d'une solution agentique pour les professionnels du droit. Je suis à la recherche d'un poste junior en machine learning/ingénieur IA à partir d'octobre 2025, avec si possible une dimension DevOps. Je suis motivé à contribuer à la mise en place de solutions ML efficaces et fiables dans un contexte de production.</p>
+            </div>
+
+            <!-- Expérience -->
+            <div class="cv-section">
+                <h3 class="cv-section-title">Expérience</h3>
+                
+                <div class="cv-experience">
+                    <div class="cv-exp-header">
+                        <h4>HermineIA – Stage – Data Science & ingénierie agents IA – Paris STATION F</h4>
+                        <span class="cv-duration">Legal Tech - 6 mois</span>
+                    </div>
+                    <ul>
+                        <li>Design et implémentations d'une solution multi-agentique pour assister des professionnels du droits dans leurs rédaction (Q&A + Analyse de documents) : LangGraph, asyncio, MkDocs, HF Transformers, APIs, contexte engineering</li>
+                        <li>État de l'art des solutions actuelles dans le cadre juridique français (voir Gitlab : SoTA)</li>
+                        <li>Flexibilité, adaptabilité et réactivité dans un environnement de start up</li>
+                    </ul>
+                </div>
+
+                <div class="cv-experience">
+                    <div class="cv-exp-header">
+                        <h4>Equasens – Stage – DevOps – Nancy Siège</h4>
+                        <span class="cv-duration">Leader Européen Health Tech pour pharmacies et soins médicaux - 4 mois</span>
+                    </div>
+                    <ul>
+                        <li>Design et développement d'une solution de monitoring de serveur client : Linux, Bash, shUnit2</li>
+                        <li>Mise en production (CI/CD) et contrôle de version : BitBucket /Jenkins</li>
+                        <li>Création d'une documentation technique écrite et vidéo : Markdown, Webex Video Editor</li>
+                        <li>Collaboration et Proactivité au sein d'un grand groupe</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Formation -->
+            <div class="cv-section">
+                <h3 class="cv-section-title">Formation</h3>
+                
+                <div class="cv-education">
+                    <h4>Master II – Intelligence artificielle appliquée à la vision et à la robotique (IA2VR)</h4>
+                    <p class="cv-school">Faculté de Sciences et Technologies de Nancy</p>
+                    <ul>
+                        <li>Fondamentaux du Machine Learning : axé Deep Learning, Reinforcement Learning et applications</li>
+                        <li>Pipeline complète de pré-entrainement, fine-tuning (ResNet50)</li>
+                        <li>Optimisation de paramètres d'entrainements, mise en place et analyse de métriques</li>
+                        <li>Algorithmes de Planification et Contrôle robotique</li>
+                    </ul>
+                </div>
+
+                <div class="cv-education">
+                    <h4>Diplôme d'ingénieur en Informatique (IA2R) - Spécialisation Système d'information et Réseaux (SIR)</h4>
+                    <p class="cv-school">Polytech Nancy</p>
+                    <ul>
+                        <li>Informatique générale</li>
+                        <li>Scripting : Bash, Python</li>
+                        <li>CI/CD, contrôle de version, conteneurisation : Jenkins, git, Docker, Kubernetes</li>
+                        <li>Software System Design</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Compétences -->
+            <div class="cv-section">
+                <h3 class="cv-section-title">Compétences</h3>
+                <div class="cv-skills">
+                    <div class="cv-skill-category">
+                        <h5>Systèmes et Déploiement</h5>
+                        <p>CI/CD, Conteneurisation, Automatisation, Gestion de version : Bash, Docker, Kubernetes, Jenkins, Git, Helm, Terraform</p>
+                    </div>
+                    <div class="cv-skill-category">
+                        <h5>Machine Learning</h5>
+                        <p>Apprentissage supervisé, Évaluation et entraînement de modèles, Fine-tuning, Techniques d'augmentation de données : Python, PyTorch, ONNX, OpenCV, Tensorboard, pandas</p>
+                    </div>
+                    <div class="cv-skill-category">
+                        <h5>Architecture, Développement et Monitoring d'Agents IA</h5>
+                        <p>Langchain, LangGraph, crewAI, Agno, Asyncio, ChromaDB, Streamlit, Firebase</p>
+                    </div>
+                    <div class="cv-skill-category">
+                        <h5>Développement Logiciel (Full-Stack)</h5>
+                        <p>Python, Java, Angular, React, Spring, REST API</p>
+                    </div>
+                    <div class="cv-skill-category">
+                        <h5>Langues</h5>
+                        <p>Français (Langue maternelle), Anglais (Courant), Allemand (Notions)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certifications -->
+            <div class="cv-section">
+                <h3 class="cv-section-title">Certifications</h3>
+                <ul>
+                    <li>TOEIC : 865/990</li>
+                    <li>Hugging face Agent Course, Hugging Face</li>
+                    <li>Administration de Serveur Linux, Open Classroom</li>
+                </ul>
+            </div>
+
+            <!-- Projets -->
+            <div class="cv-section">
+                <h3 class="cv-section-title">Projets</h3>
+                <p class="cv-gitlab-link">Mon Gitlab : <a href="https://gitlab.com/users/SilloVV/projects" target="_blank">https://gitlab.com/users/SilloVV/projects</a></p>
+                
+                <div class="cv-projects">
+                    <h5>ML :</h5>
+                    <ul>
+                        <li>Segmentation Sémantique pour de la segmentation d'objets sur le dataset PascalVOC utilisant un modèle U-Net CNN : Pytorch, TensorBoard, ONNX (Voir Gitlab : U-Net)</li>
+                        <li>Contrôle d'un angle de braquage d'un véhicule simulé via vision par ordinateur : ROS2, Pytorch, ONNX, TensorBoard (voir Gitlab : SteerSim)</li>
+                        <li>Implémentation d'un RNN pour la classification de sentiments sur des tweets</li>
+                        <li>Implémentation d'un DCGAN pour la génération d'image synthétique sur le dataset Fashion MNIST</li>
+                    </ul>
+                    
+                    <h5>DevOps :</h5>
+                    <ul>
+                        <li>Pipeline CI/CD pour le backend d'une application java : Gitlab CI (voir Gitlab : Mise en production back end)</li>
+                        <li>Cluster de 5 conteneurs pour une application « Docker coins Miner » : KinD, Helm, Kubectl (voir Gitlab : Kubernetes-simple-app)</li>
+                        <li>Conteneurisation d'une application PHP : Docker, RabbitMQ (voir Gitlab : container project)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Centre d'intérêts -->
+            <div class="cv-section">
+                <h3 class="cv-section-title">Centre d'intérêts</h3>
+                <ul>
+                    <li>Lecture</li>
+                    <li>Cuisine</li>
+                    <li>Préparation physique et kinésithérapie : j'ai toujours été attiré par les sciences du mouvement et la biomécanique</li>
+                    <li>Tennis et Boxe anglaise</li>
+                </ul>
             </div>
         </div>
-        
     </div>
 
 
     
-    <div id="projectwrapper" >
+    <div id="projectwrapper" style="display: none;">
+        <div id="closeb-projects" class="closeb" onclick="closeCurrentSection()">×</div>
+        <div class="projects-header">
+            <h2>Mes Projets</h2>
+            <p>Découvrez mes réalisations techniques</p>
+        </div>
+
         
+        <!-- Section IA -->
+        <div class="project-section">
+            <h3 class="section-title">🤖 Intelligence Artificielle</h3>
+            <div class="projects-row">
+                <!-- Projet IA 1: Segmentation Sémantique U-Net -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-placeholder">🧠</div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Segmentation Sémantique U-Net</h3>
+                        <p>Segmentation d'objets sur le dataset PascalVOC utilisant un modèle U-Net CNN avec PyTorch, TensorBoard et ONNX.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">PyTorch</span>
+                            <span class="tech-tag">TensorBoard</span>
+                            <span class="tech-tag">ONNX</span>
+                        </div>
+                        <a href="https://gitlab.com/SilloVV/U-Net" target="_blank" class="project-link">
+                            Voir sur GitLab →
+                        </a>
+                    </div>
+                </div>
 
-        <div class="project"style="display: none">
-            <a href="https://github.com/SilloVV/Lab2-TDDC73" target="_blank"><Text >Interface de paiement par carte bancaire (React native) </Text></a>
-            <button class="next-project" id="next-project">Suivant</button>
-            <button class="back-project" id="back-project"> Précédent</button>
-        <img class="projectimage1" src="./docs/credit1.png" alt="creditcard1">
-             
-        <img class="projectimage2" src="./docs/credit2.png" alt="creditcard2">
+                <!-- Projet IA 2: Contrôle Véhicule Vision -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-placeholder">🚗</div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Contrôle Véhicule par Vision</h3>
+                        <p>Contrôle d'angle de braquage d'un véhicule simulé via vision par ordinateur. Pipeline complète ML avec ROS2.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">ROS2</span>
+                            <span class="tech-tag">PyTorch</span>
+                            <span class="tech-tag">OpenCV</span>
+                        </div>
+                        <a href="https://gitlab.com/SilloVV/SteerSim" target="_blank" class="project-link">
+                            Voir sur GitLab →
+                        </a>
+                    </div>
+                </div>
 
-         
+                <!-- Projet IA 3: Solution Multi-Agentique HermineIA -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-placeholder">⚖️</div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Solution Multi-Agentique LegalTech</h3>
+                        <p>Développement d'une solution agentique pour professionnels du droit : Q&A automatique et analyse de documents juridiques.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">LangGraph</span>
+                            <span class="tech-tag">HF Transformers</span>
+                            <span class="tech-tag">Asyncio</span>
+                        </div>
+                        <a href="https://gitlab.com/SilloVV/hermine-agents" target="_blank" class="project-link">
+                            Voir sur GitLab →
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="project" style="display: none">
-            <a href="./docs/TIPE2022.pdf" target="_blank"><Text >TIPE 2022 (Blender , Python ,OpenCV, C++, Arduino) </Text></a>
 
-            <button class="next-project" id="next-project"> Suivant</button>
-            <button class="back-project" id="back-project"> Précédent</button>
-            <img class="projectimage3" src="./docs/tipe1.png" alt="TIPE">
-             
-            <img class="projectimage4" src="./docs/tipe2.png" alt="TIPE">
-            <img class="projectimage5" src="./docs/tipe3.png" alt="TIPE">
-        </div>
-        <div class="project" style="display: none">
-            <Text >Owasp Security Sheperd Project (Burp ,Zap) </Text>
+        <!-- Section DevOps -->
+        <div class="project-section">
+            <h3 class="section-title">⚙️ DevOps & Infrastructure</h3>
+            <div class="projects-row">
+                <!-- Projet DevOps 1: SuperDiag -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-placeholder">🏥</div>
+                    </div>
+                    <div class="project-content">
+                        <h3>SuperDiag - Solution de Monitoring</h3>
+                        <p>Solution de monitoring de serveurs clients développée chez Equasens. Design et développement complet avec tests unitaires.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Linux</span>
+                            <span class="tech-tag">Bash</span>
+                            <span class="tech-tag">shUnit2</span>
+                            <span class="tech-tag">Jenkins</span>
+                        </div>
+                        <a href="https://gitlab.com/SilloVV/superdiag" target="_blank" class="project-link">
+                            Voir sur GitLab →
+                        </a>
+                    </div>
+                </div>
 
-            <button class="next-project" id="next-project"> Suivant</button>
-            <button  class="back-project" id="back-project"> Précédent</button>
-            <img class="projectimage6" src="./docs/topdog.png" alt="creditcard1">
-             
-       
-        </div>
-        <div class="project" style="display: none;">
-            <Text >Github Repositories trending (GraphQL, react native) </Text>
+                <!-- Projet DevOps 2: Cluster Kubernetes -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-placeholder">☸️</div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Cluster Kubernetes</h3>
+                        <p>Déploiement d'un cluster de 5 conteneurs pour une application distribuée avec orchestration Kubernetes et monitoring complet.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Kubernetes</span>
+                            <span class="tech-tag">Helm</span>
+                            <span class="tech-tag">Docker</span>
+                            <span class="tech-tag">KinD</span>
+                        </div>
+                        <a href="https://gitlab.com/SilloVV/kubernetes-app" target="_blank" class="project-link">
+                            Voir sur GitLab →
+                        </a>
+                    </div>
+                </div>
 
-            <button  class="next-project" id="next-project"> Suivant</button>
-            <button class="back-project" id="back-project"> Précédent</button>
-            <img class="projectimage1" src="./docs/credit1.png" alt="creditcard1">
-            <img class="projectimage2" src="./docs/credit2.png" alt="creditcard2">
+                <!-- Projet DevOps 3: Pipeline CI/CD -->
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-placeholder">🔄</div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Pipeline CI/CD Java</h3>
+                        <p>Pipeline CI/CD complet pour le backend d'une application Java avec GitLab CI, tests automatisés et déploiement containerisé.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">GitLab CI</span>
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">Docker</span>
+                            <span class="tech-tag">Maven</span>
+                        </div>
+                        <a href="https://gitlab.com/SilloVV/backend-cicd" target="_blank" class="project-link">
+                            Voir sur GitLab →
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="project" style="display: none">
-            <Text >Co-réalisation de "TIRAILLEURS" court métrage prix du coup de coeur 3is 2019 </Text>
-
-            <button class="next-project" id="next-project"> Suivant</button>
-            <button  class="back-project" id="back-project"> Précédent</button>
-            <img class="projectimage1" src="./docs/credit1.png" alt="creditcard1">
-             
-        <img class="projectimage2" src="./docs/credit2.png" alt="creditcard2">
-        </div>
-        
-        
     </div>
     
     <div id="contact-section"  style="display: none;">
+        <div id="closeb-contact" class="closeb" onclick="closeCurrentSection()">×</div>
         <div class="contact-content">
-            <div class="contact-me">Contact me !</div>
-            <div class="contact-icon linkedin">
-                <a href="https://www.linkedin.com/in/wassil-nakib-031361293/" target="_blank"><img src="./assets/icons/linkedin.png" alt=""></a>
+            <div class="contact-me">Contactez-moi</div>
+            
+            <div class="contact-icons-container">
+                <div class="contact-icon linkedin" title="LinkedIn: linkedin.com/in/wassil-nakib-031361293">
+                    <a href="https://www.linkedin.com/in/wassil-nakib-031361293/" target="_blank">
+                        <img src="./assets/icons/linkedin_logo.svg" alt="LinkedIn">
+                    </a>
+                    <div class="tooltip">linkedin.com/in/wassil-nakib-031361293</div>
+                </div>
+
+                <div class="contact-icon gitlab" title="GitLab: gitlab.com/SilloVV">
+                    <a href="https://gitlab.com/SilloVV" target="_blank">
+                        <img src="./assets/icons/gitlab_logo.svg" alt="GitLab">
+                    </a>
+                    <div class="tooltip">gitlab.com/SilloVV</div>
+                </div>
+
+                <div class="contact-icon instagram" title="Instagram: instagram.com/_scoobidouuu">
+                    <a href="https://www.instagram.com/_scoobidouuu" target="_blank">
+                        <img src="./assets/icons/instagram_logo.svg" alt="Instagram">
+                    </a>
+                    <div class="tooltip">instagram.com/_scoobidouuu</div>
+                </div>
             </div>
 
-            <div class=" contact-icon github">
-                    <a href="https://github.com/SilloVV" target="_blank"><img src="./assets/icons/github.png" alt=""></a>
+            <div class="mail-container">
+                <div class="mail" onclick="copyEmail()">
+                    wnakib21@gmail.com
+                </div>
+                <button class="copy-btn" onclick="copyEmail()" title="Copier l'email">
+                    <i class="bx bx-copy"></i>
+                </button>
             </div>
+        </div>
+    </div>
 
-            <div class="contact-icon instagram">
-                    <a href="https://www.instagram.com/_scoobidouuu" target="_blank"><img src="./assets/icons/instagram.png" alt=""></a>
+    <!-- Section Chat LLM -->
+    <div id="chat-section" style="display: none;">
+        <div id="closeb-chat" class="closeb" onclick="closeCurrentSection()">×</div>
+        <div class="chat-container">
+            <div class="chat-header">
+                <h2>💬 Discute avec ma version LLM</h2>
+                <p>Pose-moi des questions sur mon parcours, mes compétences ou mes projets !</p>
             </div>
-
-            <div class="mail">
-                wassil.nakib.pro@gmail.com
+            
+            <div class="chat-messages" id="chat-messages">
+                <div class="message bot-message">
+                    <div class="message-content">
+                        👋 Salut ! Je suis la version IA de Wassil NAKIB. Je peux te parler de mon parcours en ingénierie IA, mes expériences chez HermineIA et Equasens, mes projets en machine learning et DevOps. Que souhaites-tu savoir ?
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chat-input-container">
+                <input 
+                    type="text" 
+                    id="chat-input" 
+                    placeholder="Tape ta question ici..."
+                    maxlength="200"
+                >
+                <button id="send-button" onclick="sendMessage()">
+                    Envoyer
+                </button>
+            </div>
+            
+            <div class="chat-info">
+                <small>⚡ Propulsé par Hugging Face • Réponses générées par IA</small>
             </div>
         </div>
     </div>
 
     <div id="about-me" style="display: none;">
+        <div id="closeb-about" class="closeb" onclick="closeCurrentSection()">×</div>
         <div class="propos"> 
             <em>À propos de moi </em></div>
-        <p> Parlons un peu de moi ! Je suis actuellement en plein dans l'aventure de la deuxième année d'école d'ingénieur, plongé dans le passionnant univers de l'informatique, de la robotique, de l'automatique, des réseaux et de l'intelligence artificielle à Polytech Nancy. À 22 ans, c'est comme un vaste terrain de jeu pour mon esprit curieux et avide de découvertes technologiques. 
-            En dehors du monde de la tech, j'ai une passion pour la boxe qui me permet de maintenir un équilibre entre le corps et l'esprit. De plus, j'adore voyager, explorer de nouveaux horizons et m'immerger dans des cultures différentes.<br> <br>
-
-             Je suis à la recherche d'un stage, un stage qui sonne comme une expérience riche et passionnante de 14 à 17 semaines. Mon objectif ? Plonger tête la première dans le monde de l'informatique et de la data science. Je suis avide de défis, prêt à mettre en pratique mes connaissances et à étancher ma soif d'apprentissage au sein de votre entreprise.</p>
-    </div>
-
-    <div id="imga2" style="display: none;">
-        <img src="./docs/img-about4.jpg" alt="">
-    </div>
-   
-    <div id="imga1" style="display: none;">
-        <img src="./docs/img-about.JPG" alt="">
+        <p>Je suis actuellement en 5ème année de cycle ingénieur en double diplôme IA à Polytech Nancy. Passionné par l'intersection entre la technologie et l'innovation, je me spécialise dans l'intelligence artificielle et les systèmes informatiques avancés.
+        <br><br>
+        
+        <strong>Expérience actuelle :</strong><br>
+        Je réalise actuellement mon stage chez HermineIA, une startup innovante basée à STATION F, qui développe un copilot IA spécialement conçu pour les professionnels du droit. Cette expérience me permet d'allier mes compétences techniques en IA avec les besoins concrets du secteur juridique.
+        <br><br>
+        
+        <strong>Objectifs professionnels :</strong><br>
+        Je recherche un poste qui combine DevOps et Intelligence Artificielle, permettant de déployer et maintenir des solutions IA robustes et scalables. Mon intérêt se porte sur l'automatisation des infrastructures et l'optimisation des pipelines ML/AI.
+        <br><br>
+        
+        En dehors du monde professionnel, je suis passionné par le cinéma sous toutes ses formes. Je m'intéresse également beaucoup à la kinésithérapie et aux sciences du sport, des domaines qui m'apportent une compréhension approfondie du corps humain et de la performance. Côté sport, je pratique la boxe anglaise et le tennis, deux disciplines qui m'aident à maintenir un équilibre entre le corps et l'esprit.</p>
     </div>
 
     
@@ -166,6 +463,12 @@
                 </a>
                 
             </li>
+            <li>
+                <a onclick="show_chat()">
+                    <span class="nav-item">Chat avec moi !</span>
+                </a>
+                
+            </li>
         </ul>
         
     </div>
@@ -179,11 +482,6 @@
     </div>
 
 
-    <div id="color-mode">
-        <div id="toggle_button" class="icon">
-            
-        </div>
-    </div>
     
 
     <div class="circle"></div>
