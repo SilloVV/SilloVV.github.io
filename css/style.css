@@ -60,7 +60,8 @@ h1, h2, h5, p{
 }
 
 .wave-emoji{
-    font-size: 32px;
+    width: 32px;
+    height: 32px;
     animation: wave 2s infinite;
     transform-origin: 70% 70%;
 }
@@ -136,6 +137,20 @@ h1, h2, h5, p{
     background: rgba(255,255,255,0.2);
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.cursor{
+    font-weight: 900;
+    font-size: 28px;
+    animation: blink 1s infinite;
+    color: var(--text);
+    font-family: monospace;
+    letter-spacing: -2px;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
 }
 
 #hero_animation{
