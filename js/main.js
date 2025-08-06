@@ -4,6 +4,7 @@
 
 
 
+
 // Gestionnaire d'état unifié pour les pages
 class PageManager {
     constructor() {
@@ -281,7 +282,7 @@ function showCopyMessage() {
 // Fonction pour le chat LLM
 let isLoading = false;
 
-function sendMessage() {
+async function sendMessage() {
     const input = document.getElementById('chat-input');
     const sendButton = document.getElementById('send-button');
     const messagesContainer = document.getElementById('chat-messages');
@@ -301,16 +302,55 @@ function sendMessage() {
     // Ajouter indicateur de frappe
     const typingIndicator = addTypingIndicator();
     
-    // Simuler une réponse (remplacer par l'API Hugging Face)
-    setTimeout(() => {
-        typingIndicator.remove();
-        const response = generateResponse(message);
-        addMessage(response, 'bot');
+    try {
+        // Appel direct à l'API Cerebras
+        const response = await fetch('https://api.cerebras.ai/v1/chat/completions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + CEREBRAS_API_KEY
+            },
+            body: JSON.stringify({
+                model: "llama-4-scout-17b-16e-instruct",
+                messages: [
+                    {
+                        role: "system",
+                        content: "Tu es Wassil NAKIB, ingénieur en Machine Learning et DevOps français. Tu es actuellement en 5ème année de cycle ingénieur en double diplôme IA à Polytech Nancy. Informations sur toi : Tu réalises actuellement ton stage chez HermineIA à STATION F, développant une solution multi-agentique pour les professionnels du droit. Tu as fait un stage chez Equasens où tu as créé SuperDiag, une solution de monitoring de serveurs. Tes compétences IA : PyTorch, TensorBoard, LangGraph, HF Transformers, ONNX. Tes compétences DevOps : Kubernetes, Docker, Jenkins, Linux, Bash. Projets : segmentation sémantique U-Net, contrôle véhicule par vision, solutions multi-agentiques, clusters Kubernetes. Email : wnakib21@gmail.com. GitLab : gitlab.com/SilloVV. LinkedIn : linkedin.com/in/wassil-nakib-031361293. Passions : cinéma, kinésithérapie, sciences du sport, boxe anglaise, tennis. Réponds toujours en français, de manière naturelle et engageante. Tu es passionné par l'intersection entre l'IA et le DevOps."
+                    },
+                    {
+                        role: "user",
+                        content: message
+                    }
+                ],
+                max_tokens: 500,
+                temperature: 0.7
+            })
+        });
         
-        isLoading = false;
-        sendButton.disabled = false;
-        sendButton.textContent = 'Envoyer';
-    }, 1500);
+        const data = await response.json();
+        
+        typingIndicator.remove();
+        
+        if (data.choices && data.choices[0] && data.choices[0].message) {
+            addMessage(data.choices[0].message.content, 'bot');
+        } else {
+            // Fallback vers réponses prédéfinies en cas d'erreur
+            const fallbackResponse = generateResponse(message);
+            addMessage(fallbackResponse, 'bot');
+        }
+        
+    } catch (error) {
+        console.error('Erreur lors de l\'appel à l\'API:', error);
+        typingIndicator.remove();
+        
+        // Fallback vers réponses prédéfinies en cas d'erreur réseau
+        const fallbackResponse = generateResponse(message);
+        addMessage(fallbackResponse, 'bot');
+    }
+    
+    isLoading = false;
+    sendButton.disabled = false;
+    sendButton.textContent = 'Envoyer';
 }
 
 function addMessage(text, sender) {
