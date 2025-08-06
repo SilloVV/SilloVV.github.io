@@ -147,10 +147,7 @@ class PageManager {
             });
         }
         
-        // Réinitialiser l'animation de streaming si c'est la section about
-        if (pageName === 'about') {
-            resetStreamingText();
-        }
+        // Plus besoin de réinitialiser quoi que ce soit pour la section about
         
         document.getElementById('hero').style.display = '';
         this.currentPage = null;
@@ -219,13 +216,7 @@ function show_contact() {
 }
 
 function show_about() {
-    if (pageManager) {
-        pageManager.showPage('about');
-        // Lancer l'animation de streaming après un court délai
-        setTimeout(() => {
-            startStreamingText();
-        }, 300);
-    }
+    if (pageManager) pageManager.showPage('about');
 }
 
 
@@ -499,90 +490,6 @@ function animateCircles() {
 
 animateCircles();
 
-// Fonction pour l'animation de texte en streaming
-let streamingTextActive = false;
-
-function startStreamingText() {
-    if (streamingTextActive) return; // Éviter les animations multiples
-    
-    const streamingContainer = document.getElementById('streaming-text');
-    const typingCursor = document.querySelector('.typing-cursor');
-    
-    if (!streamingContainer || !typingCursor) {
-        console.error('Éléments streaming non trouvés');
-        return;
-    }
-    
-    // Texte à afficher
-    const aboutText = `Passionné d'intelligence artificielle et de DevOps, je termine actuellement ma 5ème année d'ingénieur à Polytech Nancy avec un double diplôme en IA.
-
-Actuellement en stage chez HermineIA à STATION F, je développe des solutions multi-agentiques innovantes pour les professionnels du droit, combinant ma passion pour l'IA générative et l'ingénierie logicielle.
-
-Mon parcours m'a mené de la création d'outils de monitoring chez Equasens au développement d'architectures d'agents conversationnels, en passant par des projets de deep learning et de vision par ordinateur.
-
-Ce qui me motive ? L'intersection fascinante entre l'intelligence artificielle et l'infrastructure DevOps, où chaque pipeline CI/CD peut déployer des modèles qui transforment notre façon de travailler.
-
-Quand je ne code pas, vous me trouverez sur un court de tennis, dans une salle de boxe, ou en train d'étudier les dernières avancées en biomécanique - parce que l'optimisation, c'est partout !
-
-Disponible dès novembre 2025 pour de nouveaux défis techniques passionnants.`;
-    
-    streamingTextActive = true;
-    
-    // Vider le container
-    streamingContainer.innerHTML = '';
-    
-    // Créer un conteneur inline pour le texte et le curseur
-    const textWithCursor = document.createElement('div');
-    textWithCursor.style.display = 'inline';
-    
-    // Ajouter le curseur directement après le container de texte
-    streamingContainer.appendChild(textWithCursor);
-    streamingContainer.appendChild(typingCursor);
-    typingCursor.style.display = 'inline';
-    
-    let currentIndex = 0;
-    const typingSpeed = 8; // Vitesse de frappe en ms
-    
-    function typeCharacter() {
-        if (currentIndex < aboutText.length) {
-            const char = aboutText[currentIndex];
-            
-            if (char === '\n') {
-                // Ajouter un saut de ligne
-                const br = document.createElement('br');
-                textWithCursor.appendChild(br);
-            } else {
-                // Ajouter le caractère directement sans span
-                const textNode = document.createTextNode(char);
-                textWithCursor.appendChild(textNode);
-            }
-            
-            currentIndex++;
-            setTimeout(typeCharacter, typingSpeed);
-        } else {
-            // Animation terminée, cacher le curseur immédiatement
-            typingCursor.style.display = 'none';
-            streamingTextActive = false;
-        }
-    }
-    
-    // Démarrer l'animation
-    typeCharacter();
-}
-
-// Réinitialiser l'animation lors de la fermeture de la section
-function resetStreamingText() {
-    streamingTextActive = false;
-    const streamingContainer = document.getElementById('streaming-text');
-    const typingCursor = document.querySelector('.typing-cursor');
-    
-    if (streamingContainer) {
-        streamingContainer.innerHTML = '';
-    }
-    if (typingCursor) {
-        typingCursor.style.display = 'none';
-    }
-}
 
 
 
