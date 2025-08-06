@@ -611,6 +611,7 @@ h1, h2, h5, p{
 }
 
 .cv-container{
+    position: relative;
     max-width: 800px;
     width: 100%;
     background: rgba(255, 255, 255, 0.95);
@@ -622,7 +623,6 @@ h1, h2, h5, p{
     color: var(--text);
     line-height: 1.6;
     backdrop-filter: blur(10px);
-    position: relative;
     z-index: 1;
 }
 
@@ -1135,8 +1135,6 @@ h1, h2, h5, p{
 
 .closeb {
     position: absolute;
-    top: 30px;
-    right: 30px;
     cursor: pointer;
     font-size: 28px;
     color: var(--text);
@@ -1152,6 +1150,21 @@ h1, h2, h5, p{
     z-index: 1001;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     font-weight: 500;
+}
+
+#closeb-cv {
+    top: 20px;
+    right: 20px;
+}
+
+#closeb-projects, #closeb-chat {
+    top: 30px;
+    right: 30px;
+}
+
+#closeb-contact, #closeb-about {
+    top: 15px;
+    right: 30px;
 }
 
 .closeb:hover {
@@ -1733,6 +1746,41 @@ h1, h2, h5, p{
   transition: transform 0.1s ease-out;
   opacity: 0.8;
 }
+
+.inverseur-circle{
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  position: fixed; 
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 999999998;
+  background: white !important;
+  mix-blend-mode: difference !important;
+  opacity: 1;
+  display: none;
+}
+
+body:not(.page-open) .inverseur-circle {
+  display: block !important;
+}
+
+.cursor-center{
+  height: 4px;
+  width: 4px;
+  border-radius: 50%;
+  position: fixed; 
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 999999999;
+  background: white;
+  opacity: 1;
+}
+
+
+
 
 .paint-effect {
   filter: blur(0.5px);

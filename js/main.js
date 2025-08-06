@@ -118,6 +118,9 @@ class PageManager {
             
             this.currentPage = pageName;
             
+            // Ajouter classe pour indiquer qu'une page est ouverte
+            document.body.classList.add('page-open');
+            
             // Cacher le logo du menu quand une section est ouverte
             this.hideMenuLogo();
             
@@ -151,6 +154,9 @@ class PageManager {
         
         document.getElementById('hero').style.display = '';
         this.currentPage = null;
+        
+        // Enlever la classe pour indiquer qu'on est sur la page d'accueil
+        document.body.classList.remove('page-open');
         
         // Réafficher le logo du menu et la sidebar
         this.showMenuLogo();
@@ -489,6 +495,32 @@ function animateCircles() {
 }
 
 animateCircles();
+
+// Animation du cercle inverseur
+const inverseurCircle = document.querySelector(".inverseur-circle");
+
+function animateInverseurCircle() {
+  if (inverseurCircle) {
+    inverseurCircle.style.left = coords.x - 50 + "px"; // Centrer le cercle de 100px
+    inverseurCircle.style.top = coords.y - 50 + "px";
+  }
+  requestAnimationFrame(animateInverseurCircle);
+}
+
+// Animation du point blanc central
+const cursorCenter = document.querySelector(".cursor-center");
+
+function animateCursorCenter() {
+  if (cursorCenter) {
+    cursorCenter.style.left = coords.x - 2 + "px"; // Centrer le point de 4px
+    cursorCenter.style.top = coords.y - 2 + "px";
+  }
+  requestAnimationFrame(animateCursorCenter);
+}
+
+animateInverseurCircle();
+animateCursorCenter();
+
 
 
 
