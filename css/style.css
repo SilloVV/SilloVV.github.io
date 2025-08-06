@@ -1662,31 +1662,13 @@ h1, h2, h5, p{
     color: var(--text);
 }
 
-/* Styles pour le texte en streaming */
-.streaming-container {
+/* Style pour le texte à propos de moi */
+.about-text {
     font-size: 18px;
     line-height: 1.6;
     color: var(--text);
     text-align: justify;
     word-wrap: break-word;
-    display: inline;
-}
-
-.typing-cursor {
-    font-size: 18px;
-    color: var(--bg-alt);
-    animation: blink 1s infinite;
-    display: none;
-    margin-left: 1px;
-}
-
-@keyframes blink {
-    0%, 50% {
-        opacity: 1;
-    }
-    51%, 100% {
-        opacity: 0;
-    }
 }
 
 #imga1{
