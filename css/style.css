@@ -1226,7 +1226,7 @@ h1, h2, h5, p{
 
 .project-image{
     height: 120px;
-    background: linear-gradient(135deg, var(--bg-alt2) 0%, var(--bg-alt) 100%);
+    background: white;
     border-radius: 15px;
     display: flex;
     align-items: center;
@@ -1302,6 +1302,20 @@ h1, h2, h5, p{
 
 .project-card:hover::before{
     left: 100%;
+}
+
+/* Project logo styles */
+.project-logo{
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    transition: all 0.3s ease;
+}
+
+/* GitLab logo spécifique - x1.5 */
+.project-image img[alt="CI/CD"]{
+    width: 140px;
+    height: 90px;
 }
 
 
@@ -1421,7 +1435,7 @@ h1, h2, h5, p{
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 35px;
+    gap: 50px;
     flex-wrap: wrap;
     margin-top: 15px;
     padding: 10px 0;
@@ -1463,7 +1477,7 @@ h1, h2, h5, p{
 }
 
 .contact-icon:hover {
-    transform: translateY(-3px) scale(1.03);
+    transform: translateY(-2px) scale(1.02);
     background: rgba(255,255,255,0.4);
     border-color: var(--bg-alt);
     box-shadow: 0 8px 20px rgba(0,0,0,0.15);
