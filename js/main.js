@@ -118,6 +118,16 @@ class PageManager {
             
             this.currentPage = pageName;
             
+            // Afficher le bouton CV seulement sur la page CV
+            const cvDownloadBtn = document.querySelector('.cv-download-fixed');
+            if (cvDownloadBtn) {
+                if (pageName === 'cv') {
+                    cvDownloadBtn.style.display = 'flex';
+                } else {
+                    cvDownloadBtn.style.display = 'none';
+                }
+            }
+            
             // Ajouter classe pour indiquer qu'une page est ouverte
             document.body.classList.add('page-open');
             
@@ -151,6 +161,12 @@ class PageManager {
         }
         
         // Plus besoin de réinitialiser quoi que ce soit pour la section about
+        
+        // Cacher le bouton CV quand on ferme une page
+        const cvDownloadBtn = document.querySelector('.cv-download-fixed');
+        if (cvDownloadBtn) {
+            cvDownloadBtn.style.display = 'none';
+        }
         
         document.getElementById('hero').style.display = '';
         this.currentPage = null;
@@ -197,6 +213,12 @@ class PageManager {
                 }
             });
         });
+        
+        // Cacher le bouton CV quand on ferme les pages
+        const cvDownloadBtn = document.querySelector('.cv-download-fixed');
+        if (cvDownloadBtn) {
+            cvDownloadBtn.style.display = 'none';
+        }
     }
 }
 
