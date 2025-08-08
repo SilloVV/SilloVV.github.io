@@ -602,6 +602,26 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+    
+    // Gestion des hovers pour les mots-clés
+    const hoverWords = document.querySelectorAll('.hover-word');
+    
+    hoverWords.forEach(word => {
+        const imageId = word.getAttribute('data-image');
+        const imageElement = document.getElementById(`hover-${imageId}`);
+        
+        if (imageElement) {
+            word.addEventListener('mouseenter', () => {
+                imageElement.style.opacity = '1';
+                imageElement.style.visibility = 'visible';
+            });
+            
+            word.addEventListener('mouseleave', () => {
+                imageElement.style.opacity = '0';
+                imageElement.style.visibility = 'hidden';
+            });
+        }
+    });
 });
 
 // Fonction pour fermer les previews de projet
