@@ -543,7 +543,44 @@ function animateCursorCenter() {
 animateInverseurCircle();
 animateCursorCenter();
 
+// Gestion des previews de projets
+document.addEventListener('DOMContentLoaded', () => {
+    const projectCards = document.querySelectorAll('.project-card[data-preview]');
+    
+    projectCards.forEach(card => {
+        const previewId = card.getAttribute('data-preview');
+        const previewElement = document.getElementById(`preview-${previewId}`);
+        
+        if (previewElement) {
+            // Afficher la preview au clic
+            card.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                previewElement.style.opacity = '1';
+                previewElement.style.visibility = 'visible';
+                
+                // Cacher la croix de fermeture de la section projet
+                const projectCloseBtn = document.getElementById('closeb-projects');
+                if (projectCloseBtn) {
+                    projectCloseBtn.style.display = 'none';
+                }
+            });
+        }
+    });
+});
 
-
-
+// Fonction pour fermer les previews de projet
+function closeProjectPreview(previewId) {
+    const previewElement = document.getElementById(`preview-${previewId}`);
+    if (previewElement) {
+        previewElement.style.opacity = '0';
+        previewElement.style.visibility = 'hidden';
+        
+        // Réafficher la croix de fermeture de la section projet
+        const projectCloseBtn = document.getElementById('closeb-projects');
+        if (projectCloseBtn) {
+            projectCloseBtn.style.display = 'flex';
+        }
+    }
+}
 
