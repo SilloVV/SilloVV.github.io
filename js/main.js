@@ -553,8 +553,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const previewElement = document.getElementById(`preview-${previewId}`);
         
         if (previewElement) {
-            // Afficher la preview au clic
-            card.addEventListener('click', (e) => {
+            // Afficher la preview au clic/touch
+            const showPreview = (e) => {
                 e.preventDefault();
                 e.stopPropagation();
                 
@@ -573,9 +573,35 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (projectCloseBtn) {
                     projectCloseBtn.style.display = 'none';
                 }
-            });
+            };
+            
+            // Support tactile et souris
+            card.addEventListener('click', showPreview);
+            card.addEventListener('touchstart', showPreview);
         }
     });
+    
+    // Fermeture par clic sur l'overlay sur mobile
+    if (overlay) {
+        overlay.addEventListener('click', () => {
+            // Fermer toutes les previews ouvertes
+            const openPreviews = document.querySelectorAll('.project-preview[style*="opacity: 1"]');
+            openPreviews.forEach(preview => {
+                preview.style.opacity = '0';
+                preview.style.visibility = 'hidden';
+            });
+            
+            // Masquer l'overlay
+            overlay.style.opacity = '0';
+            overlay.style.visibility = 'hidden';
+            
+            // Réafficher la croix de la section projet
+            const projectCloseBtn = document.getElementById('closeb-projects');
+            if (projectCloseBtn) {
+                projectCloseBtn.style.display = 'flex';
+            }
+        });
+    }
 });
 
 // Fonction pour fermer les previews de projet
