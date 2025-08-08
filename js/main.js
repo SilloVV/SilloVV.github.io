@@ -546,6 +546,7 @@ animateCursorCenter();
 // Gestion des previews de projets
 document.addEventListener('DOMContentLoaded', () => {
     const projectCards = document.querySelectorAll('.project-card[data-preview]');
+    const overlay = document.getElementById('preview-overlay');
     
     projectCards.forEach(card => {
         const previewId = card.getAttribute('data-preview');
@@ -556,6 +557,14 @@ document.addEventListener('DOMContentLoaded', () => {
             card.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
+                
+                // Afficher l'overlay blur
+                if (overlay) {
+                    overlay.style.opacity = '1';
+                    overlay.style.visibility = 'visible';
+                }
+                
+                // Afficher la preview
                 previewElement.style.opacity = '1';
                 previewElement.style.visibility = 'visible';
                 
@@ -572,9 +581,18 @@ document.addEventListener('DOMContentLoaded', () => {
 // Fonction pour fermer les previews de projet
 function closeProjectPreview(previewId) {
     const previewElement = document.getElementById(`preview-${previewId}`);
+    const overlay = document.getElementById('preview-overlay');
+    
     if (previewElement) {
+        // Masquer la preview
         previewElement.style.opacity = '0';
         previewElement.style.visibility = 'hidden';
+        
+        // Masquer l'overlay blur
+        if (overlay) {
+            overlay.style.opacity = '0';
+            overlay.style.visibility = 'hidden';
+        }
         
         // Réafficher la croix de fermeture de la section projet
         const projectCloseBtn = document.getElementById('closeb-projects');
