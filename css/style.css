@@ -1353,8 +1353,82 @@ h1, h2, h5, p{
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     position: relative;
-    overflow: hidden;
+    overflow: visible;
+    cursor: pointer;
 }
+
+/* Tooltip pour preview project */
+.project-card::after {
+    content: '↓ Clic pour voir la preview ↓';
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg-alt);
+    color: var(--bg);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 999999;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    pointer-events: none;
+}
+
+.project-card:hover::after {
+    opacity: 1;
+    visibility: visible;
+    top: -45px;
+}
+
+.project-preview {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60vw;
+    height: 50vh;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+    z-index: 999999;
+    pointer-events: auto;
+    border-radius: 15px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    border: 3px solid var(--bg-alt);
+    overflow: hidden;
+    background: var(--bg);
+}
+
+.project-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    transition: transform 0.3s ease;
+    background: var(--bg);
+}
+
+/* Agrandir spécifiquement l'image U-Net */
+#preview-unet {
+    width: 80vw;
+    height: 70vh;
+}
+
+/* Positionnement de la croix de fermeture dans les previews */
+.project-preview .closeb {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 999999;
+    pointer-events: auto;
+    cursor: pointer;
+}
+
 
 .project-card:hover{
     transform: translateY(-8px);
@@ -1427,20 +1501,6 @@ h1, h2, h5, p{
     transform: translateX(5px);
 }
 
-.project-card::before{
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-    transition: left 0.5s ease;
-}
-
-.project-card:hover::before{
-    left: 100%;
-}
 
 /* Project logo styles */
 .project-logo{

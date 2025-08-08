@@ -236,7 +236,7 @@
                     <h5>DevOps :</h5>
                     <ul>
                         <li>Pipeline CI/CD pour le backend d'une application java : Gitlab CI (voir Gitlab : Mise en production back end)</li>
-                        <li>Cluster de 5 conteneurs pour une application « Docker coins Miner » : KinD, Helm, Kubectl (voir Gitlab : Kubernetes-simple-app)</li>
+                        <li>Cluster de 4 conteneurs pour une application « Docker coins Miner » : KinD, Helm, Kubectl (voir Gitlab : Kubernetes-simple-app)</li>
                         <li>Conteneurisation d'une application PHP : Docker, RabbitMQ (voir Gitlab : container project)</li>
                     </ul>
                 </div>
@@ -270,7 +270,7 @@
             <h3 class="section-title">🤖 Intelligence Artificielle</h3>
             <div class="projects-row">
                 <!-- Projet IA 1: Segmentation Sémantique U-Net -->
-                <div class="project-card">
+                <div class="project-card" data-preview="unet">
                     <div class="project-image">
                         <img src="assets/logos/NN.svg" alt="Neural Network" class="project-logo">
                     </div>
@@ -289,7 +289,7 @@
                 </div>
 
                 <!-- Projet IA 2: Contrôle Véhicule Vision -->
-                <div class="project-card">
+                <div class="project-card" data-preview="steersim">
                     <div class="project-image">
                         <img src="assets/logos/Pytorch.svg" alt="Pytorch" class="project-logo">
                     </div>
@@ -308,7 +308,7 @@
                 </div>
 
                 <!-- Projet IA 3: Solution Multi-Agentique HermineIA -->
-                <div class="project-card">
+                <div class="project-card" data-preview="hermine">
                     <div class="project-image">
                         <img src="assets/logos/hermine_ia_logo.jpeg" alt="HermineIA" class="project-logo">
                     </div>
@@ -333,7 +333,7 @@
             <h3 class="section-title">⚙️ DevOps & Infrastructure</h3>
             <div class="projects-row">
                 <!-- Projet DevOps 1: SuperDiag -->
-                <div class="project-card">
+                <div class="project-card" data-preview="superdiag">
                     <div class="project-image">
                         <img src="assets/logos/Monitoring.svg" alt="Monitoring" class="project-logo">
                     </div>
@@ -353,13 +353,13 @@
                 </div>
 
                 <!-- Projet DevOps 2: Cluster Kubernetes -->
-                <div class="project-card">
+                <div class="project-card" data-preview="kubernetes">
                     <div class="project-image">
                         <img src="assets/logos/Kubernetes.svg" alt="Kubernetes" class="project-logo">
                     </div>
                     <div class="project-content">
                         <h3>Cluster Kubernetes</h3>
-                        <p>Déploiement d'un cluster de 5 conteneurs pour une application distribuée avec orchestration Kubernetes et monitoring complet.</p>
+                        <p>Déploiement d'un cluster de 4 conteneurs pour une application distribuée avec orchestration Kubernetes et monitoring complet.</p>
                         <div class="project-tech">
                             <span class="tech-tag">Kubernetes</span>
                             <span class="tech-tag">Helm</span>
@@ -373,7 +373,7 @@
                 </div>
 
                 <!-- Projet DevOps 3: Pipeline CI/CD -->
-                <div class="project-card">
+                <div class="project-card" data-preview="cicd">
                     <div class="project-image">
                         <img src="assets/logos/gitlab_logo_1.svg" alt="CI/CD" class="project-logo">
                     </div>
@@ -597,6 +597,32 @@
                 </div>
             </div>
         </a>
+    </div>
+    
+    <!-- Images de preview des projets -->
+    <div class="project-preview" id="preview-unet">
+        <div class="closeb" onclick="closeProjectPreview('unet')">×</div>
+        <img src="assets/projects/u_net.png" alt="U-Net Segmentation Preview">
+    </div>
+    <div class="project-preview" id="preview-steersim">
+        <div class="closeb" onclick="closeProjectPreview('steersim')">×</div>
+        <img src="assets/projects/Steersim.png" alt="SteerSim Vehicle Control Preview">
+    </div>
+    <div class="project-preview" id="preview-hermine">
+        <div class="closeb" onclick="closeProjectPreview('hermine')">×</div>
+        <img src="assets/projects/legal.png" alt="HermineIA Multi-Agent Preview">
+    </div>
+    <div class="project-preview" id="preview-superdiag">
+        <div class="closeb" onclick="closeProjectPreview('superdiag')">×</div>
+        <img src="assets/projects/superdiag.png" alt="SuperDiag Monitoring Preview">
+    </div>
+    <div class="project-preview" id="preview-kubernetes">
+        <div class="closeb" onclick="closeProjectPreview('kubernetes')">×</div>
+        <img src="assets/projects/kubernetes.png" alt="Kubernetes Cluster Preview">
+    </div>
+    <div class="project-preview" id="preview-cicd">
+        <div class="closeb" onclick="closeProjectPreview('cicd')">×</div>
+        <img src="assets/projects/gitlab_ci.png" alt="CI/CD Pipeline Preview">
     </div>
     
 </body>
