@@ -1985,17 +1985,26 @@ body:not(.page-open) .inverseur-circle {
 
 
 
-@media screen and (max-width:700px)  {
+@media screen and (max-width: 768px) {
+    /* Hero section mobile */
+    #hero {
+        padding: 20px;
+        gap: 20px;
+    }
+    
     .sidebar.active .top .logo{
         transform: translate(0Vw);
     }
     
     .hero-name h1{
-        font-size: 36px;
+        font-size: 32px;
+        text-align: center;
+        letter-spacing: 1px;
     }
     
     .hero-title p{
-        font-size: 18px;
+        font-size: 16px;
+        text-align: center;
     }
     
     .hero-tags{
@@ -2004,8 +2013,45 @@ body:not(.page-open) .inverseur-circle {
         gap: 10px;
     }
     
+    .hero-tag {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+    
     .wave-emoji{
-        font-size: 24px;
+        width: 24px;
+        height: 24px;
+    }
+    
+    .hero-greeting h5 {
+        font-size: 16px;
+    }
+    
+    /* Animation hero mobile */
+    #hero_animation {
+        height: 15rem;
+        width: 15rem;
+        margin-top: 10px;
+    }
+    
+    /* Sidebar mobile */
+    .sidebar {
+        width: 60px;
+        height: 8vh;
+    }
+    
+    .sidebar.active {
+        width: 90vw;
+        height: 60vh;
+    }
+    
+    .sidebar #btn {
+        font-size: 40px;
+        top: 0.2rem;
+    }
+    
+    .sidebar.active #btn {
+        left: 85%;
     }
     
     /* CV Responsive */
@@ -2210,6 +2256,31 @@ body:not(.page-open) .inverseur-circle {
     .contact-icon:hover .tooltip {
         bottom: -45px;
     }
+    
+    /* Chat section mobile */
+    .chat-container {
+        width: 95%;
+        height: 85vh;
+        margin: 0 auto;
+    }
+    
+    .chat-header h2 {
+        font-size: 20px;
+    }
+    
+    .chat-header p {
+        font-size: 14px;
+    }
+    
+    #chat-input {
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+    
+    #send-button {
+        padding: 10px 20px;
+        font-size: 12px;
+    }
 
     #about-me{
         
@@ -2280,6 +2351,186 @@ body:not(.page-open) .inverseur-circle {
     
     .project-placeholder{
         font-size: 36px;
+    }
+    
+    /* Adaptations mobiles pour les previews de projets */
+    .project-preview {
+        width: 95vw;
+        height: 60vh;
+        border-radius: 10px;
+        border: 2px solid var(--bg-alt);
+    }
+    
+    /* Agrandir spécifiquement l'image U-Net sur mobile */
+    #preview-unet {
+        width: 95vw;
+        height: 70vh;
+    }
+    
+    /* Tooltip mobile pour preview project */
+    .project-card::after {
+        font-size: 10px;
+        padding: 6px 10px;
+        top: -35px;
+    }
+    
+    .project-card:hover::after {
+        top: -40px;
+    }
+    
+    /* Croix des previews sur mobile */
+    .project-preview .closeb {
+        top: 10px;
+        right: 10px;
+        width: 35px;
+        height: 35px;
+        font-size: 20px;
+    }
+}
+
+/* Adaptation spécifique iPhone 15 et écrans similaires */
+@media screen and (max-width: 430px) and (min-width: 375px) {
+    .hero-name h1 {
+        font-size: 30px;
+        line-height: 1.2;
+    }
+    
+    .hero-title p {
+        font-size: 16px;
+    }
+    
+    .hero-tag {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+    
+    #hero_animation {
+        height: 16rem;
+        width: 16rem;
+    }
+    
+    /* Previews optimisées pour iPhone 15 */
+    .project-preview {
+        width: 92vw;
+        height: 65vh;
+        border-radius: 12px;
+    }
+    
+    #preview-unet {
+        width: 92vw;
+        height: 72vh;
+    }
+    
+    .sidebar.active {
+        width: 85vw;
+        height: 55vh;
+        border-radius: 15px;
+    }
+    
+    .chat-container {
+        width: 90%;
+        height: 80vh;
+        border-radius: 15px;
+    }
+    
+    /* Contact section pour iPhone 15 */
+    #contact-section {
+        width: 85vw;
+        max-height: 75vh;
+    }
+    
+    #about-me {
+        width: 85vw;
+        max-height: 75vh;
+    }
+}
+
+/* Adaptation pour très petits écrans (moins de 375px) */
+@media screen and (max-width: 375px) {
+    .hero-name h1 {
+        font-size: 28px;
+    }
+    
+    .hero-title p {
+        font-size: 14px;
+    }
+    
+    .hero-tag {
+        font-size: 11px;
+        padding: 5px 10px;
+    }
+    
+    #hero_animation {
+        height: 12rem;
+        width: 12rem;
+    }
+    
+    .project-preview {
+        width: 98vw;
+        height: 50vh;
+    }
+    
+    #preview-unet {
+        width: 98vw;
+        height: 60vh;
+    }
+    
+    .sidebar.active {
+        width: 95vw;
+        height: 65vh;
+    }
+    
+    .chat-container {
+        width: 98%;
+        height: 90vh;
+    }
+}
+
+/* Adaptation pour iPhone 15 en mode paysage */
+@media screen and (max-height: 430px) and (min-width: 700px) and (orientation: landscape) {
+    #hero {
+        flex-direction: row;
+        gap: 40px;
+        align-items: center;
+    }
+    
+    .hero-content {
+        flex: 1;
+    }
+    
+    #hero_animation {
+        height: 12rem;
+        width: 12rem;
+        flex-shrink: 0;
+    }
+    
+    .hero-name h1 {
+        font-size: 36px;
+    }
+    
+    .hero-title p {
+        font-size: 18px;
+    }
+    
+    /* Previews en mode paysage */
+    .project-preview {
+        width: 80vw;
+        height: 85vh;
+    }
+    
+    #preview-unet {
+        width: 85vw;
+        height: 85vh;
+    }
+    
+    .sidebar.active {
+        width: 60vw;
+        height: 70vh;
+    }
+    
+    .chat-container {
+        width: 85%;
+        height: 85vh;
     }
 }
 
