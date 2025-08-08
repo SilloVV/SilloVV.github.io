@@ -2388,7 +2388,7 @@ body:not(.page-open) .inverseur-circle {
         font-size: 12px;
     }
 
-    /* About me manuscrit mobile */
+    /* About me mobile */
     #about-me{
         animation: fadeIn 0.5s forwards;
         position: fixed;
@@ -2397,40 +2397,37 @@ body:not(.page-open) .inverseur-circle {
         transform: translate(-50%, -50%);
         max-height: 75vh;
         height: auto;
-        border: 2px solid rgba(139, 69, 19, 0.3);
+        border: 4px solid #8B4513;
         font-size: 16px;
         display: flex;
-        width: 90vw;
-        background: linear-gradient(135deg, #ffffff 0%, #f9f7f4 100%);
-        color: #1a1a1a;
+        width: 85vw;
+        background: linear-gradient(135deg, var(--bg) 0%, var(--bg-transparent) 100%);
+        color: var(--text);
         flex-direction: column;
-        padding: 25px 20px;
+        padding: 20px 15px;
         border-radius: 18px;
-        text-align: left;
-        line-height: 1.8;
-        box-shadow: 0 20px 50px rgba(0,0,0,0.25), 
-                    inset 0 1px 0 rgba(255,255,255,0.9),
-                    0 0 0 1px rgba(139, 69, 19, 0.2);
-        backdrop-filter: blur(8px);
+        text-align: justify;
+        line-height: 1.6;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        backdrop-filter: blur(10px);
         z-index: 1000;
     }
     
     #about-me .propos{
-        font-family: 'Dancing Script', cursive;
-        font-size: 32px;
+        font-size: 24px;
         text-align: center;
-        margin-bottom: 20px;
-        color: #1a1a1a;
-        font-weight: 700;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.15);
+        margin-bottom: 15px;
+        font-weight: 600;
+        border-bottom: 2px solid var(--bg-alt);
+        padding-bottom: 15px;
+        color: var(--text);
     }
     
     .about-text {
-        font-family: 'Kalam', cursive;
-        font-size: 16px;
-        line-height: 1.8;
-        color: #1a1a1a;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        font-size: 15px;
+        line-height: 1.6;
+        color: var(--text);
+        text-align: justify;
     }
     
     .about-text::first-letter {
@@ -2441,14 +2438,14 @@ body:not(.page-open) .inverseur-circle {
     
     /* Signature mobile */
     .signature-container {
-        justify-content: center;
-        margin-top: 20px;
-        padding-top: 15px;
+        justify-content: right;
+        margin-top: 15px;
+        padding-top: 10px;
         padding-right: 0;
     }
     
     .signature {
-        max-width: 140px;
+        max-width: 120px;
         transform: rotate(-1deg);
     }
     #imga2{
@@ -2482,7 +2479,10 @@ body:not(.page-open) .inverseur-circle {
     }
     
     .project-card{
-        padding: 20px;
+        padding: 15px;
+        margin: 0 5px;
+        max-width: calc(100vw - 40px);
+        box-sizing: border-box;
     }
     
     .project-image{
