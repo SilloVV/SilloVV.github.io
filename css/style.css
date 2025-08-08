@@ -1419,6 +1419,21 @@ h1, h2, h5, p{
     height: 70vh;
 }
 
+/* Overlay blur pour les previews */
+.project-preview-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    z-index: 999998;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
 /* Positionnement de la croix de fermeture dans les previews */
 .project-preview .closeb {
     position: absolute;
