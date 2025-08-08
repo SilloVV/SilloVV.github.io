@@ -2,6 +2,8 @@
 /*CUSTOM FONT*/
 
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap');
 
 
   /* GENERAL */
@@ -1836,23 +1838,25 @@ h1, h2, h5, p{
     transform: translateX(-50%) translateY(-10px);
 }
 
-/* Scrollbar personnalisée pour about-me */
+/* Scrollbar personnalisée manuscrite pour about-me */
 #about-me::-webkit-scrollbar {
     width: 8px;
 }
 
 #about-me::-webkit-scrollbar-track {
-    background: var(--bg-alt2);
-    border-radius: 10px;
+    background: #f8f6f0;
+    border-radius: 6px;
+    border: 1px solid rgba(139, 69, 19, 0.1);
 }
 
 #about-me::-webkit-scrollbar-thumb {
-    background: var(--bg-alt);
-    border-radius: 10px;
+    background: linear-gradient(180deg, #8B4513 0%, #A0522D 100%);
+    border-radius: 6px;
+    border: 1px solid rgba(139, 69, 19, 0.3);
 }
 
 #about-me::-webkit-scrollbar-thumb:hover {
-    background: var(--text);
+    background: linear-gradient(180deg, #A0522D 0%, #8B4513 100%);
 }
 
 #about-me{
@@ -1863,8 +1867,8 @@ h1, h2, h5, p{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    max-height: 80vh;
-    border: 2px solid var(--bg-alt);
+    max-height: 65vh;
+    border: 6px solid #8B4513;
     font-size: 18px;
     display: flex;
     width: 50vw;
@@ -1877,7 +1881,9 @@ h1, h2, h5, p{
     line-height: 1.6;
     box-shadow: 0 15px 35px rgba(0,0,0,0.1);
     backdrop-filter: blur(10px);
+    z-index: 1000;
 }
+
 
 #about-me .propos{
     font-size: 32px;
@@ -1889,14 +1895,114 @@ h1, h2, h5, p{
     color: var(--text);
 }
 
-/* Style pour le texte à propos de moi */
+/* Style pour le texte à propos de moi manuscrit */
 .about-text {
+    font-family: 'Kalam', cursive;
     font-size: 18px;
-    line-height: 1.6;
-    color: var(--text);
-    text-align: justify;
+    line-height: 1.9;
+    color: #1a1a1a;
+    text-align: left;
     word-wrap: break-word;
+    position: relative;
+    z-index: 3;
+    font-weight: 400;
+    letter-spacing: 0.4px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
+
+/* Effet de variation d'encre pour certains mots */
+.about-text::first-letter {
+    font-family: 'Dancing Script', cursive;
+    font-size: 42px;
+    float: left;
+    line-height: 38px;
+    padding-right: 8px;
+    padding-top: 4px;
+    color: #8B4513;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Style pour les paragraphes */
+.about-text br + br {
+    display: block;
+    content: "";
+    margin-top: 20px;
+}
+
+/* Container de la signature */
+.signature-container {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    position: relative;
+    z-index: 3;
+}
+
+/* Style de la signature */
+.signature {
+    max-width: 180px;
+    height: auto;
+    opacity: 0.9;
+    filter: sepia(20%) saturate(150%) hue-rotate(15deg) brightness(0.95);
+    transition: all 0.3s ease;
+    transform: rotate(-2deg);
+}
+
+.signature:hover {
+    opacity: 1;
+    transform: rotate(0deg) scale(1.05);
+    filter: sepia(30%) saturate(180%) hue-rotate(15deg) brightness(1);
+}
+
+/* Styles pour les mots-clés avec hover */
+.hover-word {
+    color: #D2691E;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.hover-word:hover {
+    color: #8B4513;
+    text-decoration: underline;
+}
+
+/* Images de hover */
+.hover-image {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 60vw;
+    max-height: 50vh;
+    width: auto;
+    height: auto;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+    z-index: 999999;
+    pointer-events: none;
+    border-radius: 15px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    border: 3px solid var(--bg-alt);
+    overflow: hidden;
+    background: var(--bg);
+    padding: 10px;
+}
+
+.hover-image img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+}
+
 
 #imga1{
     animation: fadeIn 0.5s forwards;
@@ -2282,34 +2388,68 @@ body:not(.page-open) .inverseur-circle {
         font-size: 12px;
     }
 
+    /* About me manuscrit mobile */
     #about-me{
-        
         animation: fadeIn 0.5s forwards;
         position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        
-        max-height: 85vh;
-        border: 2px solid var(--bg-alt);
-        font-size: 15px;
+        max-height: 75vh;
+        height: auto;
+        border: 2px solid rgba(139, 69, 19, 0.3);
+        font-size: 16px;
         display: flex;
         width: 90vw;
-        background: linear-gradient(135deg, var(--bg) 0%, var(--bg-transparent) 100%);
-        color: var(--text);
+        background: linear-gradient(135deg, #ffffff 0%, #f9f7f4 100%);
+        color: #1a1a1a;
         flex-direction: column;
-        padding: 20px;
-        border-radius: 20px;
-        text-align: justify;
-        line-height: 1.5;
-        box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-        backdrop-filter: blur(10px);
+        padding: 25px 20px;
+        border-radius: 18px;
+        text-align: left;
+        line-height: 1.8;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.25), 
+                    inset 0 1px 0 rgba(255,255,255,0.9),
+                    0 0 0 1px rgba(139, 69, 19, 0.2);
+        backdrop-filter: blur(8px);
+        z-index: 1000;
     }
     
     #about-me .propos{
-        font-size: 24px;
+        font-family: 'Dancing Script', cursive;
+        font-size: 32px;
         text-align: center;
-        margin-bottom: 15px;
+        margin-bottom: 20px;
+        color: #1a1a1a;
+        font-weight: 700;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.15);
+    }
+    
+    .about-text {
+        font-family: 'Kalam', cursive;
+        font-size: 16px;
+        line-height: 1.8;
+        color: #1a1a1a;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+    
+    .about-text::first-letter {
+        font-size: 32px;
+        line-height: 28px;
+        padding-right: 6px;
+    }
+    
+    /* Signature mobile */
+    .signature-container {
+        justify-content: center;
+        margin-top: 20px;
+        padding-top: 15px;
+        padding-right: 0;
+    }
+    
+    .signature {
+        max-width: 140px;
+        transform: rotate(-1deg);
     }
     #imga2{
         display: none;
