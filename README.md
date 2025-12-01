@@ -1,1 +1,1 @@
-[preview](portfolio.png)
+![preview](portfolio.png)
