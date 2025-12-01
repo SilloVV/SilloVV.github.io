@@ -1,1 +1,1 @@
-[preview](preview.png)
+[preview](portfolio.png)
