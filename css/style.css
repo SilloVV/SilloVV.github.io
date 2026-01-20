@@ -6,7 +6,34 @@
   @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap');
 
 
-  /* GENERAL */
+  /* LANGUAGE TOGGLE */
+.lang-toggle {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 100001;
+    background: var(--bg-alt);
+    color: var(--bg);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border: 2px solid transparent;
+}
+
+.lang-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+
+/* GENERAL */
   body{
     font-family: 'Playfair Display', serif;
     background-color: var(--bg);
@@ -97,13 +124,20 @@ h1, h2, h5, p{
     font-size: 48px;
     font-weight: 700;
     margin: 0;
-    background: linear-gradient(135deg, var(--text) 0%, var(--bg-alt) 100%);
+    background: linear-gradient(
+        90deg,
+        var(--text) 0%,
+        var(--text) 100%
+    );
+    background-size: 200% 100%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     letter-spacing: 2px;
-    text-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
+
+
+
 
 .hero-title{
     text-align: center;
@@ -187,7 +221,6 @@ h1, h2, h5, p{
     background-size: cover;
 }
 
-
 .sidebar{
     position: relative;
     top: 0;
@@ -203,12 +236,12 @@ h1, h2, h5, p{
 
 
 .sidebar.active~ .main-content{
-    left: 160px;
+    left: 150px;
     width: calc(100%-160px);
 }
 
 .sidebar.active{
-    width:35Vw;
+    width:30Vw;
     height: 50Vh;
 }
 
@@ -304,7 +337,6 @@ h1, h2, h5, p{
     opacity: 0;
     animation: fadeIn 2s forwards;
 }
-
 
 
 @keyframes fadeIn{
@@ -1342,7 +1374,7 @@ h1, h2, h5, p{
 
 .projects-row{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 25px;
     width: 100%;
 }
