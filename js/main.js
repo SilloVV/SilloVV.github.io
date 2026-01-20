@@ -75,16 +75,20 @@ class PageManager {
             // Opening animation
             this.isAnimationRunning = true;
             this.sidebar.classList.add('active');
-            
-            // Trigger image animation
+
+            // Reset animation first, then trigger
+            this.heroAnimationImg.style.animation = 'none';
+            this.heroAnimationImg.offsetHeight; // Force reflow
             this.heroAnimationImg.style.animation = 'top-left 0.4s ease-out forwards';
-            
+
         } else {
             // Closing animation
             this.isAnimationRunning = false;
             this.sidebar.classList.remove('active');
-            
-            // Trigger reverse image animation
+
+            // Reset animation first, then trigger reverse
+            this.heroAnimationImg.style.animation = 'none';
+            this.heroAnimationImg.offsetHeight; // Force reflow
             this.heroAnimationImg.style.animation = 'reverse-top-left 0.4s ease-out forwards';
         }
     }
