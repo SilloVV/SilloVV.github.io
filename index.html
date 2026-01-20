@@ -8,12 +8,17 @@
     <link rel="icon" type="image/x-icon"  href="/assets/icons/favicon.ico">
     <script src="/js/config.js"></script>
     <script src="/js/main.js" defer></script>
-    <script src="/js/project-slideshow.js" defer></script>
+    <script src="/js/translations.js" defer></script>
     <link rel="stylesheet" href="/css/style.css">
     
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
+
+    <!-- Language Toggle Button -->
+    <div class="lang-toggle" onclick="toggleLanguage()">
+        <span id="lang-text">EN</span>
+    </div>
 
     <div id="hero">
         <div class="hero-content">
@@ -26,7 +31,7 @@
                 <h1 id="sillow" style="display: none;">'Sillow'</h1>
             </div>
             <div class="hero-title">
-                <p>AI and Cloud Software Engineer <span class="cursor">|</span></p>
+                <p>DevOps and AI Software Engineer <span class="cursor">|</span></p>
                 <div class="hero-tags">
                     <span class="hero-tag"> Artificial Intelligence (GenAI/Machine Learning) </span>
                     <span class="hero-tag"> DevOps & Infrastructure</span>
@@ -45,7 +50,7 @@
             <div id="closeb-cv" class="closeb" onclick="closeCurrentSection()">×</div>
             <div class="cv-header">
                 <h1 class="cv-name">NAKIB Wassil</h1>
-                <h2 class="cv-title"> AI & Cloud Software Engineer</h2>
+                <h2 class="cv-title"> DevOps & AI Software Engineer</h2>
                 <div class="cv-contact">
                     <span>📞 +33 7 81 41 56 22</span> • 
                     <span>🚗 Driver's License & Vehicle </span> • 
@@ -59,7 +64,7 @@
             <div class="cv-section">
                 <h3 class="cv-section-title">Profile</h3>
                 <p>
-                    AI and Cloud Software Engineer with a strong focus on building <span class="highlight">sustainable, production-grade architectures</span>. 
+                    DevOps and AI Software Engineer with a strong focus on building <span class="highlight">sustainable, production-grade architectures</span>. 
                     My background spans Linux administration, Data Engineering, and AI Agent development. I am deeply interested in software design patterns and best practices that ensure long-term system maintainability. 
                     Currently preparing for the <span class="highlight">AWS Solutions Architect Associate</span> certification, I am eager to leverage my Python/ Shell expertise and DevOps experience to build scalable, high-performance solutions in a Cloud-native environment.
                 </p> 
@@ -137,6 +142,7 @@
                     <li><strong>Communication:</strong> Led a knowledge-sharing session on TDD for 3 people.</li>
                     <li><strong>Key Impact:</strong> Reduced server analysis time by 30% for support teams on 8,000+ pharmacies.</li>
                 </ul>
+            </div>
             </div>
 
             <div class="cv-section">
@@ -238,6 +244,7 @@
             <div class="cv-section">
                 <h3 class="cv-section-title">Certifications</h3>
                 <ul>
+                    <li>• AWS Certified Solutions Architect Associate (Exam scheduled March 2026)</li>
                     <li>• TOEIC : 865/990</li>
                     <li class="certification-item">
                         <span class="certification-text">• Hugging face Agent Course, Hugging Face</span>
@@ -266,6 +273,11 @@
                 </div>
                 
                 <div class="cv-projects">
+                    <h5>MLOps :</h5>
+                    <ul>
+                        <li><strong>Jira Ticket Classifier:</strong> Fine-tuned DistilBERT with LoRA/PEFT for incident classification. Hybrid cloud architecture (Terraform IaC) connecting AWS S3 and local resources via SQS. GitOps workflow with FluxCD, MLFlow tracking.</li>
+                    </ul>
+
                     <h5>ML :</h5>
                     <ul>
                         <li>Semantic Segmentation for object segmentation on PascalVOC dataset using a U-Net CNN model: Pytorch, TensorBoard, ONNX (See Gitlab: U-Net)</li>
@@ -306,8 +318,24 @@
 
         
         <div class="project-section">
-            <h3 class="section-title">🤖 Artificial Intelligence</h3>
+            <h3 class="section-title"> Artificial Intelligence & MLOps</h3>
             <div class="projects-row">
+                <div class="project-card" data-preview="jira-mlops">
+                    <div class="project-image">
+                        <img src="assets/logos/NN.svg" alt="MLOps" class="project-logo">
+                    </div>
+                    <div class="project-content">
+                        <h3>Jira Ticket Classifier</h3>
+                        <p>MLOps pipeline with DistilBERT fine-tuning (LoRA/PEFT), hybrid AWS/local architecture via Terraform, GitOps with FluxCD.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Terraform</span>
+                            <span class="tech-tag">MLFlow</span>
+                            <span class="tech-tag">AWS S3/SQS</span>
+                            <span class="tech-tag">FluxCD</span>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="project-card" data-preview="unet">
                     <div class="project-image">
                         <img src="assets/logos/NN.svg" alt="Neural Network" class="project-logo">
@@ -320,9 +348,6 @@
                             <span class="tech-tag">TensorBoard</span>
                             <span class="tech-tag">ONNX</span>
                         </div>
-                        <a href="https://gitlab.com/SilloVV/U-Net" target="_blank" class="project-link">
-                            View on GitLab →
-                        </a>
                     </div>
                 </div>
 
@@ -338,9 +363,6 @@
                             <span class="tech-tag">PyTorch</span>
                             <span class="tech-tag">OpenCV</span>
                         </div>
-                        <a href="https://gitlab.com/SilloVV/SteerSim" target="_blank" class="project-link">
-                            View on GitLab →
-                        </a>
                     </div>
                 </div>
 
@@ -356,16 +378,13 @@
                             <span class="tech-tag">HF Transformers</span>
                             <span class="tech-tag">Asyncio</span>
                         </div>
-                        <a href="" target="_blank" class="project-link">
-                            In progress ...
-                        </a>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="project-section">
-            <h3 class="section-title">⚙️ DevOps & Infrastructure</h3>
+            <h3 class="section-title"> DevOps & Infrastructure</h3>
             <div class="projects-row">
                 <div class="project-card" data-preview="superdiag">
                     <div class="project-image">
@@ -380,9 +399,6 @@
                             <span class="tech-tag">shUnit2</span>
                             <span class="tech-tag">Jenkins</span>
                         </div>
-                        <a href="https://gitlab.com/SilloVV/superdiag" target="_blank" class="project-link">
-                            View on GitLab (lite version) →
-                        </a>
                     </div>
                 </div>
 
@@ -399,9 +415,6 @@
                             <span class="tech-tag">Docker</span>
                             <span class="tech-tag">KinD</span>
                         </div>
-                        <a href="https://gitlab.com/SilloVV/kubernetes-simple-app" target="_blank" class="project-link">
-                            View on GitLab →
-                        </a>
                     </div>
                 </div>
 
@@ -418,15 +431,12 @@
                             <span class="tech-tag">Docker</span>
                             <span class="tech-tag">Maven</span>
                         </div>
-                        <a href="https://gitlab.com/SilloVV/mise-en-production-back-end" target="_blank" class="project-link">
-                            View on GitLab →
-                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <div id="contact-section" style="display: none;">
         <div id="closeb-contact" class="closeb" onclick="closeCurrentSection()">×</div>
         <div class="contact-content">
@@ -453,6 +463,13 @@
                                     <img src="./assets/icons/gitlab_logo.svg" alt="GitLab">
                                 </a>
                                 <div class="tooltip">gitlab.com/SilloVV</div>
+                            </div>
+
+                            <div class="contact-icon github" title="GitHub: github.com/SilloVV">
+                                <a href="https://github.com/SilloVV" target="_blank">
+                                    <img src="./assets/icons/github_logo.svg" alt="GitHub">
+                                </a>
+                                <div class="tooltip">github.com/SilloVV</div>
                             </div>
 
                             <div class="contact-icon instagram" title="Instagram: instagram.com/_scoobidouuu">
@@ -484,7 +501,7 @@
             </div>
             
             <div class="contact-footer">
-                <p> Available for new challenges from November 2025</p>
+                <p> Available now for new challenges</p>
             </div>
         </div>
     </div>
@@ -517,9 +534,6 @@
                 </button>
             </div>
             
-            <div class="chat-info">
-                <small>⚡ Powered by Cerebras • AI-generated responses</small>
-            </div>
         </div>
     </div>
 
@@ -528,17 +542,17 @@
         <div class="propos"> 
             <em>About me </em></div>
         <div class="about-text">
-            Passionate about artificial intelligence and DevOps, I have <strong>completed</strong> my 5th year of engineering at <span class="hover-word" data-image="polytech">Polytech Nancy</span> with a <span class="hover-word" data-image="diplome">double degree</span> in AI.
+            Passionate about artificial intelligence and DevOps, I have <strong>completed</strong> my Engineering degree at <span class="hover-word" data-image="polytech">Polytech Nancy</span> with a <span class="hover-word" data-image="diplome">double degree</span> in AI (Master II in Vision and Robotics).
             <br><br>
-            Currently interning at <span class="hover-word" data-image="hermine">HermineIA</span> at <span class="hover-word" data-image="stationf">STATION F</span>, I am developing a multi-agent solution for legal professionals, combining generative AI and software design.
+            After my experience at <span class="hover-word" data-image="hermine">HermineIA</span> at <span class="hover-word" data-image="stationf">STATION F</span> as Applied AI Engineer, I developed a multi-agent legal assistant and led ETL automation projects, achieving 90% time savings on client migrations.
             <br><br>
-            My journey has taken me from creating monitoring tools at <span class="hover-word" data-image="equasens">Equasens</span> to developing and supervising a conversational agent architecture, through deep learning and computer vision projects.
+            My journey has taken me from creating monitoring tools at <span class="hover-word" data-image="equasens">Equasens</span> to architecting resilient agentic systems, through deep learning and MLOps projects. Currently preparing for the AWS Solutions Architect Associate certification.
             <br><br>
             What interests me? The fascinating intersection between artificial intelligence and DevOps infrastructure, where each infrastructure and pipeline enables deploying models that transform the way we work.
             <br><br>
             When I'm not coding, you'll find me on a tennis court, in a boxing gym, studying biomechanics or in a movie theater.
             <br><br>
-            Available from November 2025 for exciting new technical challenges.
+            Available now for exciting new technical challenges.
         </div>
         
         <div class="signature-container">
@@ -550,7 +564,7 @@
     <div class="sidebar">
         <div class="top">
             <div class="logo">
-                <span>My Portfolio</span>
+                <span>Menu</span>
             </div>
             <i class="bx bx-menu" id="btn"></i>
 
@@ -631,7 +645,11 @@
     </div>
     
     <div class="project-preview-overlay" id="preview-overlay"></div>
-    
+
+    <div class="project-preview" id="preview-jira-mlops">
+        <div class="closeb" onclick="closeProjectPreview('jira-mlops')">×</div>
+        <img src="assets/projects/mlops.png" alt="MLOps Architecture Preview">
+    </div>
     <div class="project-preview" id="preview-unet">
         <div class="closeb" onclick="closeProjectPreview('unet')">×</div>
         <img src="assets/projects/u_net.png" alt="U-Net Segmentation Preview">
