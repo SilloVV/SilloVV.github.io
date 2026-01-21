@@ -192,7 +192,7 @@ const translations = {
 
         // Easter eggs
         "console-message": "Stop looking at my code! 👀",
-        "dont-click-btn": "Don't click!"
+        "dont-click-btn": "catch me, if you can !"
     },
     fr: {
         // Hero
@@ -386,7 +386,7 @@ const translations = {
 
         // Easter eggs
         "console-message": "Arrête de regarder mon code ! 👀",
-        "dont-click-btn": "Ne pas cliquer !"
+        "dont-click-btn": "Attrape moi si tu peux  !"
     }
 };
 

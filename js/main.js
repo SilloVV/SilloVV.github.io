@@ -740,8 +740,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!btn) return;
 
     let clickCount = 0;
-    const escapeDistance = 150; // Distance to trigger escape
-    const moveDistance = 200;   // How far to move
+    const escapeDistance = 100; // Distance to trigger escape
+    const moveDistance = 140;   // How far to move
 
     // Update button text based on language
     const updateButtonText = () => {
