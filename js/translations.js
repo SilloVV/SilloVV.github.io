@@ -165,7 +165,24 @@ const translations = {
         // CV Download Preview
         "cv-preview-title": "CV - Wassil NAKIB",
         "cv-preview-subtitle": "Machine Learning & DevOps Engineer",
-        "cv-preview-format": "PDF Format - 2 pages"
+        "cv-preview-format": "PDF Format - 2 pages",
+
+        // Resources
+        "resources-title": "Useful Resources",
+        "resources-subtitle": "A curated selection of tools and documentation I find valuable",
+        "nav-resources": "Resources",
+        "resource-fossflow-title": "FossFLOW",
+        "resource-fossflow-desc": "Create beautiful network diagrams for your infrastructure documentation",
+        "resource-fossflow-tag": "Diagrams",
+        "resource-stephane-title": "Stéphane Robert Blog",
+        "resource-stephane-desc": "Comprehensive blog covering DevSecOps best practices and tools",
+        "resource-stephane-tag": "DevSecOps",
+        "resource-resume-title": "Easy Free Resume",
+        "resource-resume-desc": "ATS-friendly resume templates to build your professional CV",
+        "resource-resume-tag": "Career",
+        "resource-roadmap-title": "Roadmap.sh",
+        "resource-roadmap-desc": "Developer roadmaps and learning paths for any IT career or skill",
+        "resource-roadmap-tag": "Learning"
     },
     fr: {
         // Hero
@@ -332,7 +349,24 @@ const translations = {
         // CV Download Preview
         "cv-preview-title": "CV - Wassil NAKIB",
         "cv-preview-subtitle": "Ingénieur Machine Learning & DevOps",
-        "cv-preview-format": "Format PDF - 2 pages"
+        "cv-preview-format": "Format PDF - 2 pages",
+
+        // Resources
+        "resources-title": "Sources Utiles",
+        "resources-subtitle": "Une sélection d'outils et de documentation que je trouve précieux",
+        "nav-resources": "Ressources",
+        "resource-fossflow-title": "FossFLOW",
+        "resource-fossflow-desc": "Créez de beaux diagrammes réseaux pour votre documentation d'infrastructure",
+        "resource-fossflow-tag": "Diagrammes",
+        "resource-stephane-title": "Blog Stéphane Robert",
+        "resource-stephane-desc": "Blog complet sur les bonnes pratiques et outils DevSecOps",
+        "resource-stephane-tag": "DevSecOps",
+        "resource-resume-title": "Easy Free Resume",
+        "resource-resume-desc": "Modèles de CV compatibles ATS pour construire votre CV professionnel",
+        "resource-resume-tag": "Carrière",
+        "resource-roadmap-title": "Roadmap.sh",
+        "resource-roadmap-desc": "Roadmaps et parcours d'apprentissage pour toute carrière ou compétence IT",
+        "resource-roadmap-tag": "Apprentissage"
     }
 };
 
@@ -743,6 +777,50 @@ function applyTranslations() {
         if (p) p.textContent = t['cv-preview-subtitle'];
         if (small) small.textContent = t['cv-preview-format'];
     }
+
+    // CV Download Link - change PDF based on language
+    const cvDownloadLink = document.getElementById('cv-download-link');
+    if (cvDownloadLink) {
+        if (currentLang === 'fr') {
+            cvDownloadLink.href = 'assets/CV_NAKIB_WASSIL.pdf';
+            cvDownloadLink.download = 'CV_Wassil_NAKIB.pdf';
+        } else {
+            cvDownloadLink.href = 'assets/RESUME_NAKIB_WASSIL.pdf';
+            cvDownloadLink.download = 'Resume_Wassil_NAKIB.pdf';
+        }
+    }
+
+    // Resources Section
+    const resourcesHeader = document.querySelector('.resources-header');
+    if (resourcesHeader) {
+        const h2 = resourcesHeader.querySelector('h2');
+        const p = resourcesHeader.querySelector('p');
+        if (h2) h2.textContent = t['resources-title'];
+        if (p) p.textContent = t['resources-subtitle'];
+    }
+
+    // Resources cards
+    const resourceCards = document.querySelectorAll('.resource-card');
+    const resourceKeys = ['fossflow', 'stephane', 'resume', 'roadmap'];
+    resourceCards.forEach((card, index) => {
+        if (index < resourceKeys.length) {
+            const key = resourceKeys[index];
+            const title = card.querySelector('h3');
+            const desc = card.querySelector('.resource-desc');
+            const tag = card.querySelector('.resource-tag');
+            if (title) title.textContent = t[`resource-${key}-title`];
+            if (desc) desc.textContent = t[`resource-${key}-desc`];
+            if (tag) tag.textContent = t[`resource-${key}-tag`];
+        }
+    });
+
+    // Nav Resources
+    const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(item => {
+        if (item.textContent.trim() === 'Resources' || item.textContent.trim() === 'Ressources') {
+            item.textContent = t['nav-resources'];
+        }
+    });
 }
 
 // Initialize language on page load

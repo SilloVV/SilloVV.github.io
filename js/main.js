@@ -50,6 +50,10 @@ class PageManager {
             'chat': {
                 element: 'chat-section',
                 additionalElements: []
+            },
+            'resources': {
+                element: 'resources',
+                additionalElements: []
             }
         };
         
@@ -259,6 +263,10 @@ function show_about() {
 
 function show_chat() {
     if (pageManager) pageManager.showPage('chat');
+}
+
+function show_resources() {
+    if (pageManager) pageManager.showPage('resources');
 }
 
 function closeCurrentSection() {

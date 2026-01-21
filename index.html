@@ -590,7 +590,62 @@
         </div>
     </div>
 
-    
+    <!-- Resources Section -->
+    <div id="resources" style="display: none;">
+        <div id="closeb-resources" class="closeb" onclick="closeCurrentSection()">×</div>
+        <div class="resources-header">
+            <h2>Useful Resources</h2>
+            <p>A curated selection of tools and documentation I find valuable</p>
+        </div>
+        <div class="resources-grid">
+            <a href="https://stan-smith.github.io/FossFLOW/" target="_blank" class="resource-card">
+                <div class="resource-icon">
+                    <i class='bx bx-git-branch'></i>
+                </div>
+                <div class="resource-content">
+                    <h3>FossFLOW</h3>
+                    <p class="resource-desc">Create beautiful network diagrams for your infrastructure documentation</p>
+                    <span class="resource-tag">Diagrams</span>
+                </div>
+                <i class='bx bx-link-external resource-external'></i>
+            </a>
+            <a href="https://blog.stephane-robert.info/docs/" target="_blank" class="resource-card">
+                <div class="resource-icon">
+                    <i class='bx bx-shield-quarter'></i>
+                </div>
+                <div class="resource-content">
+                    <h3>Stéphane Robert Blog</h3>
+                    <p class="resource-desc">Comprehensive blog covering DevSecOps best practices and tools</p>
+                    <span class="resource-tag">DevSecOps</span>
+                </div>
+                <i class='bx bx-link-external resource-external'></i>
+            </a>
+            <a href="https://easyfreeresume.com/templates" target="_blank" class="resource-card">
+                <div class="resource-icon">
+                    <i class='bx bx-file'></i>
+                </div>
+                <div class="resource-content">
+                    <h3>Easy Free Resume</h3>
+                    <p class="resource-desc">ATS-friendly resume templates to build your professional CV</p>
+                    <span class="resource-tag">Career</span>
+                </div>
+                <i class='bx bx-link-external resource-external'></i>
+            </a>
+            <a href="https://roadmap.sh/" target="_blank" class="resource-card">
+                <div class="resource-icon">
+                    <i class='bx bx-map-alt'></i>
+                </div>
+                <div class="resource-content">
+                    <h3>Roadmap.sh</h3>
+                    <p class="resource-desc">Developer roadmaps and learning paths for any IT career or skill</p>
+                    <span class="resource-tag">Learning</span>
+                </div>
+                <i class='bx bx-link-external resource-external'></i>
+            </a>
+        </div>
+    </div>
+
+
     <div class="sidebar" style="opacity: 0;">
         <div class="top">
             <div class="logo">
@@ -604,25 +659,31 @@
                 <a onclick="show_about()">
                     <span class="nav-item"> About me</span>
                 </a>
-                
+
             </li>
             <li>
                 <a onclick="show_cv()">
                     <span class="nav-item"> Curriculum</span>
                 </a>
-                
+
             </li>
             <li>
                 <a onclick="show_projects()">
                     <span class="nav-item">Projects</span>
                 </a>
-                
+
+            </li>
+            <li>
+                <a onclick="show_resources()">
+                    <span class="nav-item">Resources</span>
+                </a>
+
             </li>
             <li>
                 <a onclick="show_contact()">
                     <span class="nav-item">Contact</span>
                 </a>
-                
+
             </li>
             <li>
                 <a onclick="show_chat()">
@@ -662,7 +723,7 @@
         <div class="download-arrow">
             <img src="assets/icons/arrow_download.svg" alt="Download arrow" class="arrow-svg">
         </div>
-        <a href="assets/RESUME_NAKIB_WASSIL.pdf" download="CV_Wassil_NAKIB.pdf" class="download-btn-fixed" title="Download CV">
+        <a href="assets/RESUME_NAKIB_WASSIL.pdf" download="CV_Wassil_NAKIB.pdf" class="download-btn-fixed" title="Download CV" id="cv-download-link">
             <i class="bx bx-download"></i>
             <div class="cv-preview">
                 <div class="cv-preview-content">
