@@ -145,6 +145,11 @@ class PageManager {
             if (this.sidebar.classList.contains('active') && this.isAnimationRunning) {
                 this.toggleSidebarAnimation();
             }
+
+            // Re-apply translations when page is shown
+            if (typeof applyTranslations === 'function') {
+                applyTranslations();
+            }
         }
     }
     

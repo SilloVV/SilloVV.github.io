@@ -1,4 +1,4 @@
-// Typing Animation for Hero Section
+// Typing Animation for Hero Section - Old School Style
 class TypeWriter {
     constructor(element, texts, wait = 2000) {
         this.element = element;
@@ -22,10 +22,11 @@ class TypeWriter {
 
         this.element.innerHTML = `${this.txt}<span class="cursor">|</span>`;
 
-        let typeSpeed = 80;
+        // Variable speed for old-school effect
+        let typeSpeed = 60 + Math.random() * 80;
 
         if (this.isDeleting) {
-            typeSpeed /= 2;
+            typeSpeed = 30 + Math.random() * 40;
         }
 
         if (!this.isDeleting && this.txt === fullTxt) {
@@ -53,8 +54,8 @@ function initHeroTyping() {
     new TypeWriter(heroTitle, texts, 3000);
 }
 
-// Typing effect for greeting and name (one-time animation)
-function typeText(element, text, speed = 50) {
+// Old-school typing effect with variable speed and occasional pauses
+function typeTextOldSchool(element, text, baseSpeed = 50) {
     return new Promise(resolve => {
         let i = 0;
         element.textContent = '';
@@ -63,8 +64,52 @@ function typeText(element, text, speed = 50) {
         function type() {
             if (i < text.length) {
                 element.textContent += text.charAt(i);
+
+                // Variable speed for realistic typing
+                let delay = baseSpeed + Math.random() * 60;
+
+                // Occasional slight pause (like thinking)
+                if (Math.random() < 0.1) {
+                    delay += 100 + Math.random() * 150;
+                }
+
+                // Pause after punctuation
+                if ([',', '.', '!', '?', ':'].includes(text.charAt(i))) {
+                    delay += 200;
+                }
+
                 i++;
-                setTimeout(type, speed);
+                setTimeout(type, delay);
+            } else {
+                resolve();
+            }
+        }
+        type();
+    });
+}
+
+// Type name letter by letter
+function typeNameOldSchool(element, text, baseSpeed = 80) {
+    return new Promise(resolve => {
+        let i = 0;
+        element.textContent = '';
+        element.style.visibility = 'visible';
+        element.style.opacity = '1';
+
+        function type() {
+            if (i < text.length) {
+                element.textContent += text.charAt(i);
+
+                // Variable speed
+                let delay = baseSpeed + Math.random() * 50;
+
+                // Space pause
+                if (text.charAt(i) === ' ') {
+                    delay += 100;
+                }
+
+                i++;
+                setTimeout(type, delay);
             } else {
                 resolve();
             }
@@ -75,43 +120,128 @@ function typeText(element, text, speed = 50) {
 
 async function animateHeroEntrance() {
     const greeting = document.querySelector('.hero-greeting h5');
-    const name = document.querySelector('.hero-name h1');
+    const nameElement = document.getElementById('nom');
     const title = document.querySelector('.hero-title p');
     const tags = document.querySelectorAll('.hero-tag');
+    const heroAnimation = document.getElementById('hero_animation');
 
-    if (!greeting || !name || !title) return;
+    if (!greeting || !nameElement || !title) return;
 
-    // Hide elements initially
+    // Hide all elements initially
     greeting.style.visibility = 'hidden';
-    name.style.visibility = 'hidden';
+    greeting.style.opacity = '0';
+    nameElement.style.visibility = 'hidden';
+    nameElement.style.opacity = '0';
     title.style.visibility = 'hidden';
-    tags.forEach(tag => tag.style.opacity = '0');
+    title.style.opacity = '0';
+    tags.forEach(tag => {
+        tag.style.opacity = '0';
+        tag.style.transform = 'translateY(10px)';
+    });
+    if (heroAnimation) {
+        heroAnimation.style.opacity = '0';
+        heroAnimation.style.transform = 'scale(0.9)';
+    }
 
-    // Get translated text
-    const t = translations[currentLang];
-    const greetingText = t['hero-greeting'];
-    const nameText = 'Wassil NAKIB';
-
-    // Animate greeting
-    await typeText(greeting, greetingText, 60);
+    // Small initial delay for page load
     await new Promise(r => setTimeout(r, 300));
 
-    // Animate name
-    name.style.visibility = 'visible';
-    name.style.animation = 'fadeInUp 0.8s ease forwards';
-    await new Promise(r => setTimeout(r, 800));
+    // Animate greeting with old-school typing
+    const t = translations[currentLang];
+    const greetingText = t['hero-greeting'];
+    greeting.style.visibility = 'visible';
+    greeting.style.opacity = '1';
+    await typeTextOldSchool(greeting, greetingText, 70);
+
+    await new Promise(r => setTimeout(r, 400));
+
+    // Animate name with typing effect
+    const nameText = 'Wassil NAKIB';
+    await typeNameOldSchool(nameElement, nameText, 100);
+
+    // Setup the name hover effect after typing is done
+    setupNameHoverEffect();
+
+    await new Promise(r => setTimeout(r, 300));
+
+    // Fade in hero animation
+    if (heroAnimation) {
+        heroAnimation.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+        heroAnimation.style.opacity = '1';
+        heroAnimation.style.transform = 'scale(1)';
+    }
+
+    await new Promise(r => setTimeout(r, 400));
 
     // Start title typing animation
     title.style.visibility = 'visible';
+    title.style.opacity = '1';
     initHeroTyping();
 
-    // Fade in tags
-    await new Promise(r => setTimeout(r, 500));
+    // Fade in tags one by one
+    await new Promise(r => setTimeout(r, 600));
     tags.forEach((tag, index) => {
         setTimeout(() => {
-            tag.style.transition = 'opacity 0.5s ease';
+            tag.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
             tag.style.opacity = '1';
+            tag.style.transform = 'translateY(0)';
         }, index * 200);
+    });
+}
+
+// Name hover effect: reveal "SilloVV" under cursor
+function setupNameHoverEffect() {
+    const nameContainer = document.querySelector('.hero-name');
+    const nameElement = document.getElementById('nom');
+    const sillowElement = document.getElementById('sillow');
+
+    if (!nameContainer || !nameElement || !sillowElement) return;
+
+    // Position sillow exactly over nom
+    sillowElement.style.position = 'absolute';
+    sillowElement.style.top = '0';
+    sillowElement.style.left = '0';
+    sillowElement.style.width = '100%';
+    sillowElement.style.height = '100%';
+    sillowElement.style.display = 'flex';
+    sillowElement.style.alignItems = 'center';
+    sillowElement.style.justifyContent = 'center';
+    sillowElement.style.clipPath = 'circle(0px at 50% 50%)';
+    sillowElement.style.transition = 'none';
+    sillowElement.style.pointerEvents = 'none';
+    sillowElement.style.zIndex = '10';
+
+    // Track mouse position over name
+    let isOverName = false;
+    let animationFrame = null;
+
+    nameContainer.addEventListener('mouseenter', () => {
+        isOverName = true;
+    });
+
+    nameContainer.addEventListener('mouseleave', () => {
+        isOverName = false;
+        // Smoothly hide the sillow text
+        sillowElement.style.transition = 'clip-path 0.3s ease-out';
+        sillowElement.style.clipPath = 'circle(0px at 50% 50%)';
+    });
+
+    nameContainer.addEventListener('mousemove', (e) => {
+        if (!isOverName) return;
+
+        if (animationFrame) {
+            cancelAnimationFrame(animationFrame);
+        }
+
+        animationFrame = requestAnimationFrame(() => {
+            const rect = nameContainer.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            // Reveal with circle mask following cursor (matches inverseur-circle size)
+            sillowElement.style.transition = 'none';
+            sillowElement.style.clipPath = `circle(50px at ${x}px ${y}px)`;
+        });
     });
 }
 
@@ -142,6 +272,34 @@ style.textContent = `
     @keyframes blink {
         0%, 50% { opacity: 1; }
         51%, 100% { opacity: 0; }
+    }
+
+    /* Name hover effect styles */
+    .hero-name {
+        position: relative;
+        cursor: pointer;
+    }
+
+    #sillow {
+        font-family: 'Playfair Display', serif;
+        font-size: 48px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        color: var(--text);
+        background: linear-gradient(
+            90deg,
+            var(--bg-alt) 0%,
+            var(--text) 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    @media screen and (max-width: 768px) {
+        #sillow {
+            font-size: 32px;
+        }
     }
 `;
 document.head.appendChild(style);
