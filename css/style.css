@@ -2501,24 +2501,9 @@ h1, h2, h5, p{
     20%, 40%, 60%, 80% { transform: translateX(5px); }
 }
 
-/* Selma Easter Egg - Site flip */
-.selma-flip {
-    animation: flipSite 0.8s ease-in-out forwards;
-}
 
-.selma-flip-back {
-    animation: flipSiteBack 0.8s ease-in-out forwards;
-}
 
-@keyframes flipSite {
-    0% { transform: perspective(1000px) rotateX(0deg); }
-    100% { transform: perspective(1000px) rotateX(180deg); }
-}
 
-@keyframes flipSiteBack {
-    0% { transform: perspective(1000px) rotateX(180deg); }
-    100% { transform: perspective(1000px) rotateX(360deg); }
-}
 
 /* Selma heart emoji overlay */
 .selma-overlay {

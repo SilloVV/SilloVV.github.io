@@ -925,8 +925,8 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             if (overlay) overlay.classList.add('show');
 
-            // Countdown from 5
-            let count = 5;
+            // Countdown from 3
+            let count = 3;
             const countdownInterval = setInterval(() => {
                 count--;
                 if (countdownEl) countdownEl.textContent = count;
