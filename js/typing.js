@@ -1,12 +1,20 @@
 // Typing Animation for Hero Section - Old School Style
 class TypeWriter {
-    constructor(element, texts, wait = 2000) {
+    constructor(element, texts, wait = 2000, startWithDelete = null) {
         this.element = element;
         this.texts = texts;
         this.wait = parseInt(wait, 10);
-        this.txt = '';
         this.wordIndex = 0;
-        this.isDeleting = false;
+
+        // If startWithDelete is provided, start by deleting that text first
+        if (startWithDelete) {
+            this.txt = startWithDelete;
+            this.isDeleting = true;
+        } else {
+            this.txt = '';
+            this.isDeleting = false;
+        }
+
         this.type();
     }
 
@@ -15,7 +23,7 @@ class TypeWriter {
         const fullTxt = this.texts[current];
 
         if (this.isDeleting) {
-            this.txt = fullTxt.substring(0, this.txt.length - 1);
+            this.txt = this.txt.substring(0, this.txt.length - 1);
         } else {
             this.txt = fullTxt.substring(0, this.txt.length + 1);
         }
@@ -106,6 +114,14 @@ function preloadFaceAnimation() {
     });
 }
 
+// Update progress bar
+function updateProgress(percent) {
+    const progressBar = document.getElementById('loading-progress');
+    if (progressBar) {
+        progressBar.style.width = percent + '%';
+    }
+}
+
 // Main loading screen animation
 async function animateLoadingScreen() {
     // Start preloading face animation images immediately
@@ -139,41 +155,56 @@ async function animateLoadingScreen() {
         'Python, Bash, Java'
     ];
 
+    // Store title text for hero transition
+    window.loadingTitleText = titleText;
+
     // Show cursor
     if (cursor) cursor.style.display = 'inline-block';
 
-    // Small initial delay (20% faster)
+    // Small initial delay
+    updateProgress(5);
     await new Promise(r => setTimeout(r, 320));
 
-    // Type greeting (20% faster: 55 -> 44)
+    // Type greeting
+    updateProgress(15);
     await typeLoadingText(helloEl, greetingText, 44);
+    updateProgress(30);
     await new Promise(r => setTimeout(r, 240));
 
-    // Type name (20% faster: 70 -> 56)
+    // Type name
+    updateProgress(35);
     await typeLoadingText(nameEl, nameText, 56);
+    updateProgress(55);
     await new Promise(r => setTimeout(r, 320));
 
-    // Type title (20% faster: 50 -> 40, keep cursor here)
+    // Type title (keep cursor here)
+    updateProgress(60);
     await typeLoadingText(titleEl, titleText, 40, true);
+    updateProgress(75);
     await new Promise(r => setTimeout(r, 400));
 
     // Hide cursor before showing tags
     if (cursor) cursor.style.display = 'none';
 
-    // Show tags one by one (20% faster)
+    // Show tags one by one
     tag1.textContent = tags[0];
     tag1.classList.add('visible');
+    updateProgress(82);
     await new Promise(r => setTimeout(r, 240));
 
     tag2.textContent = tags[1];
     tag2.classList.add('visible');
+    updateProgress(89);
     await new Promise(r => setTimeout(r, 240));
 
     tag3.textContent = tags[2];
     tag3.classList.add('visible');
+    updateProgress(95);
 
-    // Wait a moment to appreciate the full loading screen (20% faster)
-    await new Promise(r => setTimeout(r, 800));
+    // Wait a moment to appreciate the full loading screen
+    await new Promise(r => setTimeout(r, 600));
+    updateProgress(100);
+    await new Promise(r => setTimeout(r, 200));
 
     // Transition to main content
     transitionToHero();
@@ -185,17 +216,19 @@ function transitionToHero() {
     const hero = document.getElementById('hero');
     const langToggle = document.querySelector('.lang-toggle');
     const sidebar = document.querySelector('.sidebar');
-    const heroAnimation = document.getElementById('hero_animation');
+    const heroTitle = document.querySelector('.hero-title p');
 
-    // Pre-fill hero content with same text (already in HTML)
-    // Just need to show the hero elements
+    // Set hero title to match loading screen (no retyping)
+    if (heroTitle && window.loadingTitleText) {
+        heroTitle.innerHTML = window.loadingTitleText + '<span class="cursor">|</span>';
+    }
 
     // Fade out loading screen
     loadingScreen.classList.add('fade-out');
 
     // After a small delay, show hero
     setTimeout(() => {
-        // Show hero (text is already there from HTML)
+        // Show hero
         if (hero) {
             hero.style.display = '';
             hero.style.opacity = '1';
@@ -215,8 +248,10 @@ function transitionToHero() {
         // Setup name hover effect
         setupNameHoverEffect();
 
-        // Start the hero title typing animation
-        initHeroTyping();
+        // Wait then start typing animation with NEXT text (not the same one)
+        setTimeout(() => {
+            initHeroTyping();
+        }, 2500);
 
     }, 600);
 
@@ -226,19 +261,22 @@ function transitionToHero() {
     }, 800);
 }
 
-// Hero typing animation - starts with different text than loading screen
+// Hero typing animation - starts by deleting the loading screen text, then types new texts
 function initHeroTyping() {
     const heroTitle = document.querySelector('.hero-title p');
     if (!heroTitle) return;
 
     const savedLang = localStorage.getItem('portfolio-lang') || 'en';
 
-    // Start with MLOps/Cloud to avoid repeating the loading screen text
+    // Texts to cycle through (different from loading screen)
     const texts = savedLang === 'fr'
         ? ['Passionné par le MLOps', 'Architecte Cloud', 'Ingénieur DevOps et IA']
         : ['MLOps Enthusiast', 'Cloud Architect', 'DevOps and AI Engineer'];
 
-    new TypeWriter(heroTitle, texts, 3000);
+    // Start by deleting the loading screen text, then type the new texts
+    const startText = window.loadingTitleText || (savedLang === 'fr' ? 'Ingénieur DevOps et IA' : 'DevOps and AI Engineer');
+
+    new TypeWriter(heroTitle, texts, 3000, startText);
 }
 
 // Old-school typing effect with variable speed and occasional pauses

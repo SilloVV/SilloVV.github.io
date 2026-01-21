@@ -131,6 +131,24 @@
     51%, 100% { opacity: 0; }
 }
 
+/* Progress bar like Claude Code */
+.loading-progress-container {
+    width: 280px;
+    height: 3px;
+    background-color: rgba(51, 51, 51, 0.15);
+    border-radius: 3px;
+    margin-top: 30px;
+    overflow: hidden;
+}
+
+.loading-progress-bar {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--bg-alt) 0%, var(--text) 100%);
+    border-radius: 3px;
+    transition: width 0.15s ease-out;
+}
+
 /* Mobile loading screen */
 @media screen and (max-width: 768px) {
     .loading-greeting {
