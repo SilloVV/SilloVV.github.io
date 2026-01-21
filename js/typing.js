@@ -114,11 +114,16 @@ function preloadFaceAnimation() {
     });
 }
 
-// Update progress bar
+// Update progress bar and percentage text
 function updateProgress(percent) {
     const progressBar = document.getElementById('loading-progress');
+    const progressText = document.getElementById('loading-progress-text');
+
     if (progressBar) {
         progressBar.style.width = percent + '%';
+    }
+    if (progressText) {
+        progressText.textContent = percent + '%';
     }
 }
 
