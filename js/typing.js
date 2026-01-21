@@ -91,8 +91,26 @@ function typeLoadingText(element, text, baseSpeed = 45, keepCursor = false) {
     });
 }
 
+// Preload face animation images to avoid lag on first menu click
+function preloadFaceAnimation() {
+    const images = [
+        'assets/face-animation-light/tl1.png',
+        'assets/face-animation-light/tl2.png',
+        'assets/face-animation-light/tl3.png',
+        'assets/face-animation-light/tl4.png'
+    ];
+
+    images.forEach(src => {
+        const img = new Image();
+        img.src = src;
+    });
+}
+
 // Main loading screen animation
 async function animateLoadingScreen() {
+    // Start preloading face animation images immediately
+    preloadFaceAnimation();
+
     const loadingScreen = document.getElementById('loading-screen');
     const helloEl = document.getElementById('loading-hello');
     const nameEl = document.getElementById('loading-name-text');
@@ -104,7 +122,7 @@ async function animateLoadingScreen() {
 
     if (!loadingScreen || !helloEl || !nameEl || !titleEl) {
         // If elements don't exist, just show the main content
-        showMainContent();
+        transitionToHero();
         return;
     }
 
@@ -208,14 +226,17 @@ function transitionToHero() {
     }, 800);
 }
 
-// Hero typing animation
+// Hero typing animation - starts with different text than loading screen
 function initHeroTyping() {
     const heroTitle = document.querySelector('.hero-title p');
     if (!heroTitle) return;
 
-    const texts = currentLang === 'fr'
-        ? ['Ingénieur DevOps et IA', 'Passionné par le MLOps', 'Architecte Cloud']
-        : ['DevOps and AI Software Engineer', 'MLOps Enthusiast', 'Cloud Architect'];
+    const savedLang = localStorage.getItem('portfolio-lang') || 'en';
+
+    // Start with MLOps/Cloud to avoid repeating the loading screen text
+    const texts = savedLang === 'fr'
+        ? ['Passionné par le MLOps', 'Architecte Cloud', 'Ingénieur DevOps et IA']
+        : ['MLOps Enthusiast', 'Cloud Architect', 'DevOps and AI Engineer'];
 
     new TypeWriter(heroTitle, texts, 3000);
 }
