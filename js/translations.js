@@ -167,6 +167,12 @@ const translations = {
         "cv-preview-subtitle": "Machine Learning & DevOps Engineer",
         "cv-preview-format": "PDF Format - 2 pages",
 
+        // CV Download Hover
+        "cv-download-title": "Download CV",
+
+        // Hidden Menu Item
+        "nav-hidden-movies": "Films & Series",
+
         // Resources
         "resources-title": "Useful Resources",
         "resources-subtitle": "A curated selection of tools and documentation I find valuable",
@@ -350,6 +356,12 @@ const translations = {
         "cv-preview-title": "CV - Wassil NAKIB",
         "cv-preview-subtitle": "Ingénieur Machine Learning & DevOps",
         "cv-preview-format": "Format PDF - 2 pages",
+
+        // CV Download Hover
+        "cv-download-title": "Télécharger le CV",
+
+        // Hidden Menu Item
+        "nav-hidden-movies": "Films & Séries",
 
         // Resources
         "resources-title": "Sources Utiles",
@@ -779,9 +791,10 @@ function applyTranslations() {
         if (small) small.textContent = t['cv-preview-format'];
     }
 
-    // CV Download Link - change PDF based on language
+    // CV Download Link - change PDF based on language and update title
     const cvDownloadLink = document.getElementById('cv-download-link');
     if (cvDownloadLink) {
+        cvDownloadLink.title = t['cv-download-title'];
         if (currentLang === 'fr') {
             cvDownloadLink.href = 'assets/CV_NAKIB_WASSIL.pdf';
             cvDownloadLink.download = 'CV_Wassil_NAKIB.pdf';
@@ -790,6 +803,10 @@ function applyTranslations() {
             cvDownloadLink.download = 'Resume_Wassil_NAKIB.pdf';
         }
     }
+
+    // Hidden Menu Item (Easter Egg)
+    const hiddenNavItem = document.querySelector('.hidden-nav-item');
+    if (hiddenNavItem) hiddenNavItem.textContent = t['nav-hidden-movies'];
 
     // Resources Section
     const resourcesHeader = document.querySelector('.resources-header');

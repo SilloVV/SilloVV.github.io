@@ -533,6 +533,62 @@ h1, h2, h5, p{
     }
 }
 
+/* Hidden Easter Egg Menu Item */
+.hidden-menu-item {
+    position: absolute;
+    bottom: -60px;
+    left: 0;
+    width: 100%;
+    padding: 0.4rem 0.8rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.sidebar.active .hidden-menu-item {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.sidebar.active:hover .hidden-menu-item,
+.sidebar.active .hidden-menu-item:hover {
+    opacity: 0.6;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.hidden-nav-link {
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    border-radius: 0.8rem;
+    height: 50px;
+    transition: all 0.3s ease;
+}
+
+.hidden-nav-link:hover {
+    padding-left: 5px;
+    background-color: var(--bg-alt);
+    color: var(--bg);
+    opacity: 1 !important;
+}
+
+.hidden-nav-item {
+    display: none;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.sidebar.active .hidden-nav-item {
+    display: flex;
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+}
+
 
 
 
