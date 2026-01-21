@@ -127,6 +127,8 @@ const translations = {
         "interest-4": "Tennis and Boxing 🎾 🥊",
 
         // Projects Section
+        "projects-header-title": "My Projects",
+        "projects-header-subtitle": "Discover my technical achievements",
         "projects-ai-title": "🤖 Artificial Intelligence & MLOps",
         "projects-devops-title": "⚙️ DevOps & Infrastructure",
 
@@ -154,10 +156,16 @@ const translations = {
         "contact-footer": "Available now for new challenges",
 
         // Chat
-        "chat-title": "Chat with me",
-        "chat-subtitle": "Ask me anything about my background, skills or projects!",
-        "chat-placeholder": "Ask a question...",
-        "chat-send": "Send"
+        "chat-title": "💬 Chat with my LLM version",
+        "chat-subtitle": "Ask me questions about my background, skills, or projects!",
+        "chat-placeholder": "Type your question here...",
+        "chat-send": "Send",
+        "chat-bot-greeting": "👋 Hello! I'm the AI version of Wassil NAKIB. I can tell you about my AI engineering background, my experiences at HermineIA and Equasens, my machine learning and DevOps projects. What would you like to know?",
+
+        // CV Download Preview
+        "cv-preview-title": "CV - Wassil NAKIB",
+        "cv-preview-subtitle": "Machine Learning & DevOps Engineer",
+        "cv-preview-format": "PDF Format - 2 pages"
     },
     fr: {
         // Hero
@@ -286,6 +294,8 @@ const translations = {
         "interest-4": "Tennis et Boxe 🎾 🥊",
 
         // Projects Section
+        "projects-header-title": "Mes Projets",
+        "projects-header-subtitle": "Découvrez mes réalisations techniques",
         "projects-ai-title": "🤖 Intelligence Artificielle & MLOps",
         "projects-devops-title": "⚙️ DevOps & Infrastructure",
 
@@ -313,10 +323,16 @@ const translations = {
         "contact-footer": "Disponible maintenant pour de nouveaux défis",
 
         // Chat
-        "chat-title": "Discuter avec moi",
+        "chat-title": "💬 Discutez avec ma version IA",
         "chat-subtitle": "Posez-moi des questions sur mon parcours, mes compétences ou mes projets !",
-        "chat-placeholder": "Posez une question...",
-        "chat-send": "Envoyer"
+        "chat-placeholder": "Tapez votre question ici...",
+        "chat-send": "Envoyer",
+        "chat-bot-greeting": "👋 Bonjour ! Je suis la version IA de Wassil NAKIB. Je peux vous parler de mon parcours en ingénierie IA, de mes expériences chez HermineIA et Equasens, et de mes projets en machine learning et DevOps. Que souhaitez-vous savoir ?",
+
+        // CV Download Preview
+        "cv-preview-title": "CV - Wassil NAKIB",
+        "cv-preview-subtitle": "Ingénieur Machine Learning & DevOps",
+        "cv-preview-format": "Format PDF - 2 pages"
     }
 };
 
@@ -516,6 +532,161 @@ function applyTranslations() {
         }
     });
 
+    // Education 3 - MPSI-PSI
+    if (educations.length >= 3) {
+        const edu3Title = educations[2].querySelector('h4');
+        const edu3School = educations[2].querySelector('.cv-school');
+        const edu3Items = educations[2].querySelectorAll('li');
+        if (edu3Title) edu3Title.textContent = t['edu3-title'];
+        if (edu3School) edu3School.textContent = t['edu3-school'];
+        if (edu3Items.length >= 4) {
+            edu3Items[0].textContent = t['edu3-li1'];
+            edu3Items[1].textContent = t['edu3-li2'];
+            edu3Items[2].textContent = t['edu3-li3'];
+            edu3Items[3].textContent = t['edu3-li4'];
+        }
+    }
+
+    // CV Skills
+    const cvSkillsTitle = document.querySelectorAll('.cv-section-title');
+    cvSkillsTitle.forEach(title => {
+        const text = title.textContent.trim();
+        if (text === 'Skills' || text === 'Compétences') {
+            title.textContent = t['cv-skills-title'];
+        } else if (text === 'Interests' || text === 'Centres d\'intérêt') {
+            title.textContent = t['cv-interests-title'];
+        }
+    });
+
+    const skillCategories = document.querySelectorAll('.cv-skill-category');
+    if (skillCategories.length >= 5) {
+        // Cloud & DevOps
+        const skill1Title = skillCategories[0].querySelector('h5');
+        const skill1Text = skillCategories[0].querySelector('p');
+        if (skill1Title) skill1Title.textContent = t['skill-cloud-title'];
+        if (skill1Text) skill1Text.innerHTML = t['skill-cloud-text'];
+
+        // AI & ML
+        const skill2Title = skillCategories[1].querySelector('h5');
+        const skill2Text = skillCategories[1].querySelector('p');
+        if (skill2Title) skill2Title.textContent = t['skill-ai-title'];
+        if (skill2Text) skill2Text.textContent = t['skill-ai-text'];
+
+        // AI Agents
+        const skill3Title = skillCategories[2].querySelector('h5');
+        const skill3Text = skillCategories[2].querySelector('p');
+        if (skill3Title) skill3Title.textContent = t['skill-agents-title'];
+        if (skill3Text) skill3Text.textContent = t['skill-agents-text'];
+
+        // Development
+        const skill4Title = skillCategories[3].querySelector('h5');
+        const skill4Text = skillCategories[3].querySelector('p');
+        if (skill4Title) skill4Title.textContent = t['skill-dev-title'];
+        if (skill4Text) skill4Text.innerHTML = t['skill-dev-text'];
+
+        // Languages
+        const skill5Title = skillCategories[4].querySelector('h5');
+        const skill5Text = skillCategories[4].querySelector('p');
+        if (skill5Title) skill5Title.textContent = t['skill-lang-title'];
+        if (skill5Text) skill5Text.textContent = t['skill-lang-text'];
+    }
+
+    // CV Certifications
+    const certSection = document.querySelectorAll('.cv-section')[5];
+    if (certSection) {
+        const certItems = certSection.querySelectorAll('li');
+        if (certItems.length >= 4) {
+            // AWS cert (first item without class)
+            if (!certItems[0].classList.contains('certification-item')) {
+                certItems[0].textContent = t['cert-aws'];
+            }
+            // TOEIC (second item without class)
+            if (!certItems[1].classList.contains('certification-item')) {
+                certItems[1].textContent = t['cert-toeic'];
+            }
+            // HF cert
+            const hfCertText = certItems[2].querySelector('.certification-text');
+            if (hfCertText) hfCertText.textContent = t['cert-hf'];
+            // Linux cert
+            const linuxCertText = certItems[3].querySelector('.certification-text');
+            if (linuxCertText) linuxCertText.textContent = t['cert-linux'];
+        }
+    }
+
+    // CV Projects section
+    const cvProjectsSection = document.querySelectorAll('.cv-section')[6];
+    if (cvProjectsSection) {
+        const gitlabLink = cvProjectsSection.querySelector('.cv-gitlab-link');
+        if (gitlabLink) {
+            const link = gitlabLink.querySelector('a');
+            if (link) {
+                gitlabLink.innerHTML = t['cv-projects-gitlab'] + ' <a href="https://gitlab.com/users/SilloVV/projects" target="_blank" class="gitlab-link">https://gitlab.com/users/SilloVV/projects</a>';
+            }
+        }
+
+        const projectH5s = cvProjectsSection.querySelectorAll('.cv-projects h5');
+        const projectUls = cvProjectsSection.querySelectorAll('.cv-projects ul');
+
+        if (projectH5s.length >= 3) {
+            projectH5s[0].textContent = t['cv-projects-mlops'];
+            projectH5s[1].textContent = t['cv-projects-ml'];
+            projectH5s[2].textContent = t['cv-projects-devops'];
+        }
+
+        if (projectUls.length >= 3) {
+            // MLOps
+            const mlopsItems = projectUls[0].querySelectorAll('li');
+            if (mlopsItems.length >= 1) mlopsItems[0].innerHTML = t['cv-projects-mlops-1'];
+
+            // ML
+            const mlItems = projectUls[1].querySelectorAll('li');
+            if (mlItems.length >= 4) {
+                mlItems[0].textContent = t['cv-projects-ml-1'];
+                mlItems[1].textContent = t['cv-projects-ml-2'];
+                mlItems[2].textContent = t['cv-projects-ml-3'];
+                mlItems[3].textContent = t['cv-projects-ml-4'];
+            }
+
+            // DevOps
+            const devopsItems = projectUls[2].querySelectorAll('li');
+            if (devopsItems.length >= 3) {
+                devopsItems[0].textContent = t['cv-projects-devops-1'];
+                devopsItems[1].textContent = t['cv-projects-devops-2'];
+                devopsItems[2].textContent = t['cv-projects-devops-3'];
+            }
+        }
+    }
+
+    // CV Interests
+    const interestsSection = document.querySelectorAll('.cv-section')[7];
+    if (interestsSection) {
+        const interestItems = interestsSection.querySelectorAll('li');
+        if (interestItems.length >= 4) {
+            interestItems[0].textContent = t['interest-1'];
+            interestItems[1].textContent = t['interest-2'];
+            interestItems[2].textContent = t['interest-3'];
+            interestItems[3].textContent = t['interest-4'];
+        }
+    }
+
+    // CV Driver's license
+    const cvContact = document.querySelector('.cv-contact');
+    if (cvContact) {
+        const spans = cvContact.querySelectorAll('span');
+        if (spans.length >= 2) {
+            spans[1].textContent = t['cv-driver'] + ' ';
+        }
+    }
+
+    // Projects page header
+    const projectsHeader = document.querySelector('.projects-header');
+    if (projectsHeader) {
+        const h2 = projectsHeader.querySelector('h2');
+        const p = projectsHeader.querySelector('p');
+        if (h2) h2.textContent = t['projects-header-title'];
+        if (p) p.textContent = t['projects-header-subtitle'];
+    }
+
     // Contact
     const contactTitle = document.querySelector('.contact-title');
     if (contactTitle) contactTitle.textContent = ' ' + t['contact-title'];
@@ -544,6 +715,26 @@ function applyTranslations() {
 
     const chatSend = document.getElementById('send-button');
     if (chatSend) chatSend.textContent = t['chat-send'];
+
+    // Chat bot greeting (first message)
+    const chatMessages = document.getElementById('chat-messages');
+    if (chatMessages) {
+        const firstBotMessage = chatMessages.querySelector('.bot-message .message-content');
+        if (firstBotMessage && !firstBotMessage.hasAttribute('data-user-message')) {
+            firstBotMessage.textContent = t['chat-bot-greeting'];
+        }
+    }
+
+    // CV Download Preview
+    const cvPreview = document.querySelector('.cv-preview-content');
+    if (cvPreview) {
+        const h4 = cvPreview.querySelector('h4');
+        const p = cvPreview.querySelector('p');
+        const small = cvPreview.querySelector('small');
+        if (h4) h4.textContent = t['cv-preview-title'];
+        if (p) p.textContent = t['cv-preview-subtitle'];
+        if (small) small.textContent = t['cv-preview-format'];
+    }
 }
 
 // Initialize language on page load
