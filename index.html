@@ -15,12 +15,32 @@
 </head>
 <body>
 
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loading-content">
+            <div class="loading-greeting">
+                <span id="loading-hello"></span>
+            </div>
+            <div class="loading-name">
+                <span id="loading-name-text"></span>
+            </div>
+            <div class="loading-title">
+                <span id="loading-title-text"></span>
+            </div>
+            <div class="loading-tags">
+                <span class="loading-tag" id="loading-tag-1"></span>
+                <span class="loading-tag" id="loading-tag-2"></span>
+                <span class="loading-tag" id="loading-tag-3"></span>
+            </div>
+        </div>
+    </div>
+
     <!-- Language Toggle Button -->
-    <div class="lang-toggle" onclick="toggleLanguage()">
+    <div class="lang-toggle" onclick="toggleLanguage()" style="display: none;">
         <span id="lang-text">EN</span>
     </div>
 
-    <div id="hero">
+    <div id="hero" style="display: none;">
         <div class="hero-content">
             <div class="hero-greeting">
                 <img src="assets/icons/waving.svg" alt="Waving hand" class="wave-emoji">
@@ -561,7 +581,7 @@
     </div>
 
     
-    <div class="sidebar">
+    <div class="sidebar" style="opacity: 0;">
         <div class="top">
             <div class="logo">
                 <span>Menu</span>

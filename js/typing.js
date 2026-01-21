@@ -42,6 +42,149 @@ class TypeWriter {
     }
 }
 
+// ============== LOADING SCREEN ANIMATION ==============
+
+// Typing effect for loading screen
+function typeLoadingText(element, text, baseSpeed = 45) {
+    return new Promise(resolve => {
+        let i = 0;
+        element.innerHTML = '<span class="loading-cursor"></span>';
+
+        function type() {
+            if (i < text.length) {
+                // Remove cursor, add char, add cursor back
+                element.innerHTML = text.substring(0, i + 1) + '<span class="loading-cursor"></span>';
+
+                // Variable speed for realistic typing
+                let delay = baseSpeed + Math.random() * 40;
+
+                // Occasional pause
+                if (Math.random() < 0.08) {
+                    delay += 80 + Math.random() * 100;
+                }
+
+                // Pause after punctuation
+                if ([',', '.', '!', '?'].includes(text.charAt(i))) {
+                    delay += 150;
+                }
+
+                i++;
+                setTimeout(type, delay);
+            } else {
+                // Keep cursor blinking at end
+                element.innerHTML = text + '<span class="loading-cursor"></span>';
+                resolve();
+            }
+        }
+        type();
+    });
+}
+
+// Main loading screen animation
+async function animateLoadingScreen() {
+    const loadingScreen = document.getElementById('loading-screen');
+    const helloEl = document.getElementById('loading-hello');
+    const nameEl = document.getElementById('loading-name-text');
+    const titleEl = document.getElementById('loading-title-text');
+    const tag1 = document.getElementById('loading-tag-1');
+    const tag2 = document.getElementById('loading-tag-2');
+    const tag3 = document.getElementById('loading-tag-3');
+
+    if (!loadingScreen || !helloEl || !nameEl || !titleEl) {
+        // If elements don't exist, just show the main content
+        showMainContent();
+        return;
+    }
+
+    // Get current language
+    const savedLang = localStorage.getItem('portfolio-lang') || 'en';
+    const t = translations[savedLang];
+
+    // Texts based on language
+    const greetingText = savedLang === 'fr' ? 'Bonjour, je suis' : 'Hi, I\'m';
+    const nameText = 'Wassil NAKIB';
+    const titleText = savedLang === 'fr' ? 'Ingénieur DevOps et IA' : 'DevOps and AI Engineer';
+    const tags = [
+        savedLang === 'fr' ? 'Intelligence Artificielle (GenAI/ML)' : 'Artificial Intelligence (GenAI/ML)',
+        'DevOps & Infrastructure',
+        'Python, Bash, Java'
+    ];
+
+    // Small initial delay
+    await new Promise(r => setTimeout(r, 400));
+
+    // Type greeting
+    await typeLoadingText(helloEl, greetingText, 55);
+    await new Promise(r => setTimeout(r, 300));
+
+    // Type name
+    await typeLoadingText(nameEl, nameText, 70);
+    await new Promise(r => setTimeout(r, 400));
+
+    // Type title
+    await typeLoadingText(titleEl, titleText, 50);
+    await new Promise(r => setTimeout(r, 500));
+
+    // Show tags one by one
+    tag1.textContent = tags[0];
+    tag1.classList.add('visible');
+    await new Promise(r => setTimeout(r, 300));
+
+    tag2.textContent = tags[1];
+    tag2.classList.add('visible');
+    await new Promise(r => setTimeout(r, 300));
+
+    tag3.textContent = tags[2];
+    tag3.classList.add('visible');
+
+    // Wait a moment to appreciate the full loading screen
+    await new Promise(r => setTimeout(r, 1200));
+
+    // Fade out loading screen and show main content
+    loadingScreen.classList.add('fade-out');
+
+    // Show main content after fade starts
+    setTimeout(() => {
+        showMainContent();
+    }, 400);
+
+    // Remove loading screen from DOM after fade completes
+    setTimeout(() => {
+        loadingScreen.style.display = 'none';
+    }, 800);
+}
+
+// Show main content (hero, lang toggle, etc.)
+function showMainContent() {
+    const hero = document.getElementById('hero');
+    const langToggle = document.querySelector('.lang-toggle');
+    const sidebar = document.querySelector('.sidebar');
+
+    if (hero) {
+        hero.style.display = '';
+        hero.style.opacity = '0';
+        hero.style.transition = 'opacity 0.6s ease';
+        setTimeout(() => {
+            hero.style.opacity = '1';
+        }, 50);
+    }
+
+    if (langToggle) {
+        langToggle.style.display = '';
+    }
+
+    if (sidebar) {
+        sidebar.style.opacity = '0';
+        sidebar.style.transition = 'opacity 0.6s ease';
+        setTimeout(() => {
+            sidebar.style.opacity = '1';
+        }, 200);
+    }
+
+    // Setup name hover effect
+    setupNameHoverEffect();
+}
+
 // Hero typing animation
 function initHeroTyping() {
     const heroTitle = document.querySelector('.hero-title p');
@@ -306,8 +449,8 @@ document.head.appendChild(style);
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
-    // Wait a bit for translations to load
+    // Start loading screen animation
     setTimeout(() => {
-        animateHeroEntrance();
+        animateLoadingScreen();
     }, 100);
 });
