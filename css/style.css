@@ -2528,7 +2528,7 @@ h1, h2, h5, p{
     width: 100vw;
     height: 100vh;
     background: rgba(255, 182, 193, 0.9);
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     z-index: 9999999999;
@@ -2538,6 +2538,7 @@ h1, h2, h5, p{
 }
 
 .selma-overlay.show {
+    display: flex;
     opacity: 1;
     visibility: visible;
 }
@@ -2574,7 +2575,7 @@ h1, h2, h5, p{
     width: 100vw;
     height: 100vh;
     background: rgba(0, 0, 0, 0.95);
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -2585,6 +2586,7 @@ h1, h2, h5, p{
 }
 
 .nul-overlay.show {
+    display: flex;
     opacity: 1;
     visibility: visible;
 }

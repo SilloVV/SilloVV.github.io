@@ -713,63 +713,25 @@ function closeProjectPreview(previewId) {
 
 // ============== EASTER EGGS ==============
 
-// Console detection - Show message when DevTools is opened
+// Console message - Always visible when someone opens DevTools
 (function() {
-    let consoleOpened = false;
-
-    const showConsoleMessage = () => {
-        if (consoleOpened) return;
-        consoleOpened = true;
-
-        // Get message based on current language
-        const message = typeof currentLang !== 'undefined' && currentLang === 'fr'
-            ? "Arrête de regarder mon code ! 👀"
-            : "Stop looking at my code! 👀";
-
-        // Styled console message
-        console.log(
-            '%c' + message,
-            'background: linear-gradient(135deg, #ff6b6b, #ee5a5a); color: white; font-size: 24px; font-weight: bold; padding: 20px 40px; border-radius: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);'
-        );
-        console.log(
-            '%cBut since you\'re here... welcome! 🎉',
-            'color: #4ecdc4; font-size: 14px; font-style: italic;'
-        );
-
-        // Reset after a delay to allow re-triggering
-        setTimeout(() => { consoleOpened = false; }, 5000);
-    };
-
-    // Method 1: Using a getter that gets called when console evaluates
-    const devtools = { open: false };
-    const threshold = 160;
-
-    const checkDevTools = () => {
-        const widthThreshold = window.outerWidth - window.innerWidth > threshold;
-        const heightThreshold = window.outerHeight - window.innerHeight > threshold;
-
-        if (widthThreshold || heightThreshold) {
-            showConsoleMessage();
-        }
-    };
-
-    // Check periodically
-    setInterval(checkDevTools, 1000);
-
-    // Method 2: Using console.log with a custom toString
-    const element = new Image();
-    Object.defineProperty(element, 'id', {
-        get: function() {
-            showConsoleMessage();
-            return '';
-        }
-    });
-
-    // Trigger the check
-    setInterval(() => {
-        console.log(element);
-        console.clear();
-    }, 2000);
+    // Show message immediately on page load
+    console.log(
+        '%c🛑 STOP! 🛑',
+        'color: #ff0000; font-size: 50px; font-weight: bold; text-shadow: 2px 2px 0 #000;'
+    );
+    console.log(
+        '%cArrête de regarder mon code ! 👀\nStop looking at my code! 👀',
+        'background: linear-gradient(135deg, #333333, #1a1a1a); color: #F5F5DC; font-size: 24px; font-weight: bold; padding: 20px 40px; border-radius: 10px; border: 2px solid #333;'
+    );
+    console.log(
+        '%cMais puisque tu es là... bienvenue ! 🎉\nBut since you\'re here... welcome! 🎉',
+        'color: #4ecdc4; font-size: 14px; font-style: italic; padding: 10px;'
+    );
+    console.log(
+        '%c╭─────────────────────────────────╮\n│  Made with ♥ by Wassil NAKIB    │\n│  github.com/SilloVV             │\n╰─────────────────────────────────╯',
+        'color: #888; font-family: monospace; font-size: 12px;'
+    );
 })();
 
 // Runaway button - Escapes from cursor
