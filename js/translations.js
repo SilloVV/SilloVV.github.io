@@ -465,8 +465,9 @@ function applyTranslations() {
 
     // CV Education
     const educations = document.querySelectorAll('.cv-education');
-    if (educations.length >= 2) {
-        // Education 1 - Master II
+
+    // Education 1 - Master II
+    if (educations.length >= 1) {
         const edu1Title = educations[0].querySelector('h4');
         const edu1School = educations[0].querySelector('.cv-school');
         const edu1Items = educations[0].querySelectorAll('li');
@@ -478,8 +479,10 @@ function applyTranslations() {
             edu1Items[2].textContent = t['edu1-li3'];
             edu1Items[3].textContent = t['edu1-li4'];
         }
+    }
 
-        // Education 2 - Polytech
+    // Education 2 - Polytech
+    if (educations.length >= 2) {
         const edu2Title = educations[1].querySelector('h4');
         const edu2School = educations[1].querySelector('.cv-school');
         const edu2Items = educations[1].querySelectorAll('li');
@@ -490,6 +493,21 @@ function applyTranslations() {
             edu2Items[1].textContent = t['edu2-li2'];
             edu2Items[2].textContent = t['edu2-li3'];
             edu2Items[3].textContent = t['edu2-li4'];
+        }
+    }
+
+    // Education 3 - MPSI-PSI
+    if (educations.length >= 3) {
+        const edu3Title = educations[2].querySelector('h4');
+        const edu3School = educations[2].querySelector('.cv-school');
+        const edu3Items = educations[2].querySelectorAll('li');
+        if (edu3Title) edu3Title.textContent = t['edu3-title'];
+        if (edu3School) edu3School.textContent = t['edu3-school'];
+        if (edu3Items.length >= 4) {
+            edu3Items[0].textContent = t['edu3-li1'];
+            edu3Items[1].textContent = t['edu3-li2'];
+            edu3Items[2].textContent = t['edu3-li3'];
+            edu3Items[3].textContent = t['edu3-li4'];
         }
     }
 
@@ -532,24 +550,9 @@ function applyTranslations() {
         }
     });
 
-    // Education 3 - MPSI-PSI
-    if (educations.length >= 3) {
-        const edu3Title = educations[2].querySelector('h4');
-        const edu3School = educations[2].querySelector('.cv-school');
-        const edu3Items = educations[2].querySelectorAll('li');
-        if (edu3Title) edu3Title.textContent = t['edu3-title'];
-        if (edu3School) edu3School.textContent = t['edu3-school'];
-        if (edu3Items.length >= 4) {
-            edu3Items[0].textContent = t['edu3-li1'];
-            edu3Items[1].textContent = t['edu3-li2'];
-            edu3Items[2].textContent = t['edu3-li3'];
-            edu3Items[3].textContent = t['edu3-li4'];
-        }
-    }
-
-    // CV Skills
-    const cvSkillsTitle = document.querySelectorAll('.cv-section-title');
-    cvSkillsTitle.forEach(title => {
+    // CV Skills - translate section title and all skill categories
+    const allSectionTitles = document.querySelectorAll('.cv-section-title');
+    allSectionTitles.forEach(title => {
         const text = title.textContent.trim();
         if (text === 'Skills' || text === 'Compétences') {
             title.textContent = t['cv-skills-title'];
@@ -591,8 +594,8 @@ function applyTranslations() {
         if (skill5Text) skill5Text.textContent = t['skill-lang-text'];
     }
 
-    // CV Certifications
-    const certSection = document.querySelectorAll('.cv-section')[5];
+    // CV Certifications (index 4: Profile=0, Experience=1, Education=2, Skills=3, Certifications=4)
+    const certSection = document.querySelectorAll('.cv-section')[4];
     if (certSection) {
         const certItems = certSection.querySelectorAll('li');
         if (certItems.length >= 4) {
@@ -613,8 +616,8 @@ function applyTranslations() {
         }
     }
 
-    // CV Projects section
-    const cvProjectsSection = document.querySelectorAll('.cv-section')[6];
+    // CV Projects section (index 5)
+    const cvProjectsSection = document.querySelectorAll('.cv-section')[5];
     if (cvProjectsSection) {
         const gitlabLink = cvProjectsSection.querySelector('.cv-gitlab-link');
         if (gitlabLink) {
@@ -657,8 +660,8 @@ function applyTranslations() {
         }
     }
 
-    // CV Interests
-    const interestsSection = document.querySelectorAll('.cv-section')[7];
+    // CV Interests (index 6)
+    const interestsSection = document.querySelectorAll('.cv-section')[6];
     if (interestsSection) {
         const interestItems = interestsSection.querySelectorAll('li');
         if (interestItems.length >= 4) {
