@@ -118,9 +118,10 @@ h1, h2, h5, p{
 
 .hero-name{
     position: relative;
+    cursor: pointer;
 }
 
-.hero-name h1{
+.hero-name h1#nom{
     font-size: 48px;
     font-weight: 700;
     margin: 0;
@@ -134,6 +135,33 @@ h1, h2, h5, p{
     -webkit-text-fill-color: transparent;
     background-clip: text;
     letter-spacing: 2px;
+}
+
+.hero-name h1#sillow{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    font-weight: 700;
+    margin: 0;
+    background: linear-gradient(
+        90deg,
+        var(--bg-alt) 0%,
+        var(--text) 100%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 2px;
+    clip-path: circle(0px at 50% 50%);
+    pointer-events: none;
+    z-index: 10;
 }
 
 
@@ -2134,10 +2162,14 @@ body:not(.page-open) .inverseur-circle {
         transform: translate(0Vw);
     }
     
-    .hero-name h1{
+    .hero-name h1#nom{
         font-size: 32px;
         text-align: center;
         letter-spacing: 1px;
+    }
+
+    .hero-name h1#sillow{
+        font-size: 32px;
     }
     
     .hero-title p{
