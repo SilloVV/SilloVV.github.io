@@ -44,16 +44,25 @@ class TypeWriter {
 
 // ============== LOADING SCREEN ANIMATION ==============
 
-// Typing effect for loading screen
-function typeLoadingText(element, text, baseSpeed = 45) {
+// Typing effect with single moving cursor
+function typeLoadingText(element, text, baseSpeed = 45, keepCursor = false) {
     return new Promise(resolve => {
         let i = 0;
-        element.innerHTML = '<span class="loading-cursor"></span>';
+        element.textContent = '';
+
+        // Add cursor to this element
+        const cursor = document.getElementById('typing-cursor');
+        if (cursor) {
+            element.appendChild(cursor);
+        }
 
         function type() {
             if (i < text.length) {
-                // Remove cursor, add char, add cursor back
-                element.innerHTML = text.substring(0, i + 1) + '<span class="loading-cursor"></span>';
+                // Set text content and re-append cursor
+                element.textContent = text.substring(0, i + 1);
+                if (cursor) {
+                    element.appendChild(cursor);
+                }
 
                 // Variable speed for realistic typing
                 let delay = baseSpeed + Math.random() * 40;
@@ -71,8 +80,10 @@ function typeLoadingText(element, text, baseSpeed = 45) {
                 i++;
                 setTimeout(type, delay);
             } else {
-                // Keep cursor blinking at end
-                element.innerHTML = text + '<span class="loading-cursor"></span>';
+                element.textContent = text;
+                if (keepCursor && cursor) {
+                    element.appendChild(cursor);
+                }
                 resolve();
             }
         }
@@ -89,6 +100,7 @@ async function animateLoadingScreen() {
     const tag1 = document.getElementById('loading-tag-1');
     const tag2 = document.getElementById('loading-tag-2');
     const tag3 = document.getElementById('loading-tag-3');
+    const cursor = document.getElementById('typing-cursor');
 
     if (!loadingScreen || !helloEl || !nameEl || !titleEl) {
         // If elements don't exist, just show the main content
@@ -98,7 +110,6 @@ async function animateLoadingScreen() {
 
     // Get current language
     const savedLang = localStorage.getItem('portfolio-lang') || 'en';
-    const t = translations[savedLang];
 
     // Texts based on language
     const greetingText = savedLang === 'fr' ? 'Bonjour, je suis' : 'Hi, I\'m';
@@ -109,6 +120,9 @@ async function animateLoadingScreen() {
         'DevOps & Infrastructure',
         'Python, Bash, Java'
     ];
+
+    // Show cursor
+    if (cursor) cursor.style.display = 'inline-block';
 
     // Small initial delay
     await new Promise(r => setTimeout(r, 400));
@@ -121,9 +135,12 @@ async function animateLoadingScreen() {
     await typeLoadingText(nameEl, nameText, 70);
     await new Promise(r => setTimeout(r, 400));
 
-    // Type title
-    await typeLoadingText(titleEl, titleText, 50);
+    // Type title (keep cursor here)
+    await typeLoadingText(titleEl, titleText, 50, true);
     await new Promise(r => setTimeout(r, 500));
+
+    // Hide cursor before showing tags
+    if (cursor) cursor.style.display = 'none';
 
     // Show tags one by one
     tag1.textContent = tags[0];
@@ -138,51 +155,57 @@ async function animateLoadingScreen() {
     tag3.classList.add('visible');
 
     // Wait a moment to appreciate the full loading screen
-    await new Promise(r => setTimeout(r, 1200));
+    await new Promise(r => setTimeout(r, 1000));
 
-    // Fade out loading screen and show main content
-    loadingScreen.classList.add('fade-out');
-
-    // Show main content after fade starts
-    setTimeout(() => {
-        showMainContent();
-    }, 400);
-
-    // Remove loading screen from DOM after fade completes
-    setTimeout(() => {
-        loadingScreen.style.display = 'none';
-    }, 800);
+    // Transition to main content
+    transitionToHero();
 }
 
-// Show main content (hero, lang toggle, etc.)
-function showMainContent() {
+// Smooth transition from loading screen to hero
+function transitionToHero() {
+    const loadingScreen = document.getElementById('loading-screen');
     const hero = document.getElementById('hero');
     const langToggle = document.querySelector('.lang-toggle');
     const sidebar = document.querySelector('.sidebar');
+    const heroAnimation = document.getElementById('hero_animation');
 
-    if (hero) {
-        hero.style.display = '';
-        hero.style.opacity = '0';
-        hero.style.transition = 'opacity 0.6s ease';
-        setTimeout(() => {
+    // Pre-fill hero content with same text (already in HTML)
+    // Just need to show the hero elements
+
+    // Fade out loading screen
+    loadingScreen.classList.add('fade-out');
+
+    // After a small delay, show hero
+    setTimeout(() => {
+        // Show hero (text is already there from HTML)
+        if (hero) {
+            hero.style.display = '';
             hero.style.opacity = '1';
-        }, 50);
-    }
+        }
 
-    if (langToggle) {
-        langToggle.style.display = '';
-    }
+        // Show language toggle
+        if (langToggle) {
+            langToggle.style.display = '';
+        }
 
-    if (sidebar) {
-        sidebar.style.opacity = '0';
-        sidebar.style.transition = 'opacity 0.6s ease';
-        setTimeout(() => {
+        // Show sidebar with fade
+        if (sidebar) {
+            sidebar.style.transition = 'opacity 0.5s ease';
             sidebar.style.opacity = '1';
-        }, 200);
-    }
+        }
 
-    // Setup name hover effect
-    setupNameHoverEffect();
+        // Setup name hover effect
+        setupNameHoverEffect();
+
+        // Start the hero title typing animation
+        initHeroTyping();
+
+    }, 600);
+
+    // Remove loading screen from DOM
+    setTimeout(() => {
+        loadingScreen.style.display = 'none';
+    }, 800);
 }
 
 // Hero typing animation
