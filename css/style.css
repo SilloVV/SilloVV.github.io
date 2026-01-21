@@ -2464,11 +2464,172 @@ h1, h2, h5, p{
    
 }
 
+/* Runaway Button Easter Egg */
+.dont-click-btn {
+    position: fixed;
+    bottom: 80px;
+    right: 30px;
+    padding: 12px 24px;
+    background: var(--bg);
+    color: var(--text);
+    border: 2px solid var(--text);
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(51, 51, 51, 0.15);
+    transition: transform 0.15s ease-out, box-shadow 0.3s ease, background 0.3s ease;
+    z-index: 9999;
+    font-family: 'Playfair Display', serif;
+}
+
+.dont-click-btn:hover {
+    box-shadow: 0 6px 20px rgba(51, 51, 51, 0.25);
+    background: var(--bg-alt2);
+}
+
+.dont-click-btn.caught {
+    animation: btnShake 0.5s ease-in-out;
+    background: var(--bg-alt);
+    color: var(--bg);
+    border-color: var(--bg-alt);
+}
+
+@keyframes btnShake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+/* Selma Easter Egg - Site flip */
+.selma-flip {
+    animation: flipSite 0.8s ease-in-out forwards;
+}
+
+.selma-flip-back {
+    animation: flipSiteBack 0.8s ease-in-out forwards;
+}
+
+@keyframes flipSite {
+    0% { transform: perspective(1000px) rotateY(0deg); }
+    100% { transform: perspective(1000px) rotateY(180deg); }
+}
+
+@keyframes flipSiteBack {
+    0% { transform: perspective(1000px) rotateY(180deg); }
+    100% { transform: perspective(1000px) rotateY(360deg); }
+}
+
+/* Selma heart emoji overlay */
+.selma-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(255, 182, 193, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999999999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease;
+}
+
+.selma-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.selma-emoji {
+    font-size: 80px;
+    animation: heartBeat 1s infinite;
+    color: #e91e63;
+    text-shadow: 0 0 20px rgba(233, 30, 99, 0.5);
+}
+
+@keyframes heartBeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+/* Nul Easter Egg - Screen shake */
+.nul-shake {
+    animation: violentShake 0.1s infinite;
+}
+
+@keyframes violentShake {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(-10px, 5px) rotate(-2deg); }
+    50% { transform: translate(10px, -5px) rotate(2deg); }
+    75% { transform: translate(-5px, -10px) rotate(-1deg); }
+}
+
+/* Nul destruction overlay */
+.nul-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.95);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999999999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+}
+
+.nul-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.nul-message {
+    color: #ff0000;
+    font-size: 28px;
+    font-family: 'Courier New', monospace;
+    text-align: center;
+    margin-bottom: 30px;
+    text-shadow: 0 0 10px #ff0000;
+    animation: glitch 0.3s infinite;
+}
+
+.nul-countdown {
+    color: #ff0000;
+    font-size: 120px;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    text-shadow: 0 0 30px #ff0000;
+}
+
+.nul-emoji {
+    color: white;
+    font-size: 60px;
+    animation: middleFinger 0.5s ease-in-out;
+}
+
+@keyframes glitch {
+    0%, 100% { transform: translate(0); }
+    33% { transform: translate(-2px, 2px); }
+    66% { transform: translate(2px, -2px); }
+}
+
+@keyframes middleFinger {
+    0% { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
 .circle{
   height: 20px;
   width: 20px;
   border-radius: 50%;
-  position: fixed; 
+  position: fixed;
   top: 0;
   left: 0;
   pointer-events: none;
@@ -2532,14 +2693,19 @@ body:not(.page-open) .inverseur-circle {
 
 
 @media screen and (max-width: 768px) {
+    /* Hide runaway button on mobile - too annoying on touch */
+    .dont-click-btn {
+        display: none;
+    }
+
     /* Hero section mobile */
     #hero {
         padding: 20px;
         gap: 20px;
     }
-    
+
     .sidebar.active .top .logo{
-        transform: translate(0Vw);
+        display: none;
     }
     
     .hero-name h1#nom{

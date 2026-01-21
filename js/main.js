@@ -691,18 +691,18 @@ document.addEventListener('DOMContentLoaded', () => {
 function closeProjectPreview(previewId) {
     const previewElement = document.getElementById(`preview-${previewId}`);
     const overlay = document.getElementById('preview-overlay');
-    
+
     if (previewElement) {
         // Hide preview
         previewElement.style.opacity = '0';
         previewElement.style.visibility = 'hidden';
-        
+
         // Hide blur overlay
         if (overlay) {
             overlay.style.opacity = '0';
             overlay.style.visibility = 'hidden';
         }
-        
+
         // Show project section close button again
         const projectCloseBtn = document.getElementById('closeb-projects');
         if (projectCloseBtn) {
@@ -710,4 +710,297 @@ function closeProjectPreview(previewId) {
         }
     }
 }
+
+// ============== EASTER EGGS ==============
+
+// Console detection - Show message when DevTools is opened
+(function() {
+    let consoleOpened = false;
+
+    const showConsoleMessage = () => {
+        if (consoleOpened) return;
+        consoleOpened = true;
+
+        // Get message based on current language
+        const message = typeof currentLang !== 'undefined' && currentLang === 'fr'
+            ? "Arrête de regarder mon code ! 👀"
+            : "Stop looking at my code! 👀";
+
+        // Styled console message
+        console.log(
+            '%c' + message,
+            'background: linear-gradient(135deg, #ff6b6b, #ee5a5a); color: white; font-size: 24px; font-weight: bold; padding: 20px 40px; border-radius: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);'
+        );
+        console.log(
+            '%cBut since you\'re here... welcome! 🎉',
+            'color: #4ecdc4; font-size: 14px; font-style: italic;'
+        );
+
+        // Reset after a delay to allow re-triggering
+        setTimeout(() => { consoleOpened = false; }, 5000);
+    };
+
+    // Method 1: Using a getter that gets called when console evaluates
+    const devtools = { open: false };
+    const threshold = 160;
+
+    const checkDevTools = () => {
+        const widthThreshold = window.outerWidth - window.innerWidth > threshold;
+        const heightThreshold = window.outerHeight - window.innerHeight > threshold;
+
+        if (widthThreshold || heightThreshold) {
+            showConsoleMessage();
+        }
+    };
+
+    // Check periodically
+    setInterval(checkDevTools, 1000);
+
+    // Method 2: Using console.log with a custom toString
+    const element = new Image();
+    Object.defineProperty(element, 'id', {
+        get: function() {
+            showConsoleMessage();
+            return '';
+        }
+    });
+
+    // Trigger the check
+    setInterval(() => {
+        console.log(element);
+        console.clear();
+    }, 2000);
+})();
+
+// Runaway button - Escapes from cursor
+document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.getElementById('dont-click-btn');
+    if (!btn) return;
+
+    let clickCount = 0;
+    const escapeDistance = 150; // Distance to trigger escape
+    const moveDistance = 200;   // How far to move
+
+    // Update button text based on language
+    const updateButtonText = () => {
+        if (typeof currentLang !== 'undefined' && translations && translations[currentLang]) {
+            btn.textContent = translations[currentLang]['dont-click-btn'] || "Don't click!";
+        }
+    };
+
+    // Initial text
+    updateButtonText();
+
+    // Update on language change
+    const originalToggle = window.toggleLanguage;
+    window.toggleLanguage = function() {
+        if (originalToggle) originalToggle();
+        setTimeout(updateButtonText, 100);
+    };
+
+    // Get button center position
+    const getBtnCenter = () => {
+        const rect = btn.getBoundingClientRect();
+        return {
+            x: rect.left + rect.width / 2,
+            y: rect.top + rect.height / 2
+        };
+    };
+
+    // Move button away from cursor
+    const escapeFromCursor = (cursorX, cursorY) => {
+        const btnCenter = getBtnCenter();
+        const dx = btnCenter.x - cursorX;
+        const dy = btnCenter.y - cursorY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < escapeDistance) {
+            // Calculate escape direction (away from cursor)
+            const angle = Math.atan2(dy, dx);
+            let newX = btnCenter.x + Math.cos(angle) * moveDistance;
+            let newY = btnCenter.y + Math.sin(angle) * moveDistance;
+
+            // Keep within viewport bounds
+            const padding = 60;
+            const maxX = window.innerWidth - padding;
+            const maxY = window.innerHeight - padding;
+
+            newX = Math.max(padding, Math.min(maxX, newX));
+            newY = Math.max(padding, Math.min(maxY, newY));
+
+            // If stuck in corner, jump to opposite side
+            const rect = btn.getBoundingClientRect();
+            if ((newX <= padding || newX >= maxX) && (newY <= padding || newY >= maxY)) {
+                newX = window.innerWidth - rect.left - rect.width;
+                newY = window.innerHeight - rect.top - rect.height;
+            }
+
+            // Apply new position
+            btn.style.position = 'fixed';
+            btn.style.right = 'auto';
+            btn.style.bottom = 'auto';
+            btn.style.left = (newX - btn.offsetWidth / 2) + 'px';
+            btn.style.top = (newY - btn.offsetHeight / 2) + 'px';
+        }
+    };
+
+    // Track mouse movement
+    document.addEventListener('mousemove', (e) => {
+        escapeFromCursor(e.clientX, e.clientY);
+    });
+
+    // Handle click - after many attempts, let them "catch" it
+    btn.addEventListener('click', () => {
+        clickCount++;
+
+        if (clickCount >= 5) {
+            // They finally caught it!
+            btn.classList.add('caught');
+            btn.textContent = typeof currentLang !== 'undefined' && currentLang === 'fr'
+                ? "Tu m'as eu ! 🎉"
+                : "You got me! 🎉";
+
+            // Reset after celebration
+            setTimeout(() => {
+                btn.classList.remove('caught');
+                updateButtonText();
+                clickCount = 0;
+
+                // Reset position
+                btn.style.left = 'auto';
+                btn.style.top = 'auto';
+                btn.style.right = '30px';
+                btn.style.bottom = '80px';
+            }, 2000);
+        }
+    });
+});
+
+// ============== TAB VISIBILITY - "Reviens !" ==============
+(function() {
+    const originalTitle = document.title;
+
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            document.title = "Reviens ! Tu me manques 🥺";
+        } else {
+            document.title = originalTitle;
+        }
+    });
+})();
+
+// ============== KEYBOARD EASTER EGGS (Selma & Nul) ==============
+(function() {
+    let typedKeys = '';
+    let selmaActive = false;
+    let nulActive = false;
+
+    // Listen for keystrokes
+    document.addEventListener('keydown', (e) => {
+        // Ignore if typing in an input field
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+        typedKeys += e.key.toLowerCase();
+
+        // Keep only last 10 characters
+        if (typedKeys.length > 10) {
+            typedKeys = typedKeys.slice(-10);
+        }
+
+        // Check for "selma"
+        if (typedKeys.includes('selma') && !selmaActive) {
+            triggerSelma();
+            typedKeys = '';
+        }
+
+        // Check for "nul"
+        if (typedKeys.includes('nul') && !nulActive) {
+            triggerNul();
+            typedKeys = '';
+        }
+    });
+
+    // ===== SELMA EASTER EGG =====
+    function triggerSelma() {
+        selmaActive = true;
+        const body = document.body;
+        const overlay = document.getElementById('selma-overlay');
+
+        // Flip the site
+        body.classList.add('selma-flip');
+
+        // After flip animation, show heart overlay
+        setTimeout(() => {
+            if (overlay) overlay.classList.add('show');
+        }, 800);
+
+        // After 5 seconds, flip back
+        setTimeout(() => {
+            if (overlay) overlay.classList.remove('show');
+            body.classList.remove('selma-flip');
+            body.classList.add('selma-flip-back');
+
+            // Clean up
+            setTimeout(() => {
+                body.classList.remove('selma-flip-back');
+                selmaActive = false;
+            }, 800);
+        }, 5000);
+    }
+
+    // ===== NUL EASTER EGG =====
+    function triggerNul() {
+        nulActive = true;
+        const body = document.body;
+        const overlay = document.getElementById('nul-overlay');
+        const countdownEl = document.getElementById('nul-countdown');
+        const messageEl = document.getElementById('nul-message');
+
+        // Start shaking
+        body.classList.add('nul-shake');
+
+        // Show overlay after a moment
+        setTimeout(() => {
+            if (overlay) overlay.classList.add('show');
+
+            // Countdown from 5
+            let count = 5;
+            const countdownInterval = setInterval(() => {
+                count--;
+                if (countdownEl) countdownEl.textContent = count;
+
+                if (count <= 0) {
+                    clearInterval(countdownInterval);
+
+                    // Stop shaking
+                    body.classList.remove('nul-shake');
+
+                    // Show middle finger emoji instead of destruction
+                    if (messageEl) messageEl.style.display = 'none';
+                    if (countdownEl) {
+                        countdownEl.classList.remove('nul-countdown');
+                        countdownEl.classList.add('nul-emoji');
+                        countdownEl.textContent = '╭∩╮( •̀_•́ )╭∩╮';
+                    }
+
+                    // Hide after 3 seconds
+                    setTimeout(() => {
+                        if (overlay) overlay.classList.remove('show');
+
+                        // Reset for next time
+                        setTimeout(() => {
+                            if (messageEl) messageEl.style.display = '';
+                            if (countdownEl) {
+                                countdownEl.classList.remove('nul-emoji');
+                                countdownEl.classList.add('nul-countdown');
+                                countdownEl.textContent = '5';
+                            }
+                            nulActive = false;
+                        }, 500);
+                    }, 3000);
+                }
+            }, 1000);
+        }, 500);
+    }
+})();
 

@@ -188,7 +188,11 @@ const translations = {
         "resource-resume-tag": "Career",
         "resource-roadmap-title": "Roadmap.sh",
         "resource-roadmap-desc": "Developer roadmaps and learning paths for any IT career or skill",
-        "resource-roadmap-tag": "Learning"
+        "resource-roadmap-tag": "Learning",
+
+        // Easter eggs
+        "console-message": "Stop looking at my code! 👀",
+        "dont-click-btn": "Don't click!"
     },
     fr: {
         // Hero
@@ -378,7 +382,11 @@ const translations = {
         "resource-resume-tag": "Carrière",
         "resource-roadmap-title": "Roadmap.sh",
         "resource-roadmap-desc": "Roadmaps et parcours d'apprentissage pour toute carrière ou compétence IT",
-        "resource-roadmap-tag": "Apprentissage"
+        "resource-roadmap-tag": "Apprentissage",
+
+        // Easter eggs
+        "console-message": "Arrête de regarder mon code ! 👀",
+        "dont-click-btn": "Ne pas cliquer !"
     }
 };
 
