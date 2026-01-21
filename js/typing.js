@@ -414,23 +414,6 @@ function setupNameHoverEffect() {
 // Add CSS animation
 const style = document.createElement('style');
 style.textContent = `
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    .hero-greeting h5,
-    .hero-name h1,
-    .hero-title p {
-        visibility: hidden;
-    }
-
     .cursor {
         animation: blink 1s infinite;
     }
@@ -438,34 +421,6 @@ style.textContent = `
     @keyframes blink {
         0%, 50% { opacity: 1; }
         51%, 100% { opacity: 0; }
-    }
-
-    /* Name hover effect styles */
-    .hero-name {
-        position: relative;
-        cursor: pointer;
-    }
-
-    #sillow {
-        font-family: 'Playfair Display', serif;
-        font-size: 48px;
-        font-weight: 700;
-        letter-spacing: 2px;
-        color: var(--text);
-        background: linear-gradient(
-            90deg,
-            var(--bg-alt) 0%,
-            var(--text) 100%
-        );
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-
-    @media screen and (max-width: 768px) {
-        #sillow {
-            font-size: 32px;
-        }
     }
 `;
 document.head.appendChild(style);
