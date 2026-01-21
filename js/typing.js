@@ -44,8 +44,8 @@ class TypeWriter {
 
 // ============== LOADING SCREEN ANIMATION ==============
 
-// Typing effect with single moving cursor
-function typeLoadingText(element, text, baseSpeed = 45, keepCursor = false) {
+// Typing effect with single moving cursor (20% faster)
+function typeLoadingText(element, text, baseSpeed = 36, keepCursor = false) {
     return new Promise(resolve => {
         let i = 0;
         element.textContent = '';
@@ -64,17 +64,17 @@ function typeLoadingText(element, text, baseSpeed = 45, keepCursor = false) {
                     element.appendChild(cursor);
                 }
 
-                // Variable speed for realistic typing
-                let delay = baseSpeed + Math.random() * 40;
+                // Variable speed for realistic typing (reduced by 20%)
+                let delay = baseSpeed + Math.random() * 32;
 
-                // Occasional pause
-                if (Math.random() < 0.08) {
-                    delay += 80 + Math.random() * 100;
+                // Occasional pause (reduced)
+                if (Math.random() < 0.06) {
+                    delay += 60 + Math.random() * 80;
                 }
 
-                // Pause after punctuation
+                // Pause after punctuation (reduced)
                 if ([',', '.', '!', '?'].includes(text.charAt(i))) {
-                    delay += 150;
+                    delay += 120;
                 }
 
                 i++;
@@ -142,38 +142,38 @@ async function animateLoadingScreen() {
     // Show cursor
     if (cursor) cursor.style.display = 'inline-block';
 
-    // Small initial delay
+    // Small initial delay (20% faster)
+    await new Promise(r => setTimeout(r, 320));
+
+    // Type greeting (20% faster: 55 -> 44)
+    await typeLoadingText(helloEl, greetingText, 44);
+    await new Promise(r => setTimeout(r, 240));
+
+    // Type name (20% faster: 70 -> 56)
+    await typeLoadingText(nameEl, nameText, 56);
+    await new Promise(r => setTimeout(r, 320));
+
+    // Type title (20% faster: 50 -> 40, keep cursor here)
+    await typeLoadingText(titleEl, titleText, 40, true);
     await new Promise(r => setTimeout(r, 400));
-
-    // Type greeting
-    await typeLoadingText(helloEl, greetingText, 55);
-    await new Promise(r => setTimeout(r, 300));
-
-    // Type name
-    await typeLoadingText(nameEl, nameText, 70);
-    await new Promise(r => setTimeout(r, 400));
-
-    // Type title (keep cursor here)
-    await typeLoadingText(titleEl, titleText, 50, true);
-    await new Promise(r => setTimeout(r, 500));
 
     // Hide cursor before showing tags
     if (cursor) cursor.style.display = 'none';
 
-    // Show tags one by one
+    // Show tags one by one (20% faster)
     tag1.textContent = tags[0];
     tag1.classList.add('visible');
-    await new Promise(r => setTimeout(r, 300));
+    await new Promise(r => setTimeout(r, 240));
 
     tag2.textContent = tags[1];
     tag2.classList.add('visible');
-    await new Promise(r => setTimeout(r, 300));
+    await new Promise(r => setTimeout(r, 240));
 
     tag3.textContent = tags[2];
     tag3.classList.add('visible');
 
-    // Wait a moment to appreciate the full loading screen
-    await new Promise(r => setTimeout(r, 1000));
+    // Wait a moment to appreciate the full loading screen (20% faster)
+    await new Promise(r => setTimeout(r, 800));
 
     // Transition to main content
     transitionToHero();
