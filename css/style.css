@@ -112,17 +112,17 @@
     transform: translateY(0);
 }
 
-.loading-cursor {
-    display: inline-block;
+#typing-cursor {
+    display: none;
     width: 3px;
-    height: 1em;
+    height: 1.1em;
     background-color: var(--text);
-    margin-left: 2px;
-    animation: loading-blink 0.8s infinite;
+    margin-left: 3px;
+    animation: typing-blink 0.7s infinite;
     vertical-align: text-bottom;
 }
 
-@keyframes loading-blink {
+@keyframes typing-blink {
     0%, 50% { opacity: 1; }
     51%, 100% { opacity: 0; }
 }
