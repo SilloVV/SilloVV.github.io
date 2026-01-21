@@ -895,7 +895,18 @@ document.addEventListener('DOMContentLoaded', () => {
             if (overlay) overlay.classList.add('show');
         }, 500);
 
-        
+        // After 5 seconds, flip back
+        setTimeout(() => {
+            if (overlay) overlay.classList.remove('show');
+            body.classList.remove('selma-flip');
+            body.classList.add('selma-flip-back');
+
+            // Clean up
+            setTimeout(() => {
+                body.classList.remove('selma-flip-back');
+                selmaActive = false;
+            }, 800);
+        }, 2000);
     }
 
     // ===== NUL EASTER EGG =====
