@@ -840,6 +840,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (savedLang) {
         currentLang = savedLang;
         document.getElementById('lang-text').textContent = currentLang === 'en' ? 'EN' : 'FR';
-        applyTranslations();
     }
+    // Always apply translations on load
+    applyTranslations();
 });

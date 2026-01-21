@@ -536,27 +536,21 @@ h1, h2, h5, p{
 /* Hidden Easter Egg Menu Item */
 .hidden-menu-item {
     position: absolute;
-    bottom: -60px;
+    bottom: -50px;
     left: 0;
     width: 100%;
     padding: 0.4rem 0.8rem;
     opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
+    transition: opacity 0.3s ease;
     pointer-events: none;
 }
 
 .sidebar.active .hidden-menu-item {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
+    pointer-events: auto;
 }
 
-.sidebar.active:hover .hidden-menu-item,
 .sidebar.active .hidden-menu-item:hover {
-    opacity: 0.6;
-    visibility: visible;
-    pointer-events: auto;
+    opacity: 1;
 }
 
 .hidden-nav-link {
@@ -568,13 +562,14 @@ h1, h2, h5, p{
     border-radius: 0.8rem;
     height: 50px;
     transition: all 0.3s ease;
+    opacity: 0.5;
 }
 
 .hidden-nav-link:hover {
     padding-left: 5px;
     background-color: var(--bg-alt);
     color: var(--bg);
-    opacity: 1 !important;
+    opacity: 1;
 }
 
 .hidden-nav-item {
@@ -585,8 +580,32 @@ h1, h2, h5, p{
 
 .sidebar.active .hidden-nav-item {
     display: flex;
-    opacity: 0;
-    animation: fadeIn 2s forwards;
+}
+
+.hidden-links {
+    display: flex;
+    gap: 8px;
+    margin-left: 10px;
+}
+
+.hidden-links a {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--bg-alt);
+    color: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.hidden-links a:hover {
+    transform: scale(1.2);
+    background: var(--text);
 }
 
 
