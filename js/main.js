@@ -888,26 +888,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const body = document.body;
         const overlay = document.getElementById('selma-overlay');
 
-        // Flip the site
-        body.classList.add('selma-flip');
+    
 
-        // After flip animation, show heart overlay
+        // show heart overlay
         setTimeout(() => {
             if (overlay) overlay.classList.add('show');
-        }, 800);
+        }, 500);
 
-        // After 5 seconds, flip back
-        setTimeout(() => {
-            if (overlay) overlay.classList.remove('show');
-            body.classList.remove('selma-flip');
-            body.classList.add('selma-flip-back');
-
-            // Clean up
-            setTimeout(() => {
-                body.classList.remove('selma-flip-back');
-                selmaActive = false;
-            }, 800);
-        }, 5000);
+        
     }
 
     // ===== NUL EASTER EGG =====
