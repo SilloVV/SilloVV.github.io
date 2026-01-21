@@ -560,6 +560,49 @@ function animateCursorCenter() {
 animateInverseurCircle();
 animateCursorCenter();
 
+// Hero name reveal effect - SilloVV appears where cursor is, Wassil NAKIB is masked
+const heroName = document.querySelector('.hero-name');
+const nomElement = document.getElementById('nom');
+const sillowElement = document.getElementById('sillow');
+
+function updateHeroNameClipPath() {
+    if (!heroName || !nomElement || !sillowElement) return;
+
+    const rect = heroName.getBoundingClientRect();
+    const isOverHeroName = (
+        coords.x >= rect.left &&
+        coords.x <= rect.right &&
+        coords.y >= rect.top &&
+        coords.y <= rect.bottom
+    );
+
+    if (isOverHeroName) {
+        // Calculate relative position within the hero-name element
+        const relativeX = coords.x - rect.left;
+        const relativeY = coords.y - rect.top;
+
+        // Circle radius for the reveal effect (matches inverseur-circle size)
+        const circleRadius = 50;
+
+        // Update SilloVV clip-path to show a circle at cursor position
+        sillowElement.style.clipPath = `circle(${circleRadius}px at ${relativeX}px ${relativeY}px)`;
+
+        // Update Wassil NAKIB to hide content at cursor position using CSS mask
+        // We use a radial gradient mask: transparent inside circle, black (visible) outside
+        nomElement.style.maskImage = `radial-gradient(circle ${circleRadius}px at ${relativeX}px ${relativeY}px, transparent 0%, transparent ${circleRadius}px, black ${circleRadius}px)`;
+        nomElement.style.webkitMaskImage = `radial-gradient(circle ${circleRadius}px at ${relativeX}px ${relativeY}px, transparent 0%, transparent ${circleRadius}px, black ${circleRadius}px)`;
+    } else {
+        // Reset when cursor leaves the hero-name area
+        sillowElement.style.clipPath = 'circle(0px at 50% 50%)';
+        nomElement.style.maskImage = 'none';
+        nomElement.style.webkitMaskImage = 'none';
+    }
+
+    requestAnimationFrame(updateHeroNameClipPath);
+}
+
+updateHeroNameClipPath();
+
 // Project preview management
 document.addEventListener('DOMContentLoaded', () => {
     const projectCards = document.querySelectorAll('.project-card[data-preview]');

@@ -815,8 +815,8 @@ function applyTranslations() {
     });
 
     // Nav Resources
-    const navItems = document.querySelectorAll('.nav-item');
-    navItems.forEach(item => {
+    const allNavItems = document.querySelectorAll('.nav-item');
+    allNavItems.forEach(item => {
         if (item.textContent.trim() === 'Resources' || item.textContent.trim() === 'Ressources') {
             item.textContent = t['nav-resources'];
         }
