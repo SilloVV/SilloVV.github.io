@@ -341,8 +341,13 @@ let currentLang = 'en';
 function toggleLanguage() {
     currentLang = currentLang === 'en' ? 'fr' : 'en';
     document.getElementById('lang-text').textContent = currentLang === 'en' ? 'EN' : 'FR';
-    applyTranslations();
     localStorage.setItem('portfolio-lang', currentLang);
+    applyTranslations();
+
+    // Restart hero typing animation with new language
+    if (typeof restartHeroTyping === 'function') {
+        restartHeroTyping();
+    }
 }
 
 function applyTranslations() {

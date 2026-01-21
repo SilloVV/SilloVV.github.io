@@ -1,10 +1,13 @@
 // Typing Animation for Hero Section - Old School Style
+let currentTypeWriter = null;
+
 class TypeWriter {
     constructor(element, texts, wait = 2000, startWithDelete = null) {
         this.element = element;
         this.texts = texts;
         this.wait = parseInt(wait, 10);
         this.wordIndex = 0;
+        this.isRunning = true;
 
         // If startWithDelete is provided, start by deleting that text first
         if (startWithDelete) {
@@ -18,7 +21,13 @@ class TypeWriter {
         this.type();
     }
 
+    stop() {
+        this.isRunning = false;
+    }
+
     type() {
+        if (!this.isRunning) return;
+
         const current = this.wordIndex % this.texts.length;
         const fullTxt = this.texts[current];
 
@@ -48,6 +57,26 @@ class TypeWriter {
 
         setTimeout(() => this.type(), typeSpeed);
     }
+}
+
+// Function to restart TypeWriter with new language
+function restartHeroTyping() {
+    // Stop current TypeWriter
+    if (currentTypeWriter) {
+        currentTypeWriter.stop();
+    }
+
+    const heroTitle = document.querySelector('.hero-title p');
+    if (!heroTitle) return;
+
+    const savedLang = localStorage.getItem('portfolio-lang') || 'en';
+
+    const texts = savedLang === 'fr'
+        ? ['Passionné par le MLOps', 'Architecte Cloud', 'Ingénieur DevOps et IA']
+        : ['MLOps Enthusiast', 'Cloud Architect', 'DevOps and AI Engineer'];
+
+    // Start fresh (no delete animation)
+    currentTypeWriter = new TypeWriter(heroTitle, texts, 3000);
 }
 
 // ============== LOADING SCREEN ANIMATION ==============
@@ -281,7 +310,7 @@ function initHeroTyping() {
     // Start by deleting the loading screen text, then type the new texts
     const startText = window.loadingTitleText || (savedLang === 'fr' ? 'Ingénieur DevOps et IA' : 'DevOps and AI Engineer');
 
-    new TypeWriter(heroTitle, texts, 3000, startText);
+    currentTypeWriter = new TypeWriter(heroTitle, texts, 3000, startText);
 }
 
 // Old-school typing effect with variable speed and occasional pauses
