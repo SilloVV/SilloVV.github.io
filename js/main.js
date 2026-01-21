@@ -565,24 +565,27 @@ const heroName = document.querySelector('.hero-name');
 const nomElement = document.getElementById('nom');
 const sillowElement = document.getElementById('sillow');
 
+// Circle radius for the reveal effect (matches inverseur-circle size)
+const circleRadius = 50;
+
 function updateHeroNameClipPath() {
     if (!heroName || !nomElement || !sillowElement) return;
 
     const rect = heroName.getBoundingClientRect();
-    const isOverHeroName = (
-        coords.x >= rect.left &&
-        coords.x <= rect.right &&
-        coords.y >= rect.top &&
-        coords.y <= rect.bottom
+
+    // Check if the circle (not just center) overlaps with the hero-name area
+    // Expand detection by circleRadius in all directions
+    const isCircleOverHeroName = (
+        coords.x + circleRadius >= rect.left &&
+        coords.x - circleRadius <= rect.right &&
+        coords.y + circleRadius >= rect.top &&
+        coords.y - circleRadius <= rect.bottom
     );
 
-    if (isOverHeroName) {
+    if (isCircleOverHeroName) {
         // Calculate relative position within the hero-name element
         const relativeX = coords.x - rect.left;
         const relativeY = coords.y - rect.top;
-
-        // Circle radius for the reveal effect (matches inverseur-circle size)
-        const circleRadius = 50;
 
         // Update SilloVV clip-path to show a circle at cursor position
         sillowElement.style.clipPath = `circle(${circleRadius}px at ${relativeX}px ${relativeY}px)`;
@@ -592,7 +595,7 @@ function updateHeroNameClipPath() {
         nomElement.style.maskImage = `radial-gradient(circle ${circleRadius}px at ${relativeX}px ${relativeY}px, transparent 0%, transparent ${circleRadius}px, black ${circleRadius}px)`;
         nomElement.style.webkitMaskImage = `radial-gradient(circle ${circleRadius}px at ${relativeX}px ${relativeY}px, transparent 0%, transparent ${circleRadius}px, black ${circleRadius}px)`;
     } else {
-        // Reset when cursor leaves the hero-name area
+        // Reset when cursor circle leaves the hero-name area
         sillowElement.style.clipPath = 'circle(0px at 50% 50%)';
         nomElement.style.maskImage = 'none';
         nomElement.style.webkitMaskImage = 'none';

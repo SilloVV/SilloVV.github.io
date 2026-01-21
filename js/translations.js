@@ -401,14 +401,15 @@ function applyTranslations() {
         heroTags[2].textContent = ' ' + t['hero-tag-3'];
     }
 
-    // Sidebar
+    // Sidebar - 6 items: About, CV, Projects, Resources, Contact, Chat
     const navItems = document.querySelectorAll('.sidebar .nav-item');
-    if (navItems.length >= 5) {
+    if (navItems.length >= 6) {
         navItems[0].textContent = ' ' + t['nav-about'];
         navItems[1].textContent = ' ' + t['nav-cv'];
         navItems[2].textContent = ' ' + t['nav-projects'];
-        navItems[3].textContent = ' ' + t['nav-contact'];
-        navItems[4].textContent = ' ' + t['nav-chat'];
+        navItems[3].textContent = ' ' + t['nav-resources'];
+        navItems[4].textContent = ' ' + t['nav-contact'];
+        navItems[5].textContent = ' ' + t['nav-chat'];
     }
 
     // About
@@ -814,13 +815,6 @@ function applyTranslations() {
         }
     });
 
-    // Nav Resources
-    const allNavItems = document.querySelectorAll('.nav-item');
-    allNavItems.forEach(item => {
-        if (item.textContent.trim() === 'Resources' || item.textContent.trim() === 'Ressources') {
-            item.textContent = t['nav-resources'];
-        }
-    });
 }
 
 // Initialize language on page load
