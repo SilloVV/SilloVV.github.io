@@ -156,14 +156,14 @@ const translations = {
         "contact-footer": "Available now for new challenges",
 
         // Chat
-        "chat-title": "💬 Chat with my LLM version",
+        "chat-title": " Chat with my LLM version",
         "chat-subtitle": "Ask me questions about my background, skills, or projects!",
         "chat-placeholder": "Type your question here...",
         "chat-send": "Send",
         "chat-bot-greeting": "👋 Hello! I'm the AI version of Wassil NAKIB. I can tell you about my AI engineering background, my experiences at HermineIA and Equasens, my machine learning and DevOps projects. What would you like to know?",
 
         // CV Download Preview
-        "cv-preview-title": "CV - Wassil NAKIB",
+        "cv-preview-title": "Resume - Wassil NAKIB",
         "cv-preview-subtitle": "Machine Learning & DevOps Engineer",
         "cv-preview-format": "PDF Format - 2 pages",
 
