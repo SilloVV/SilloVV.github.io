@@ -717,15 +717,15 @@ function closeProjectPreview(previewId) {
 (function() {
     // Show message immediately on page load
     console.log(
-        '%c🛑 STOP! 🛑',
-        'color: #ff0000; font-size: 50px; font-weight: bold; text-shadow: 2px 2px 0 #000;'
+        '%cദ്ദി◝ ⩊ ◜.ᐟ',
+        'color: #2903ff; font-size: 50px; font-weight: bold; text-shadow: 2px 2px 0 #000;'
     );
     console.log(
-        '%cArrête de regarder mon code ! 👀\nStop looking at my code! 👀',
-        'background: linear-gradient(135deg, #333333, #1a1a1a); color: #F5F5DC; font-size: 24px; font-weight: bold; padding: 20px 40px; border-radius: 10px; border: 2px solid #333;'
+        '%cQue cherches-tu ?! \nWhat are-you looking for ? ',
+        'background: linear-gradient(135deg, #5064be, #3f41b6); color: #F5F5DC; font-size: 24px; font-weight: bold; padding: 20px 40px; border-radius: 10px; border: 2px solid #333;'
     );
     console.log(
-        '%cMais puisque tu es là... bienvenue ! 🎉\nBut since you\'re here... welcome! 🎉',
+        '%cMais puisque tu es là... bienvenue ! \nBut since you\'re here... welcome! ',
         'color: #4ecdc4; font-size: 14px; font-style: italic; padding: 10px;'
     );
     console.log(
