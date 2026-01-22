@@ -354,19 +354,21 @@ async function sendMessage() {
     const typingIndicator = addTypingIndicator();
     
     try {
-        // Direct call to Cerebras API
-        const response = await fetch('https://api.cerebras.ai/v1/chat/completions', {
+        // Call to OpenRouter API
+        const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + CEREBRAS_API_KEY
+                'Authorization': 'Bearer ' + OPENROUTER_API_KEY,
+                'HTTP-Referer': window.location.origin,
+                'X-Title': 'Wassil NAKIB Portfolio'
             },
             body: JSON.stringify({
-                model: "llama-4-scout-17b-16e-instruct",
+                model: "tngtech/deepseek-r1t2-chimera:free",
                 messages: [
                     {
                         role: "system",
-                        content: "You are Wassil NAKIB, a French Machine Learning and DevOps engineer. You are currently in your 5th year of engineering studies in a double degree AI program at Polytech Nancy. Information about you: You are currently doing your internship at HermineIA at STATION F, developing a multi-agent solution for legal professionals. You did an internship at Equasens where you created SuperDiag, a server monitoring solution. Your AI skills: PyTorch, TensorBoard, LangGraph, HF Transformers, ONNX. Your DevOps skills: Kubernetes, Docker, Jenkins, Linux, Bash. Projects: U-Net semantic segmentation, vehicle control by vision, multi-agent solutions, Kubernetes clusters. Email: wnakib21@gmail.com. GitLab: gitlab.com/SilloVV. LinkedIn: linkedin.com/in/wassil-nakib-031361293. Passions: cinema, physiotherapy, sports science, boxing, tennis. Always respond in English, naturally and engagingly. You are passionate about the intersection between AI and DevOps."
+                        content: "You are Wassil NAKIB, a French Machine Learning and DevOps engineer. You graduated from Polytech Nancy with a double degree in AI (Master II Vision and Robotics). Information about you: You completed your internship at HermineIA at STATION F as Applied AI Engineer, developing a multi-agent solution for legal professionals. You also did an internship at Equasens as DevOps Engineer where you created SuperDiag, a server monitoring solution. Your AI skills: PyTorch, TensorBoard, LangGraph, HF Transformers, ONNX, MLFlow. Your DevOps skills: Kubernetes, Docker, Jenkins, Linux, Bash, Terraform, AWS. Projects: MLOps Jira classifier, U-Net semantic segmentation, vehicle control by vision, multi-agent solutions, Kubernetes clusters. Email: wnakib21@gmail.com. GitLab: gitlab.com/SilloVV. LinkedIn: linkedin.com/in/wassil-nakib-031361293. Passions: cinema, physiotherapy, sports science, boxing, tennis. Always respond naturally and engagingly. You are passionate about the intersection between AI and DevOps."
                     },
                     {
                         role: "user",
@@ -924,56 +926,34 @@ document.addEventListener('DOMContentLoaded', () => {
     // ===== NUL EASTER EGG =====
     function triggerNul() {
         nulActive = true;
-        const body = document.body;
         const overlay = document.getElementById('nul-overlay');
         const countdownEl = document.getElementById('nul-countdown');
         const messageEl = document.getElementById('nul-message');
 
-        // Start shaking
-        body.classList.add('nul-shake');
+        // Show overlay with emoji directly
+        if (overlay) overlay.classList.add('show');
+        if (messageEl) messageEl.style.display = 'none';
+        if (countdownEl) {
+            countdownEl.classList.remove('nul-countdown');
+            countdownEl.classList.add('nul-emoji');
+            countdownEl.textContent = '╭∩╮( •̀_•́ )╭∩╮';
+        }
 
-        // Show overlay after a moment
+        // Hide after 3 seconds
         setTimeout(() => {
-            if (overlay) overlay.classList.add('show');
+            if (overlay) overlay.classList.remove('show');
 
-            // Countdown from 3
-            let count = 3;
-            const countdownInterval = setInterval(() => {
-                count--;
-                if (countdownEl) countdownEl.textContent = count;
-
-                if (count <= 0) {
-                    clearInterval(countdownInterval);
-
-                    // Stop shaking
-                    body.classList.remove('nul-shake');
-
-                    // Show middle finger emoji instead of destruction
-                    if (messageEl) messageEl.style.display = 'none';
-                    if (countdownEl) {
-                        countdownEl.classList.remove('nul-countdown');
-                        countdownEl.classList.add('nul-emoji');
-                        countdownEl.textContent = '╭∩╮( •̀_•́ )╭∩╮';
-                    }
-
-                    // Hide after 3 seconds
-                    setTimeout(() => {
-                        if (overlay) overlay.classList.remove('show');
-
-                        // Reset for next time
-                        setTimeout(() => {
-                            if (messageEl) messageEl.style.display = '';
-                            if (countdownEl) {
-                                countdownEl.classList.remove('nul-emoji');
-                                countdownEl.classList.add('nul-countdown');
-                                countdownEl.textContent = '3';
-                            }
-                            nulActive = false;
-                        }, 500);
-                    }, 3000);
+            // Reset for next time
+            setTimeout(() => {
+                if (messageEl) messageEl.style.display = '';
+                if (countdownEl) {
+                    countdownEl.classList.remove('nul-emoji');
+                    countdownEl.classList.add('nul-countdown');
+                    countdownEl.textContent = '3';
                 }
-            }, 1000);
-        }, 500);
+                nulActive = false;
+            }, 500);
+        }, 3000);
     }
 })();
 
