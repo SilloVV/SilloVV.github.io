@@ -6,13 +6,25 @@
     <title>Wassil NAKIB Portfolio</title>
     
     <link rel="icon" type="image/x-icon"  href="/assets/icons/favicon.ico">
+
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/css/style.css" as="style">
+    <link rel="preload" href="/js/typing.js" as="script">
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="dns-prefetch" href="https://unpkg.com">
+
+    <!-- Critical CSS first -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Boxicons with optimized loading -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' media="print" onload="this.media='all'">
+    <noscript><link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'></noscript>
+
+    <!-- Scripts -->
     <script src="/js/config.js"></script>
     <script src="/js/translations.js" defer></script>
     <script src="/js/typing.js" defer></script>
     <script src="/js/main.js" defer></script>
-    <link rel="stylesheet" href="/css/style.css">
-    
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
 
@@ -108,7 +120,7 @@
                         <div class="cv-company-info">
                             <div class="cv-company-logo">
                                 <a href="https://www.hermineia.fr" target="_blank" class="company-logo-link">
-                                    <img src="./assets/logos/hermine_ia_logo.jpeg" alt="HermineIA Logo" class="company-logo-img hermine">
+                                    <img src="./assets/logos/hermine_ia_logo.jpeg" alt="HermineIA Logo" class="company-logo-img hermine" loading="lazy" decoding="async">
                                     <div class="logo-tooltip">https://www.hermineia.fr</div>
                                 </a>
                                 <div class="current-position-indicator" title="Current position"></div>
@@ -132,7 +144,7 @@
                     <div class="cv-company-info">
                         <div class="cv-company-logo">
                             <a href="https://www.hermineia.fr" target="_blank" class="company-logo-link">
-                                <img src="./assets/logos/hermine_ia_logo.jpeg" alt="HermineIA Logo" class="company-logo-img hermine">
+                                <img src="./assets/logos/hermine_ia_logo.jpeg" alt="HermineIA Logo" class="company-logo-img hermine" loading="lazy" decoding="async">
                                 <div class="logo-tooltip">https://www.hermineia.fr</div>
                             </a>
                         </div>
@@ -155,7 +167,7 @@
                     <div class="cv-company-info">
                         <div class="cv-company-logo">
                             <a href="https://www.equasens.com/" target="_blank" class="company-logo-link">
-                                <img src="./assets/logos/equasens_logo.png" alt="Equasens Logo" class="company-logo-img equasens">
+                                <img src="./assets/logos/equasens_logo.png" alt="Equasens Logo" class="company-logo-img equasens" loading="lazy" decoding="async">
                                 <div class="logo-tooltip">equasens.com</div>
                             </a>
                         </div>
@@ -182,7 +194,7 @@
                     <div class="cv-education-header">
                         <div class="cv-education-logo">
                             <a href="https://licence-master-informatique.formation.univ-lorraine.fr/master/m2-parcours-avr/" target="_blank" class="education-logo-link">
-                                <img src="./assets/logos/logo_fst.png" alt="Master II Logo" class="education-logo-img">
+                                <img src="./assets/logos/logo_fst.png" alt="Master II Logo" class="education-logo-img" loading="lazy" decoding="async">
                                 <div class="logo-tooltip">https://licence-master-informatique.formation.univ-lorraine.fr/master/m2-parcours-avr/</div>
                             </a>
                         </div>
@@ -203,7 +215,7 @@
                     <div class="cv-education-header">
                         <div class="cv-education-logo">
                             <a href="https://polytech-nancy.univ-lorraine.fr/formation/informatique-automatique-robotique-reseaux-ia2r/" target="_blank" class="education-logo-link">
-                                <img src="./assets/logos/polytech_logo.svg" alt="Polytech Nancy Logo" class="education-logo-img">
+                                <img src="./assets/logos/polytech_logo.svg" alt="Polytech Nancy Logo" class="education-logo-img" loading="lazy" decoding="async">
                                 <div class="logo-tooltip">https://polytech-nancy.univ-lorraine.fr/formation/informatique-automatique-robotique-reseaux-ia2r/</div>
                             </a>
                         </div>
@@ -280,14 +292,14 @@
                         <span class="certification-text">• Hugging face Agent Course, Hugging Face</span>
                         <span class="hover-indicator">🔍</span>
                         <div class="certification-preview">
-                            <img src="./assets/certificates/certificat_HF.jpg" alt="Certificat Hugging Face" class="certificate-thumbnail">
+                            <img src="./assets/certificates/certificat_HF.jpg" alt="Certificat Hugging Face" class="certificate-thumbnail" loading="lazy" decoding="async">
                         </div>
                     </li>
                     <li class="certification-item">
                         <span class="certification-text">• Linux Server Administration, Open Classroom</span>
                         <span class="hover-indicator">🔍</span>
                         <div class="certification-preview">
-                            <img src="./assets/certificates/certificat_admin_linux.jpg" alt="Certificat OpenClassroom" class="certificate-thumbnail">
+                            <img src="./assets/certificates/certificat_admin_linux.jpg" alt="Certificat OpenClassroom" class="certificate-thumbnail" loading="lazy" decoding="async">
                         </div>
                     </li>
                 </ul>
@@ -298,7 +310,7 @@
                 <div class="gitlab-preview-container">
                     <p class="cv-gitlab-link">My Gitlab: <a href="https://gitlab.com/users/SilloVV/projects" target="_blank" class="gitlab-link">https://gitlab.com/users/SilloVV/projects</a></p>
                     <div class="gitlab-preview">
-                        <img src="./assets/screenshots/gitlab-preview.png" alt="GitLab Preview" class="gitlab-thumbnail">
+                        <img src="./assets/screenshots/gitlab-preview.png" alt="GitLab Preview" class="gitlab-thumbnail" loading="lazy" decoding="async">
                     </div>
                 </div>
                 
@@ -352,7 +364,7 @@
             <div class="projects-row">
                 <div class="project-card" data-preview="jira-mlops">
                     <div class="project-image">
-                        <img src="assets/logos/NN.svg" alt="MLOps" class="project-logo">
+                        <img src="assets/logos/NN.svg" alt="MLOps" class="project-logo" loading="lazy" decoding="async">
                     </div>
                     <div class="project-content">
                         <h3>Jira Ticket Classifier</h3>
@@ -368,7 +380,7 @@
 
                 <div class="project-card" data-preview="unet">
                     <div class="project-image">
-                        <img src="assets/logos/NN.svg" alt="Neural Network" class="project-logo">
+                        <img src="assets/logos/NN.svg" alt="Neural Network" class="project-logo" loading="lazy" decoding="async">
                     </div>
                     <div class="project-content">
                         <h3>Semantic Segmentation U-Net</h3>
@@ -383,7 +395,7 @@
 
                 <div class="project-card" data-preview="steersim">
                     <div class="project-image">
-                        <img src="assets/logos/Pytorch.svg" alt="Pytorch" class="project-logo">
+                        <img src="assets/logos/Pytorch.svg" alt="Pytorch" class="project-logo" loading="lazy" decoding="async">
                     </div>
                     <div class="project-content">
                         <h3>Vehicle Control via Vision</h3>
@@ -398,7 +410,7 @@
 
                 <div class="project-card" data-preview="hermine">
                     <div class="project-image">
-                        <img src="assets/logos/hermine_ia_logo.jpeg" alt="HermineIA" class="project-logo">
+                        <img src="assets/logos/hermine_ia_logo.jpeg" alt="HermineIA" class="project-logo" loading="lazy" decoding="async">
                     </div>
                     <div class="project-content">
                         <h3>Multi-Agent LegalTech Solution</h3>
@@ -418,7 +430,7 @@
             <div class="projects-row">
                 <div class="project-card" data-preview="superdiag">
                     <div class="project-image">
-                        <img src="assets/logos/Monitoring.svg" alt="Monitoring" class="project-logo">
+                        <img src="assets/logos/Monitoring.svg" alt="Monitoring" class="project-logo" loading="lazy" decoding="async">
                     </div>
                     <div class="project-content">
                         <h3>SuperDiag - Monitoring Solution</h3>
@@ -434,7 +446,7 @@
 
                 <div class="project-card" data-preview="kubernetes">
                     <div class="project-image">
-                        <img src="assets/logos/Kubernetes.svg" alt="Kubernetes" class="project-logo">
+                        <img src="assets/logos/Kubernetes.svg" alt="Kubernetes" class="project-logo" loading="lazy" decoding="async">
                     </div>
                     <div class="project-content">
                         <h3>Kubernetes Cluster</h3>
@@ -450,7 +462,7 @@
 
                 <div class="project-card" data-preview="cicd">
                     <div class="project-image">
-                        <img src="assets/logos/gitlab_logo_1.svg" alt="CI/CD" class="project-logo">
+                        <img src="assets/logos/gitlab_logo_1.svg" alt="CI/CD" class="project-logo" loading="lazy" decoding="async">
                     </div>
                     <div class="project-content">
                         <h3>Java CI/CD Pipeline</h3>
@@ -483,28 +495,28 @@
                         <div class="contact-icons-container">
                             <div class="contact-icon linkedin" title="LinkedIn: linkedin.com/in/wassil-nakib-031361293">
                                 <a href="https://www.linkedin.com/in/wassil-nakib-031361293/" target="_blank">
-                                    <img src="./assets/icons/linkedin_logo.svg" alt="LinkedIn">
+                                    <img src="./assets/icons/linkedin_logo.svg" alt="LinkedIn" loading="lazy" decoding="async">
                                 </a>
                                 <div class="tooltip">linkedin.com/in/wassil-nakib-031361293</div>
                             </div>
 
                             <div class="contact-icon gitlab" title="GitLab: gitlab.com/SilloVV">
                                 <a href="https://gitlab.com/SilloVV" target="_blank">
-                                    <img src="./assets/icons/gitlab_logo.svg" alt="GitLab">
+                                    <img src="./assets/icons/gitlab_logo.svg" alt="GitLab" loading="lazy" decoding="async">
                                 </a>
                                 <div class="tooltip">gitlab.com/SilloVV</div>
                             </div>
 
                             <div class="contact-icon github" title="GitHub: github.com/SilloVV">
                                 <a href="https://github.com/SilloVV" target="_blank">
-                                    <img src="./assets/icons/github_logo.svg" alt="GitHub">
+                                    <img src="./assets/icons/github_logo.svg" alt="GitHub" loading="lazy" decoding="async">
                                 </a>
                                 <div class="tooltip">github.com/SilloVV</div>
                             </div>
 
                             <div class="contact-icon instagram" title="Instagram: instagram.com/_scoobidouuu">
                                 <a href="https://www.instagram.com/_scoobidouuu" target="_blank">
-                                    <img src="./assets/icons/instagram_logo.svg" alt="Instagram">
+                                    <img src="./assets/icons/instagram_logo.svg" alt="Instagram" loading="lazy" decoding="async">
                                 </a>
                                 <div class="tooltip">instagram.com/_scoobidouuu</div>
                             </div>
@@ -586,7 +598,7 @@
         </div>
         
         <div class="signature-container">
-            <img src="assets/icons/signature.png" alt="Signature Wassil NAKIB" class="signature">
+            <img src="assets/icons/signature.png" alt="Signature Wassil NAKIB" class="signature" loading="lazy" decoding="async">
         </div>
     </div>
 
@@ -906,7 +918,7 @@
     
     <div class="cv-download-fixed">
         <div class="download-arrow">
-            <img src="assets/icons/arrow_download.svg" alt="Download arrow" class="arrow-svg">
+            <img src="assets/icons/arrow_download.svg" alt="Download arrow" class="arrow-svg" loading="lazy" decoding="async">
         </div>
         <a href="assets/RESUME_NAKIB_WASSIL.pdf" download="CV_Wassil_NAKIB.pdf" class="download-btn-fixed" title="Download CV" id="cv-download-link">
             <i class="bx bx-download"></i>
@@ -924,47 +936,47 @@
 
     <div class="project-preview" id="preview-jira-mlops">
         <div class="closeb" onclick="closeProjectPreview('jira-mlops')">×</div>
-        <img src="assets/projects/mlops.png" alt="MLOps Architecture Preview">
+        <img src="assets/projects/mlops.png" alt="MLOps Architecture Preview" loading="lazy" decoding="async">
     </div>
     <div class="project-preview" id="preview-unet">
         <div class="closeb" onclick="closeProjectPreview('unet')">×</div>
-        <img src="assets/projects/u_net.png" alt="U-Net Segmentation Preview">
+        <img src="assets/projects/u_net.png" alt="U-Net Segmentation Preview" loading="lazy" decoding="async">
     </div>
     <div class="project-preview" id="preview-steersim">
         <div class="closeb" onclick="closeProjectPreview('steersim')">×</div>
-        <img src="assets/projects/Steersim.png" alt="SteerSim Vehicle Control Preview">
+        <img src="assets/projects/Steersim.png" alt="SteerSim Vehicle Control Preview" loading="lazy" decoding="async">
     </div>
     <div class="project-preview" id="preview-hermine">
         <div class="closeb" onclick="closeProjectPreview('hermine')">×</div>
-        <img src="assets/projects/legal.png" alt="HermineIA Multi-Agent Preview">
+        <img src="assets/projects/legal.png" alt="HermineIA Multi-Agent Preview" loading="lazy" decoding="async">
     </div>
     <div class="project-preview" id="preview-superdiag">
         <div class="closeb" onclick="closeProjectPreview('superdiag')">×</div>
-        <img src="assets/projects/superdiag.png" alt="SuperDiag Monitoring Preview">
+        <img src="assets/projects/superdiag.png" alt="SuperDiag Monitoring Preview" loading="lazy" decoding="async">
     </div>
     <div class="project-preview" id="preview-kubernetes">
         <div class="closeb" onclick="closeProjectPreview('kubernetes')">×</div>
-        <img src="assets/projects/kubernetes.png" alt="Kubernetes Cluster Preview">
+        <img src="assets/projects/kubernetes.png" alt="Kubernetes Cluster Preview" loading="lazy" decoding="async">
     </div>
     <div class="project-preview" id="preview-cicd">
         <div class="closeb" onclick="closeProjectPreview('cicd')">×</div>
-        <img src="assets/projects/gitlab_ci.png" alt="CI/CD Pipeline Preview">
+        <img src="assets/projects/gitlab_ci.png" alt="CI/CD Pipeline Preview" loading="lazy" decoding="async">
     </div>
     
     <div class="hover-image" id="hover-polytech">
-        <img src="assets/about_me_images/polytech.png" alt="Polytech Nancy">
+        <img src="assets/about_me_images/polytech.png" alt="Polytech Nancy" loading="lazy" decoding="async">
     </div>
     <div class="hover-image" id="hover-diplome">
-        <img src="assets/about_me_images/diplome.png" alt="Double Diplôme">
+        <img src="assets/about_me_images/diplome.png" alt="Double Diplôme" loading="lazy" decoding="async">
     </div>
     <div class="hover-image" id="hover-hermine">
-        <img src="assets/about_me_images/hermine.png" alt="HermineIA">
+        <img src="assets/about_me_images/hermine.png" alt="HermineIA" loading="lazy" decoding="async">
     </div>
     <div class="hover-image" id="hover-stationf">
-        <img src="assets/about_me_images/stationf.png" alt="STATION F">
+        <img src="assets/about_me_images/stationf.png" alt="STATION F" loading="lazy" decoding="async">
     </div>
     <div class="hover-image" id="hover-equasens">
-        <img src="assets/about_me_images/equasens.png" alt="Equasens">
+        <img src="assets/about_me_images/equasens.png" alt="Equasens" loading="lazy" decoding="async">
     </div>
     
 </body>

@@ -790,27 +790,31 @@ document.addEventListener('DOMContentLoaded', () => {
             let newX = btnCenter.x + Math.cos(angle) * moveDistance;
             let newY = btnCenter.y + Math.sin(angle) * moveDistance;
 
-            // Keep within viewport bounds
-            const padding = 60;
-            const maxX = window.innerWidth - padding;
-            const maxY = window.innerHeight - padding;
+            // Keep within viewport bounds (account for button size)
+            const btnWidth = btn.offsetWidth;
+            const btnHeight = btn.offsetHeight;
+            const minX = btnWidth / 2 + 20;
+            const maxX = window.innerWidth - btnWidth / 2 - 20;
+            const minY = btnHeight / 2 + 20;
+            const maxY = window.innerHeight - btnHeight / 2 - 20;
 
-            newX = Math.max(padding, Math.min(maxX, newX));
-            newY = Math.max(padding, Math.min(maxY, newY));
+            newX = Math.max(minX, Math.min(maxX, newX));
+            newY = Math.max(minY, Math.min(maxY, newY));
 
             // If stuck in corner, jump to opposite side
-            const rect = btn.getBoundingClientRect();
-            if ((newX <= padding || newX >= maxX) && (newY <= padding || newY >= maxY)) {
-                newX = window.innerWidth - rect.left - rect.width;
-                newY = window.innerHeight - rect.top - rect.height;
+            if ((newX <= minX || newX >= maxX) && (newY <= minY || newY >= maxY)) {
+                newX = window.innerWidth - newX;
+                newY = window.innerHeight - newY;
+                newX = Math.max(minX, Math.min(maxX, newX));
+                newY = Math.max(minY, Math.min(maxY, newY));
             }
 
             // Apply new position
             btn.style.position = 'fixed';
             btn.style.right = 'auto';
             btn.style.bottom = 'auto';
-            btn.style.left = (newX - btn.offsetWidth / 2) + 'px';
-            btn.style.top = (newY - btn.offsetHeight / 2) + 'px';
+            btn.style.left = (newX - btnWidth / 2) + 'px';
+            btn.style.top = (newY - btnHeight / 2) + 'px';
         }
     };
 

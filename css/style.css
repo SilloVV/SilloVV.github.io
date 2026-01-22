@@ -891,6 +891,8 @@ h1, h2, h5, p{
     box-sizing: border-box;
     min-height: 100vh;
     font-family: Georgia, serif;
+    contain: layout style;
+    will-change: opacity;
 }
 
 #cvscroller::-webkit-scrollbar{
@@ -1594,6 +1596,8 @@ h1, h2, h5, p{
     animation: fadeIn 0.5s forwards;
     padding: 40px 20px;
     box-sizing: border-box;
+    contain: layout style;
+    will-change: opacity;
 }
 
 .projects-header{
@@ -2147,6 +2151,8 @@ h1, h2, h5, p{
     overflow-y: auto;
     animation: fadeIn 0.5s forwards;
     z-index: 1000;
+    contain: layout style;
+    will-change: opacity, transform;
 }
 
 .resources-header {
@@ -2338,6 +2344,8 @@ h1, h2, h5, p{
     box-shadow: 0 15px 35px rgba(0,0,0,0.1);
     backdrop-filter: blur(10px);
     z-index: 1000;
+    contain: layout style;
+    will-change: opacity, transform;
 }
 
 
