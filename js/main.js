@@ -844,7 +844,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.addEventListener('visibilitychange', () => {
         if (document.hidden) {
-            document.title = "Reviens ! Tu me manques 🥺";
+            document.title = "Reviens ! ";
         } else {
             document.title = originalTitle;
         }
@@ -954,7 +954,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             if (countdownEl) {
                                 countdownEl.classList.remove('nul-emoji');
                                 countdownEl.classList.add('nul-countdown');
-                                countdownEl.textContent = '5';
+                                countdownEl.textContent = '3';
                             }
                             nulActive = false;
                         }, 500);
