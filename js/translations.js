@@ -192,6 +192,21 @@ const translations = {
         "resource-resume-title": "Easy Free Resume",
         "resource-resume-desc": "ATS-friendly resume templates to build your professional CV",
         "resource-resume-tag": "Career",
+        "resource-wolfram-title": "Wolfram Alpha",
+        "resource-wolfram-desc": "Computational intelligence for math, science, and data analysis",
+        "resource-wolfram-tag": "Calculations",
+        "resource-exercism-title": "Exercism",
+        "resource-exercism-desc": "Free coding practice with mentorship in 70+ programming languages",
+        "resource-exercism-tag": "Practice",
+        "resource-toffeeshare-title": "ToffeeShare",
+        "resource-toffeeshare-desc": "Secure peer-to-peer file sharing with no size limits",
+        "resource-toffeeshare-tag": "Sharing",
+        "resource-flowlauncher-title": "Flow Launcher",
+        "resource-flowlauncher-desc": "Quick file search and app launcher for Windows",
+        "resource-flowlauncher-tag": "Search",
+        "resource-bitwarden-title": "Bitwarden",
+        "resource-bitwarden-desc": "Open source password manager for individuals and teams",
+        "resource-bitwarden-tag": "Security",
         "resource-roadmap-title": "Roadmap.sh",
         "resource-roadmap-desc": "Developer roadmaps and learning paths for any IT career or skill",
         "resource-roadmap-tag": "Learning",
@@ -428,6 +443,21 @@ const translations = {
         "resource-resume-title": "Easy Free Resume",
         "resource-resume-desc": "Modèles de CV compatibles ATS pour construire votre CV professionnel",
         "resource-resume-tag": "Carrière",
+        "resource-wolfram-title": "Wolfram Alpha",
+        "resource-wolfram-desc": "Intelligence computationnelle pour les maths, sciences et analyse de données",
+        "resource-wolfram-tag": "Calculs",
+        "resource-exercism-title": "Exercism",
+        "resource-exercism-desc": "Pratique gratuite du code avec mentorat dans 70+ langages de programmation",
+        "resource-exercism-tag": "Pratique",
+        "resource-toffeeshare-title": "ToffeeShare",
+        "resource-toffeeshare-desc": "Partage de fichiers peer-to-peer sécurisé sans limite de taille",
+        "resource-toffeeshare-tag": "Partage",
+        "resource-flowlauncher-title": "Flow Launcher",
+        "resource-flowlauncher-desc": "Recherche rapide de fichiers et lanceur d'applications pour Windows",
+        "resource-flowlauncher-tag": "Recherche",
+        "resource-bitwarden-title": "Bitwarden",
+        "resource-bitwarden-desc": "Gestionnaire de mots de passe open source pour particuliers et équipes",
+        "resource-bitwarden-tag": "Sécurité",
         "resource-roadmap-title": "Roadmap.sh",
         "resource-roadmap-desc": "Roadmaps et parcours d'apprentissage pour toute carrière ou compétence IT",
         "resource-roadmap-tag": "Apprentissage",
@@ -918,18 +948,17 @@ function applyTranslations() {
         }
     });
 
-    // Resources cards (new order by category)
+    // Resources cards (using data-resource attribute for reliable mapping)
     const resourceCards = document.querySelectorAll('.resource-card');
-    const resourceKeys = ['roadmap', 'stephane', 'resume', 'jsoncrack', 'devtoys', 'fossflow', 'anchor', 'tinywow', 'ditto', 'snapdrop', 'privnote', 'streamline', 'coolors', 'alternativeto', 'miromind', 'elgoog'];
-    resourceCards.forEach((card, index) => {
-        if (index < resourceKeys.length) {
-            const key = resourceKeys[index];
+    resourceCards.forEach(card => {
+        const key = card.getAttribute('data-resource');
+        if (key) {
             const title = card.querySelector('h3');
             const desc = card.querySelector('.resource-desc');
             const tag = card.querySelector('.resource-tag');
-            if (title) title.textContent = t[`resource-${key}-title`];
-            if (desc) desc.textContent = t[`resource-${key}-desc`];
-            if (tag) tag.textContent = t[`resource-${key}-tag`];
+            if (title && t[`resource-${key}-title`]) title.textContent = t[`resource-${key}-title`];
+            if (desc && t[`resource-${key}-desc`]) desc.textContent = t[`resource-${key}-desc`];
+            if (tag && t[`resource-${key}-tag`]) tag.textContent = t[`resource-${key}-tag`];
         }
     });
 
