@@ -2167,6 +2167,21 @@ h1, h2, h5, p{
     font-style: italic;
 }
 
+.resource-category-title {
+    font-size: 18px;
+    color: var(--text);
+    margin: 30px 0 15px 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--bg-alt);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.resource-category-title:first-of-type {
+    margin-top: 20px;
+}
+
 .resources-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);

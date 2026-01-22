@@ -177,6 +177,12 @@ const translations = {
         "resources-title": "Useful Resources",
         "resources-subtitle": "A curated selection of tools and documentation I find valuable",
         "nav-resources": "Resources",
+        "resource-cat-learning": "Learning & Career",
+        "resource-cat-dev": "Development",
+        "resource-cat-productivity": "Productivity",
+        "resource-cat-design": "Design",
+        "resource-cat-discovery": "Discovery & Research",
+        "resource-cat-fun": "Fun",
         "resource-fossflow-title": "FossFLOW",
         "resource-fossflow-desc": "Create beautiful network diagrams for your infrastructure documentation",
         "resource-fossflow-tag": "Diagrams",
@@ -200,7 +206,7 @@ const translations = {
         "resource-devtoys-tag": "Development",
         "resource-anchor-title": "Anchor",
         "resource-anchor-desc": "Offline-first, self-hostable note taking application",
-        "resource-anchor-tag": "Development",
+        "resource-anchor-tag": "Notes",
         "resource-tinywow-title": "TinyWow",
         "resource-tinywow-desc": "Free online PDF tools - convert, compress, merge, split",
         "resource-tinywow-tag": "PDF Tools",
@@ -209,16 +215,16 @@ const translations = {
         "resource-ditto-tag": "Productivity",
         "resource-snapdrop-title": "Snapdrop",
         "resource-snapdrop-desc": "Cross-platform file sharing like AirDrop - works on any device",
-        "resource-snapdrop-tag": "Productivity",
+        "resource-snapdrop-tag": "Sharing",
         "resource-privnote-title": "Privnote",
         "resource-privnote-desc": "Send self-destructing notes that disappear after being read",
         "resource-privnote-tag": "Privacy",
         "resource-streamline-title": "Streamline",
         "resource-streamline-desc": "Massive icon library with illustrations and emojis",
-        "resource-streamline-tag": "Design",
+        "resource-streamline-tag": "Icons",
         "resource-coolors-title": "Coolors",
         "resource-coolors-desc": "Generate perfect color palettes for your projects",
-        "resource-coolors-tag": "Design",
+        "resource-coolors-tag": "Colors",
         "resource-alternativeto-title": "AlternativeTo",
         "resource-alternativeto-desc": "Find open source and free alternatives to any software",
         "resource-alternativeto-tag": "Discovery",
@@ -407,6 +413,12 @@ const translations = {
         "resources-title": "Sources Utiles",
         "resources-subtitle": "Une sélection d'outils et de documentation que je trouve précieux",
         "nav-resources": "Ressources",
+        "resource-cat-learning": "Apprentissage & Carrière",
+        "resource-cat-dev": "Développement",
+        "resource-cat-productivity": "Productivité",
+        "resource-cat-design": "Design",
+        "resource-cat-discovery": "Découverte & Recherche",
+        "resource-cat-fun": "Fun",
         "resource-fossflow-title": "FossFLOW",
         "resource-fossflow-desc": "Créez de beaux diagrammes réseaux pour votre documentation d'infrastructure",
         "resource-fossflow-tag": "Diagrammes",
@@ -430,7 +442,7 @@ const translations = {
         "resource-devtoys-tag": "Développement",
         "resource-anchor-title": "Anchor",
         "resource-anchor-desc": "Application de prise de notes offline-first et auto-hébergeable",
-        "resource-anchor-tag": "Développement",
+        "resource-anchor-tag": "Notes",
         "resource-tinywow-title": "TinyWow",
         "resource-tinywow-desc": "Outils PDF gratuits en ligne - convertir, compresser, fusionner, diviser",
         "resource-tinywow-tag": "Outils PDF",
@@ -439,16 +451,16 @@ const translations = {
         "resource-ditto-tag": "Productivité",
         "resource-snapdrop-title": "Snapdrop",
         "resource-snapdrop-desc": "Partage de fichiers multiplateforme comme AirDrop - fonctionne sur tout appareil",
-        "resource-snapdrop-tag": "Productivité",
+        "resource-snapdrop-tag": "Partage",
         "resource-privnote-title": "Privnote",
         "resource-privnote-desc": "Envoyez des notes qui s'autodétruisent après avoir été lues",
         "resource-privnote-tag": "Confidentialité",
         "resource-streamline-title": "Streamline",
         "resource-streamline-desc": "Immense bibliothèque d'icônes avec illustrations et emojis",
-        "resource-streamline-tag": "Design",
+        "resource-streamline-tag": "Icônes",
         "resource-coolors-title": "Coolors",
         "resource-coolors-desc": "Générez des palettes de couleurs parfaites pour vos projets",
-        "resource-coolors-tag": "Design",
+        "resource-coolors-tag": "Couleurs",
         "resource-alternativeto-title": "AlternativeTo",
         "resource-alternativeto-desc": "Trouvez des alternatives open source et gratuites à tout logiciel",
         "resource-alternativeto-tag": "Découverte",
@@ -897,9 +909,18 @@ function applyTranslations() {
         if (p) p.textContent = t['resources-subtitle'];
     }
 
-    // Resources cards
+    // Resources category titles
+    const categoryTitles = document.querySelectorAll('.resource-category-title');
+    categoryTitles.forEach(title => {
+        const key = title.getAttribute('data-translate');
+        if (key && t[key]) {
+            title.textContent = t[key];
+        }
+    });
+
+    // Resources cards (new order by category)
     const resourceCards = document.querySelectorAll('.resource-card');
-    const resourceKeys = ['fossflow', 'stephane', 'resume', 'roadmap', 'elgoog', 'jsoncrack', 'devtoys', 'anchor', 'tinywow', 'ditto', 'snapdrop', 'privnote', 'streamline', 'coolors', 'alternativeto', 'miromind'];
+    const resourceKeys = ['roadmap', 'stephane', 'resume', 'jsoncrack', 'devtoys', 'fossflow', 'anchor', 'tinywow', 'ditto', 'snapdrop', 'privnote', 'streamline', 'coolors', 'alternativeto', 'miromind', 'elgoog'];
     resourceCards.forEach((card, index) => {
         if (index < resourceKeys.length) {
             const key = resourceKeys[index];
