@@ -38,7 +38,7 @@
 .term-toggle {
     position: fixed;
     bottom: 20px;
-    left: 80px;
+    left: 90px;
     z-index: 100001;
     background: var(--bg-alt);
     color: var(--bg);
@@ -467,6 +467,7 @@ h1, h2, h5, p{
     background-image: var(--tl-1);
     height: 110%;
     width: 100%;
+    position: relative;
     transition: background-image 300ms ease-out;
     background-position: center;
     background-size: cover;
