@@ -189,6 +189,9 @@ const translations = {
         "resource-roadmap-title": "Roadmap.sh",
         "resource-roadmap-desc": "Developer roadmaps and learning paths for any IT career or skill",
         "resource-roadmap-tag": "Learning",
+        "resource-elgoog-title": "elgooG",
+        "resource-elgoog-desc": "Time capsule of Google Easter Eggs - hidden games and surprises",
+        "resource-elgoog-tag": "Easter Eggs",
 
         // Easter eggs
         "console-message": "Stop looking at my code! 👀",
@@ -383,6 +386,9 @@ const translations = {
         "resource-roadmap-title": "Roadmap.sh",
         "resource-roadmap-desc": "Roadmaps et parcours d'apprentissage pour toute carrière ou compétence IT",
         "resource-roadmap-tag": "Apprentissage",
+        "resource-elgoog-title": "elgooG",
+        "resource-elgoog-desc": "Capsule temporelle des Easter Eggs de Google - jeux et surprises cachés",
+        "resource-elgoog-tag": "Easter Eggs",
 
         // Easter eggs
         "console-message": "Arrête de regarder mon code ! 👀",
@@ -827,7 +833,7 @@ function applyTranslations() {
 
     // Resources cards
     const resourceCards = document.querySelectorAll('.resource-card');
-    const resourceKeys = ['fossflow', 'stephane', 'resume', 'roadmap'];
+    const resourceKeys = ['fossflow', 'stephane', 'resume', 'roadmap', 'elgoog'];
     resourceCards.forEach((card, index) => {
         if (index < resourceKeys.length) {
             const key = resourceKeys[index];
