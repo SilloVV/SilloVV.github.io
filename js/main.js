@@ -938,7 +938,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 count--;
                 if (countdownEl) countdownEl.textContent = count;
 
-                if (count <= 1) {
+                if (count <= 0) {
                     clearInterval(countdownInterval);
 
                     // Stop shaking

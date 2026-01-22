@@ -890,6 +890,7 @@ h1, h2, h5, p{
     padding: 20px 20px 40px 20px;
     box-sizing: border-box;
     min-height: 100vh;
+    font-family: Georgia, serif;
 }
 
 #cvscroller::-webkit-scrollbar{
