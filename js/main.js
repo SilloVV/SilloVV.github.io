@@ -732,6 +732,14 @@ function closeProjectPreview(previewId) {
         '%c╭─────────────────────────────────╮\n│  Made with ♥ by Wassil NAKIB    │\n│  github.com/SilloVV             │\n╰─────────────────────────────────╯',
         'color: #888; font-family: monospace; font-size: 12px;'
     );
+    console.log(
+        '%cPsst... Il y a des Easter Eggs cachés sur ce site ! Sauras-tu les trouver ? 🥚\nPsst... There are hidden Easter Eggs on this site! Can you find them?',
+        'color: #ff6b6b; font-size: 13px; font-weight: bold; padding: 8px; background: rgba(255, 107, 107, 0.1); border-radius: 5px;'
+    );
+    console.log(
+        '%c🕰️ Time Capsule: https://elgoog.im/ - Une collection des Easter Eggs de Google!\n   A collection of Google Easter Eggs!',
+        'color: #4ecdc4; font-size: 12px; padding: 5px;'
+    );
 })();
 
 // Runaway button - Escapes from cursor
@@ -930,7 +938,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 count--;
                 if (countdownEl) countdownEl.textContent = count;
 
-                if (count <= 0) {
+                if (count <= 1) {
                     clearInterval(countdownInterval);
 
                     // Stop shaking
