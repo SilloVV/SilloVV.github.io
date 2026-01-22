@@ -399,6 +399,56 @@ const translations = {
         "project-cicd-title": "Pipeline CI/CD Java",
         "project-cicd-desc": "Pipeline CI/CD complet pour un backend d'application Java avec GitLab CI, tests automatisés et déploiement conteneurisé.",
 
+        // Project Detailed Descriptions - French
+        "project-jira-detail-title": "Détails Techniques:",
+        "project-jira-detail-1": "<strong>Fine-tuning:</strong> Modèle DistilBERT utilisant LoRA et PEFT pour classification efficace d'incidents",
+        "project-jira-detail-2": "<strong>Cloud Hybride:</strong> IaC Terraform connectant AWS S3 et ressources locales via SQS pour traitement asynchrone",
+        "project-jira-detail-3": "<strong>CI/CD:</strong> Trunk-Based Development avec FluxCD (GitOps), pre-commits, linters (Ruff, yamllint, TFLint)",
+        "project-jira-detail-4": "<strong>Suivi:</strong> MLFlow pour la gestion des expérimentations et cycle de vie des modèles",
+        "project-jira-detail-5": "<strong>Impact:</strong> Pipeline MLOps de qualité production suivant les principes AWS Solutions Architect",
+
+        "project-unet-detail-title": "Détails Techniques:",
+        "project-unet-detail-1": "<strong>Modèle:</strong> Architecture CNN U-Net pour segmentation sémantique sur dataset PascalVOC",
+        "project-unet-detail-2": "<strong>Framework:</strong> PyTorch pour développement et entraînement du modèle",
+        "project-unet-detail-3": "<strong>Monitoring:</strong> TensorBoard pour suivi des métriques et visualisation",
+        "project-unet-detail-4": "<strong>Déploiement:</strong> Format ONNX pour export du modèle et optimisation de l'inférence",
+        "project-unet-detail-5": "<strong>Application:</strong> Segmentation précise d'objets pour tâches de vision par ordinateur",
+
+        "project-steersim-detail-title": "Détails Techniques:",
+        "project-steersim-detail-1": "<strong>Intégration Système:</strong> Architecture ROS2 publish/subscribe pour télémétrie véhicule et contrôle temps réel",
+        "project-steersim-detail-2": "<strong>Ingénierie de Données:</strong> Collecteur multi-caméras (3 POVs + métadonnées direction) avec topics ROS2 synchronisés",
+        "project-steersim-detail-3": "<strong>Formation Distribuée:</strong> Entraînement large échelle sur cluster Slurm avec PyTorch, optimisation hyperparamètres",
+        "project-steersim-detail-4": "<strong>Monitoring:</strong> TensorBoard pour suivi Loss et F1-Score, évaluation \"distance-to-route\" personnalisée",
+        "project-steersim-detail-5": "<strong>Impact:</strong> Pipeline complet end-to-end ML et robotique pour direction autonome",
+
+        "project-hermine-detail-title": "Détails Techniques:",
+        "project-hermine-detail-1": "<strong>Architecture:</strong> Système multi-agents hiérarchique (Python, FastAPI, Redis, Firebase) avec APIs Natives",
+        "project-hermine-detail-2": "<strong>Gestion d'État:</strong> État persistant et contrôle granulaire à travers hiérarchie d'agents",
+        "project-hermine-detail-3": "<strong>Optimisation Coûts:</strong> Injection contexte NoSQL (évitant RAG complexe), outils benchmarking internes",
+        "project-hermine-detail-4": "<strong>Pont Juridique-NLP:</strong> Collaboration avec juristes pour ingénierie de prompts haute précision",
+        "project-hermine-detail-5": "<strong>Impact:</strong> 2 clients, 15 bêta-testeurs, 50% gain temps rédaction juridique, potentiel vente incitative",
+
+        "project-superdiag-detail-title": "Détails Techniques:",
+        "project-superdiag-detail-1": "<strong>Software Craftsmanship:</strong> Principes SOLID et TDD en Bash pour haute fiabilité",
+        "project-superdiag-detail-2": "<strong>Tests:</strong> Tests unitaires complets avec framework shUnit2",
+        "project-superdiag-detail-3": "<strong>CI/CD:</strong> Pipeline Jenkins pour déploiements production automatisés en environnement Gitflow",
+        "project-superdiag-detail-4": "<strong>Monitoring:</strong> Outils diagnostic et analyse serveur pour infrastructure pharmacies",
+        "project-superdiag-detail-5": "<strong>Impact:</strong> Réduction 30% temps analyse serveur équipes support sur 8 000+ pharmacies",
+
+        "project-kubernetes-detail-title": "Détails Techniques:",
+        "project-kubernetes-detail-1": "<strong>Orchestration:</strong> Cluster 4 conteneurs pour application distribuée \"Docker coins Miner\"",
+        "project-kubernetes-detail-2": "<strong>Outils:</strong> KinD (Kubernetes in Docker) pour développement et tests locaux",
+        "project-kubernetes-detail-3": "<strong>Gestion Paquets:</strong> Charts Helm pour déploiement et configuration application",
+        "project-kubernetes-detail-4": "<strong>Monitoring:</strong> Stack observabilité complète pour santé et performance cluster",
+        "project-kubernetes-detail-5": "<strong>Impact:</strong> Expérience pratique orchestration Kubernetes qualité production",
+
+        "project-cicd-detail-title": "Détails Techniques:",
+        "project-cicd-detail-1": "<strong>Conteneurisation:</strong> Builds Docker multi-étapes avec images légères utilisant layer caching",
+        "project-cicd-detail-2": "<strong>GitLab CI:</strong> Gestion tags et versions, build automatique et push vers Docker Hub",
+        "project-cicd-detail-3": "<strong>Registre Artefacts:</strong> Artefacts JAR stockés dans registre artefacts GitLab",
+        "project-cicd-detail-4": "<strong>Automatisation:</strong> Déclenché sur commits branche main ou création tags",
+        "project-cicd-detail-5": "<strong>Impact:</strong> Processus déploiement rationalisé pour applications backend Java",
+
         // Contact
         "contact-title": "Me contacter",
         "contact-subtitle": "N'hésitez pas à me contacter pour discuter d'opportunités ou échanger des idées sur nos projets communs",
@@ -695,10 +745,12 @@ function applyTranslations() {
     // Project Cards
     const projectCards = document.querySelectorAll('.project-card');
     projectCards.forEach(card => {
-        const title = card.querySelector('h3');
-        const desc = card.querySelector('p');
+        const title = card.querySelector('.project-content h3');
+        const desc = card.querySelector('.project-content p');
+        const preview = card.getAttribute('data-preview');
+
+        // Translate title and description
         if (title && desc) {
-            const preview = card.getAttribute('data-preview');
             if (preview === 'jira-mlops') {
                 title.textContent = t['project-jira-title'];
                 desc.textContent = t['project-jira-desc'];
@@ -720,6 +772,63 @@ function applyTranslations() {
             } else if (preview === 'cicd') {
                 title.textContent = t['project-cicd-title'];
                 desc.textContent = t['project-cicd-desc'];
+            }
+        }
+
+        // Translate detailed descriptions
+        const detailTitle = card.querySelector('.project-description h4');
+        const detailItems = card.querySelectorAll('.project-description li');
+
+        if (detailTitle && detailItems.length >= 5) {
+            if (preview === 'jira-mlops') {
+                detailTitle.textContent = t['project-jira-detail-title'] || 'Technical Details:';
+                detailItems[0].innerHTML = t['project-jira-detail-1'];
+                detailItems[1].innerHTML = t['project-jira-detail-2'];
+                detailItems[2].innerHTML = t['project-jira-detail-3'];
+                detailItems[3].innerHTML = t['project-jira-detail-4'];
+                detailItems[4].innerHTML = t['project-jira-detail-5'];
+            } else if (preview === 'unet') {
+                detailTitle.textContent = t['project-unet-detail-title'] || 'Technical Details:';
+                detailItems[0].innerHTML = t['project-unet-detail-1'];
+                detailItems[1].innerHTML = t['project-unet-detail-2'];
+                detailItems[2].innerHTML = t['project-unet-detail-3'];
+                detailItems[3].innerHTML = t['project-unet-detail-4'];
+                detailItems[4].innerHTML = t['project-unet-detail-5'];
+            } else if (preview === 'steersim') {
+                detailTitle.textContent = t['project-steersim-detail-title'] || 'Technical Details:';
+                detailItems[0].innerHTML = t['project-steersim-detail-1'];
+                detailItems[1].innerHTML = t['project-steersim-detail-2'];
+                detailItems[2].innerHTML = t['project-steersim-detail-3'];
+                detailItems[3].innerHTML = t['project-steersim-detail-4'];
+                detailItems[4].innerHTML = t['project-steersim-detail-5'];
+            } else if (preview === 'hermine') {
+                detailTitle.textContent = t['project-hermine-detail-title'] || 'Technical Details:';
+                detailItems[0].innerHTML = t['project-hermine-detail-1'];
+                detailItems[1].innerHTML = t['project-hermine-detail-2'];
+                detailItems[2].innerHTML = t['project-hermine-detail-3'];
+                detailItems[3].innerHTML = t['project-hermine-detail-4'];
+                detailItems[4].innerHTML = t['project-hermine-detail-5'];
+            } else if (preview === 'superdiag') {
+                detailTitle.textContent = t['project-superdiag-detail-title'] || 'Technical Details:';
+                detailItems[0].innerHTML = t['project-superdiag-detail-1'];
+                detailItems[1].innerHTML = t['project-superdiag-detail-2'];
+                detailItems[2].innerHTML = t['project-superdiag-detail-3'];
+                detailItems[3].innerHTML = t['project-superdiag-detail-4'];
+                detailItems[4].innerHTML = t['project-superdiag-detail-5'];
+            } else if (preview === 'kubernetes') {
+                detailTitle.textContent = t['project-kubernetes-detail-title'] || 'Technical Details:';
+                detailItems[0].innerHTML = t['project-kubernetes-detail-1'];
+                detailItems[1].innerHTML = t['project-kubernetes-detail-2'];
+                detailItems[2].innerHTML = t['project-kubernetes-detail-3'];
+                detailItems[3].innerHTML = t['project-kubernetes-detail-4'];
+                detailItems[4].innerHTML = t['project-kubernetes-detail-5'];
+            } else if (preview === 'cicd') {
+                detailTitle.textContent = t['project-cicd-detail-title'] || 'Technical Details:';
+                detailItems[0].innerHTML = t['project-cicd-detail-1'];
+                detailItems[1].innerHTML = t['project-cicd-detail-2'];
+                detailItems[2].innerHTML = t['project-cicd-detail-3'];
+                detailItems[3].innerHTML = t['project-cicd-detail-4'];
+                detailItems[4].innerHTML = t['project-cicd-detail-5'];
             }
         }
     });

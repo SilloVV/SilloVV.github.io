@@ -4,6 +4,7 @@
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
   @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap');
   @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
 
 
   /* LANGUAGE TOGGLE */
@@ -31,6 +32,81 @@
 .lang-toggle:hover {
     transform: scale(1.1);
     box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+
+/* TERMINAL MODE TOGGLE */
+.term-toggle {
+    position: fixed;
+    bottom: 20px;
+    left: 80px;
+    z-index: 100001;
+    background: var(--bg-alt);
+    color: var(--bg);
+    width: 55px;
+    height: 45px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border: 2px solid transparent;
+}
+
+.term-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+
+/* TERMINAL MODE STYLES */
+body.terminal-mode {
+    background-color: #0F0A0A !important;
+    color: #138A36 !important;
+    cursor: crosshair !important;
+    font-family: 'JetBrains Mono', monospace !important;
+}
+
+body.terminal-mode * {
+    border-radius: 0 !important;
+    font-family: 'JetBrains Mono', monospace !important;
+    cursor: crosshair !important;
+}
+
+body.terminal-mode .hero-name h1,
+body.terminal-mode .hero-title p,
+body.terminal-mode .hero-greeting h5,
+body.terminal-mode .cv-name,
+body.terminal-mode .cv-title,
+body.terminal-mode h1, body.terminal-mode h2,
+body.terminal-mode h3, body.terminal-mode h4,
+body.terminal-mode h5, body.terminal-mode p,
+body.terminal-mode span, body.terminal-mode a,
+body.terminal-mode .project-content h3,
+body.terminal-mode .project-content p,
+body.terminal-mode .contact-title,
+body.terminal-mode .about-text {
+    color: #138A36 !important;
+}
+
+body.terminal-mode .hero-tag,
+body.terminal-mode .tech-tag,
+body.terminal-mode .project-card,
+body.terminal-mode .contact-content,
+body.terminal-mode .cv-container,
+body.terminal-mode #about-me {
+    background: rgba(19, 138, 54, 0.1) !important;
+    border: 1px solid #138A36 !important;
+}
+
+body.terminal-mode .lang-toggle,
+body.terminal-mode .term-toggle {
+    background: #138A36 !important;
+    color: #0F0A0A !important;
+    border: 1px solid #138A36 !important;
 }
 
 /* LOADING SCREEN - Positioned exactly like hero */
@@ -382,7 +458,8 @@ h1, h2, h5, p{
     width: 21rem;
     max-height: 100Vh;
     max-width: 100Vh;
-    
+    position: relative;
+
 }
 
 #hero__animation__img{
@@ -394,8 +471,21 @@ h1, h2, h5, p{
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    
-    
+
+
+}
+
+.animation-copyright {
+    position: absolute;
+    bottom: 10px;
+    right: 15px;
+    font-size: 11px;
+    color: var(--text);
+    opacity: 0.6;
+    font-weight: 500;
+    font-family: 'Courier New', monospace;
+    pointer-events: none;
+    z-index: 10;
 }
 
 #top-left-img{
@@ -1750,16 +1840,87 @@ h1, h2, h5, p{
     border-color: var(--bg-alt);
 }
 
+/* Project images container - horizontal layout */
+.project-images-container {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    align-items: stretch;
+}
+
 .project-image{
     height: 120px;
+    width: 120px;
+    flex-shrink: 0;
     background: white;
     border-radius: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 20px;
     position: relative;
     overflow: hidden;
+}
+
+.project-description {
+    flex: 1;
+    background: rgba(51, 51, 51, 0.05);
+    border-radius: 12px;
+    padding: 12px 15px;
+    border: 1px solid rgba(51, 51, 51, 0.1);
+}
+
+.project-description h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin: 0 0 10px 0;
+    text-decoration: underline;
+}
+
+.project-description ul {
+    margin: 0;
+    padding-left: 18px;
+    list-style: none;
+}
+
+.project-description li {
+    font-size: 11px;
+    line-height: 1.5;
+    color: var(--text);
+    margin-bottom: 6px;
+    position: relative;
+    padding-left: 10px;
+}
+
+.project-description li:before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: var(--bg-alt);
+    font-weight: bold;
+}
+
+.project-description strong {
+    color: var(--bg-alt);
+    font-weight: 600;
+}
+
+.project-second-image {
+    margin-bottom: 15px;
+    height: 180px;
+    background: rgba(51, 51, 51, 0.05);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed rgba(51, 51, 51, 0.2);
+}
+
+.image-placeholder {
+    font-size: 13px;
+    color: rgba(51, 51, 51, 0.4);
+    font-style: italic;
+    font-weight: 500;
 }
 
 .project-placeholder{

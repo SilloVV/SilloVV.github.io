@@ -852,6 +852,36 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// ============== TERMINAL MODE TOGGLE ==============
+function toggleTerminalMode() {
+    document.body.classList.toggle('terminal-mode');
+
+    // Save preference to localStorage
+    const isTerminalMode = document.body.classList.contains('terminal-mode');
+    localStorage.setItem('terminal-mode', isTerminalMode ? 'enabled' : 'disabled');
+}
+
+// Load terminal mode preference on page load
+document.addEventListener('DOMContentLoaded', () => {
+    const terminalMode = localStorage.getItem('terminal-mode');
+    if (terminalMode === 'enabled') {
+        document.body.classList.add('terminal-mode');
+    }
+});
+
+// Preload reverse animation (simple placeholder function)
+function preloadReverseAnimation() {
+    // This function can be expanded if needed for animation preloading
+    const heroAnimationImg = document.getElementById('hero__animation__img');
+    if (heroAnimationImg) {
+        // Preload animation frames or resources here if needed
+        console.log('Reverse animation preloaded');
+    }
+}
+
+// Call preload on page load
+document.addEventListener('DOMContentLoaded', preloadReverseAnimation);
+
 // ============== TAB VISIBILITY - "Reviens !" ==============
 (function() {
     const originalTitle = document.title;
