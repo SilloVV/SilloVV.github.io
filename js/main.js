@@ -903,7 +903,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const overlay = document.getElementById('selma-overlay');
 
     
-
+   
         // show heart overlay
         setTimeout(() => {
             if (overlay) overlay.classList.add('show');
