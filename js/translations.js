@@ -152,6 +152,7 @@ const translations = {
         "contact-title": "Contact me",
         "contact-subtitle": "Feel free to contact me to discuss opportunities or exchange ideas about our common projects",
         "contact-social": "Social Networks",
+        "contact-freelance": "Freelance",
         "contact-email": "Email",
         "contact-footer": "Available now for new challenges",
 
@@ -453,6 +454,7 @@ const translations = {
         "contact-title": "Me contacter",
         "contact-subtitle": "N'hésitez pas à me contacter pour discuter d'opportunités ou échanger des idées sur nos projets communs",
         "contact-social": "Réseaux Sociaux",
+        "contact-freelance": "Freelance",
         "contact-email": "Email",
         "contact-footer": "Disponible maintenant pour de nouveaux défis",
 
@@ -982,6 +984,9 @@ function applyTranslations() {
 
     const contactSocial = document.querySelector('.social-method h3');
     if (contactSocial) contactSocial.textContent = t['contact-social'];
+
+    const contactFreelance = document.querySelector('.malt-method h3');
+    if (contactFreelance) contactFreelance.textContent = t['contact-freelance'];
 
     const contactEmail = document.querySelector('.email-method h3');
     if (contactEmail) contactEmail.textContent = t['contact-email'];

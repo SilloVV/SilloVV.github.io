@@ -111,14 +111,21 @@ body.terminal-mode .hero-name h1#sillow {
     -webkit-text-fill-color: #138A36 !important;
 }
 
-/* Conteneurs avec bordure verte */
+/* Conteneurs avec bordure verte (PAS le CV) */
 body.terminal-mode .hero-tag,
 body.terminal-mode .tech-tag,
 body.terminal-mode .project-card,
-body.terminal-mode .cv-container,
 body.terminal-mode #about-me {
     background: #0F0A0A !important;
     border: 1px solid #138A36 !important;
+}
+
+/* À propos de moi - titre en vert */
+body.terminal-mode .propos,
+body.terminal-mode .propos em,
+body.terminal-mode #about-me h2,
+body.terminal-mode #about-me em {
+    color: #138A36 !important;
 }
 
 /* Boutons TERM et FR/ENG - texte noir sur fond vert */
@@ -162,12 +169,23 @@ body.terminal-mode .resource-card {
     border: 1px solid #138A36 !important;
 }
 
-body.terminal-mode .resource-icon {
-    background: transparent !important;
+body.terminal-mode .resource-icon,
+body.terminal-mode .resource-card .resource-icon {
+    background: #0F0A0A !important;
+    background-image: none !important;
     border: 1px solid #138A36 !important;
 }
 
-body.terminal-mode .resource-icon i {
+body.terminal-mode .resource-icon i,
+body.terminal-mode .resource-icon i.bx,
+body.terminal-mode .resource-card .resource-icon i {
+    color: #138A36 !important;
+}
+
+/* Icône download et autres icônes boxicons */
+body.terminal-mode .bx-download,
+body.terminal-mode i.bx-download,
+body.terminal-mode .cv-download-fixed i {
     color: #138A36 !important;
 }
 
@@ -225,6 +243,28 @@ body.terminal-mode .copy-btn {
 body.terminal-mode .mail::before,
 body.terminal-mode .mail::after {
     display: none !important;
+}
+
+/* Section Malt en mode terminal */
+body.terminal-mode .malt-method,
+body.terminal-mode .malt-container {
+    background: #0F0A0A !important;
+}
+
+body.terminal-mode .malt-link {
+    background: #0F0A0A !important;
+    border: 1px solid #138A36 !important;
+    color: #138A36 !important;
+    backdrop-filter: none !important;
+}
+
+body.terminal-mode .malt-link img {
+    filter: brightness(0) saturate(100%) invert(36%) sepia(89%) saturate(412%) hue-rotate(95deg) brightness(95%) contrast(92%);
+}
+
+body.terminal-mode .malt-link:hover {
+    background: #0F0A0A !important;
+    transform: none !important;
 }
 
 /* Sidebar en mode terminal */
@@ -700,9 +740,6 @@ h1, h2, h5, p{
     line-height: 50px;
 }
 
-#btn{
-    padding-right: 15px;
-}
 
 .sidebar ul li a{
     color: var(--text);
@@ -2392,6 +2429,44 @@ h1, h2, h5, p{
 
 .copy-btn:active {
     transform: translateY(0) scale(0.95);
+}
+
+/* Section Malt Freelance */
+.malt-method {
+    text-align: center;
+}
+
+.malt-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.malt-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 25px;
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.malt-link:hover {
+    background: rgba(255,255,255,0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.malt-link img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
 }
 
 .copy-message {
