@@ -139,10 +139,12 @@ body.terminal-mode #hero__animation__img {
     filter: brightness(0) saturate(100%) invert(36%) sepia(89%) saturate(412%) hue-rotate(95deg) brightness(95%) contrast(92%);
 }
 
-/* Logo menu (#btn) et toutes les icônes boxicons en vert */
-body.terminal-mode #btn,
-body.terminal-mode i#btn,
-body.terminal-mode .bx-menu,
+/* Logo menu - cibler .sidebar #btn spécifiquement */
+body.terminal-mode .sidebar #btn {
+    color: #138A36 !important;
+}
+
+/* Toutes les icônes boxicons en vert */
 body.terminal-mode i.bx,
 body.terminal-mode .bx {
     color: #138A36 !important;
@@ -182,14 +184,35 @@ body.terminal-mode .method-content {
     border: 1px solid #138A36 !important;
 }
 
-/* Icônes de contact */
+/* Icônes de contact - désactiver tous les effets visuels */
 body.terminal-mode .contact-icon {
     background: #0F0A0A !important;
     border: 1px solid #138A36 !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    transition: none !important;
+    transform: none !important;
+}
+
+body.terminal-mode .contact-icon:hover {
+    transform: none !important;
+    background: #0F0A0A !important;
+    border-color: #138A36 !important;
+}
+
+body.terminal-mode .contact-icon::before,
+body.terminal-mode .contact-icon::after {
+    display: none !important;
 }
 
 body.terminal-mode .contact-icon img {
     filter: brightness(0) saturate(100%) invert(36%) sepia(89%) saturate(412%) hue-rotate(95deg) brightness(95%) contrast(92%);
+    transition: none !important;
+    transform: none !important;
+}
+
+body.terminal-mode .contact-icon:hover img {
+    transform: none !important;
 }
 
 /* Section Email */
