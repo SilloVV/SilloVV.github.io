@@ -1268,8 +1268,8 @@ body.terminal-mode #btn.menu-logo {
 }
 
 .cv-download-icon {
-    width: 28px;
-    height: 28px;
+    width: 40px;
+    height: 40px;
     object-fit: contain;
     filter: brightness(0) saturate(100%);
     transition: all 0.3s ease;
