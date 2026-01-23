@@ -860,13 +860,9 @@ function toggleTerminalMode() {
     localStorage.setItem('terminal-mode', isTerminalMode ? 'enabled' : 'disabled');
 }
 
-// Load terminal mode preference on page load
-document.addEventListener('DOMContentLoaded', () => {
-    const terminalMode = localStorage.getItem('terminal-mode');
-    if (terminalMode === 'enabled') {
-        document.body.classList.add('terminal-mode');
-    }
-});
+// Terminal mode is NOT loaded automatically on page load
+// User must manually click the TERM button to enable it each session
+// (removed automatic loading from localStorage)
 
 // Preload reverse animation (simple placeholder function)
 function preloadReverseAnimation() {

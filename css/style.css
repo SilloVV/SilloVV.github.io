@@ -78,8 +78,6 @@ body.terminal-mode * {
 
 /* Texte en vert */
 body.terminal-mode .hero-name h1,
-body.terminal-mode .hero-name #nom,
-body.terminal-mode .hero-name #sillow,
 body.terminal-mode .hero-title p,
 body.terminal-mode .hero-greeting h5,
 body.terminal-mode .cv-name,
@@ -95,6 +93,14 @@ body.terminal-mode .contact-title,
 body.terminal-mode .about-text,
 body.terminal-mode .nav-item,
 body.terminal-mode .animation-copyright {
+    color: #138A36 !important;
+}
+
+/* Wassil NAKIB et SilloVV en vert - haute spécificité */
+body.terminal-mode #nom,
+body.terminal-mode #sillow,
+body.terminal-mode h1#nom,
+body.terminal-mode h1#sillow {
     color: #138A36 !important;
 }
 
@@ -127,18 +133,27 @@ body.terminal-mode #hero__animation__img {
     filter: brightness(0) saturate(100%) invert(36%) sepia(89%) saturate(412%) hue-rotate(95deg) brightness(95%) contrast(92%);
 }
 
-/* Logo menu visible en vert */
-body.terminal-mode #btn img,
-body.terminal-mode .sidebar img,
-body.terminal-mode #btn svg {
-    filter: brightness(0) saturate(100%) invert(36%) sepia(89%) saturate(412%) hue-rotate(95deg) brightness(95%) contrast(92%);
+/* Logo menu (#btn est une icône bx-menu) en vert */
+body.terminal-mode #btn,
+body.terminal-mode i#btn,
+body.terminal-mode .bx-menu {
+    color: #138A36 !important;
 }
 
 /* Images de ressources visibles */
 body.terminal-mode .resource-card img,
-body.terminal-mode .resource-icon i,
 body.terminal-mode .contact-icon img {
     filter: brightness(0) saturate(100%) invert(36%) sepia(89%) saturate(412%) hue-rotate(95deg) brightness(95%) contrast(92%);
+}
+
+/* Icônes boxicons dans les ressources - fond visible */
+body.terminal-mode .resource-icon {
+    background: rgba(19, 138, 54, 0.2) !important;
+    border: 1px solid #138A36 !important;
+}
+
+body.terminal-mode .resource-icon i {
+    color: #138A36 !important;
 }
 
 /* Icônes boxicons en vert */
