@@ -685,7 +685,7 @@ h1, h2, h5, p{
 }
 
 .sidebar #btn{
-    
+
     position: absolute;
     color: var(--bg-alt);
     top: 0.4rem;
@@ -696,6 +696,17 @@ h1, h2, h5, p{
     transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
     will-change: transform;
 
+}
+
+.sidebar .menu-logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    filter: brightness(0) saturate(100%);
+}
+
+body.terminal-mode .sidebar .menu-logo {
+    filter: brightness(0) saturate(100%) invert(36%) sepia(89%) saturate(412%) hue-rotate(95deg) brightness(95%) contrast(92%);
 }
 
 .sidebar.active #btn{
@@ -774,32 +785,6 @@ h1, h2, h5, p{
     animation: fadeIn 2s forwards;
 }
 
-/* Navigation icons */
-.nav-icon-bx {
-    font-size: 22px;
-    min-width: 30px;
-    margin-right: 10px;
-    opacity: 0;
-    transition: all 0.3s ease;
-    color: var(--text);
-}
-
-.sidebar.active .nav-icon-bx {
-    opacity: 1;
-}
-
-.sidebar.active ul li a:hover .nav-icon-bx {
-    color: var(--bg);
-}
-
-/* Terminal mode - nav icons */
-body.terminal-mode .nav-icon-bx {
-    color: #138A36 !important;
-}
-
-body.terminal-mode .sidebar.active ul li a:hover .nav-icon-bx {
-    color: #0F0A0A !important;
-}
 
 
 @keyframes fadeIn{
