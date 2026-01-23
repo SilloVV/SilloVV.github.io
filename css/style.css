@@ -114,7 +114,6 @@ body.terminal-mode .hero-name h1#sillow {
 /* Conteneurs avec bordure verte (PAS le CV) */
 body.terminal-mode .hero-tag,
 body.terminal-mode .tech-tag,
-body.terminal-mode .project-card,
 body.terminal-mode #about-me {
     background: #0F0A0A !important;
     border: 1px solid #138A36 !important;
