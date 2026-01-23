@@ -247,6 +247,15 @@ const translations = {
         "resource-miromind-title": "Dr. MiroMind",
         "resource-miromind-desc": "Free agentic AI search for deep research queries",
         "resource-miromind-tag": "AI Research",
+        "resource-rayso-title": "Ray.so",
+        "resource-rayso-desc": "Create beautiful code screenshots for sharing and documentation",
+        "resource-rayso-tag": "Code Screenshots",
+        "resource-diagrams-title": "Draw.io",
+        "resource-diagrams-desc": "Create professional diagrams for architecture and workflows",
+        "resource-diagrams-tag": "Diagrams",
+
+        // Contact
+        "email-tooltip": "Click to copy",
 
         // Easter eggs
         "console-message": "Stop looking at my code! 👀",
@@ -549,6 +558,15 @@ const translations = {
         "resource-miromind-title": "Dr. MiroMind",
         "resource-miromind-desc": "Recherche IA agentique gratuite pour requêtes approfondies",
         "resource-miromind-tag": "Recherche IA",
+        "resource-rayso-title": "Ray.so",
+        "resource-rayso-desc": "Créez de beaux screenshots de code pour partage et documentation",
+        "resource-rayso-tag": "Screenshots Code",
+        "resource-diagrams-title": "Draw.io",
+        "resource-diagrams-desc": "Créez des diagrammes professionnels pour architecture et workflows",
+        "resource-diagrams-tag": "Diagrammes",
+
+        // Contact
+        "email-tooltip": "Cliquer pour copier",
 
         // Easter eggs
         "console-message": "Arrête de regarder mon code ! 👀",
@@ -990,6 +1008,9 @@ function applyTranslations() {
 
     const contactEmail = document.querySelector('.email-method h3');
     if (contactEmail) contactEmail.textContent = t['contact-email'];
+
+    const emailTooltip = document.getElementById('email-tooltip');
+    if (emailTooltip) emailTooltip.textContent = t['email-tooltip'];
 
     const contactFooter = document.querySelector('.contact-footer p');
     if (contactFooter) contactFooter.textContent = ' ' + t['contact-footer'];

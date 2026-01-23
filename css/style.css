@@ -2114,6 +2114,14 @@ body.terminal-mode .download-btn-fixed:hover .cv-download-icon {
     align-items: center;
     justify-content: center;
     border: 1px dashed rgba(51, 51, 51, 0.2);
+    overflow: hidden;
+}
+
+.project-second-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
 }
 
 .image-placeholder {
