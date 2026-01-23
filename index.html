@@ -646,9 +646,10 @@
                         <div class="mail-container">
                             <div class="mail" onclick="copyEmail()">
                                 wnakib21@gmail.com
+                                <div class="tooltip">Click to copy</div>
                             </div>
                             <button class="copy-btn" onclick="copyEmail()" title="Copy email">
-                                <i class="bx bx-copy"></i>
+                                <img src="assets/icons/copy.svg" alt="Copy" class="copy-icon">
                             </button>
                         </div>
                     </div>
@@ -729,7 +730,7 @@
         <div class="resources-grid">
             <a href="https://roadmap.sh/" target="_blank" class="resource-card" data-resource="roadmap">
                 <div class="resource-icon">
-                    <i class='bx bx-map-alt'></i>
+                    <img src="assets/icons/map_logo.svg" alt="Roadmap" class="resource-icon-img">
                 </div>
                 <div class="resource-content">
                     <h3>Roadmap.sh</h3>
@@ -740,7 +741,7 @@
             </a>
             <a href="https://blog.stephane-robert.info/docs/" target="_blank" class="resource-card" data-resource="stephane">
                 <div class="resource-icon">
-                    <i class='bx bx-shield-quarter'></i>
+                    <img src="assets/icons/blog_logo.svg" alt="Blog" class="resource-icon-img">
                 </div>
                 <div class="resource-content">
                     <h3>Stéphane Robert Blog</h3>
@@ -751,7 +752,7 @@
             </a>
             <a href="https://easyfreeresume.com/templates" target="_blank" class="resource-card" data-resource="resume">
                 <div class="resource-icon">
-                    <i class='bx bx-file'></i>
+                    <img src="assets/icons/resume_download.svg" alt="Resume" class="resource-icon-img">
                 </div>
                 <div class="resource-content">
                     <h3>Easy Free Resume</h3>
@@ -762,7 +763,7 @@
             </a>
             <a href="https://www.wolframalpha.com/" target="_blank" class="resource-card" data-resource="wolfram">
                 <div class="resource-icon">
-                    <i class='bx bx-calculator'></i>
+                    <img src="assets/icons/calculus_logo.svg" alt="Calculator" class="resource-icon-img">
                 </div>
                 <div class="resource-content">
                     <h3>Wolfram Alpha</h3>
@@ -789,7 +790,7 @@
         <div class="resources-grid">
             <a href="https://jsoncrack.com/" target="_blank" class="resource-card" data-resource="jsoncrack">
                 <div class="resource-icon">
-                    <i class='bx bx-code-curly'></i>
+                    <img src="assets/icons/json_logo.svg" alt="JSON" class="resource-icon-img">
                 </div>
                 <div class="resource-content">
                     <h3>JSON Crack</h3>
@@ -838,7 +839,7 @@
         <div class="resources-grid">
             <a href="https://tinywow.com/tools/pdf" target="_blank" class="resource-card" data-resource="tinywow">
                 <div class="resource-icon">
-                    <i class='bx bxs-file-pdf'></i>
+                    <img src="assets/icons/pdf.svg" alt="PDF" class="resource-icon-img">
                 </div>
                 <div class="resource-content">
                     <h3>TinyWow</h3>
@@ -860,7 +861,7 @@
             </a>
             <a href="https://snapdrop.net/" target="_blank" class="resource-card" data-resource="snapdrop">
                 <div class="resource-icon">
-                    <i class='bx bx-share-alt'></i>
+                    <img src="assets/icons/share.svg" alt="Share" class="resource-icon-img">
                 </div>
                 <div class="resource-content">
                     <h3>Snapdrop</h3>
@@ -904,7 +905,7 @@
             </a>
             <a href="https://bitwarden.com/" target="_blank" class="resource-card" data-resource="bitwarden">
                 <div class="resource-icon">
-                    <i class='bx bx-key'></i>
+                    <img src="assets/icons/security.svg" alt="Security" class="resource-icon-img">
                 </div>
                 <div class="resource-content">
                     <h3>Bitwarden</h3>
@@ -931,7 +932,7 @@
             </a>
             <a href="https://coolors.co/" target="_blank" class="resource-card" data-resource="coolors">
                 <div class="resource-icon">
-                    <i class='bx bx-palette'></i>
+                    <img src="assets/icons/colors.svg" alt="Colors" class="resource-icon-img">
                 </div>
                 <div class="resource-content">
                     <h3>Coolors</h3>
@@ -998,36 +999,42 @@
         <ul>
             <li>
                 <a onclick="show_about()">
+                    <i class='bx bx-user nav-icon-bx'></i>
                     <span class="nav-item"> About me</span>
                 </a>
 
             </li>
             <li>
                 <a onclick="show_cv()">
+                    <i class='bx bx-file nav-icon-bx'></i>
                     <span class="nav-item"> Curriculum</span>
                 </a>
 
             </li>
             <li>
                 <a onclick="show_projects()">
+                    <i class='bx bx-code-alt nav-icon-bx'></i>
                     <span class="nav-item">Projects</span>
                 </a>
 
             </li>
             <li>
                 <a onclick="show_resources()">
+                    <i class='bx bx-link nav-icon-bx'></i>
                     <span class="nav-item">Resources</span>
                 </a>
 
             </li>
             <li>
                 <a onclick="show_contact()">
+                    <i class='bx bx-envelope nav-icon-bx'></i>
                     <span class="nav-item">Contact</span>
                 </a>
 
             </li>
             <li>
                 <a onclick="show_chat()">
+                    <i class='bx bx-chat nav-icon-bx'></i>
                     <span class="nav-item">Chat with me!</span>
                 </a>
 

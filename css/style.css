@@ -774,6 +774,33 @@ h1, h2, h5, p{
     animation: fadeIn 2s forwards;
 }
 
+/* Navigation icons */
+.nav-icon-bx {
+    font-size: 22px;
+    min-width: 30px;
+    margin-right: 10px;
+    opacity: 0;
+    transition: all 0.3s ease;
+    color: var(--text);
+}
+
+.sidebar.active .nav-icon-bx {
+    opacity: 1;
+}
+
+.sidebar.active ul li a:hover .nav-icon-bx {
+    color: var(--bg);
+}
+
+/* Terminal mode - nav icons */
+body.terminal-mode .nav-icon-bx {
+    color: #138A36 !important;
+}
+
+body.terminal-mode .sidebar.active ul li a:hover .nav-icon-bx {
+    color: #0F0A0A !important;
+}
+
 
 @keyframes fadeIn{
     0%{
@@ -1825,6 +1852,11 @@ h1, h2, h5, p{
     right: 30px;
 }
 
+#closeb-resources {
+    top: 15px;
+    right: 30px;
+}
+
 .closeb:hover {
     background: var(--bg-alt);
     color: var(--bg);
@@ -2382,6 +2414,7 @@ h1, h2, h5, p{
     align-items: center;
     gap: 12px;
     justify-content: center;
+    position: relative;
 }
 
 .mail {
@@ -2396,12 +2429,52 @@ h1, h2, h5, p{
     letter-spacing: 0.5px;
     transition: all 0.3s ease;
     cursor: pointer;
+    position: relative;
 }
 
 .mail:hover {
     background: rgba(255,255,255,0.3);
-    transform: translateY(-2px);
+    transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.mail .tooltip {
+    position: absolute;
+    top: -45px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg-alt);
+    color: var(--bg);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+    z-index: 9999;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+    pointer-events: none;
+}
+
+.mail .tooltip::before {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid var(--bg-alt);
+}
+
+.mail:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+    top: -50px;
 }
 
 .copy-btn {
@@ -2422,12 +2495,28 @@ h1, h2, h5, p{
 
 .copy-btn:hover {
     background: rgba(255,255,255,0.4);
-    transform: translateY(-2px) scale(1.05);
+    transform: translateY(-3px) scale(1.05);
     box-shadow: 0 5px 15px rgba(0,0,0,0.15);
 }
 
 .copy-btn:active {
     transform: translateY(0) scale(0.95);
+}
+
+.copy-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    filter: brightness(0) saturate(100%);
+    transition: all 0.3s ease;
+}
+
+.copy-btn:hover .copy-icon {
+    transform: scale(1.1);
+}
+
+body.terminal-mode .copy-icon {
+    filter: brightness(0) saturate(100%) invert(36%) sepia(89%) saturate(412%) hue-rotate(95deg) brightness(95%) contrast(92%);
 }
 
 /* Section Malt Freelance */
@@ -2588,6 +2677,17 @@ h1, h2, h5, p{
 .resource-icon i {
     font-size: 24px;
     color: var(--bg);
+}
+
+.resource-icon-img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+}
+
+body.terminal-mode .resource-icon-img {
+    filter: brightness(0) saturate(100%) invert(36%) sepia(89%) saturate(412%) hue-rotate(95deg) brightness(95%) contrast(92%);
 }
 
 .resource-content {
@@ -2870,6 +2970,18 @@ h1, h2, h5, p{
 .dont-click-btn:hover {
     box-shadow: 0 6px 20px rgba(51, 51, 51, 0.25);
     background: var(--bg-alt2);
+}
+
+/* Terminal mode - dont-click-btn */
+body.terminal-mode .dont-click-btn {
+    background: #0F0A0A !important;
+    color: #138A36 !important;
+    border-color: #138A36 !important;
+}
+
+body.terminal-mode .dont-click-btn:hover {
+    background: #138A36 !important;
+    color: #0F0A0A !important;
 }
 
 .dont-click-btn.caught {
