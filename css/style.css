@@ -97,11 +97,18 @@ body.terminal-mode .animation-copyright {
 }
 
 /* Wassil NAKIB et SilloVV en vert - haute spécificité */
+/* Override du gradient text effect */
 body.terminal-mode #nom,
 body.terminal-mode #sillow,
 body.terminal-mode h1#nom,
-body.terminal-mode h1#sillow {
+body.terminal-mode h1#sillow,
+body.terminal-mode .hero-name h1#nom,
+body.terminal-mode .hero-name h1#sillow {
     color: #138A36 !important;
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
+    -webkit-text-fill-color: #138A36 !important;
 }
 
 /* Conteneurs avec bordure verte */
@@ -140,20 +147,33 @@ body.terminal-mode .bx-menu {
     color: #138A36 !important;
 }
 
-/* Images de ressources visibles */
+/* Images de ressources et contacts visibles */
 body.terminal-mode .resource-card img,
 body.terminal-mode .contact-icon img {
     filter: brightness(0) saturate(100%) invert(36%) sepia(89%) saturate(412%) hue-rotate(95deg) brightness(95%) contrast(92%);
 }
 
-/* Icônes boxicons dans les ressources - fond visible */
+/* Cartes de ressources en mode terminal */
+body.terminal-mode .resource-card {
+    background: #0F0A0A !important;
+    border: 1px solid #138A36 !important;
+}
+
+/* Icônes dans les ressources - fond noir, icône verte */
 body.terminal-mode .resource-icon {
-    background: rgba(19, 138, 54, 0.2) !important;
+    background: #0F0A0A !important;
     border: 1px solid #138A36 !important;
 }
 
 body.terminal-mode .resource-icon i {
     color: #138A36 !important;
+}
+
+/* Section ressources fond noir */
+body.terminal-mode #resources,
+body.terminal-mode .resources-grid,
+body.terminal-mode .resource-category {
+    background: #0F0A0A !important;
 }
 
 /* Icônes boxicons en vert */
