@@ -210,9 +210,10 @@ body.terminal-mode .contact-icon {
 }
 
 body.terminal-mode .contact-icon:hover {
-    transform: none !important;
+    transform: translateY(-3px) !important;
     background: #0F0A0A !important;
     border-color: #138A36 !important;
+    box-shadow: 0 5px 15px rgba(19, 138, 54, 0.2) !important;
 }
 
 body.terminal-mode .contact-icon::before,
