@@ -664,7 +664,7 @@ h1, h2, h5, p{
     position: relative;
     top: 0;
     left: 0;
-    height: 10Vh;
+    height: 6Vh;
     width:50px;
     background-color: var(--bg);
     opacity:0.9;
