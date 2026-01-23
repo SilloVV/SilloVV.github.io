@@ -129,8 +129,8 @@ const translations = {
         // Projects Section
         "projects-header-title": "My Projects",
         "projects-header-subtitle": "Discover my technical achievements",
-        "projects-ai-title": "🤖 Artificial Intelligence & MLOps",
-        "projects-devops-title": "⚙️ DevOps & Infrastructure",
+        "projects-ai-title": " AI & MLOps",
+        "projects-devops-title": " DevOps & Infrastructure",
 
         // Project Cards
         "project-jira-title": "Jira Ticket Classifier",
@@ -380,8 +380,8 @@ const translations = {
         // Projects Section
         "projects-header-title": "Mes Projets",
         "projects-header-subtitle": "Découvrez mes réalisations techniques",
-        "projects-ai-title": "🤖 Intelligence Artificielle & MLOps",
-        "projects-devops-title": "⚙️ DevOps & Infrastructure",
+        "projects-ai-title": " IA & MLOps",
+        "projects-devops-title": " DevOps & Infrastructure",
 
         // Project Cards
         "project-jira-title": "Classifieur de Tickets Jira",

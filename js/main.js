@@ -63,7 +63,6 @@ class PageManager {
     init() {
         // Handle sidebar button with animation
         this.btn.onclick = () => {
-            console.log('Button clicked, currentPage:', this.currentPage);
             if (this.currentPage) {
                 // If a page is open, close it first
                 this.hidePage(this.currentPage);

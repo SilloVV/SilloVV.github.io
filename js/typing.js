@@ -249,6 +249,7 @@ function transitionToHero() {
     const loadingScreen = document.getElementById('loading-screen');
     const hero = document.getElementById('hero');
     const langToggle = document.querySelector('.lang-toggle');
+    const termToggle = document.querySelector('.term-toggle');
     const sidebar = document.querySelector('.sidebar');
     const heroTitle = document.querySelector('.hero-title p');
 
@@ -271,6 +272,11 @@ function transitionToHero() {
         // Show language toggle
         if (langToggle) {
             langToggle.style.display = '';
+        }
+
+        // Show terminal toggle
+        if (termToggle) {
+            termToggle.style.display = '';
         }
 
         // Show sidebar with fade

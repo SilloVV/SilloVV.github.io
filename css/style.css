@@ -76,7 +76,10 @@ body.terminal-mode * {
     cursor: crosshair !important;
 }
 
+/* Texte en vert */
 body.terminal-mode .hero-name h1,
+body.terminal-mode .hero-name #nom,
+body.terminal-mode .hero-name #sillow,
 body.terminal-mode .hero-title p,
 body.terminal-mode .hero-greeting h5,
 body.terminal-mode .cv-name,
@@ -85,13 +88,17 @@ body.terminal-mode h1, body.terminal-mode h2,
 body.terminal-mode h3, body.terminal-mode h4,
 body.terminal-mode h5, body.terminal-mode p,
 body.terminal-mode span, body.terminal-mode a,
+body.terminal-mode li,
 body.terminal-mode .project-content h3,
 body.terminal-mode .project-content p,
 body.terminal-mode .contact-title,
-body.terminal-mode .about-text {
+body.terminal-mode .about-text,
+body.terminal-mode .nav-item,
+body.terminal-mode .animation-copyright {
     color: #138A36 !important;
 }
 
+/* Conteneurs avec bordure verte */
 body.terminal-mode .hero-tag,
 body.terminal-mode .tech-tag,
 body.terminal-mode .project-card,
@@ -102,10 +109,46 @@ body.terminal-mode #about-me {
     border: 1px solid #138A36 !important;
 }
 
+/* Boutons TERM et FR/ENG - texte noir sur fond vert */
 body.terminal-mode .lang-toggle,
 body.terminal-mode .term-toggle {
     background: #138A36 !important;
     color: #0F0A0A !important;
+    border: 2px solid #0F0A0A !important;
+}
+
+body.terminal-mode .lang-toggle span,
+body.terminal-mode .term-toggle span {
+    color: #0F0A0A !important;
+}
+
+/* Animation/dessin en vert - filtre pour convertir le noir en vert */
+body.terminal-mode #hero__animation__img {
+    filter: brightness(0) saturate(100%) invert(36%) sepia(89%) saturate(412%) hue-rotate(95deg) brightness(95%) contrast(92%);
+}
+
+/* Logo menu visible en vert */
+body.terminal-mode #btn img,
+body.terminal-mode .sidebar img,
+body.terminal-mode #btn svg {
+    filter: brightness(0) saturate(100%) invert(36%) sepia(89%) saturate(412%) hue-rotate(95deg) brightness(95%) contrast(92%);
+}
+
+/* Images de ressources visibles */
+body.terminal-mode .resource-card img,
+body.terminal-mode .resource-icon i,
+body.terminal-mode .contact-icon img {
+    filter: brightness(0) saturate(100%) invert(36%) sepia(89%) saturate(412%) hue-rotate(95deg) brightness(95%) contrast(92%);
+}
+
+/* Icônes boxicons en vert */
+body.terminal-mode i.bx {
+    color: #138A36 !important;
+}
+
+/* Sidebar en mode terminal */
+body.terminal-mode .sidebar {
+    background: #0F0A0A !important;
     border: 1px solid #138A36 !important;
 }
 
