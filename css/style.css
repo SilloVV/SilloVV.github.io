@@ -74,6 +74,7 @@ body.terminal-mode * {
     border-radius: 0 !important;
     font-family: 'JetBrains Mono', monospace !important;
     cursor: crosshair !important;
+    box-shadow: none !important;
 }
 
 /* Texte en vert */
@@ -97,7 +98,6 @@ body.terminal-mode .animation-copyright {
 }
 
 /* Wassil NAKIB et SilloVV en vert - haute spécificité */
-/* Override du gradient text effect */
 body.terminal-mode #nom,
 body.terminal-mode #sillow,
 body.terminal-mode h1#nom,
@@ -115,10 +115,9 @@ body.terminal-mode .hero-name h1#sillow {
 body.terminal-mode .hero-tag,
 body.terminal-mode .tech-tag,
 body.terminal-mode .project-card,
-body.terminal-mode .contact-content,
 body.terminal-mode .cv-container,
 body.terminal-mode #about-me {
-    background: rgba(19, 138, 54, 0.1) !important;
+    background: #0F0A0A !important;
     border: 1px solid #138A36 !important;
 }
 
@@ -135,50 +134,76 @@ body.terminal-mode .term-toggle span {
     color: #0F0A0A !important;
 }
 
-/* Animation/dessin en vert - filtre pour convertir le noir en vert */
+/* Animation/dessin en vert */
 body.terminal-mode #hero__animation__img {
     filter: brightness(0) saturate(100%) invert(36%) sepia(89%) saturate(412%) hue-rotate(95deg) brightness(95%) contrast(92%);
 }
 
-/* Logo menu (#btn est une icône bx-menu) en vert */
+/* Logo menu (#btn) et toutes les icônes boxicons en vert */
 body.terminal-mode #btn,
 body.terminal-mode i#btn,
-body.terminal-mode .bx-menu {
+body.terminal-mode .bx-menu,
+body.terminal-mode i.bx,
+body.terminal-mode .bx {
     color: #138A36 !important;
 }
 
-/* Images de ressources et contacts visibles */
-body.terminal-mode .resource-card img,
-body.terminal-mode .contact-icon img {
-    filter: brightness(0) saturate(100%) invert(36%) sepia(89%) saturate(412%) hue-rotate(95deg) brightness(95%) contrast(92%);
-}
-
-/* Cartes de ressources en mode terminal */
-body.terminal-mode .resource-card {
-    background: #0F0A0A !important;
-    border: 1px solid #138A36 !important;
-}
-
-/* Icônes dans les ressources - fond noir, icône verte */
-body.terminal-mode .resource-icon {
-    background: #0F0A0A !important;
-    border: 1px solid #138A36 !important;
-}
-
-body.terminal-mode .resource-icon i {
-    color: #138A36 !important;
-}
-
-/* Section ressources fond noir */
+/* Section ressources */
 body.terminal-mode #resources,
 body.terminal-mode .resources-grid,
 body.terminal-mode .resource-category {
     background: #0F0A0A !important;
 }
 
-/* Icônes boxicons en vert */
-body.terminal-mode i.bx {
+body.terminal-mode .resource-card {
+    background: #0F0A0A !important;
+    border: 1px solid #138A36 !important;
+}
+
+body.terminal-mode .resource-icon {
+    background: transparent !important;
+    border: 1px solid #138A36 !important;
+}
+
+body.terminal-mode .resource-icon i.bx {
     color: #138A36 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Section Contact - fond noir, pas d'ombres */
+body.terminal-mode #contact-section,
+body.terminal-mode .contact-content,
+body.terminal-mode .contact-method,
+body.terminal-mode .social-method,
+body.terminal-mode .email-method,
+body.terminal-mode .method-content {
+    background: #0F0A0A !important;
+    border: 1px solid #138A36 !important;
+}
+
+/* Icônes de contact */
+body.terminal-mode .contact-icon {
+    background: #0F0A0A !important;
+    border: 1px solid #138A36 !important;
+}
+
+body.terminal-mode .contact-icon img {
+    filter: brightness(0) saturate(100%) invert(36%) sepia(89%) saturate(412%) hue-rotate(95deg) brightness(95%) contrast(92%);
+}
+
+/* Section Email */
+body.terminal-mode .mail-container,
+body.terminal-mode .mail,
+body.terminal-mode .copy-btn {
+    background: #0F0A0A !important;
+    border: 1px solid #138A36 !important;
+    color: #138A36 !important;
+}
+
+body.terminal-mode .mail::before,
+body.terminal-mode .mail::after {
+    display: none !important;
 }
 
 /* Sidebar en mode terminal */
