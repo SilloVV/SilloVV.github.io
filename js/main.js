@@ -607,43 +607,25 @@ function updateHeroNameClipPath() {
 
 updateHeroNameClipPath();
 
-// Project management
+// redirection au clic
 document.addEventListener('DOMContentLoaded', () => {
-    const projectCards = document.querySelectorAll('.project-card[data-preview]');
-    const overlay = document.getElementById('preview-overlay');
+    // Sélectionne toutes les cartes qui ont un lien défini
+    const projectCards = document.querySelectorAll('.project-card[data-url]');
     
     projectCards.forEach(card => {
-        const previewId = card.getAttribute('data-preview');
-        const previewElement = document.getElementById(`preview-${previewId}`);
-        
-        if (previewElement) {
-            // Show preview on click/touch
-            const showPreview = (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                // Show blur overlay
-                if (overlay) {
-                    overlay.style.opacity = '1';
-                    overlay.style.visibility = 'visible';
-                }
-                
-                // Show preview
-                previewElement.style.opacity = '1';
-                previewElement.style.visibility = 'visible';
-                
-                // Hide project section close button
-                const projectCloseBtn = document.getElementById('closeb-projects');
-                if (projectCloseBtn) {
-                    projectCloseBtn.style.display = 'none';
-                }
-            };
+        card.addEventListener('click', (e) => {
+            // Empêche la propagation si tu as d'autres éléments interactifs dedans
+            e.preventDefault(); 
             
-            // Touch and mouse support
-            card.addEventListener('click', showPreview);
-            card.addEventListener('touchstart', showPreview);
-        }
+            const url = card.getAttribute('data-url');
+            
+            // Ouvre dans un nouvel onglet
+            if (url) {
+                window.open(url, '_blank');
+            }
+        });
     });
+});
     
     
     
