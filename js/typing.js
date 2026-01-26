@@ -165,10 +165,6 @@ async function animateLoadingScreen() {
     const helloEl = document.getElementById('loading-hello');
     const nameEl = document.getElementById('loading-name-text');
     const titleEl = document.getElementById('loading-title-text');
-    const tag1 = document.getElementById('loading-tag-1');
-    const tag2 = document.getElementById('loading-tag-2');
-    const tag3 = document.getElementById('loading-tag-3');
-    const cursor = document.getElementById('typing-cursor');
 
     if (!loadingScreen || !helloEl || !nameEl || !titleEl) {
         // If elements don't exist, just show the main content
@@ -183,17 +179,9 @@ async function animateLoadingScreen() {
     const greetingText = savedLang === 'fr' ? 'Bonjour, je suis' : 'Hi, I\'m';
     const nameText = 'Wassil NAKIB';
     const titleText = savedLang === 'fr' ? 'Ingénieur DevOps et IA' : 'DevOps and AI Engineer';
-    const tags = [
-        savedLang === 'fr' ? 'Intelligence Artificielle (GenAI/ML)' : 'Artificial Intelligence (GenAI/ML)',
-        'DevOps & Infrastructure',
-        'Python, Bash, Java'
-    ];
 
     // Store title text for hero transition
     window.loadingTitleText = titleText;
-
-    // Show cursor
-    if (cursor) cursor.style.display = 'inline-block';
 
     // Small initial delay
     updateProgress(5);
@@ -212,27 +200,8 @@ async function animateLoadingScreen() {
     await new Promise(r => setTimeout(r, 130));
 
     // Type title (keep cursor here)
-    updateProgress(60);
+    updateProgress(70);
     await typeLoadingText(titleEl, titleText, 22, true);
-    updateProgress(75);
-    await new Promise(r => setTimeout(r, 150));
-
-    // Hide cursor before showing tags
-    if (cursor) cursor.style.display = 'none';
-
-    // Show tags one by one
-    tag1.textContent = tags[0];
-    tag1.classList.add('visible');
-    updateProgress(82);
-    await new Promise(r => setTimeout(r, 100));
-
-    tag2.textContent = tags[1];
-    tag2.classList.add('visible');
-    updateProgress(89);
-    await new Promise(r => setTimeout(r, 100));
-
-    tag3.textContent = tags[2];
-    tag3.classList.add('visible');
     updateProgress(95);
 
     // Brief pause before transition
