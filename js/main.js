@@ -607,7 +607,7 @@ function updateHeroNameClipPath() {
 
 updateHeroNameClipPath();
 
-// Project preview management
+// Project management
 document.addEventListener('DOMContentLoaded', () => {
     const projectCards = document.querySelectorAll('.project-card[data-preview]');
     const overlay = document.getElementById('preview-overlay');
