@@ -648,7 +648,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     });
-});
+
 
 // Function to close project previews
 function closeProjectPreview(previewId) {
