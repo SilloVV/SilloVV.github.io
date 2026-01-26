@@ -182,13 +182,23 @@ class PageManager {
         
         document.getElementById('hero').style.display = '';
         this.currentPage = null;
-        
+
         // Remove class to indicate we're on the home page
         document.body.classList.remove('page-open');
-        
-        // Show menu logo and sidebar again
-        this.showMenuLogo();
-        this.sidebar.style.display = '';
+
+        // If terminal mode is active, show overlay instead of sidebar
+        if (document.body.classList.contains('terminal-mode')) {
+            const overlay = document.getElementById('terminal-overlay');
+            if (overlay) overlay.style.display = 'flex';
+            this.sidebar.style.display = 'none';
+            termSelectedIndex = -1;
+            updateTermSelection();
+            startCursorHideTimer();
+        } else {
+            // Show menu logo and sidebar again
+            this.showMenuLogo();
+            this.sidebar.style.display = '';
+        }
         
         // Don't automatically reactivate animation to avoid back-and-forth
     }
@@ -275,14 +285,6 @@ function closeCurrentSection() {
         updateSectionItemSelection();
 
         pageManager.hidePage(pageManager.currentPage);
-
-        // If terminal mode is active, show overlay and hide sidebar again
-        if (document.body.classList.contains('terminal-mode')) {
-            const overlay = document.getElementById('terminal-overlay');
-            const sidebar = document.querySelector('.sidebar');
-            if (overlay) overlay.style.display = 'flex';
-            if (sidebar) sidebar.style.display = 'none';
-        }
     }
 }
 
@@ -838,19 +840,16 @@ function toggleTerminalMode() {
 
     const overlay = document.getElementById('terminal-overlay');
     const sidebar = document.querySelector('.sidebar');
-
     const termArrow = document.querySelector('.term-shortcut-arrow');
+    const hasOpenPage = pageManager && pageManager.currentPage;
 
-    if (isEntering) {
-        // Entering TERM mode
+    if (hasOpenPage) {
+        // A section is open: just toggle terminal styling, don't show overlay
+        if (termArrow) termArrow.style.display = isEntering ? 'none' : '';
+    } else if (isEntering) {
+        // No section open, entering TERM mode: show overlay
         termSelectedIndex = -1;
 
-        // Close any open section first (this restores sidebar)
-        if (pageManager && pageManager.currentPage) {
-            pageManager.hidePage(pageManager.currentPage);
-        }
-
-        // Then show overlay and hide sidebar
         if (overlay) overlay.style.display = 'flex';
         if (sidebar) sidebar.style.display = 'none';
         if (termArrow) termArrow.style.display = 'none';
@@ -858,7 +857,7 @@ function toggleTerminalMode() {
         updateTermSelection();
         startCursorHideTimer();
     } else {
-        // Exiting TERM mode
+        // No section open, exiting TERM mode: hide overlay
         if (overlay) overlay.style.display = 'none';
         if (sidebar) sidebar.style.display = '';
         if (termArrow) termArrow.style.display = '';
