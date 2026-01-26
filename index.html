@@ -70,8 +70,51 @@
     </div>
 
     <!-- Terminal Mode Toggle Button -->
-    <div class="term-toggle" onclick="toggleTerminalMode()" style="display: none;">
+    <div class="term-toggle" onclick="toggleTerminalMode()" style="display: none;" title="Shift + T">
         <span>TERM</span>
+    </div>
+
+    <!-- Terminal Overlay -->
+    <div id="terminal-overlay" style="display: none;">
+        <div class="term-header">
+            <span data-translate="term-ls-header">$ ls -a</span>
+        </div>
+        <div class="term-menu">
+            <div class="term-item" data-index="0">
+                <span class="term-perm">drwxr-xr-x</span>
+                <span class="term-name">about-me/</span>
+            </div>
+            <div class="term-item" data-index="1">
+                <span class="term-perm">drwxr-xr-x</span>
+                <span class="term-name">curriculum/</span>
+            </div>
+            <div class="term-item" data-index="2">
+                <span class="term-perm">drwxr-xr-x</span>
+                <span class="term-name">projects/</span>
+            </div>
+            <div class="term-item" data-index="3">
+                <span class="term-perm">drwxr-xr-x</span>
+                <span class="term-name">resources/</span>
+            </div>
+            <div class="term-item" data-index="4">
+                <span class="term-perm">drwxr-xr-x</span>
+                <span class="term-name">contact/</span>
+            </div>
+            <div class="term-item" data-index="5">
+                <span class="term-perm">drwxr-xr-x</span>
+                <span class="term-name">chat/</span>
+            </div>
+        </div>
+        <div class="term-prompt">
+            <span>$ cd </span><span id="term-prompt-target">_</span><span class="term-cursor">|</span>
+        </div>
+        <div class="term-bottom-bar">
+            <span data-translate="term-press-tab">Press Tab to choose</span>
+            <span class="term-separator">|</span>
+            <span data-translate="term-enter-go">Enter to go</span>
+            <span class="term-separator">|</span>
+            <span data-translate="term-esc-exit">Esc to Exit</span>
+        </div>
     </div>
 
     <div id="hero" style="display: none;">

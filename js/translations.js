@@ -299,6 +299,13 @@ const translations = {
         "resource-trustgame-desc": "Interactive guide to game theory and why we trust or distrust each other",
         "resource-trustgame-tag": "Game Theory",
 
+        // Terminal overlay
+        "term-ls-header": "$ ls -a",
+        "term-press-tab": "Press Tab to choose",
+        "term-enter-go": "Enter to go",
+        "term-esc-exit": "Esc to Exit",
+        "term-shortcut": "Shift + T",
+
         // Contact
         "email-tooltip": "Click to copy",
 
@@ -654,6 +661,13 @@ const translations = {
         "resource-trustgame-title": "L'Évolution de la Confiance",
         "resource-trustgame-desc": "Guide interactif sur la théorie des jeux et pourquoi on se fait confiance ou non",
         "resource-trustgame-tag": "Théorie des jeux",
+
+        // Terminal overlay
+        "term-ls-header": "$ ls -a",
+        "term-press-tab": "Appuyez sur Tab pour choisir",
+        "term-enter-go": "Entr\u00e9e pour aller",
+        "term-esc-exit": "Esc pour quitter",
+        "term-shortcut": "Shift + T",
 
         // Contact
         "email-tooltip": "Cliquer pour copier",
@@ -1173,6 +1187,15 @@ function applyTranslations() {
         const key = title.getAttribute('data-translate');
         if (key && t[key]) {
             title.textContent = t[key];
+        }
+    });
+
+    // Terminal overlay
+    const termTranslatable = document.querySelectorAll('#terminal-overlay [data-translate]');
+    termTranslatable.forEach(el => {
+        const key = el.getAttribute('data-translate');
+        if (key && t[key]) {
+            el.textContent = t[key];
         }
     });
 

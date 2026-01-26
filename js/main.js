@@ -271,6 +271,14 @@ function show_resources() {
 function closeCurrentSection() {
     if (pageManager && pageManager.currentPage) {
         pageManager.hidePage(pageManager.currentPage);
+
+        // If terminal mode is active, show overlay and hide sidebar again
+        if (document.body.classList.contains('terminal-mode')) {
+            const overlay = document.getElementById('terminal-overlay');
+            const sidebar = document.querySelector('.sidebar');
+            if (overlay) overlay.style.display = 'flex';
+            if (sidebar) sidebar.style.display = 'none';
+        }
     }
 }
 
@@ -808,17 +816,185 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ============== TERMINAL MODE TOGGLE ==============
+let termSelectedIndex = -1;
+let cursorHideTimeout = null;
+
+const termMenuItems = [
+    { name: 'about-me/', fn: show_about },
+    { name: 'curriculum/', fn: show_cv },
+    { name: 'projects/', fn: show_projects },
+    { name: 'resources/', fn: show_resources },
+    { name: 'contact/', fn: show_contact },
+    { name: 'chat/', fn: show_chat }
+];
+
 function toggleTerminalMode() {
+    const isEntering = !document.body.classList.contains('terminal-mode');
     document.body.classList.toggle('terminal-mode');
 
-    // Save preference to localStorage
-    const isTerminalMode = document.body.classList.contains('terminal-mode');
-    localStorage.setItem('terminal-mode', isTerminalMode ? 'enabled' : 'disabled');
+    const overlay = document.getElementById('terminal-overlay');
+    const sidebar = document.querySelector('.sidebar');
+
+    if (isEntering) {
+        // Entering TERM mode
+        termSelectedIndex = -1;
+
+        // Close any open section first (this restores sidebar)
+        if (pageManager && pageManager.currentPage) {
+            pageManager.hidePage(pageManager.currentPage);
+        }
+
+        // Then show overlay and hide sidebar
+        if (overlay) overlay.style.display = 'flex';
+        if (sidebar) sidebar.style.display = 'none';
+
+        updateTermSelection();
+        startCursorHideTimer();
+    } else {
+        // Exiting TERM mode
+        if (overlay) overlay.style.display = 'none';
+        if (sidebar) sidebar.style.display = '';
+        stopCursorHideTimer();
+        document.body.classList.remove('cursor-hidden');
+    }
+
+    localStorage.setItem('terminal-mode', isEntering ? 'enabled' : 'disabled');
 }
 
-// Terminal mode is NOT loaded automatically on page load
-// User must manually click the TERM button to enable it each session
-// (removed automatic loading from localStorage)
+function updateTermSelection() {
+    const items = document.querySelectorAll('#terminal-overlay .term-item');
+    const promptTarget = document.getElementById('term-prompt-target');
+
+    items.forEach((item, i) => {
+        if (i === termSelectedIndex) {
+            item.classList.add('selected');
+        } else {
+            item.classList.remove('selected');
+        }
+    });
+
+    if (promptTarget) {
+        if (termSelectedIndex >= 0 && termSelectedIndex < termMenuItems.length) {
+            promptTarget.textContent = termMenuItems[termSelectedIndex].name;
+        } else {
+            promptTarget.textContent = '_';
+        }
+    }
+}
+
+function termNavigate() {
+    if (termSelectedIndex >= 0 && termSelectedIndex < termMenuItems.length) {
+        const overlay = document.getElementById('terminal-overlay');
+        if (overlay) overlay.style.display = 'none';
+
+        // Keep terminal-mode class active but hide overlay
+        termMenuItems[termSelectedIndex].fn();
+    }
+}
+
+// Cursor hide on idle (only in terminal mode)
+function startCursorHideTimer() {
+    stopCursorHideTimer();
+    cursorHideTimeout = setTimeout(() => {
+        if (document.body.classList.contains('terminal-mode')) {
+            document.body.classList.add('cursor-hidden');
+        }
+    }, 2000);
+}
+
+function stopCursorHideTimer() {
+    if (cursorHideTimeout) {
+        clearTimeout(cursorHideTimeout);
+        cursorHideTimeout = null;
+    }
+}
+
+// Mouse move listener for cursor-hidden reset
+window.addEventListener('mousemove', () => {
+    if (document.body.classList.contains('terminal-mode')) {
+        document.body.classList.remove('cursor-hidden');
+        startCursorHideTimer();
+    }
+});
+
+// ============== KEYBOARD SHORTCUTS ==============
+document.addEventListener('keydown', (e) => {
+    // Ignore if typing in input/textarea
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+    const isTermMode = document.body.classList.contains('terminal-mode');
+    const overlay = document.getElementById('terminal-overlay');
+    const overlayVisible = overlay && overlay.style.display !== 'none';
+
+    // Shift+T: Toggle TERM mode
+    if (e.key === 'T' && e.shiftKey && !e.ctrlKey && !e.altKey && !e.metaKey) {
+        e.preventDefault();
+        toggleTerminalMode();
+        return;
+    }
+
+    if (!isTermMode) return;
+
+    // When overlay is NOT visible (a section is open in TERM mode)
+    if (!overlayVisible) {
+        if (e.key === 'Escape' && pageManager && pageManager.currentPage) {
+            e.preventDefault();
+            closeCurrentSection();
+            return;
+        }
+        // Arrow keys / ZQSD for scrolling while viewing a section
+        const scrollAmt = 60;
+        if (e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') {
+            window.scrollBy(0, scrollAmt);
+        } else if (e.key === 'ArrowUp' || e.key === 'z' || e.key === 'Z') {
+            window.scrollBy(0, -scrollAmt);
+        } else if (e.key === 'ArrowLeft' || e.key === 'q' || e.key === 'Q') {
+            window.scrollBy(-scrollAmt, 0);
+        } else if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {
+            window.scrollBy(scrollAmt, 0);
+        }
+        return;
+    }
+
+    // From here on, overlay is visible
+    if (e.key === 'Tab') {
+        e.preventDefault();
+        if (e.shiftKey) {
+            // Shift+Tab: go backwards
+            termSelectedIndex--;
+            if (termSelectedIndex < 0) termSelectedIndex = termMenuItems.length - 1;
+        } else {
+            termSelectedIndex++;
+            if (termSelectedIndex >= termMenuItems.length) termSelectedIndex = 0;
+        }
+        updateTermSelection();
+        return;
+    }
+
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        termNavigate();
+        return;
+    }
+
+    if (e.key === 'Escape') {
+        e.preventDefault();
+        toggleTerminalMode();
+        return;
+    }
+
+    // Arrow keys / ZQSD for scrolling in TERM mode
+    const scrollAmount = 60;
+    if (e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') {
+        window.scrollBy(0, scrollAmount);
+    } else if (e.key === 'ArrowUp' || e.key === 'z' || e.key === 'Z') {
+        window.scrollBy(0, -scrollAmount);
+    } else if (e.key === 'ArrowLeft' || e.key === 'q' || e.key === 'Q') {
+        window.scrollBy(-scrollAmount, 0);
+    } else if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {
+        window.scrollBy(scrollAmount, 0);
+    }
+});
 
 // Preload reverse animation (simple placeholder function)
 function preloadReverseAnimation() {

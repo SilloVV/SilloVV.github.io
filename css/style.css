@@ -3665,3 +3665,152 @@ body:not(.page-open) .inverseur-circle {
     }
 }
 
+/* ============== TERMINAL OVERLAY ============== */
+
+/* Cursor hidden on idle in terminal mode */
+body.terminal-mode.cursor-hidden,
+body.terminal-mode.cursor-hidden * {
+    cursor: none !important;
+}
+
+/* Terminal overlay container */
+#terminal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #0F0A0A;
+    z-index: 100000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0 15vw;
+    font-family: 'JetBrains Mono', monospace;
+    color: #138A36;
+    box-sizing: border-box;
+}
+
+/* Header: $ ls -a */
+#terminal-overlay .term-header {
+    font-size: 20px;
+    margin-bottom: 28px;
+    opacity: 0.7;
+}
+
+/* Menu items container */
+#terminal-overlay .term-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 36px;
+}
+
+/* Individual menu item */
+#terminal-overlay .term-item {
+    font-size: 18px;
+    padding: 6px 12px;
+    display: flex;
+    gap: 20px;
+    transition: all 0.15s ease;
+    border-left: 3px solid transparent;
+}
+
+/* Permission string (dim) */
+#terminal-overlay .term-perm {
+    opacity: 0.5;
+    user-select: none;
+}
+
+/* Directory name */
+#terminal-overlay .term-name {
+    color: #138A36;
+}
+
+/* Selected item */
+#terminal-overlay .term-item.selected {
+    background: rgba(19, 138, 54, 0.12);
+    border-left-color: #138A36;
+}
+
+#terminal-overlay .term-item.selected .term-name {
+    color: #2EE85A;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+#terminal-overlay .term-item.selected .term-perm {
+    opacity: 0.8;
+}
+
+/* Prompt line */
+#terminal-overlay .term-prompt {
+    font-size: 20px;
+    margin-bottom: 40px;
+}
+
+#terminal-overlay #term-prompt-target {
+    color: #2EE85A;
+}
+
+/* Blinking cursor */
+#terminal-overlay .term-cursor {
+    animation: termBlink 1s step-end infinite;
+    color: #138A36;
+    margin-left: 2px;
+}
+
+@keyframes termBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Bottom bar */
+#terminal-overlay .term-bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 14px 0;
+    text-align: center;
+    font-size: 13px;
+    background: #0a0707;
+    border-top: 1px solid rgba(19, 138, 54, 0.3);
+    color: #138A36;
+    opacity: 0.7;
+}
+
+#terminal-overlay .term-separator {
+    margin: 0 16px;
+    opacity: 0.4;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #terminal-overlay {
+        padding: 0 8vw;
+    }
+
+    #terminal-overlay .term-header {
+        font-size: 16px;
+    }
+
+    #terminal-overlay .term-item {
+        font-size: 14px;
+        gap: 12px;
+    }
+
+    #terminal-overlay .term-prompt {
+        font-size: 16px;
+    }
+
+    #terminal-overlay .term-bottom-bar {
+        font-size: 11px;
+    }
+
+    #terminal-overlay .term-separator {
+        margin: 0 8px;
+    }
+}
+
