@@ -511,7 +511,58 @@ const translations = {
         "project-cicd-detail-3": "<strong>Registre Artefacts:</strong> Artefacts JAR stockés dans registre artefacts GitLab",
         "project-cicd-detail-4": "<strong>Automatisation:</strong> Déclenché sur commits branche main ou création tags",
         "project-cicd-detail-5": "<strong>Impact:</strong> Processus déploiement rationalisé pour applications backend Java",
+        
+        // Project Detailed Descriptions - English
+        "project-jira-detail-title": "Technical Details:",
+        "project-jira-detail-1": "<strong>Fine-tuning:</strong> DistilBERT model using LoRA and PEFT for efficient incident classification",
+        "project-jira-detail-2": "<strong>Hybrid Cloud:</strong> Terraform IaC connecting AWS S3 and local resources via SQS for asynchronous processing",
+        "project-jira-detail-3": "<strong>CI/CD:</strong> Trunk-Based Development with FluxCD (GitOps), pre-commits, linters (Ruff, yamllint, TFLint)",
+        "project-jira-detail-4": "<strong>Tracking:</strong> MLFlow for experiment management and model lifecycle",
+        "project-jira-detail-5": "<strong>Impact:</strong> Production-grade MLOps pipeline following AWS Solutions Architect principles",
 
+        "project-unet-detail-title": "Technical Details:",
+        "project-unet-detail-1": "<strong>Model:</strong> U-Net CNN architecture for semantic segmentation on PascalVOC dataset",
+        "project-unet-detail-2": "<strong>Framework:</strong> PyTorch for model development and training",
+        "project-unet-detail-3": "<strong>Monitoring:</strong> TensorBoard for metrics tracking and visualization",
+        "project-unet-detail-4": "<strong>Deployment:</strong> ONNX format for model export and inference optimization",
+        "project-unet-detail-5": "<strong>Application:</strong> Precise object segmentation for computer vision tasks",
+
+        "project-steersim-detail-title": "Technical Details:",
+        "project-steersim-detail-1": "<strong>System Integration:</strong> ROS2 publish/subscribe architecture for vehicle telemetry and real-time control",
+        "project-steersim-detail-2": "<strong>Data Engineering:</strong> Multi-camera collector (3 POVs + steering metadata) with synchronized ROS2 topics",
+        "project-steersim-detail-3": "<strong>Distributed Training:</strong> Large-scale training on Slurm cluster with PyTorch, hyperparameter optimization",
+        "project-steersim-detail-4": "<strong>Monitoring:</strong> TensorBoard for Loss and F1-Score tracking, custom \"distance-to-route\" evaluation",
+        "project-steersim-detail-5": "<strong>Impact:</strong> Complete end-to-end ML and robotics pipeline for autonomous steering",
+
+        "project-hermine-detail-title": "Technical Details:",
+        "project-hermine-detail-1": "<strong>Architecture:</strong> Hierarchical multi-agent system (Python, FastAPI, Redis, Firebase) using Native APIs",
+        "project-hermine-detail-2": "<strong>State Management:</strong> Persistent state and granular control across agent hierarchy",
+        "project-hermine-detail-3": "<strong>Cost Optimization:</strong> NoSQL context injection (avoiding complex RAG), internal benchmarking tools",
+        "project-hermine-detail-4": "<strong>Legal-NLP Bridge:</strong> Collaboration with jurists for high-precision prompt engineering",
+        "project-hermine-detail-5": "<strong>Impact:</strong> 2 clients, 15 beta-testers, 50% time savings on legal drafting, upselling potential",
+
+        "project-superdiag-detail-title": "Technical Details:",
+        "project-superdiag-detail-1": "<strong>Software Craftsmanship:</strong> SOLID principles and TDD in Bash for high reliability",
+        "project-superdiag-detail-2": "<strong>Testing:</strong> Comprehensive unit tests with shUnit2 framework",
+        "project-superdiag-detail-3": "<strong>CI/CD:</strong> Jenkins pipeline for automated production deployments in Gitflow environment",
+        "project-superdiag-detail-4": "<strong>Monitoring:</strong> Diagnostic and server analysis tools for pharmacy infrastructure",
+        "project-superdiag-detail-5": "<strong>Impact:</strong> 30% reduction in server analysis time for support teams on 8,000+ pharmacies",
+
+        "project-kubernetes-detail-title": "Technical Details:",
+        "project-kubernetes-detail-1": "<strong>Orchestration:</strong> 4-container cluster for distributed application \"Docker coins Miner\"",
+        "project-kubernetes-detail-2": "<strong>Tools:</strong> KinD (Kubernetes in Docker) for local development and testing",
+        "project-kubernetes-detail-3": "<strong>Package Management:</strong> Helm charts for application deployment and configuration",
+        "project-kubernetes-detail-4": "<strong>Monitoring:</strong> Complete observability stack for cluster health and performance",
+        "project-kubernetes-detail-5": "<strong>Impact:</strong> Hands-on experience with production-grade Kubernetes orchestration",
+
+        "project-cicd-detail-title": "Technical Details:",
+        "project-cicd-detail-1": "<strong>Containerization:</strong> Multi-stage Docker builds with lightweight images using layer caching",
+        "project-cicd-detail-2": "<strong>GitLab CI:</strong> Tag and version management, automated build and push to Docker Hub",
+        "project-cicd-detail-3": "<strong>Artifact Registry:</strong> JAR artifacts stored in GitLab artifact registry",
+        "project-cicd-detail-4": "<strong>Automation:</strong> Triggered on main branch commits or tag creation",
+        "project-cicd-detail-5": "<strong>Impact:</strong> Streamlined deployment process for Java backend applications",
+
+        
         // Contact
         "contact-title": "Me contacter",
         "contact-subtitle": "N'hésitez pas à me contacter pour discuter d'opportunités ou échanger des idées sur nos projets communs",
