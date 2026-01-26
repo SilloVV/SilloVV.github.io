@@ -861,6 +861,7 @@ function toggleTerminalMode() {
         if (overlay) overlay.style.display = 'none';
         if (sidebar) sidebar.style.display = '';
         if (termArrow) termArrow.style.display = '';
+        if (pageManager) pageManager.showMenuLogo();
         stopCursorHideTimer();
         document.body.classList.remove('cursor-hidden');
     }
