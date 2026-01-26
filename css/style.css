@@ -1,10 +1,5 @@
 
-/*CUSTOM FONT*/
-
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
-  @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap');
-  @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap');
-  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+/*CUSTOM FONT - loaded via <link> in HTML head for non-blocking rendering */
 
 
   /* LANGUAGE TOGGLE */
@@ -1962,7 +1957,7 @@ body.terminal-mode .download-btn-fixed:hover .cv-download-icon {
 
 /* Tooltip pour preview project */
 .project-card::after {
-    content: '↓ Clic pour voir le projet ↓';
+    content: '↓ Click to see the project ↓';
     position: absolute;
     top: -40px;
     left: 50%;
@@ -1980,6 +1975,10 @@ body.terminal-mode .download-btn-fixed:hover .cv-download-icon {
     z-index: 999999;
     box-shadow: 0 4px 12px rgba(0,0,0,0.25);
     pointer-events: none;
+}
+
+html[data-lang="fr"] .project-card::after {
+    content: '↓ Clic pour voir le projet ↓';
 }
 
 .project-card:hover::after {

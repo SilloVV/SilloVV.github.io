@@ -681,6 +681,9 @@ function toggleLanguage() {
 function applyTranslations() {
     const t = translations[currentLang];
 
+    // Set data-lang attribute on html element for CSS content translations
+    document.documentElement.setAttribute('data-lang', currentLang);
+
     // Hero
     const heroGreeting = document.querySelector('.hero-greeting h5');
     if (heroGreeting) heroGreeting.textContent = t['hero-greeting'];

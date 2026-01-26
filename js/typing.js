@@ -197,25 +197,25 @@ async function animateLoadingScreen() {
 
     // Small initial delay
     updateProgress(5);
-    await new Promise(r => setTimeout(r, 320));
+    await new Promise(r => setTimeout(r, 150));
 
     // Type greeting
     updateProgress(15);
-    await typeLoadingText(helloEl, greetingText, 44);
+    await typeLoadingText(helloEl, greetingText, 25);
     updateProgress(30);
-    await new Promise(r => setTimeout(r, 240));
+    await new Promise(r => setTimeout(r, 100));
 
     // Type name
     updateProgress(35);
-    await typeLoadingText(nameEl, nameText, 56);
+    await typeLoadingText(nameEl, nameText, 32);
     updateProgress(55);
-    await new Promise(r => setTimeout(r, 320));
+    await new Promise(r => setTimeout(r, 130));
 
     // Type title (keep cursor here)
     updateProgress(60);
-    await typeLoadingText(titleEl, titleText, 40, true);
+    await typeLoadingText(titleEl, titleText, 22, true);
     updateProgress(75);
-    await new Promise(r => setTimeout(r, 400));
+    await new Promise(r => setTimeout(r, 150));
 
     // Hide cursor before showing tags
     if (cursor) cursor.style.display = 'none';
@@ -224,21 +224,21 @@ async function animateLoadingScreen() {
     tag1.textContent = tags[0];
     tag1.classList.add('visible');
     updateProgress(82);
-    await new Promise(r => setTimeout(r, 240));
+    await new Promise(r => setTimeout(r, 100));
 
     tag2.textContent = tags[1];
     tag2.classList.add('visible');
     updateProgress(89);
-    await new Promise(r => setTimeout(r, 240));
+    await new Promise(r => setTimeout(r, 100));
 
     tag3.textContent = tags[2];
     tag3.classList.add('visible');
     updateProgress(95);
 
-    // Wait a moment to appreciate the full loading screen
-    await new Promise(r => setTimeout(r, 600));
-    updateProgress(100);
+    // Brief pause before transition
     await new Promise(r => setTimeout(r, 200));
+    updateProgress(100);
+    await new Promise(r => setTimeout(r, 80));
 
     // Transition to main content
     transitionToHero();
@@ -293,12 +293,12 @@ function transitionToHero() {
             initHeroTyping();
         }, 2500);
 
-    }, 600);
+    }, 300);
 
     // Remove loading screen from DOM
     setTimeout(() => {
         loadingScreen.style.display = 'none';
-    }, 800);
+    }, 500);
 }
 
 // Hero typing animation - starts by deleting the loading screen text, then types new texts
