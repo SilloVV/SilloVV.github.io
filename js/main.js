@@ -839,6 +839,8 @@ function toggleTerminalMode() {
     const overlay = document.getElementById('terminal-overlay');
     const sidebar = document.querySelector('.sidebar');
 
+    const termArrow = document.querySelector('.term-shortcut-arrow');
+
     if (isEntering) {
         // Entering TERM mode
         termSelectedIndex = -1;
@@ -851,6 +853,7 @@ function toggleTerminalMode() {
         // Then show overlay and hide sidebar
         if (overlay) overlay.style.display = 'flex';
         if (sidebar) sidebar.style.display = 'none';
+        if (termArrow) termArrow.style.display = 'none';
 
         updateTermSelection();
         startCursorHideTimer();
@@ -858,6 +861,7 @@ function toggleTerminalMode() {
         // Exiting TERM mode
         if (overlay) overlay.style.display = 'none';
         if (sidebar) sidebar.style.display = '';
+        if (termArrow) termArrow.style.display = '';
         stopCursorHideTimer();
         document.body.classList.remove('cursor-hidden');
     }

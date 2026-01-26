@@ -57,24 +57,46 @@
     box-shadow: 0 6px 20px rgba(0,0,0,0.25);
 }
 
-.term-shortcut-hint {
-    position: absolute;
-    bottom: -20px;
-    left: 50%;
+.term-shortcut-arrow {
+    position: fixed;
+    bottom: 72px;
+    left: 117px;
     transform: translateX(-50%);
-    font-size: 9px;
-    opacity: 0;
-    white-space: nowrap;
+    z-index: 100000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     pointer-events: none;
-    transition: opacity 0.2s ease;
+    animation: termHintFadeIn 1.5s 2s forwards;
+    opacity: 0;
+}
+
+.term-shortcut-label {
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
     color: var(--bg-alt);
+    opacity: 0.55;
+    white-space: nowrap;
+    letter-spacing: 0.5px;
 }
 
-.term-toggle:hover .term-shortcut-hint {
-    opacity: 0.6;
+.term-shortcut-arrow-svg {
+    color: var(--bg-alt);
+    opacity: 0.45;
+    margin-top: -2px;
 }
 
-body.terminal-mode .term-shortcut-hint {
+@keyframes termHintFadeIn {
+    0% { opacity: 0; transform: translateX(-50%) translateY(-5px); }
+    100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+body.terminal-mode .term-shortcut-label {
+    color: #138A36 !important;
+}
+
+body.terminal-mode .term-shortcut-arrow-svg {
     color: #138A36 !important;
 }
 

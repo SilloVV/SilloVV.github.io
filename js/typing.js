@@ -248,6 +248,12 @@ function transitionToHero() {
             termToggle.style.display = '';
         }
 
+        // Show terminal shortcut arrow hint
+        const termArrow = document.querySelector('.term-shortcut-arrow');
+        if (termArrow) {
+            termArrow.style.display = '';
+        }
+
         // Show sidebar with fade
         if (sidebar) {
             sidebar.style.transition = 'opacity 0.5s ease';
