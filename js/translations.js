@@ -305,6 +305,7 @@ const translations = {
         "term-enter-go": "Enter to go",
         "term-esc-exit": "Esc to Exit",
         "term-shortcut": "Shift + T",
+        "term-hint": "Press Shift+T : terminal mode",
 
         // Contact
         "email-tooltip": "Click to copy",
@@ -668,6 +669,7 @@ const translations = {
         "term-enter-go": "Entr\u00e9e pour aller",
         "term-esc-exit": "Esc pour quitter",
         "term-shortcut": "Shift + T",
+        "term-hint": "Appuyez sur Shift+T : terminal mode",
 
         // Contact
         "email-tooltip": "Cliquer pour copier",
@@ -1190,9 +1192,8 @@ function applyTranslations() {
         }
     });
 
-    // Terminal overlay
-    const termTranslatable = document.querySelectorAll('#terminal-overlay [data-translate]');
-    termTranslatable.forEach(el => {
+    // Terminal overlay + sidebar hint
+    document.querySelectorAll('[data-translate^="term-"]').forEach(el => {
         const key = el.getAttribute('data-translate');
         if (key && t[key]) {
             el.textContent = t[key];

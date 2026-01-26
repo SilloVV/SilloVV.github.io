@@ -920,7 +920,7 @@ function getSectionSelectableItems() {
     const itemMap = {
         'projects': '#projectwrapper .project-card',
         'resources': '#resources .resource-card',
-        'contact': '#contact-section .contact-icon'
+        'contact': '#contact-section .contact-icon, #contact-section .mail'
     };
     const selector = itemMap[pageManager.currentPage];
     return selector ? Array.from(document.querySelectorAll(selector)) : [];
@@ -956,8 +956,12 @@ function activateSectionItem() {
         // resource-card is an <a> tag
         if (item.href) window.open(item.href, '_blank');
     } else if (page === 'contact') {
-        const link = item.querySelector('a');
-        if (link && link.href) window.open(link.href, '_blank');
+        if (item.classList.contains('mail')) {
+            copyEmail();
+        } else {
+            const link = item.querySelector('a');
+            if (link && link.href) window.open(link.href, '_blank');
+        }
     }
 }
 
