@@ -645,27 +645,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     
-    // Close by clicking overlay on mobile
-    if (overlay) {
-        overlay.addEventListener('click', () => {
-            // Close all open previews
-            const openPreviews = document.querySelectorAll('.project-preview[style*="opacity: 1"]');
-            openPreviews.forEach(preview => {
-                preview.style.opacity = '0';
-                preview.style.visibility = 'hidden';
-            });
-            
-            // Hide overlay
-            overlay.style.opacity = '0';
-            overlay.style.visibility = 'hidden';
-            
-            // Show project section close button again
-            const projectCloseBtn = document.getElementById('closeb-projects');
-            if (projectCloseBtn) {
-                projectCloseBtn.style.display = 'flex';
-            }
-        });
-    }
+    
     
     // Hover management for keywords
     const hoverWords = document.querySelectorAll('.hover-word');

@@ -1949,7 +1949,7 @@ body.terminal-mode .download-btn-fixed:hover .cv-download-icon {
 
 /* Tooltip pour preview project */
 .project-card::after {
-    content: '↓ Clic pour voir la preview ↓';
+    content: '↓ Clic pour voir le projet ↓';
     position: absolute;
     top: -40px;
     left: 50%;
@@ -1973,65 +1973,6 @@ body.terminal-mode .download-btn-fixed:hover .cv-download-icon {
     opacity: 1;
     visibility: visible;
     top: -45px;
-}
-
-.project-preview {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 60vw;
-    height: 50vh;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
-    z-index: 999999;
-    pointer-events: auto;
-    border-radius: 15px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-    border: 3px solid var(--bg-alt);
-    overflow: hidden;
-    background: var(--bg);
-}
-
-.project-preview img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    object-position: center;
-    transition: transform 0.3s ease;
-    background: var(--bg);
-}
-
-/* Agrandir spécifiquement l'image U-Net */
-#preview-unet {
-    width: 80vw;
-    height: 70vh;
-}
-
-/* Overlay blur pour les previews */
-.project-preview-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(10px);
-    z-index: 999998;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
-}
-
-/* Positionnement de la croix de fermeture dans les previews */
-.project-preview .closeb {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    z-index: 999999;
-    pointer-events: auto;
-    cursor: pointer;
 }
 
 
@@ -2892,7 +2833,7 @@ body.terminal-mode .resource-icon-img {
     text-decoration: underline;
 }
 
-/* Images de hover */
+/* Images de hover profil */
 .hover-image {
     position: fixed;
     top: 50%;
@@ -3584,39 +3525,8 @@ body:not(.page-open) .inverseur-circle {
         font-size: 36px;
     }
     
-    /* Adaptations mobiles pour les previews de projets */
-    .project-preview {
-        width: 95vw;
-        height: 60vh;
-        border-radius: 10px;
-        border: 2px solid var(--bg-alt);
-    }
-    
-    /* Agrandir spécifiquement l'image U-Net sur mobile */
-    #preview-unet {
-        width: 95vw;
-        height: 70vh;
-    }
-    
-    /* Tooltip mobile pour preview project */
-    .project-card::after {
-        font-size: 10px;
-        padding: 6px 10px;
-        top: -35px;
-    }
-    
-    .project-card:hover::after {
-        top: -40px;
-    }
-    
-    /* Croix des previews sur mobile */
-    .project-preview .closeb {
-        top: 10px;
-        right: 10px;
-        width: 35px;
-        height: 35px;
-        font-size: 20px;
-    }
+   
+
 }
 
 /* Adaptation spécifique iPhone 15 et écrans similaires */
@@ -3640,17 +3550,7 @@ body:not(.page-open) .inverseur-circle {
         width: 16rem;
     }
     
-    /* Previews optimisées pour iPhone 15 */
-    .project-preview {
-        width: 92vw;
-        height: 65vh;
-        border-radius: 12px;
-    }
-    
-    #preview-unet {
-        width: 92vw;
-        height: 72vh;
-    }
+  
     
     .sidebar.active {
         width: 85vw;
@@ -3696,15 +3596,7 @@ body:not(.page-open) .inverseur-circle {
         width: 12rem;
     }
     
-    .project-preview {
-        width: 98vw;
-        height: 50vh;
-    }
-    
-    #preview-unet {
-        width: 98vw;
-        height: 60vh;
-    }
+   
     
     .sidebar.active {
         width: 95vw;
@@ -3741,17 +3633,6 @@ body:not(.page-open) .inverseur-circle {
     
     .hero-title p {
         font-size: 18px;
-    }
-    
-    /* Previews en mode paysage */
-    .project-preview {
-        width: 80vw;
-        height: 85vh;
-    }
-    
-    #preview-unet {
-        width: 85vw;
-        height: 85vh;
     }
     
     .sidebar.active {
