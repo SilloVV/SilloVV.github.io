@@ -276,21 +276,20 @@ function closeCurrentSection() {
 
 function copyEmail() {
     navigator.clipboard.writeText('wnakib21@gmail.com').then(() => {
-        // Visual feedback on button
-        const copyBtn = document.querySelector('.copy-btn');
-        const originalContent = copyBtn.innerHTML;
-        
-        // Change icon temporarily
-        copyBtn.innerHTML = '<i class="bx bx-check"></i>';
-        copyBtn.style.background = 'rgba(34, 197, 94, 0.3)';
-        
+        const mailDiv = document.querySelector('.mail');
+        const originalHTML = mailDiv.innerHTML;
+
+        // Show check logo
+        mailDiv.innerHTML = '<img src="assets/icons/check_logo.svg" alt="Copied" class="check-logo-icon">';
+        mailDiv.style.background = 'rgba(34, 197, 94, 0.3)';
+
         // Create and display confirmation message
         showCopyMessage();
-        
-        // Restore original icon after 2 seconds
+
+        // Restore original content after 2 seconds
         setTimeout(() => {
-            copyBtn.innerHTML = originalContent;
-            copyBtn.style.background = '';
+            mailDiv.innerHTML = originalHTML;
+            mailDiv.style.background = '';
         }, 2000);
     }).catch(err => {
         console.error('Error during copy:', err);

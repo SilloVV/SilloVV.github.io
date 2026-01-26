@@ -127,6 +127,15 @@ body.terminal-mode #about-me em {
     color: #138A36 !important;
 }
 
+/* Signature en vert pour le mode terminal */
+body.terminal-mode .signature {
+    filter: brightness(0) saturate(100%) invert(39%) sepia(52%) saturate(1066%) hue-rotate(111deg) brightness(87%) contrast(92%) !important;
+}
+
+body.terminal-mode .signature:hover {
+    filter: brightness(0) saturate(100%) invert(39%) sepia(52%) saturate(1066%) hue-rotate(111deg) brightness(100%) contrast(92%) !important;
+}
+
 /* Boutons TERM et FR/ENG - texte noir sur fond vert */
 body.terminal-mode .lang-toggle,
 body.terminal-mode .term-toggle {
@@ -2414,6 +2423,14 @@ body.terminal-mode .download-btn-fixed:hover .cv-download-icon {
     opacity: 1;
     visibility: visible;
     top: -50px;
+}
+
+/* Check logo displayed after email copy */
+.check-logo-icon {
+    width: 28px;
+    height: 28px;
+    vertical-align: middle;
+    filter: invert(39%) sepia(52%) saturate(1066%) hue-rotate(111deg) brightness(87%) contrast(92%);
 }
 
 .copy-btn {
