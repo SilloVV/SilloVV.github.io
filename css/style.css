@@ -57,6 +57,27 @@
     box-shadow: 0 6px 20px rgba(0,0,0,0.25);
 }
 
+.term-shortcut-hint {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 9px;
+    opacity: 0;
+    white-space: nowrap;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    color: var(--bg-alt);
+}
+
+.term-toggle:hover .term-shortcut-hint {
+    opacity: 0.6;
+}
+
+body.terminal-mode .term-shortcut-hint {
+    color: #138A36 !important;
+}
+
 /* TERMINAL MODE STYLES */
 body.terminal-mode {
     background-color: #0F0A0A !important;
@@ -3812,5 +3833,25 @@ body.terminal-mode.cursor-hidden * {
     #terminal-overlay .term-separator {
         margin: 0 8px;
     }
+}
+
+/* Terminal mode - selected item within sections (Tab navigation) */
+body.terminal-mode .term-section-selected {
+    outline: 2px solid #138A36 !important;
+    outline-offset: 4px;
+    box-shadow: 0 0 12px rgba(19, 138, 54, 0.35) !important;
+    transition: outline 0.15s ease, box-shadow 0.15s ease;
+}
+
+body.terminal-mode .term-section-selected.project-card {
+    outline-offset: 6px;
+}
+
+body.terminal-mode .term-section-selected.resource-card {
+    outline-offset: 4px;
+}
+
+body.terminal-mode .term-section-selected.contact-icon {
+    outline-offset: 3px;
 }
 

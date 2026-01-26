@@ -270,6 +270,10 @@ function show_resources() {
 
 function closeCurrentSection() {
     if (pageManager && pageManager.currentPage) {
+        // Reset section item selection
+        sectionItemIndex = -1;
+        updateSectionItemSelection();
+
         pageManager.hidePage(pageManager.currentPage);
 
         // If terminal mode is active, show overlay and hide sidebar again
@@ -882,13 +886,78 @@ function updateTermSelection() {
     }
 }
 
+let sectionItemIndex = -1;
+
 function termNavigate() {
     if (termSelectedIndex >= 0 && termSelectedIndex < termMenuItems.length) {
         const overlay = document.getElementById('terminal-overlay');
         if (overlay) overlay.style.display = 'none';
 
+        sectionItemIndex = -1;
         // Keep terminal-mode class active but hide overlay
         termMenuItems[termSelectedIndex].fn();
+    }
+}
+
+// Get the scrollable container for the current section
+function getActiveSectionContainer() {
+    if (!pageManager || !pageManager.currentPage) return null;
+    const sectionMap = {
+        'cv': '#cvscroller',
+        'projects': '#projectwrapper',
+        'resources': '#resources',
+        'contact': '#contact-section',
+        'about': '#about-me',
+        'chat': '#chat-section'
+    };
+    const selector = sectionMap[pageManager.currentPage];
+    return selector ? document.querySelector(selector) : null;
+}
+
+// Get selectable items in the current section
+function getSectionSelectableItems() {
+    if (!pageManager || !pageManager.currentPage) return [];
+    const itemMap = {
+        'projects': '#projectwrapper .project-card',
+        'resources': '#resources .resource-card',
+        'contact': '#contact-section .contact-icon'
+    };
+    const selector = itemMap[pageManager.currentPage];
+    return selector ? Array.from(document.querySelectorAll(selector)) : [];
+}
+
+// Highlight the selected item within a section
+function updateSectionItemSelection() {
+    // Remove previous highlights
+    document.querySelectorAll('.term-section-selected').forEach(el => {
+        el.classList.remove('term-section-selected');
+    });
+
+    const items = getSectionSelectableItems();
+    if (sectionItemIndex >= 0 && sectionItemIndex < items.length) {
+        items[sectionItemIndex].classList.add('term-section-selected');
+        // Scroll item into view within the section container
+        items[sectionItemIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+}
+
+// Activate the selected item (open link / click)
+function activateSectionItem() {
+    const items = getSectionSelectableItems();
+    if (sectionItemIndex < 0 || sectionItemIndex >= items.length) return;
+
+    const item = items[sectionItemIndex];
+    const page = pageManager.currentPage;
+
+    if (page === 'projects') {
+        const url = item.getAttribute('data-url');
+        if (url) window.open(url, '_blank');
+    } else if (page === 'resources') {
+        // resource-card is an <a> tag
+        if (item.href) window.open(item.href, '_blank');
+    } else if (page === 'contact') {
+        const link = item.querySelector('a');
+        if (link && link.href) window.open(link.href, '_blank');
     }
 }
 
@@ -939,19 +1008,49 @@ document.addEventListener('keydown', (e) => {
     if (!overlayVisible) {
         if (e.key === 'Escape' && pageManager && pageManager.currentPage) {
             e.preventDefault();
+            sectionItemIndex = -1;
+            updateSectionItemSelection();
             closeCurrentSection();
             return;
         }
-        // Arrow keys / ZQSD for scrolling while viewing a section
-        const scrollAmt = 60;
-        if (e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') {
-            window.scrollBy(0, scrollAmt);
-        } else if (e.key === 'ArrowUp' || e.key === 'z' || e.key === 'Z') {
-            window.scrollBy(0, -scrollAmt);
-        } else if (e.key === 'ArrowLeft' || e.key === 'q' || e.key === 'Q') {
-            window.scrollBy(-scrollAmt, 0);
-        } else if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {
-            window.scrollBy(scrollAmt, 0);
+
+        // Tab: cycle through selectable items in the section
+        if (e.key === 'Tab') {
+            const items = getSectionSelectableItems();
+            if (items.length > 0) {
+                e.preventDefault();
+                if (e.shiftKey) {
+                    sectionItemIndex--;
+                    if (sectionItemIndex < 0) sectionItemIndex = items.length - 1;
+                } else {
+                    sectionItemIndex++;
+                    if (sectionItemIndex >= items.length) sectionItemIndex = 0;
+                }
+                updateSectionItemSelection();
+            }
+            return;
+        }
+
+        // Enter: activate selected item
+        if (e.key === 'Enter') {
+            if (sectionItemIndex >= 0) {
+                e.preventDefault();
+                activateSectionItem();
+            }
+            return;
+        }
+
+        // Arrow keys / ZQSD for scrolling the section container
+        const container = getActiveSectionContainer();
+        const scrollAmt = 80;
+        if (e.key === 'ArrowDown' || e.key === 's') {
+            if (container) container.scrollBy(0, scrollAmt);
+        } else if (e.key === 'ArrowUp' || e.key === 'z') {
+            if (container) container.scrollBy(0, -scrollAmt);
+        } else if (e.key === 'ArrowLeft' || e.key === 'q') {
+            if (container) container.scrollBy(-scrollAmt, 0);
+        } else if (e.key === 'ArrowRight' || e.key === 'd') {
+            if (container) container.scrollBy(scrollAmt, 0);
         }
         return;
     }
@@ -981,18 +1080,6 @@ document.addEventListener('keydown', (e) => {
         e.preventDefault();
         toggleTerminalMode();
         return;
-    }
-
-    // Arrow keys / ZQSD for scrolling in TERM mode
-    const scrollAmount = 60;
-    if (e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') {
-        window.scrollBy(0, scrollAmount);
-    } else if (e.key === 'ArrowUp' || e.key === 'z' || e.key === 'Z') {
-        window.scrollBy(0, -scrollAmount);
-    } else if (e.key === 'ArrowLeft' || e.key === 'q' || e.key === 'Q') {
-        window.scrollBy(-scrollAmount, 0);
-    } else if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {
-        window.scrollBy(scrollAmount, 0);
     }
 });
 
