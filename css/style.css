@@ -254,6 +254,10 @@ body.terminal-mode .mail::after {
     display: none !important;
 }
 
+body.terminal-mode .check-logo-icon {
+    filter: invert(39%) sepia(52%) saturate(1066%) hue-rotate(111deg) brightness(87%) contrast(92%) !important;
+}
+
 /* Section Malt en mode terminal */
 body.terminal-mode .malt-method,
 body.terminal-mode .malt-container {
@@ -2430,7 +2434,6 @@ body.terminal-mode .download-btn-fixed:hover .cv-download-icon {
     width: 28px;
     height: 28px;
     vertical-align: middle;
-    filter: invert(39%) sepia(52%) saturate(1066%) hue-rotate(111deg) brightness(87%) contrast(92%);
 }
 
 .copy-btn {

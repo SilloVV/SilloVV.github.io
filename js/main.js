@@ -281,15 +281,10 @@ function copyEmail() {
 
         // Show check logo
         mailDiv.innerHTML = '<img src="assets/icons/check_logo.svg" alt="Copied" class="check-logo-icon">';
-        mailDiv.style.background = 'rgba(34, 197, 94, 0.3)';
-
-        // Create and display confirmation message
-        showCopyMessage();
 
         // Restore original content after 2 seconds
         setTimeout(() => {
             mailDiv.innerHTML = originalHTML;
-            mailDiv.style.background = '';
         }, 2000);
     }).catch(err => {
         console.error('Error during copy:', err);
