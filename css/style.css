@@ -2134,8 +2134,13 @@ html[data-lang="fr"] .project-card::after {
     align-items: center;
     justify-content: center;
     border: 1px dashed rgba(51, 51, 51, 0.2);
-    overflow: hidden;
+    overflow: visible;
     cursor: pointer;
+    position: relative;
+}
+
+.project-second-image:hover {
+    z-index: 10;
 }
 
 .project-second-image img,
@@ -2147,7 +2152,7 @@ html[data-lang="fr"] .project-card::after {
 
 .project-second-image:hover img,
 .project-second-image:hover .image-placeholder {
-    transform: scale(1);
+    transform: scale(1.4);
     opacity: 1;
 }
 
