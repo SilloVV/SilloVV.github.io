@@ -382,10 +382,10 @@ const translations = {
 
         // About
         "about-title": "À propos de moi",
-        "about-text-1": "Passionné par l'intelligence artificielle et le DevOps, j'ai <strong>obtenu</strong> mon diplôme d'ingénieur à <span class=\"hover-word\" data-image=\"polytech\">Polytech Nancy</span> avec un <span class=\"hover-word\" data-image=\"diplome\">double diplôme</span> en IA (Master II Vision et Robotique).",
-        "about-text-2": "Après mon expérience chez <span class=\"hover-word\" data-image=\"hermine\">HermineIA</span> à <span class=\"hover-word\" data-image=\"stationf\">STATION F</span> en tant qu'Applied AI Engineer, j'ai développé un assistant juridique multi-agents et dirigé des projets d'automatisation ETL, réalisant 90% de gain de temps sur les migrations clients.",
+        "about-text-1": "Passionné d'informatique et de création et gestion de projets qui répondent à un problème concret , j'ai <strong>obtenu</strong> mon diplôme d'ingénieur à <span class=\"hover-word\" data-image=\"polytech\">Polytech Nancy</span> avec un <span class=\"hover-word\" data-image=\"diplome\">double diplôme</span> en IA (Master II Vision et Robotique).",
+        "about-text-2": "Après mon expérience chez <span class=\"hover-word\" data-image=\"hermine\">HermineIA</span> à <span class=\"hover-word\" data-image=\"stationf\">STATION F</span>(incubateur de plus de 1000 start ups) en tant qu'Applied AI Engineer, j'ai développé un assistant juridique multi-agents et dirigé des projets d'automatisation ETL, réalisant 90% de gain de temps sur les migrations clients.",
         "about-text-3": "Mon parcours m'a mené de la création d'outils de monitoring chez <span class=\"hover-word\" data-image=\"equasens\">Equasens</span> à l'architecture de systèmes agentiques résilients, en passant par des projets de deep learning et MLOps. Actuellement en préparation de la certification AWS Solutions Architect Associate.",
-        "about-text-4": "Ce qui m'intéresse ? L'intersection fascinante entre l'intelligence artificielle et l'infrastructure DevOps, où chaque infrastructure et pipeline permet de déployer des modèles qui transforment notre façon de travailler.",
+        "about-text-4": "Ce qui m'intéresse ? Créer des solutions propres, scalable et facilement maintenable à des problèmes concrets.",
         "about-text-5": "Quand je ne code pas, vous me trouverez sur un court de tennis, dans une salle de boxe, à étudier la biomécanique ou dans un cinéma.",
         "about-text-6": "Disponible maintenant pour de nouveaux défis techniques passionnants.",
 
