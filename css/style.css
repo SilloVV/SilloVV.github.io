@@ -2153,7 +2153,7 @@ html[data-lang="fr"] .project-card::after {
 
 .project-second-image:hover img,
 .project-second-image:hover .image-placeholder {
-    transform: scale(2.8);
+    transform: scale(1.8);
     opacity: 1;
 }
 
