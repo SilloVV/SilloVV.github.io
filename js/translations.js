@@ -131,6 +131,7 @@ const translations = {
         "projects-header-subtitle": "Discover my technical achievements",
         "projects-ai-title": " AI & MLOps",
         "projects-devops-title": " DevOps & Infrastructure",
+        "projects-webgis-title": " Web Development & GIS",
 
         // Project Cards
         "project-jira-title": "Jira Ticket Classifier",
@@ -198,6 +199,15 @@ const translations = {
         "project-cicd-detail-4": "<strong>Automation:</strong> Triggered on main branch commits or tag creation",
         "project-cicd-detail-5": "<strong>Impact:</strong> Streamlined deployment process for Java backend applications",
 
+        // Dump Alert
+        "project-dump-alert-title": "Dump Alert",
+        "project-dump-alert-desc": "Django/GeoDjango application for illegal dump reporting with geolocation and heatmap.",
+        "project-dump-alert-detail-title": "Technical Details:",
+        "project-dump-alert-detail-1": "<strong>Reporting:</strong> Image upload with danger level and geolocation",
+        "project-dump-alert-detail-2": "<strong>Administration:</strong> Report validation/rejection by Django administrator",
+        "project-dump-alert-detail-3": "<strong>Mapping:</strong> Interactive map with heatmap and QGIS marker generation",
+        "project-dump-alert-detail-4": "<strong>Stack:</strong> Django 5.2, GeoDjango, SpatiaLite/PostGIS, django-leaflet",
+        "project-dump-alert-detail-5": "<strong>Impact:</strong> Streamlined illegal dump reporting with real-time geospatial visualization",
 
         // Contact
         "contact-title": "Contact me",
@@ -511,6 +521,7 @@ const translations = {
         "projects-header-subtitle": "Découvrez mes réalisations techniques",
         "projects-ai-title": " IA & MLOps",
         "projects-devops-title": " DevOps & Infrastructure",
+        "projects-webgis-title": " Développement Web & SIG",
 
         // Project Cards
         "project-jira-title": "Classifieur de Tickets Jira",
@@ -577,8 +588,16 @@ const translations = {
         "project-cicd-detail-3": "<strong>Registre Artefacts:</strong> Artefacts JAR stockés dans registre artefacts GitLab",
         "project-cicd-detail-4": "<strong>Automatisation:</strong> Déclenché sur commits branche main ou création tags",
         "project-cicd-detail-5": "<strong>Impact:</strong> Processus déploiement rationalisé pour applications backend Java",
-        
-        
+
+        // Dump Alert
+        "project-dump-alert-title": "Dump Alert",
+        "project-dump-alert-desc": "Application Django/GeoDjango de signalement de dépôts sauvages avec géolocalisation et heatmap.",
+        "project-dump-alert-detail-title": "Détails Techniques :",
+        "project-dump-alert-detail-1": "<strong>Signalement :</strong> Upload d'image avec niveau de dangerosité et géolocalisation",
+        "project-dump-alert-detail-2": "<strong>Administration :</strong> Validation/rejet des signalements par un administrateur Django",
+        "project-dump-alert-detail-3": "<strong>Cartographie :</strong> Carte interactive avec heatmap et génération de markers QGIS",
+        "project-dump-alert-detail-4": "<strong>Stack :</strong> Django 5.2, GeoDjango, SpatiaLite/PostGIS, django-leaflet",
+        "project-dump-alert-detail-5": "<strong>Impact :</strong> Signalement simplifié des dépôts sauvages avec visualisation géospatiale en temps réel",
 
         // Contact
         "contact-title": "Me contacter",
@@ -949,7 +968,11 @@ function applyTranslations() {
 
     // Projects Section Titles
     const projectSectionTitles = document.querySelectorAll('#projectwrapper .section-title');
-    if (projectSectionTitles.length >= 2) {
+    if (projectSectionTitles.length >= 3) {
+        projectSectionTitles[0].textContent = t['projects-ai-title'];
+        projectSectionTitles[1].textContent = t['projects-devops-title'];
+        projectSectionTitles[2].textContent = t['projects-webgis-title'];
+    } else if (projectSectionTitles.length >= 2) {
         projectSectionTitles[0].textContent = t['projects-ai-title'];
         projectSectionTitles[1].textContent = t['projects-devops-title'];
     }
@@ -984,6 +1007,9 @@ function applyTranslations() {
             } else if (preview === 'cicd') {
                 title.textContent = t['project-cicd-title'];
                 desc.textContent = t['project-cicd-desc'];
+            } else if (preview === 'dump-alert') {
+                title.textContent = t['project-dump-alert-title'];
+                desc.textContent = t['project-dump-alert-desc'];
             }
         }
 
@@ -1041,6 +1067,13 @@ function applyTranslations() {
                 detailItems[2].innerHTML = t['project-cicd-detail-3'];
                 detailItems[3].innerHTML = t['project-cicd-detail-4'];
                 detailItems[4].innerHTML = t['project-cicd-detail-5'];
+            } else if (preview === 'dump-alert') {
+                detailTitle.textContent = t['project-dump-alert-detail-title'] || 'Technical Details:';
+                detailItems[0].innerHTML = t['project-dump-alert-detail-1'];
+                detailItems[1].innerHTML = t['project-dump-alert-detail-2'];
+                detailItems[2].innerHTML = t['project-dump-alert-detail-3'];
+                detailItems[3].innerHTML = t['project-dump-alert-detail-4'];
+                detailItems[4].innerHTML = t['project-dump-alert-detail-5'];
             }
         }
     });
