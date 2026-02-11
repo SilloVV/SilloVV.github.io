@@ -443,7 +443,7 @@
                             <h4>Technical Details:</h4>
                             <ul>
                                 <li><strong>Reporting:</strong> Image upload with danger level and PostGIS geolocation</li>
-                                <li><strong>Administration:</strong> Report validation/rejection via Django admin interface</li>
+                                <li><strong>Administration:</strong> Django admin interface for report validation, interoperable geospatial data export</li>
                                 <li><strong>GIS Mapping:</strong> Interactive Leaflet map with heatmap and QGIS/PyQGIS marker generation</li>
                                 <li><strong>Stack:</strong> Python, Django 5.2, GeoDjango, PostGIS/SpatiaLite, django-leaflet, Pillow</li>
                                 <li><strong>Impact:</strong> Complete GIS application for illegal dump reporting with real-time geospatial visualization</li>
@@ -473,7 +473,7 @@
                                 <li><strong>Full-Stack Architecture:</strong> Spring Boot backend (Controllers, Services, Repositories, DTO) + Angular frontend</li>
                                 <li><strong>Database:</strong> PostgreSQL with relational management of centers, slots and bookings</li>
                                 <li><strong>Security:</strong> JWT authentication with role system (Admin, Super-Admin, Doctor) and Angular guards</li>
-                                <li><strong>Frontend:</strong> Modular Angular components (features/reservation, features/admin) with API services</li>
+                                <li><strong>Frontend:</strong> Modular Angular components (features/reservation, features/admin) with REST API services</li>
                                 <li><strong>Impact:</strong> Complete multi-center vaccination booking management application</li>
                             </ul>
                         </div>
@@ -798,24 +798,41 @@
 
     <div id="about-me" style="display: none;">
         <div id="closeb-about" class="closeb" onclick="closeCurrentSection()">×</div>
-        <div class="propos"> 
-            <em>About me </em></div>
-        <div class="about-text">
-            Passionate about Computer Science and building solutions to concrete problems, I have <strong>completed</strong> my Engineering degree at <span class="hover-word" data-image="polytech">Polytech Nancy</span> with a <span class="hover-word" data-image="diplome">double degree</span> in AI (Master II in Vision and Robotics).
-            <br><br>
-            After my experience at <span class="hover-word" data-image="hermine">HermineIA</span> at <span class="hover-word" data-image="stationf">STATION F</span>(place where 1000 start-ups are working) as Applied AI Engineer, I developed a multi-agent legal assistant and led ETL automation projects, achieving 90% time savings on client migrations.
-            <br><br>
-            My journey has taken me from creating monitoring tools at <span class="hover-word" data-image="equasens">Equasens</span> to architecting resilient agentic systems, through deep learning and MLOps projects. Currently preparing for the AWS Solutions Architect Associate certification.
-            <br><br>
-            What interests me? To understand and deploy clean, eliable, scalable and easily reusable solutions to world real problems.
-            <br><br>
-            When I'm not in front of a computer, you'll find me on a tennis court, in a boxing gym, studying biomechanics or in a movie theater.
-            <br><br>
-            Available now for exciting new technical challenges.
-        </div>
-        
-        <div class="signature-container">
-            <img src="assets/icons/signature.png" alt="Signature Wassil NAKIB" class="signature" loading="lazy" decoding="async">
+
+        <div class="about-inner">
+            <div class="propos">
+                <em>About me </em>
+            </div>
+
+            <div class="about-images-row" id="about-images-desktop">
+                <div class="about-img-placeholder" id="imga1">
+                    <span>Image 1</span>
+                </div>
+                <div class="about-img-placeholder" id="imga2">
+                    <span>Image 2</span>
+                </div>
+                <div class="about-img-placeholder" id="imga3">
+                    <span>Image 3</span>
+                </div>
+            </div>
+
+            <div class="about-text">
+                Passionate about Computer Science and building solutions to concrete problems, I have <strong>completed</strong> my Engineering degree at <span class="hover-word" data-image="polytech">Polytech Nancy</span> with a <span class="hover-word" data-image="diplome">double degree</span> in AI (Master II in Vision and Robotics).
+                <br><br>
+                After my experience at <span class="hover-word" data-image="hermine">HermineIA</span> at <span class="hover-word" data-image="stationf">STATION F</span>(place where 1000 start-ups are working) as Applied AI Engineer, I developed a multi-agent legal assistant and led ETL automation projects, achieving 90% time savings on client migrations.
+                <br><br>
+                My journey has taken me from creating monitoring tools at <span class="hover-word" data-image="equasens">Equasens</span> to architecting resilient agentic systems, through deep learning and MLOps projects. Currently preparing for the AWS Solutions Architect Associate certification.
+                <br><br>
+                What interests me? To understand and deploy clean, reliable, scalable and easily reusable solutions to world real problems.
+                <br><br>
+                When I'm not in front of a computer, you'll find me on a tennis court, in a boxing gym, studying biomechanics or in a movie theater.
+                <br><br>
+                Available now for exciting new technical challenges.
+            </div>
+
+            <div class="signature-container">
+                <img src="assets/icons/signature.png" alt="Signature Wassil NAKIB" class="signature" loading="lazy" decoding="async">
+            </div>
         </div>
     </div>
 
@@ -1029,6 +1046,17 @@
                     <h3>ReactBits</h3>
                     <p class="resource-desc">Collection of useful React components ready to copy and use</p>
                     <span class="resource-tag">React</span>
+                </div>
+                <i class='bx bx-link-external resource-external'></i>
+            </a>
+            <a href="https://github.com/Njengah/claude-code-cheat-sheet" target="_blank" class="resource-card" data-resource="claudecheat">
+                <div class="resource-icon">
+                    <i class='bx bx-terminal'></i>
+                </div>
+                <div class="resource-content">
+                    <h3>Claude Code Cheat Sheet</h3>
+                    <p class="resource-desc">Ultimate collection of Claude Code tips, tricks, hacks and workflows</p>
+                    <span class="resource-tag">AI Agents</span>
                 </div>
                 <i class='bx bx-link-external resource-external'></i>
             </a>
