@@ -996,11 +996,11 @@ function applyTranslations() {
     const projectSectionTitles = document.querySelectorAll('#projectwrapper .section-title');
     if (projectSectionTitles.length >= 3) {
         projectSectionTitles[0].textContent = t['projects-webgis-title'];
-        projectSectionTitles[1].textContent = t['projects-ai-title'];
-        projectSectionTitles[2].textContent = t['projects-devops-title'];
+        projectSectionTitles[1].textContent = t['projects-devops-title'];
+        projectSectionTitles[2].textContent = t['projects-ai-title'];
     } else if (projectSectionTitles.length >= 2) {
         projectSectionTitles[0].textContent = t['projects-webgis-title'];
-        projectSectionTitles[1].textContent = t['projects-ai-title'];
+        projectSectionTitles[1].textContent = t['projects-devops-title'];
     }
 
     // Project Cards
