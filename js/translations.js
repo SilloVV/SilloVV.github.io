@@ -114,6 +114,9 @@ const translations = {
         "cv-projects-ml-2": "Control of a simulated vehicle steering angle via computer vision: ROS2, Pytorch, ONNX, TensorBoard (see Gitlab: SteerSim)",
         "cv-projects-ml-3": "Implementation of an RNN for sentiment classification on tweets",
         "cv-projects-ml-4": "Implementation of a DCGAN for synthetic image generation on Fashion MNIST dataset",
+        "cv-projects-webgis": "Web Development & GIS :",
+        "cv-projects-webgis-1": "<strong>Dump Alert:</strong> Full-stack Django 5.2 / GeoDjango application for illegal dump reporting with PostGIS geolocation, interactive Leaflet heatmap, QGIS/PyQGIS marker generation and Django admin for report validation with interoperable geospatial data export.",
+        "cv-projects-webgis-2": "<strong>Doctolib Bis:</strong> Full-stack vaccination booking application. Modular Angular frontend (features/reservation, features/admin) with REST API services, Spring Boot backend (Controllers, Services, Repositories, DTO), PostgreSQL database. JWT authentication with role system (Admin, Super-Admin, Doctor) and Angular guards.",
         "cv-projects-devops": "DevOps :",
         "cv-projects-devops-1": "CI/CD Pipeline for a Java application backend: Gitlab CI (see Gitlab: Backend Production Deployment)",
         "cv-projects-devops-2": "4-container cluster for a \"Docker coins Miner\" application: KinD, Helm, Kubectl (see Gitlab: Kubernetes-simple-app)",
@@ -520,6 +523,9 @@ const translations = {
         "cv-projects-ml-2": "Contrôle de l'angle de direction d'un véhicule simulé par vision : ROS2, Pytorch, ONNX, TensorBoard (voir Gitlab : SteerSim)",
         "cv-projects-ml-3": "Implémentation d'un RNN pour classification de sentiments sur tweets",
         "cv-projects-ml-4": "Implémentation d'un DCGAN pour génération d'images synthétiques sur dataset Fashion MNIST",
+        "cv-projects-webgis": "Développement Web & SIG :",
+        "cv-projects-webgis-1": "<strong>Dump Alert :</strong> Application full-stack Django 5.2 / GeoDjango de signalement de dépôts sauvages avec géolocalisation PostGIS, heatmap interactive Leaflet, génération de markers QGIS/PyQGIS et interface d'administration Django pour validation des signalements avec export de données géospatiales interopérables.",
+        "cv-projects-webgis-2": "<strong>Doctolib Bis :</strong> Application full-stack de réservation de vaccinations. Frontend Angular modulaire (features/reservation, features/admin) avec services API REST, backend Spring Boot (Controllers, Services, Repositories, DTO), base PostgreSQL. Authentification JWT avec système de rôles (Admin, Super-Admin, Médecin) et guards Angular.",
         "cv-projects-devops": "DevOps :",
         "cv-projects-devops-1": "Pipeline CI/CD pour backend d'application Java : Gitlab CI (voir Gitlab : Backend Production Deployment)",
         "cv-projects-devops-2": "Cluster de 4 conteneurs pour application \"Docker coins Miner\" : KinD, Helm, Kubectl (voir Gitlab : Kubernetes-simple-app)",
@@ -1200,13 +1206,14 @@ function applyTranslations() {
         const projectH5s = cvProjectsSection.querySelectorAll('.cv-projects h5');
         const projectUls = cvProjectsSection.querySelectorAll('.cv-projects ul');
 
-        if (projectH5s.length >= 3) {
+        if (projectH5s.length >= 4) {
             projectH5s[0].textContent = t['cv-projects-mlops'];
             projectH5s[1].textContent = t['cv-projects-ml'];
-            projectH5s[2].textContent = t['cv-projects-devops'];
+            projectH5s[2].textContent = t['cv-projects-webgis'];
+            projectH5s[3].textContent = t['cv-projects-devops'];
         }
 
-        if (projectUls.length >= 3) {
+        if (projectUls.length >= 4) {
             // MLOps
             const mlopsItems = projectUls[0].querySelectorAll('li');
             if (mlopsItems.length >= 1) mlopsItems[0].innerHTML = t['cv-projects-mlops-1'];
@@ -1220,8 +1227,15 @@ function applyTranslations() {
                 mlItems[3].textContent = t['cv-projects-ml-4'];
             }
 
+            // Web Development & GIS
+            const webgisItems = projectUls[2].querySelectorAll('li');
+            if (webgisItems.length >= 2) {
+                webgisItems[0].innerHTML = t['cv-projects-webgis-1'];
+                webgisItems[1].innerHTML = t['cv-projects-webgis-2'];
+            }
+
             // DevOps
-            const devopsItems = projectUls[2].querySelectorAll('li');
+            const devopsItems = projectUls[3].querySelectorAll('li');
             if (devopsItems.length >= 3) {
                 devopsItems[0].textContent = t['cv-projects-devops-1'];
                 devopsItems[1].textContent = t['cv-projects-devops-2'];

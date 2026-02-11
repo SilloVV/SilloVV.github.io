@@ -1091,12 +1091,9 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// Preload reverse animation (simple placeholder function)
 function preloadReverseAnimation() {
-    // This function can be expanded if needed for animation preloading
     const heroAnimationImg = document.getElementById('hero__animation__img');
     if (heroAnimationImg) {
-        // Preload animation frames or resources here if needed
         console.log('Reverse animation preloaded');
     }
 }
