@@ -201,13 +201,23 @@ const translations = {
 
         // Dump Alert
         "project-dump-alert-title": "Dump Alert",
-        "project-dump-alert-desc": "Django/GeoDjango application for illegal dump reporting with geolocation and heatmap.",
+        "project-dump-alert-desc": "Full-stack Python/Django application for illegal dump reporting with PostGIS geolocation, interactive mapping (Leaflet heatmap) and QGIS marker export.",
         "project-dump-alert-detail-title": "Technical Details:",
-        "project-dump-alert-detail-1": "<strong>Reporting:</strong> Image upload with danger level and geolocation",
-        "project-dump-alert-detail-2": "<strong>Administration:</strong> Report validation/rejection by Django administrator",
-        "project-dump-alert-detail-3": "<strong>Mapping:</strong> Interactive map with heatmap and QGIS marker generation",
-        "project-dump-alert-detail-4": "<strong>Stack:</strong> Django 5.2, GeoDjango, SpatiaLite/PostGIS, django-leaflet",
-        "project-dump-alert-detail-5": "<strong>Impact:</strong> Streamlined illegal dump reporting with real-time geospatial visualization",
+        "project-dump-alert-detail-1": "<strong>Reporting:</strong> Image upload with danger level and PostGIS geolocation",
+        "project-dump-alert-detail-2": "<strong>Administration:</strong> Report validation/rejection via Django admin interface",
+        "project-dump-alert-detail-3": "<strong>GIS Mapping:</strong> Interactive Leaflet map with heatmap and QGIS/PyQGIS marker generation",
+        "project-dump-alert-detail-4": "<strong>Stack:</strong> Python, Django 5.2, GeoDjango, PostGIS/SpatiaLite, django-leaflet, Pillow",
+        "project-dump-alert-detail-5": "<strong>Impact:</strong> Complete GIS application for illegal dump reporting with real-time geospatial visualization",
+
+        // Doctolib Bis
+        "project-doctolib-bis-title": "Doctolib Bis - Vaccination Booking",
+        "project-doctolib-bis-desc": "Full-stack vaccination booking application with Angular frontend, Spring Boot backend, PostgreSQL database and JWT security.",
+        "project-doctolib-bis-detail-title": "Technical Details:",
+        "project-doctolib-bis-detail-1": "<strong>Full-Stack Architecture:</strong> Spring Boot backend (Controllers, Services, Repositories, DTO) + Angular frontend",
+        "project-doctolib-bis-detail-2": "<strong>Database:</strong> PostgreSQL with relational management of centers, slots and bookings",
+        "project-doctolib-bis-detail-3": "<strong>Security:</strong> JWT authentication with role system (Admin, Super-Admin, Doctor) and Angular guards",
+        "project-doctolib-bis-detail-4": "<strong>Frontend:</strong> Modular Angular components (features/reservation, features/admin) with API services",
+        "project-doctolib-bis-detail-5": "<strong>Impact:</strong> Complete multi-center vaccination booking management application",
 
         // Contact
         "contact-title": "Contact me",
@@ -591,13 +601,23 @@ const translations = {
 
         // Dump Alert
         "project-dump-alert-title": "Dump Alert",
-        "project-dump-alert-desc": "Application Django/GeoDjango de signalement de dépôts sauvages avec géolocalisation et heatmap.",
+        "project-dump-alert-desc": "Application full-stack Python/Django de signalement de dépôts sauvages avec géolocalisation PostGIS, cartographie interactive (heatmap Leaflet) et export markers QGIS.",
         "project-dump-alert-detail-title": "Détails Techniques :",
-        "project-dump-alert-detail-1": "<strong>Signalement :</strong> Upload d'image avec niveau de dangerosité et géolocalisation",
-        "project-dump-alert-detail-2": "<strong>Administration :</strong> Validation/rejet des signalements par un administrateur Django",
-        "project-dump-alert-detail-3": "<strong>Cartographie :</strong> Carte interactive avec heatmap et génération de markers QGIS",
-        "project-dump-alert-detail-4": "<strong>Stack :</strong> Django 5.2, GeoDjango, SpatiaLite/PostGIS, django-leaflet",
-        "project-dump-alert-detail-5": "<strong>Impact :</strong> Signalement simplifié des dépôts sauvages avec visualisation géospatiale en temps réel",
+        "project-dump-alert-detail-1": "<strong>Signalement :</strong> Upload d'image avec niveau de dangerosité et géolocalisation PostGIS",
+        "project-dump-alert-detail-2": "<strong>Administration :</strong> Validation/rejet des signalements via l'interface d'administration Django",
+        "project-dump-alert-detail-3": "<strong>Cartographie SIG :</strong> Carte interactive Leaflet avec heatmap et génération de markers QGIS/PyQGIS",
+        "project-dump-alert-detail-4": "<strong>Stack :</strong> Python, Django 5.2, GeoDjango, PostGIS/SpatiaLite, django-leaflet, Pillow",
+        "project-dump-alert-detail-5": "<strong>Impact :</strong> Application SIG complète de signalement avec visualisation géospatiale temps réel",
+
+        // Doctolib Bis
+        "project-doctolib-bis-title": "Doctolib Bis - Réservation Vaccination",
+        "project-doctolib-bis-desc": "Application full-stack de réservation de vaccinations avec frontend Angular, backend Spring Boot, base PostgreSQL et sécurité JWT.",
+        "project-doctolib-bis-detail-title": "Détails Techniques :",
+        "project-doctolib-bis-detail-1": "<strong>Architecture Full-Stack :</strong> Backend Spring Boot (Controllers, Services, Repositories, DTO) + Frontend Angular",
+        "project-doctolib-bis-detail-2": "<strong>Base de données :</strong> PostgreSQL avec gestion relationnelle des centres, créneaux et réservations",
+        "project-doctolib-bis-detail-3": "<strong>Sécurité :</strong> Authentification JWT avec système de rôles (Admin, Super-Admin, Médecin) et guards Angular",
+        "project-doctolib-bis-detail-4": "<strong>Frontend :</strong> Composants Angular modulaires (features/reservation, features/admin) avec services API",
+        "project-doctolib-bis-detail-5": "<strong>Impact :</strong> Application complète de gestion de rendez-vous vaccination multi-centres",
 
         // Contact
         "contact-title": "Me contacter",
@@ -969,12 +989,12 @@ function applyTranslations() {
     // Projects Section Titles
     const projectSectionTitles = document.querySelectorAll('#projectwrapper .section-title');
     if (projectSectionTitles.length >= 3) {
-        projectSectionTitles[0].textContent = t['projects-ai-title'];
-        projectSectionTitles[1].textContent = t['projects-devops-title'];
-        projectSectionTitles[2].textContent = t['projects-webgis-title'];
+        projectSectionTitles[0].textContent = t['projects-webgis-title'];
+        projectSectionTitles[1].textContent = t['projects-ai-title'];
+        projectSectionTitles[2].textContent = t['projects-devops-title'];
     } else if (projectSectionTitles.length >= 2) {
-        projectSectionTitles[0].textContent = t['projects-ai-title'];
-        projectSectionTitles[1].textContent = t['projects-devops-title'];
+        projectSectionTitles[0].textContent = t['projects-webgis-title'];
+        projectSectionTitles[1].textContent = t['projects-ai-title'];
     }
 
     // Project Cards
@@ -1010,6 +1030,9 @@ function applyTranslations() {
             } else if (preview === 'dump-alert') {
                 title.textContent = t['project-dump-alert-title'];
                 desc.textContent = t['project-dump-alert-desc'];
+            } else if (preview === 'doctolib-bis') {
+                title.textContent = t['project-doctolib-bis-title'];
+                desc.textContent = t['project-doctolib-bis-desc'];
             }
         }
 
@@ -1074,6 +1097,13 @@ function applyTranslations() {
                 detailItems[2].innerHTML = t['project-dump-alert-detail-3'];
                 detailItems[3].innerHTML = t['project-dump-alert-detail-4'];
                 detailItems[4].innerHTML = t['project-dump-alert-detail-5'];
+            } else if (preview === 'doctolib-bis') {
+                detailTitle.textContent = t['project-doctolib-bis-detail-title'] || 'Technical Details:';
+                detailItems[0].innerHTML = t['project-doctolib-bis-detail-1'];
+                detailItems[1].innerHTML = t['project-doctolib-bis-detail-2'];
+                detailItems[2].innerHTML = t['project-doctolib-bis-detail-3'];
+                detailItems[3].innerHTML = t['project-doctolib-bis-detail-4'];
+                detailItems[4].innerHTML = t['project-doctolib-bis-detail-5'];
             }
         }
     });
