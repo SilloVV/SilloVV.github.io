@@ -3,7 +3,7 @@ const translations = {
     en: {
         // Hero
         "hero-greeting": "Hi, I'm",
-        "hero-title": "DevOps and AI Software Engineer",
+        "hero-title": "AgiRisk Development Manager",
         "hero-tag-1": "Artificial Intelligence (GenAI/Machine Learning)",
         "hero-tag-2": "DevOps & Infrastructure",
         "hero-tag-3": "Python, Bash, Java",
@@ -222,6 +222,16 @@ const translations = {
         "project-doctolib-bis-detail-4": "<strong>Frontend:</strong> Modular Angular components (features/reservation, features/admin) with REST API services",
         "project-doctolib-bis-detail-5": "<strong>Impact:</strong> Complete multi-center vaccination booking management application",
 
+        // Portfolio Pédagogique
+        "project-portfolio-pedago-title": "Portfolio – Pedagogical Manager",
+        "project-portfolio-pedago-desc": "Trilingual professional portfolio for a pedagogical manager with 13 years of experience, showcasing skills, experiences and achievements.",
+        "project-portfolio-pedago-detail-title": "Technical Details:",
+        "project-portfolio-pedago-detail-1": "<strong>Design:</strong> Modern and professional UI with structured navigation (Home, Presentation, Skills, Experiences, Education, Achievements, Contact)",
+        "project-portfolio-pedago-detail-2": "<strong>Trilingual:</strong> French/English/Arabic language toggle for international reach",
+        "project-portfolio-pedago-detail-3": "<strong>Responsive:</strong> Fully responsive layout optimized for all screen sizes",
+        "project-portfolio-pedago-detail-4": "<strong>Content:</strong> Showcase of 13 years of pedagogical engineering experience",
+        "project-portfolio-pedago-detail-5": "<strong>Impact:</strong> Professional online presence for career visibility",
+
         // Contact
         "contact-title": "Contact me",
         "contact-subtitle": "Feel free to contact me to discuss opportunities or exchange ideas about our common projects",
@@ -412,7 +422,7 @@ const translations = {
     fr: {
         // Hero
         "hero-greeting": "Bonjour, je suis",
-        "hero-title": "Ingénieur DevOps et IA",
+        "hero-title": "Responsable de développement AgiRisk",
         "hero-tag-1": "Intelligence Artificielle (GenAI/Machine Learning)",
         "hero-tag-2": "DevOps & Infrastructure",
         "hero-tag-3": "Python, Bash, Java",
@@ -630,6 +640,16 @@ const translations = {
         "project-doctolib-bis-detail-3": "<strong>Sécurité :</strong> Authentification JWT avec système de rôles (Admin, Super-Admin, Médecin) et guards Angular",
         "project-doctolib-bis-detail-4": "<strong>Frontend :</strong> Composants Angular modulaires (features/reservation, features/admin) avec services API REST",
         "project-doctolib-bis-detail-5": "<strong>Impact :</strong> Application complète de gestion de rendez-vous vaccination multi-centres",
+
+        // Portfolio Pédagogique
+        "project-portfolio-pedago-title": "Portfolio – Responsable Pédagogique",
+        "project-portfolio-pedago-desc": "Portfolio professionnel trilingue pour une responsable pédagogique avec 13 ans d'expérience, présentant compétences, expériences et réalisations.",
+        "project-portfolio-pedago-detail-title": "Détails Techniques :",
+        "project-portfolio-pedago-detail-1": "<strong>Design :</strong> Interface moderne et professionnelle avec navigation structurée (Accueil, Présentation, Compétences, Expériences, Formation, Réalisations, Contact)",
+        "project-portfolio-pedago-detail-2": "<strong>Trilingue :</strong> Basculement français/anglais/arabe pour une portée internationale",
+        "project-portfolio-pedago-detail-3": "<strong>Responsive :</strong> Mise en page entièrement responsive optimisée pour tous les écrans",
+        "project-portfolio-pedago-detail-4": "<strong>Contenu :</strong> Mise en valeur de 13 ans d'expérience en ingénierie pédagogique",
+        "project-portfolio-pedago-detail-5": "<strong>Impact :</strong> Présence en ligne professionnelle pour la visibilité de carrière",
 
         // Contact
         "contact-title": "Me contacter",
@@ -1051,6 +1071,9 @@ function applyTranslations() {
             } else if (preview === 'doctolib-bis') {
                 title.textContent = t['project-doctolib-bis-title'];
                 desc.textContent = t['project-doctolib-bis-desc'];
+            } else if (preview === 'portfolio-pedagogique') {
+                title.textContent = t['project-portfolio-pedago-title'];
+                desc.textContent = t['project-portfolio-pedago-desc'];
             }
         }
 
@@ -1122,6 +1145,13 @@ function applyTranslations() {
                 detailItems[2].innerHTML = t['project-doctolib-bis-detail-3'];
                 detailItems[3].innerHTML = t['project-doctolib-bis-detail-4'];
                 detailItems[4].innerHTML = t['project-doctolib-bis-detail-5'];
+            } else if (preview === 'portfolio-pedagogique') {
+                detailTitle.textContent = t['project-portfolio-pedago-detail-title'] || 'Technical Details:';
+                detailItems[0].innerHTML = t['project-portfolio-pedago-detail-1'];
+                detailItems[1].innerHTML = t['project-portfolio-pedago-detail-2'];
+                detailItems[2].innerHTML = t['project-portfolio-pedago-detail-3'];
+                detailItems[3].innerHTML = t['project-portfolio-pedago-detail-4'];
+                detailItems[4].innerHTML = t['project-portfolio-pedago-detail-5'];
             }
         }
     });

@@ -72,8 +72,8 @@ function restartHeroTyping() {
     const savedLang = localStorage.getItem('portfolio-lang') || 'en';
 
     const texts = savedLang === 'fr'
-        ? ['Passionné par le MLOps', 'Architecte Cloud', 'Ingénieur DevOps et IA']
-        : ['MLOps Enthusiast', 'Cloud Architect', 'DevOps and AI Engineer'];
+        ? ['Passionné par le MLOps', 'Architecte Cloud', 'Responsable de développement AgiRisk']
+        : ['MLOps Enthusiast', 'Cloud Architect', 'AgiRisk Development Manager'];
 
     // Start fresh (no delete animation)
     currentTypeWriter = new TypeWriter(heroTitle, texts, 3000);
@@ -178,7 +178,7 @@ async function animateLoadingScreen() {
     // Texts based on language
     const greetingText = savedLang === 'fr' ? 'Bonjour, je suis' : 'Hi, I\'m';
     const nameText = 'Wassil NAKIB';
-    const titleText = savedLang === 'fr' ? 'Ingénieur DevOps et IA' : 'DevOps and AI Engineer';
+    const titleText = savedLang === 'fr' ? 'Responsable de développement AgiRisk' : 'AgiRisk Development Manager';
 
     // Store title text for hero transition
     window.loadingTitleText = titleText;
@@ -285,11 +285,11 @@ function initHeroTyping() {
 
     // Texts to cycle through (different from loading screen)
     const texts = savedLang === 'fr'
-        ? ['Passionné par le MLOps', 'Architecte Cloud', 'Ingénieur DevOps et IA']
-        : ['MLOps Enthusiast', 'Cloud Architect', 'DevOps and AI Engineer'];
+        ? ['Passionné par le MLOps', 'Architecte Cloud', 'Responsable de développement AgiRisk']
+        : ['MLOps Enthusiast', 'Cloud Architect', 'AgiRisk Development Manager'];
 
     // Start by deleting the loading screen text, then type the new texts
-    const startText = window.loadingTitleText || (savedLang === 'fr' ? 'Ingénieur DevOps et IA' : 'DevOps and AI Engineer');
+    const startText = window.loadingTitleText || (savedLang === 'fr' ? 'Responsable de développement AgiRisk' : 'AgiRisk Development Manager');
 
     currentTypeWriter = new TypeWriter(heroTitle, texts, 3000, startText);
 }
