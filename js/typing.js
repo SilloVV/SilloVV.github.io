@@ -131,10 +131,10 @@ function typeLoadingText(element, text, baseSpeed = 36, keepCursor = false) {
 // Preload face animation images to avoid lag on first menu click
 function preloadFaceAnimation() {
     const images = [
-        'assets/face-animation-light/tl1.png',
-        'assets/face-animation-light/tl2.png',
-        'assets/face-animation-light/tl3.png',
-        'assets/face-animation-light/tl4.png'
+        'assets/face-animation-light/tl1.webp',
+        'assets/face-animation-light/tl2.webp',
+        'assets/face-animation-light/tl3.webp',
+        'assets/face-animation-light/tl4.webp'
     ];
 
     images.forEach(src => {
@@ -429,60 +429,14 @@ async function animateHeroEntrance() {
     });
 }
 
-// Name hover effect: reveal "SilloVV" under cursor
+// Prepare the "SilloVV" overlay. The reveal itself is driven by the cursor loop
+// in main.js, which already tracks the pointer and also masks the visible name.
 function setupNameHoverEffect() {
-    const nameContainer = document.querySelector('.hero-name');
-    const nameElement = document.getElementById('nom');
     const sillowElement = document.getElementById('sillow');
+    if (!sillowElement) return;
 
-    if (!nameContainer || !nameElement || !sillowElement) return;
-
-    // Position sillow exactly over nom
-    sillowElement.style.position = 'absolute';
-    sillowElement.style.top = '0';
-    sillowElement.style.left = '0';
-    sillowElement.style.width = '100%';
-    sillowElement.style.height = '100%';
-    sillowElement.style.display = 'flex';
-    sillowElement.style.alignItems = 'center';
-    sillowElement.style.justifyContent = 'center';
     sillowElement.style.clipPath = 'circle(0px at 50% 50%)';
     sillowElement.style.transition = 'none';
-    sillowElement.style.pointerEvents = 'none';
-    sillowElement.style.zIndex = '10';
-
-    // Track mouse position over name
-    let isOverName = false;
-    let animationFrame = null;
-
-    nameContainer.addEventListener('mouseenter', () => {
-        isOverName = true;
-    });
-
-    nameContainer.addEventListener('mouseleave', () => {
-        isOverName = false;
-        // Smoothly hide the sillow text
-        sillowElement.style.transition = 'clip-path 0.3s ease-out';
-        sillowElement.style.clipPath = 'circle(0px at 50% 50%)';
-    });
-
-    nameContainer.addEventListener('mousemove', (e) => {
-        if (!isOverName) return;
-
-        if (animationFrame) {
-            cancelAnimationFrame(animationFrame);
-        }
-
-        animationFrame = requestAnimationFrame(() => {
-            const rect = nameContainer.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-
-            // Reveal with circle mask following cursor (matches inverseur-circle size)
-            sillowElement.style.transition = 'none';
-            sillowElement.style.clipPath = `circle(50px at ${x}px ${y}px)`;
-        });
-    });
 }
 
 // Add CSS animation

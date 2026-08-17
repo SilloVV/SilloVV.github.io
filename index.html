@@ -3,39 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wassil NAKIB Portfolio</title>
-    
-    <link rel="icon" type="image/x-icon"  href="/assets/icons/favicon.ico">
+    <title>Wassil NAKIB — DevOps &amp; AI Engineer</title>
 
-    <!-- Preload critical resources -->
+    <meta name="description" content="Portfolio de Wassil NAKIB, ingénieur DevOps &amp; IA : architectures cloud, MLOps, agents IA et automatisation d'infrastructures.">
+    <meta name="author" content="Wassil NAKIB">
+    <meta name="theme-color" content="#fffefa">
+    <link rel="canonical" href="https://sillovv.github.io/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Wassil NAKIB — DevOps &amp; AI Engineer">
+    <meta property="og:description" content="Portfolio de Wassil NAKIB, ingénieur DevOps &amp; IA : architectures cloud, MLOps, agents IA et automatisation d'infrastructures.">
+    <meta property="og:url" content="https://sillovv.github.io/">
+    <meta property="og:image" content="https://sillovv.github.io/portfolio.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" type="image/x-icon" href="/assets/icons/favicon.ico">
+
+    <!-- Critical resources -->
     <link rel="preload" href="/css/style.css" as="style">
-    <link rel="preload" href="/js/typing.js" as="script">
-    <link rel="preconnect" href="https://unpkg.com" crossorigin>
-    <link rel="dns-prefetch" href="https://unpkg.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <!-- Behind the loading screen, so it must not compete with CSS for bandwidth -->
+    <link rel="preload" href="/assets/face-animation-light/tl1.webp" as="image" type="image/webp" fetchpriority="low">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
 
-    <!-- Critical CSS first -->
     <link rel="stylesheet" href="/css/style.css">
 
-    <!-- Google Fonts - non-blocking -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <!--
+      Every family is requested in a single css2 call: one connection, one
+      render-blocking-free round trip instead of four.
+    -->
+    <link rel="preload" as="style"
+          href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Kalam:wght@300;400;700&family=Dancing+Script:wght@400;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap"
+          onload="this.rel='stylesheet'">
     <noscript>
-        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet"
+              href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Kalam:wght@300;400;700&family=Dancing+Script:wght@400;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap">
     </noscript>
 
-    <!-- Boxicons with optimized loading -->
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' media="print" onload="this.media='all'">
-    <noscript><link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'></noscript>
+    <!-- Boxicons is only needed by the Resources panel, so it never blocks paint -->
+    <link rel="preload" as="style" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" onload="this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"></noscript>
 
     <!-- Scripts -->
-    <script src="/js/config.js"></script>
+    <script src="/js/config.js" defer></script>
     <script src="/js/translations.js" defer></script>
     <script src="/js/typing.js" defer></script>
     <script src="/js/main.js" defer></script>
@@ -124,7 +135,15 @@
     <div id="hero" style="display: none;">
         <div class="hero-content">
             <div class="hero-logo">
-                <img src="assets/logos/AgiRisk.png" alt="AgiRisk Logo" class="hero-logo-img">
+                <button type="button" class="hero-logo-btn" id="agirisk-trigger"
+                        aria-haspopup="dialog" aria-controls="agirisk-modal"
+                        title="AgiRisk — Cerema">
+                    <picture>
+                        <source srcset="assets/logos/AgiRisk.webp" type="image/webp">
+                        <img src="assets/logos/AgiRisk.png" alt="Logo AgiRisk" class="hero-logo-img"
+                             width="637" height="286" decoding="async">
+                    </picture>
+                </button>
             </div>
             <div class="hero-greeting">
                 <img src="assets/icons/waving.svg" alt="Waving hand" class="wave-emoji">
@@ -169,9 +188,9 @@
             <div class="cv-section">
                 <h3 class="cv-section-title">Profile</h3>
                 <p>
-                    DevOps and AI Software Engineer with a strong focus on building <span class="highlight">sustainable, production-grade architectures</span>. 
-                    My background spans Linux administration, Data Engineering, and AI Agent development. I am deeply interested in software design patterns and best practices that ensure long-term system maintainability. 
-                    Currently preparing for the <span class="highlight">AWS Solutions Architect Associate</span> certification, I am eager to leverage my Python/ Shell expertise and DevOps experience to build scalable, high-performance solutions in a Cloud-native environment.
+                    DevOps and AI Software Engineer currently working as <span class="highlight">Freelance Development Manager for AgiRisk at Cerema</span>, a flood-risk prevention platform.
+                    My background spans Linux administration, Data Engineering, AI Agent development and the delivery of <span class="highlight">sustainable, production-grade architectures</span>.
+                    I apply software design patterns and engineering best practices to build scalable, reliable and maintainable Cloud-native solutions.
                 </p> 
             </div>
 
@@ -182,15 +201,41 @@
                     <div class="cv-exp-header">
                         <div class="cv-company-info">
                             <div class="cv-company-logo">
-                                <a href="https://www.hermineia.fr" target="_blank" class="company-logo-link">
-                                    <img src="./assets/logos/hermine_ia_logo.jpeg" alt="HermineIA Logo" class="company-logo-img hermine" loading="lazy" decoding="async">
-                                    <div class="logo-tooltip">https://www.hermineia.fr</div>
+                                <a href="https://www.cerema.fr/" target="_blank" rel="noopener" class="company-logo-link">
+                                    <img src="./assets/logos/cerema_logo.svg" alt="Logo Cerema" class="company-logo-img cerema" loading="lazy" decoding="async" width="180" height="180">
+                                    <div class="logo-tooltip">cerema.fr</div>
                                 </a>
                                 <div class="current-position-indicator" title="Current position"></div>
                             </div>
                             <div class="cv-company-details">
+                                <h4>Cerema – Freelance Development Manager, AgiRisk</h4>
+                                <span class="cv-duration">March 2026 - Present · 5 months</span>
+                            </div>
+                        </div>
+                    </div>
+                    <ul>
+                        <li><strong>Development leadership:</strong> Led the development of AgiRisk, a flood-risk prevention and territorial resilience platform.</li>
+                        <li><strong>Technical delivery:</strong> Coordinated product requirements, technical design and implementation to deliver a reliable, maintainable platform.</li>
+                        <li><strong>Stakeholder coordination:</strong> Worked with Cerema experts and project stakeholders to translate flood-prevention needs into actionable features.</li>
+                        <li><strong>Public-interest impact:</strong> Contributed to improving risk awareness and decision support for territories exposed to flooding.</li>
+                    </ul>
+                </div>
+
+                <div class="cv-experience">
+                    <div class="cv-exp-header">
+                        <div class="cv-company-info">
+                            <div class="cv-company-logo">
+                                <a href="https://www.hermineia.fr" target="_blank" rel="noopener" class="company-logo-link">
+                                    <picture>
+                                        <source srcset="assets/logos/hermine_ia_logo.webp" type="image/webp">
+                                        <img src="./assets/logos/hermine_ia_logo.jpeg" alt="HermineIA Logo" class="company-logo-img hermine" loading="lazy" decoding="async" width="100" height="100">
+                                    </picture>
+                                    <div class="logo-tooltip">https://www.hermineia.fr</div>
+                                </a>
+                            </div>
+                            <div class="cv-company-details">
                                 <h4>HermineIA – Freelance Data Engineer</h4>
-                                <span class="cv-duration">December 2025 - January 2025</span>
+                                <span class="cv-duration">December 2025 - January 2026</span>
                             </div>
                         </div>
                     </div>
@@ -206,8 +251,11 @@
                 <div class="cv-exp-header">
                     <div class="cv-company-info">
                         <div class="cv-company-logo">
-                            <a href="https://www.hermineia.fr" target="_blank" class="company-logo-link">
-                                <img src="./assets/logos/hermine_ia_logo.jpeg" alt="HermineIA Logo" class="company-logo-img hermine" loading="lazy" decoding="async">
+                            <a href="https://www.hermineia.fr" target="_blank" rel="noopener" class="company-logo-link">
+                                <picture>
+                                    <source srcset="assets/logos/hermine_ia_logo.webp" type="image/webp">
+                                    <img src="./assets/logos/hermine_ia_logo.jpeg" alt="HermineIA Logo" class="company-logo-img hermine" loading="lazy" decoding="async" width="100" height="100">
+                                </picture>
                                 <div class="logo-tooltip">https://www.hermineia.fr</div>
                             </a>
                         </div>
@@ -229,8 +277,11 @@
                 <div class="cv-exp-header">
                     <div class="cv-company-info">
                         <div class="cv-company-logo">
-                            <a href="https://www.equasens.com/" target="_blank" class="company-logo-link">
-                                <img src="./assets/logos/equasens_logo.png" alt="Equasens Logo" class="company-logo-img equasens" loading="lazy" decoding="async">
+                            <a href="https://www.equasens.com/" target="_blank" rel="noopener" class="company-logo-link">
+                                <picture>
+                                    <source srcset="assets/logos/equasens_logo.webp" type="image/webp">
+                                    <img src="./assets/logos/equasens_logo.png" alt="Equasens Logo" class="company-logo-img equasens" loading="lazy" decoding="async" width="1561" height="1494">
+                                </picture>
                                 <div class="logo-tooltip">equasens.com</div>
                             </a>
                         </div>
@@ -256,8 +307,11 @@
                 <div class="cv-education">
                     <div class="cv-education-header">
                         <div class="cv-education-logo">
-                            <a href="https://licence-master-informatique.formation.univ-lorraine.fr/master/m2-parcours-avr/" target="_blank" class="education-logo-link">
-                                <img src="./assets/logos/logo_fst.png" alt="Master II Logo" class="education-logo-img" loading="lazy" decoding="async">
+                            <a href="https://licence-master-informatique.formation.univ-lorraine.fr/master/m2-parcours-avr/" target="_blank" rel="noopener" class="education-logo-link">
+                                <picture>
+                                    <source srcset="assets/logos/logo_fst.webp" type="image/webp">
+                                    <img src="./assets/logos/logo_fst.png" alt="Master II Logo" class="education-logo-img" loading="lazy" decoding="async" width="484" height="249">
+                                </picture>
                                 <div class="logo-tooltip">https://licence-master-informatique.formation.univ-lorraine.fr/master/m2-parcours-avr/</div>
                             </a>
                         </div>
@@ -277,7 +331,7 @@
                 <div class="cv-education">
                     <div class="cv-education-header">
                         <div class="cv-education-logo">
-                            <a href="https://polytech-nancy.univ-lorraine.fr/formation/informatique-automatique-robotique-reseaux-ia2r/" target="_blank" class="education-logo-link">
+                            <a href="https://polytech-nancy.univ-lorraine.fr/formation/informatique-automatique-robotique-reseaux-ia2r/" target="_blank" rel="noopener" class="education-logo-link">
                                 <img src="./assets/logos/polytech_logo.svg" alt="Polytech Nancy Logo" class="education-logo-img" loading="lazy" decoding="async">
                                 <div class="logo-tooltip">https://polytech-nancy.univ-lorraine.fr/formation/informatique-automatique-robotique-reseaux-ia2r/</div>
                             </a>
@@ -355,14 +409,20 @@
                         <span class="certification-text">• Hugging face Agent Course, Hugging Face</span>
                         <span class="hover-indicator">🔍</span>
                         <div class="certification-preview">
-                            <img src="./assets/certificates/certificat_HF.jpg" alt="Certificat Hugging Face" class="certificate-thumbnail" loading="lazy" decoding="async">
+                            <picture>
+                                <source srcset="assets/certificates/certificat_HF.webp" type="image/webp">
+                                <img src="./assets/certificates/certificat_HF.jpg" alt="Certificat Hugging Face" class="certificate-thumbnail" loading="lazy" decoding="async" width="4167" height="2946">
+                            </picture>
                         </div>
                     </li>
                     <li class="certification-item">
                         <span class="certification-text">• Linux Server Administration, Open Classroom</span>
                         <span class="hover-indicator">🔍</span>
                         <div class="certification-preview">
-                            <img src="./assets/certificates/certificat_admin_linux.jpg" alt="Certificat OpenClassroom" class="certificate-thumbnail" loading="lazy" decoding="async">
+                            <picture>
+                                <source srcset="assets/certificates/certificat_admin_linux.webp" type="image/webp">
+                                <img src="./assets/certificates/certificat_admin_linux.jpg" alt="Certificat OpenClassroom" class="certificate-thumbnail" loading="lazy" decoding="async" width="1754" height="1241">
+                            </picture>
                         </div>
                     </li>
                 </ul>
@@ -371,9 +431,12 @@
             <div class="cv-section">
                 <h3 class="cv-section-title">Projects</h3>
                 <div class="gitlab-preview-container">
-                    <p class="cv-gitlab-link">My Gitlab: <a href="https://gitlab.com/users/SilloVV/projects" target="_blank" class="gitlab-link">https://gitlab.com/users/SilloVV/projects</a></p>
+                    <p class="cv-gitlab-link">My Gitlab: <a href="https://gitlab.com/users/SilloVV/projects" target="_blank" rel="noopener" class="gitlab-link">https://gitlab.com/users/SilloVV/projects</a></p>
                     <div class="gitlab-preview">
-                        <img src="./assets/screenshots/gitlab-preview.png" alt="GitLab Preview" class="gitlab-thumbnail" loading="lazy" decoding="async">
+                        <picture>
+                            <source srcset="assets/screenshots/gitlab-preview.webp" type="image/webp">
+                            <img src="./assets/screenshots/gitlab-preview.png" alt="GitLab Preview" class="gitlab-thumbnail" loading="lazy" decoding="async" width="1824" height="1416">
+                        </picture>
                     </div>
                 </div>
                 
@@ -445,7 +508,10 @@
                         </div>
                     </div>
                     <div class="project-second-image">
-                        <img src="assets/projects/dump_alert.png" alt="Dump Alert">
+                        <picture>
+                            <source srcset="assets/projects/dump_alert.webp" type="image/webp">
+                            <img src="assets/projects/dump_alert.png" alt="Dump Alert" width="1379" height="873" decoding="async" loading="lazy">
+                        </picture>
                     </div>
                     <div class="project-images-container">
                         <div class="project-description">
@@ -473,7 +539,10 @@
                         </div>
                     </div>
                     <div class="project-second-image">
-                        <img src="assets/projects/vaccination.png" alt="Doctolib Bis">
+                        <picture>
+                            <source srcset="assets/projects/vaccination.webp" type="image/webp">
+                            <img src="assets/projects/vaccination.png" alt="Doctolib Bis" width="1792" height="897" decoding="async" loading="lazy">
+                        </picture>
                     </div>
                     <div class="project-images-container">
                         <div class="project-description">
@@ -501,7 +570,10 @@
                         </div>
                     </div>
                     <div class="project-second-image">
-                        <img src="assets/logos/portfolio_project.png" alt="Portfolio Responsable Pédagogique">
+                        <picture>
+                            <source srcset="assets/logos/portfolio_project.webp" type="image/webp">
+                            <img src="assets/logos/portfolio_project.png" alt="Portfolio Responsable Pédagogique" width="1782" height="973" decoding="async" loading="lazy">
+                        </picture>
                     </div>
                     <div class="project-images-container">
                         <div class="project-description">
@@ -536,7 +608,10 @@
                         </div>
                     </div>
                     <div class="project-second-image">
-                        <img src="assets/projects/superdiag.png" alt="">
+                        <picture>
+                            <source srcset="assets/projects/superdiag.webp" type="image/webp">
+                            <img src="assets/projects/superdiag.png" alt="" width="1203" height="757" decoding="async" loading="lazy">
+                        </picture>
                     </div>
                     <div class="project-images-container">
                         <div class="project-description">
@@ -564,7 +639,10 @@
                         </div>
                     </div>
                     <div class="project-second-image">
-                        <img src="assets/projects/kubernetes.png" alt="Kubernetes Cluster">
+                        <picture>
+                            <source srcset="assets/projects/kubernetes.webp" type="image/webp">
+                            <img src="assets/projects/kubernetes.png" alt="Kubernetes Cluster" width="1468" height="774" decoding="async" loading="lazy">
+                        </picture>
                     </div>
                     <div class="project-images-container">
                         <div class="project-description">
@@ -592,7 +670,10 @@
                         </div>
                     </div>
                     <div class="project-second-image">
-                        <img src="assets/projects/gitlab_ci.png" alt="GitLab CI/CD">
+                        <picture>
+                            <source srcset="assets/projects/gitlab_ci.webp" type="image/webp">
+                            <img src="assets/projects/gitlab_ci.png" alt="GitLab CI/CD" width="881" height="358" decoding="async" loading="lazy">
+                        </picture>
                     </div>
                     <div class="project-images-container">
                         <div class="project-description">
@@ -627,7 +708,10 @@
                         </div>
                     </div>
                     <div class="project-second-image">
-                        <img src="assets/projects/mlops.png" alt="MLOps Pipeline">
+                        <picture>
+                            <source srcset="assets/projects/mlops.webp" type="image/webp">
+                            <img src="assets/projects/mlops.png" alt="MLOps Pipeline" width="954" height="656" decoding="async" loading="lazy">
+                        </picture>
                     </div>
                     <div class="project-images-container">
                         <div class="project-description">
@@ -654,7 +738,10 @@
                         </div>
                     </div>
                     <div class="project-second-image">
-                        <img src="assets/projects/u_NET.png" alt="U-Net Segmentation">
+                        <picture>
+                            <source srcset="assets/projects/u_net.webp" type="image/webp">
+                            <img src="assets/projects/u_net.png" alt="U-Net Segmentation" width="1018" height="622" decoding="async" loading="lazy">
+                        </picture>
                     </div>
                     <div class="project-images-container">
                         <div class="project-description">
@@ -681,7 +768,10 @@
                         </div>
                     </div>
                     <div class="project-second-image">
-                        <img src="assets/projects/Steersim.png" alt="SteerSim Vehicle Control">
+                        <picture>
+                            <source srcset="assets/projects/Steersim.webp" type="image/webp">
+                            <img src="assets/projects/Steersim.png" alt="SteerSim Vehicle Control" width="1194" height="399" decoding="async" loading="lazy">
+                        </picture>
                     </div>
                     <div class="project-images-container">
                         <div class="project-description">
@@ -708,7 +798,10 @@
                         </div>
                     </div>
                     <div class="project-second-image">
-                        <img src="assets/projects/legal_chabot.png" alt="Legal Tech Chatbot">
+                        <picture>
+                            <source srcset="assets/projects/legal_chabot.webp" type="image/webp">
+                            <img src="assets/projects/legal_chabot.png" alt="Legal Tech Chatbot" width="1445" height="477" decoding="async" loading="lazy">
+                        </picture>
                     </div>
                     <div class="project-images-container">
                         <div class="project-description">
@@ -743,35 +836,35 @@
                         <h3>Social Networks</h3>
                         <div class="contact-icons-container">
                             <div class="contact-icon linkedin" title="LinkedIn: linkedin.com/in/wassil-nakib-031361293">
-                                <a href="https://www.linkedin.com/in/wassil-nakib-031361293/" target="_blank">
+                                <a href="https://www.linkedin.com/in/wassil-nakib-031361293/" target="_blank" rel="noopener">
                                     <img src="./assets/icons/linkedin_logo.svg" alt="LinkedIn" loading="lazy" decoding="async">
                                 </a>
                                 <div class="tooltip">linkedin.com/in/wassil-nakib-031361293</div>
                             </div>
 
                             <div class="contact-icon gitlab" title="GitLab: gitlab.com/SilloVV">
-                                <a href="https://gitlab.com/SilloVV" target="_blank">
+                                <a href="https://gitlab.com/SilloVV" target="_blank" rel="noopener">
                                     <img src="./assets/icons/gitlab_logo.svg" alt="GitLab" loading="lazy" decoding="async">
                                 </a>
                                 <div class="tooltip">gitlab.com/SilloVV</div>
                             </div>
 
                             <div class="contact-icon github" title="GitHub: github.com/SilloVV">
-                                <a href="https://github.com/SilloVV" target="_blank">
+                                <a href="https://github.com/SilloVV" target="_blank" rel="noopener">
                                     <img src="./assets/icons/github_logo.svg" alt="GitHub" loading="lazy" decoding="async">
                                 </a>
                                 <div class="tooltip">github.com/SilloVV</div>
                             </div>
 
                             <div class="contact-icon instagram" title="Instagram: instagram.com/_scoobidouuu">
-                                <a href="https://www.instagram.com/_scoobidouuu" target="_blank">
+                                <a href="https://www.instagram.com/_scoobidouuu" target="_blank" rel="noopener">
                                     <img src="./assets/icons/instagram_logo.svg" alt="Instagram" loading="lazy" decoding="async">
                                 </a>
                                 <div class="tooltip">instagram.com/_scoobidouuu</div>
                             </div>
 
                             <div class="contact-icon malt" title="Malt: malt.fr/profile/wassilnakib">
-                                <a href="https://www.malt.fr/profile/wassilnakib" target="_blank">
+                                <a href="https://www.malt.fr/profile/wassilnakib" target="_blank" rel="noopener">
                                     <img src="./assets/icons/malt_logo.svg" alt="Malt" loading="lazy" decoding="async">
                                 </a>
                                 <div class="tooltip">malt.fr/profile/wassilnakib</div>
@@ -862,7 +955,10 @@
             </div>
 
             <div class="signature-container">
-                <img src="assets/icons/signature.png" alt="Signature Wassil NAKIB" class="signature" loading="lazy" decoding="async">
+                <picture>
+                    <source srcset="assets/icons/signature.webp" type="image/webp">
+                    <img src="assets/icons/signature.png" alt="Signature Wassil NAKIB" class="signature" loading="lazy" decoding="async" width="509" height="490">
+                </picture>
             </div>
         </div>
     </div>
@@ -877,7 +973,7 @@
         <!-- Learning & Career -->
         <h3 class="resource-category-title" data-translate="resource-cat-learning">Learning & Career</h3>
         <div class="resources-grid">
-            <a href="https://roadmap.sh/" target="_blank" class="resource-card" data-resource="roadmap">
+            <a href="https://roadmap.sh/" target="_blank" rel="noopener" class="resource-card" data-resource="roadmap">
                 <div class="resource-icon">
                     <img src="assets/icons/map_logo.svg" alt="Roadmap" class="resource-icon-img">
                 </div>
@@ -888,7 +984,7 @@
                 </div>
                 <i class='bx bx-link-external resource-external'></i>
             </a>
-            <a href="https://blog.stephane-robert.info/docs/" target="_blank" class="resource-card" data-resource="stephane">
+            <a href="https://blog.stephane-robert.info/docs/" target="_blank" rel="noopener" class="resource-card" data-resource="stephane">
                 <div class="resource-icon">
                     <img src="assets/icons/blog_logo.svg" alt="Blog" class="resource-icon-img">
                 </div>
@@ -899,7 +995,7 @@
                 </div>
                 <i class='bx bx-link-external resource-external'></i>
             </a>
-            <a href="https://easyfreeresume.com/templates" target="_blank" class="resource-card" data-resource="resume">
+            <a href="https://easyfreeresume.com/templates" target="_blank" rel="noopener" class="resource-card" data-resource="resume">
                 <div class="resource-icon">
                     <img src="assets/icons/resume_download.svg" alt="Resume" class="resource-icon-img">
                 </div>
@@ -910,7 +1006,7 @@
                 </div>
                 <i class='bx bx-link-external resource-external'></i>
             </a>
-            <a href="https://www.wolframalpha.com/" target="_blank" class="resource-card" data-resource="wolfram">
+            <a href="https://www.wolframalpha.com/" target="_blank" rel="noopener" class="resource-card" data-resource="wolfram">
                 <div class="resource-icon">
                     <img src="assets/icons/calculus_logo.svg" alt="Calculator" class="resource-icon-img">
                 </div>
@@ -921,7 +1017,7 @@
                 </div>
                 <i class='bx bx-link-external resource-external'></i>
             </a>
-            <a href="https://exercism.org/" target="_blank" class="resource-card" data-resource="exercism">
+            <a href="https://exercism.org/" target="_blank" rel="noopener" class="resource-card" data-resource="exercism">
                 <div class="resource-icon">
                     <img src="assets/icons/exercism.svg" alt="Exercism" class="resource-icon-img">
                 </div>
@@ -932,7 +1028,7 @@
                 </div>
                 <i class='bx bx-link-external resource-external'></i>
             </a>
-            <a href="https://tutorialsdojo.com/aws-cheat-sheets/" target="_blank" class="resource-card" data-resource="awscheat">
+            <a href="https://tutorialsdojo.com/aws-cheat-sheets/" target="_blank" rel="noopener" class="resource-card" data-resource="awscheat">
                 <div class="resource-icon">
                     <i class='bx bx-cloud'></i>
                 </div>
@@ -943,7 +1039,7 @@
                 </div>
                 <i class='bx bx-link-external resource-external'></i>
             </a>
-            <a href="https://coddy.tech/" target="_blank" class="resource-card" data-resource="coddy">
+            <a href="https://coddy.tech/" target="_blank" rel="noopener" class="resource-card" data-resource="coddy">
                 <div class="resource-icon">
                     <img src="assets/icons/exercism.svg" alt="Coddy" class="resource-icon-img">
                 </div>
@@ -959,7 +1055,7 @@
         <!-- Development -->
         <h3 class="resource-category-title" data-translate="resource-cat-dev">Development</h3>
         <div class="resources-grid">
-            <a href="https://jsoncrack.com/" target="_blank" class="resource-card" data-resource="jsoncrack">
+            <a href="https://jsoncrack.com/" target="_blank" rel="noopener" class="resource-card" data-resource="jsoncrack">
                 <div class="resource-icon">
                     <img src="assets/icons/json_logo.svg" alt="JSON" class="resource-icon-img">
                 </div>
@@ -970,7 +1066,7 @@
                 </div>
                 <i class='bx bx-link-external resource-external'></i>
             </a>
-            <a href="https://devtoys.app/" target="_blank" class="resource-card" data-resource="devtoys">
+            <a href="https://devtoys.app/" target="_blank" rel="noopener" class="resource-card" data-resource="devtoys">
                 <div class="resource-icon">
                     <img src="assets/icons/toys.svg" alt="DevToys" class="resource-icon-img">
                 </div>
@@ -981,7 +1077,7 @@
                 </div>
                 <i class='bx bx-link-external resource-external'></i>
             </a>
-            <a href="https://stan-smith.github.io/FossFLOW/" target="_blank" class="resource-card" data-resource="fossflow">
+            <a href="https://stan-smith.github.io/FossFLOW/" target="_blank" rel="noopener" class="resource-card" data-resource="fossflow">
                 <div class="resource-icon">
                     <img src="assets/icons/fossflow.svg" alt="FossFLOW" class="resource-icon-img">
                 </div>
@@ -992,7 +1088,7 @@
                 </div>
                 <i class='bx bx-link-external resource-external'></i>
             </a>
-            <a href=" https://github.com/zhfahim/anchor" target="_blank" class="resource-card" data-resource="anchor">
+            <a href=" https://github.com/zhfahim/anchor" target="_blank" rel="noopener" class="resource-card" data-resource="anchor">
                 <div class="resource-icon">
                     <img src="assets/icons/notes.svg" alt="Anchor" class="resource-icon-img">
                 </div>
@@ -1003,7 +1099,7 @@
                 </div>
                 <i class='bx bx-link-external resource-external'></i>
             </a>
-            <a href="https://ray.so/" target="_blank" class="resource-card" data-resource="rayso">
+            <a href="https://ray.so/" target="_blank" rel="noopener" class="resource-card" data-resource="rayso">
                 <div class="resource-icon">
                     <i class='bx bx-code'></i>
                 </div>
@@ -1014,7 +1110,7 @@
                 </div>
                 <i class='bx bx-link-external resource-external'></i>
             </a>
-            <a href="https://app.diagrams.net/" target="_blank" class="resource-card" data-resource="diagrams">
+            <a href="https://app.diagrams.net/" target="_blank" rel="noopener" class="resource-card" data-resource="diagrams">
                 <div class="resource-icon">
                     <i class='bx bx-sitemap'></i>
                 </div>
@@ -1025,7 +1121,7 @@
                 </div>
                 <i class='bx bx-link-external resource-external'></i>
             </a>
-            <a href="https://explainshell.com/" target="_blank" class="resource-card" data-resource="explainshell">
+            <a href="https://explainshell.com/" target="_blank" rel="noopener" class="resource-card" data-resource="explainshell">
                 <div class="resource-icon">
                     <i class='bx bx-terminal'></i>
                 </div>
@@ -1036,7 +1132,7 @@
                 </div>
                 <i class='bx bx-link-external resource-external'></i>
             </a>
-            <a href="https://excalidraw.com/" target="_blank" class="resource-card" data-resource="excalidraw">
+            <a href="https://excalidraw.com/" target="_blank" rel="noopener" class="resource-card" data-resource="excalidraw">
                 <div class="resource-icon">
                     <i class='bx bx-pencil'></i>
                 </div>
@@ -1047,7 +1143,7 @@
                 </div>
                 <i class='bx bx-link-external resource-external'></i>
             </a>
-            <a href="https://sankeymatic.com/" target="_blank" class="resource-card" data-resource="sankeymatic">
+            <a href="https://sankeymatic.com/" target="_blank" rel="noopener" class="resource-card" data-resource="sankeymatic">
                 <div class="resource-icon">
                     <i class='bx bx-bar-chart-alt-2'></i>
                 </div>
@@ -1058,7 +1154,7 @@
                 </div>
                 <i class='bx bx-link-external resource-external'></i>
             </a>
-            <a href="https://skills.sh/" target="_blank" class="resource-card" data-resource="skillssh">
+            <a href="https://skills.sh/" target="_blank" rel="noopener" class="resource-card" data-resource="skillssh">
                 <div class="resource-icon">
                     <i class='bx bx-bot'></i>
                 </div>
@@ -1069,7 +1165,7 @@
                 </div>
                 <i class='bx bx-link-external resource-external'></i>
             </a>
-            <a href="https://reactbits.dev/" target="_blank" class="resource-card" data-resource="reactbits">
+            <a href="https://reactbits.dev/" target="_blank" rel="noopener" class="resource-card" data-resource="reactbits">
                 <div class="resource-icon">
                     <img src="assets/icons/copy.svg" alt="ReactBits" class="resource-icon-img">
                 </div>
@@ -1080,7 +1176,7 @@
                 </div>
                 <i class='bx bx-link-external resource-external'></i>
             </a>
-            <a href="https://github.com/Njengah/claude-code-cheat-sheet" target="_blank" class="resource-card" data-resource="claudecheat">
+            <a href="https://github.com/Njengah/claude-code-cheat-sheet" target="_blank" rel="noopener" class="resource-card" data-resource="claudecheat">
                 <div class="resource-icon">
                     <i class='bx bx-terminal'></i>
                 </div>
@@ -1096,7 +1192,7 @@
         <!-- Productivity -->
         <h3 class="resource-category-title" data-translate="resource-cat-productivity">Productivity</h3>
         <div class="resources-grid">
-            <a href="https://tinywow.com/tools/pdf" target="_blank" class="resource-card" data-resource="tinywow">
+            <a href="https://tinywow.com/tools/pdf" target="_blank" rel="noopener" class="resource-card" data-resource="tinywow">
                 <div class="resource-icon">
                     <img src="assets/icons/pdf.svg" alt="PDF" class="resource-icon-img">
                 </div>
@@ -1107,7 +1203,7 @@
                 </div>
                 <i class='bx bx-link-external resource-external'></i>
             </a>
-            <a href="https://www.ilovepdf.com/" target="_blank" class="resource-card" data-resource="ilovepdf">
+            <a href="https://www.ilovepdf.com/" target="_blank" rel="noopener" class="resource-card" data-resource="ilovepdf">
                 <div class="resource-icon">
                     <img src="assets/icons/pdf.svg" alt="PDF" class="resource-icon-img">
                 </div>
@@ -1118,7 +1214,7 @@
                 </div>
                 <i class='bx bx-link-external resource-external'></i>
             </a>
-            <a href="https://sabrogden.github.io/Ditto/" target="_blank" class="resource-card" data-resource="ditto">
+            <a href="https://sabrogden.github.io/Ditto/" target="_blank" rel="noopener" class="resource-card" data-resource="ditto">
                 <div class="resource-icon">
                     <i class='bx bx-clipboard'></i>
                 </div>
@@ -1129,7 +1225,7 @@
                 </div>
                 <i class='bx bx-link-external resource-external'></i>
             </a>
-            <a href="https://snapdrop.net/" target="_blank" class="resource-card" data-resource="snapdrop">
+            <a href="https://snapdrop.net/" target="_blank" rel="noopener" class="resource-card" data-resource="snapdrop">
                 <div class="resource-icon">
                     <img src="assets/icons/share.svg" alt="Share" class="resource-icon-img">
                 </div>
@@ -1140,7 +1236,7 @@
                 </div>
                 <i class='bx bx-link-external resource-external'></i>
             </a>
-            <a href="https://privnote.com/" target="_blank" class="resource-card" data-resource="privnote">
+            <a href="https://privnote.com/" target="_blank" rel="noopener" class="resource-card" data-resource="privnote">
                 <div class="resource-icon">
                     <img src="assets/icons/notes.svg" alt="Privnote" class="resource-icon-img">
                 </div>
@@ -1151,7 +1247,7 @@
                 </div>
                 <i class='bx bx-link-external resource-external'></i>
             </a>
-            <a href="https://toffeeshare.com/" target="_blank" class="resource-card" data-resource="toffeeshare">
+            <a href="https://toffeeshare.com/" target="_blank" rel="noopener" class="resource-card" data-resource="toffeeshare">
                 <div class="resource-icon">
                     <img src="assets/icons/candy.svg" alt="ToffeeShare" class="resource-icon-img">
                 </div>
@@ -1162,7 +1258,7 @@
                 </div>
                 <i class='bx bx-link-external resource-external'></i>
             </a>
-            <a href="https://www.flowlauncher.com/" target="_blank" class="resource-card" data-resource="flowlauncher">
+            <a href="https://www.flowlauncher.com/" target="_blank" rel="noopener" class="resource-card" data-resource="flowlauncher">
                 <div class="resource-icon">
                     <img src="assets/icons/flowlauncher.svg" alt="Flow Launcher" class="resource-icon-img">
                 </div>
@@ -1173,7 +1269,7 @@
                 </div>
                 <i class='bx bx-link-external resource-external'></i>
             </a>
-            <a href="https://bitwarden.com/" target="_blank" class="resource-card" data-resource="bitwarden">
+            <a href="https://bitwarden.com/" target="_blank" rel="noopener" class="resource-card" data-resource="bitwarden">
                 <div class="resource-icon">
                     <img src="assets/icons/security.svg" alt="Security" class="resource-icon-img">
                 </div>
@@ -1184,7 +1280,7 @@
                 </div>
                 <i class='bx bx-link-external resource-external'></i>
             </a>
-            <a href="https://www.ventusky.com/" target="_blank" class="resource-card" data-resource="ventusky">
+            <a href="https://www.ventusky.com/" target="_blank" rel="noopener" class="resource-card" data-resource="ventusky">
                 <div class="resource-icon">
                     <i class='bx bx-cloud'></i>
                 </div>
@@ -1195,7 +1291,7 @@
                 </div>
                 <i class='bx bx-link-external resource-external'></i>
             </a>
-            <a href="https://tosdr.org/" target="_blank" class="resource-card" data-resource="tosdr">
+            <a href="https://tosdr.org/" target="_blank" rel="noopener" class="resource-card" data-resource="tosdr">
                 <div class="resource-icon">
                     <i class='bx bx-file'></i>
                 </div>
@@ -1206,7 +1302,7 @@
                 </div>
                 <i class='bx bx-link-external resource-external'></i>
             </a>
-            <a href="https://www.rome2rio.com/" target="_blank" class="resource-card" data-resource="rome2rio">
+            <a href="https://www.rome2rio.com/" target="_blank" rel="noopener" class="resource-card" data-resource="rome2rio">
                 <div class="resource-icon">
                     <i class='bx bx-map-alt'></i>
                 </div>
@@ -1217,7 +1313,7 @@
                 </div>
                 <i class='bx bx-link-external resource-external'></i>
             </a>
-            <a href="https://www.eatthismuch.com/" target="_blank" class="resource-card" data-resource="eatthismuch">
+            <a href="https://www.eatthismuch.com/" target="_blank" rel="noopener" class="resource-card" data-resource="eatthismuch">
                 <div class="resource-icon">
                     <i class='bx bx-food-menu'></i>
                 </div>
@@ -1228,7 +1324,7 @@
                 </div>
                 <i class='bx bx-link-external resource-external'></i>
             </a>
-            <a href="https://www.reddit.com/r/LifeProTips/top/?t=all" target="_blank" class="resource-card" data-resource="lifepro">
+            <a href="https://www.reddit.com/r/LifeProTips/top/?t=all" target="_blank" rel="noopener" class="resource-card" data-resource="lifepro">
                 <div class="resource-icon">
                     <i class='bx bx-bulb'></i>
                 </div>
@@ -1239,7 +1335,7 @@
                 </div>
                 <i class='bx bx-link-external resource-external'></i>
             </a>
-            <a href="https://superwhisper.com/" target="_blank" class="resource-card" data-resource="superwhisper">
+            <a href="https://superwhisper.com/" target="_blank" rel="noopener" class="resource-card" data-resource="superwhisper">
                 <div class="resource-icon">
                     <img src="assets/icons/share.svg" alt="SuperWhisper" class="resource-icon-img">
                 </div>
@@ -1255,7 +1351,7 @@
         <!-- Design -->
         <h3 class="resource-category-title" data-translate="resource-cat-design">Design</h3>
         <div class="resources-grid">
-            <a href="https://www.streamlinehq.com/" target="_blank" class="resource-card" data-resource="streamline">
+            <a href="https://www.streamlinehq.com/" target="_blank" rel="noopener" class="resource-card" data-resource="streamline">
                 <div class="resource-icon">
                     <i class='bx bx-shape-square'></i>
                 </div>
@@ -1266,7 +1362,7 @@
                 </div>
                 <i class='bx bx-link-external resource-external'></i>
             </a>
-            <a href="https://coolors.co/" target="_blank" class="resource-card" data-resource="coolors">
+            <a href="https://coolors.co/" target="_blank" rel="noopener" class="resource-card" data-resource="coolors">
                 <div class="resource-icon">
                     <img src="assets/icons/colors.svg" alt="Colors" class="resource-icon-img">
                 </div>
@@ -1282,7 +1378,7 @@
         <!-- Discovery & Research -->
         <h3 class="resource-category-title" data-translate="resource-cat-discovery">Discovery & Research</h3>
         <div class="resources-grid">
-            <a href="https://alternativeto.net/" target="_blank" class="resource-card" data-resource="alternativeto">
+            <a href="https://alternativeto.net/" target="_blank" rel="noopener" class="resource-card" data-resource="alternativeto">
                 <div class="resource-icon">
                     <i class='bx bx-search-alt'></i>
                 </div>
@@ -1293,7 +1389,7 @@
                 </div>
                 <i class='bx bx-link-external resource-external'></i>
             </a>
-            <a href="https://dr.miromind.ai/" target="_blank" class="resource-card" data-resource="miromind">
+            <a href="https://dr.miromind.ai/" target="_blank" rel="noopener" class="resource-card" data-resource="miromind">
                 <div class="resource-icon">
                     <i class='bx bx-bot'></i>
                 </div>
@@ -1304,7 +1400,7 @@
                 </div>
                 <i class='bx bx-link-external resource-external'></i>
             </a>
-            <a href="https://www.geocaching.com/play" target="_blank" class="resource-card" data-resource="geocaching">
+            <a href="https://www.geocaching.com/play" target="_blank" rel="noopener" class="resource-card" data-resource="geocaching">
                 <div class="resource-icon">
                     <i class='bx bx-map-pin'></i>
                 </div>
@@ -1315,7 +1411,7 @@
                 </div>
                 <i class='bx bx-link-external resource-external'></i>
             </a>
-            <a href="https://osintframework.com" target="_blank" class="resource-card" data-resource="osint">
+            <a href="https://osintframework.com" target="_blank" rel="noopener" class="resource-card" data-resource="osint">
                 <div class="resource-icon">
                     <i class='bx bx-search-alt-2'></i>
                 </div>
@@ -1326,7 +1422,7 @@
                 </div>
                 <i class='bx bx-link-external resource-external'></i>
             </a>
-            <a href="https://ourworldindata.org/" target="_blank" class="resource-card" data-resource="owid">
+            <a href="https://ourworldindata.org/" target="_blank" rel="noopener" class="resource-card" data-resource="owid">
                 <div class="resource-icon">
                     <i class='bx bx-globe'></i>
                 </div>
@@ -1337,7 +1433,7 @@
                 </div>
                 <i class='bx bx-link-external resource-external'></i>
             </a>
-            <a href="https://human.biodigital.com/" target="_blank" class="resource-card" data-resource="biodigital">
+            <a href="https://human.biodigital.com/" target="_blank" rel="noopener" class="resource-card" data-resource="biodigital">
                 <div class="resource-icon">
                     <img src="assets/icons/map_logo.svg" alt="BioDigital" class="resource-icon-img">
                 </div>
@@ -1348,7 +1444,7 @@
                 </div>
                 <i class='bx bx-link-external resource-external'></i>
             </a>
-            <a href="https://animagraffs.com/" target="_blank" class="resource-card" data-resource="animagraffs">
+            <a href="https://animagraffs.com/" target="_blank" rel="noopener" class="resource-card" data-resource="animagraffs">
                 <div class="resource-icon">
                     <img src="assets/icons/toys.svg" alt="Animagraffs" class="resource-icon-img">
                 </div>
@@ -1364,7 +1460,7 @@
         <!-- Fun -->
         <h3 class="resource-category-title" data-translate="resource-cat-fun">Fun</h3>
         <div class="resources-grid">
-            <a href="https://elgoog.im/" target="_blank" class="resource-card" data-resource="elgoog">
+            <a href="https://elgoog.im/" target="_blank" rel="noopener" class="resource-card" data-resource="elgoog">
                 <div class="resource-icon">
                     <img src="assets/icons/eggs.svg" alt="elgooG" class="resource-icon-img">
                 </div>
@@ -1375,7 +1471,7 @@
                 </div>
                 <i class='bx bx-link-external resource-external'></i>
             </a>
-            <a href="https://neal.fun/" target="_blank" class="resource-card" data-resource="nealfun">
+            <a href="https://neal.fun/" target="_blank" rel="noopener" class="resource-card" data-resource="nealfun">
                 <div class="resource-icon">
                     <i class='bx bx-game'></i>
                 </div>
@@ -1386,7 +1482,7 @@
                 </div>
                 <i class='bx bx-link-external resource-external'></i>
             </a>
-            <a href="https://ncase.me/trust/" target="_blank" class="resource-card" data-resource="trustgame">
+            <a href="https://ncase.me/trust/" target="_blank" rel="noopener" class="resource-card" data-resource="trustgame">
                 <div class="resource-icon">
                     <i class='bx bx-group'></i>
                 </div>
@@ -1412,35 +1508,53 @@
         <ul>
             <li>
                 <a onclick="show_about()">
+                    <svg class="nav-icon nav-icon--about" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <circle class="nav-icon-head" cx="12" cy="8" r="3.6"/>
+                        <path class="nav-icon-body" d="M4.8 20c0-3.6 3.2-5.8 7.2-5.8s7.2 2.2 7.2 5.8"/>
+                    </svg>
                     <span class="nav-item"> About me</span>
                 </a>
-
             </li>
             <li>
                 <a onclick="show_cv()">
+                    <svg class="nav-icon nav-icon--cv" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path class="nav-icon-sheet" d="M5.5 3.5h9l4.5 4.5v12a1 1 0 0 1-1 1h-12a1 1 0 0 1-1-1v-15a1 1 0 0 1 1-1z"/>
+                        <path class="nav-icon-fold" d="M14.5 3.5V8h4.5"/>
+                        <path class="nav-icon-line nav-icon-line--1" d="M8.5 12.5h7"/>
+                        <path class="nav-icon-line nav-icon-line--2" d="M8.5 15.5h7"/>
+                        <path class="nav-icon-line nav-icon-line--3" d="M8.5 18.5h4"/>
+                    </svg>
                     <span class="nav-item"> Curriculum</span>
                 </a>
-
             </li>
             <li>
                 <a onclick="show_projects()">
+                    <svg class="nav-icon nav-icon--projects" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path class="nav-icon-layer nav-icon-layer--back" d="M12 3 21 7.6l-9 4.6-9-4.6z"/>
+                        <path class="nav-icon-layer nav-icon-layer--mid" d="m3 12.2 9 4.6 9-4.6"/>
+                        <path class="nav-icon-layer nav-icon-layer--front" d="m3 16.8 9 4.6 9-4.6"/>
+                    </svg>
                     <span class="nav-item">Projects</span>
                 </a>
-
             </li>
             <li>
                 <a onclick="show_resources()">
+                    <svg class="nav-icon nav-icon--resources" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <circle class="nav-icon-dial" cx="12" cy="12" r="8.5"/>
+                        <path class="nav-icon-needle" d="m15.4 8.6-2 4.8-4.8 2 2-4.8z"/>
+                    </svg>
                     <span class="nav-item">Resources</span>
                 </a>
-
             </li>
             <li>
                 <a onclick="show_contact()">
+                    <svg class="nav-icon nav-icon--contact" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <rect class="nav-icon-envelope" x="3" y="5.5" width="18" height="13" rx="1.6"/>
+                        <path class="nav-icon-flap" d="m3.6 6.6 8.4 6.2 8.4-6.2"/>
+                    </svg>
                     <span class="nav-item">Contact</span>
                 </a>
-
             </li>
-             
         </ul>
 
         <div class="sidebar-term-hint" data-translate="term-hint">
@@ -1452,9 +1566,8 @@
             <div class="hidden-nav-link">
                 <span class="hidden-nav-item">Films & Series</span>
                 <div class="hidden-links">
-                    <a href="https://nakios.site" target="_blank" title="Nakios">1</a>
-                    <a href="https://gadrov.com" target="_blank" title="Gadrov">2</a>
-                    <a href="https://movix.blog" target="_blank" title="Movix">3</a>
+                    <a href="https://gadrov.com" target="_blank" rel="noopener" title="Gadrov">1</a>
+                    <a href="https://movix.online" target="_blank" rel="noopener" title="Movix">2</a>
                 </div>
             </div>
         </div>
@@ -1517,20 +1630,53 @@
     
     
     
+    <!-- AgiRisk showcase: transparent logo over an IGN "Plan IGN v2" map backdrop -->
+    <div class="agirisk-modal" id="agirisk-modal" role="dialog" aria-modal="true"
+         aria-labelledby="agirisk-modal-title" hidden>
+        <div class="agirisk-map" id="agirisk-map" aria-hidden="true"></div>
+        <div class="agirisk-scrim"></div>
+        <button type="button" class="agirisk-close" id="agirisk-close" aria-label="Fermer">×</button>
+        <div class="agirisk-panel">
+            <picture>
+                <source srcset="assets/logos/AgiRisk.webp" type="image/webp">
+                <img src="assets/logos/AgiRisk.png" alt="Logo AgiRisk" class="agirisk-logo"
+                     width="637" height="286" decoding="async">
+            </picture>
+            <h2 class="agirisk-title" id="agirisk-modal-title">Responsable de développement</h2>
+            <p class="agirisk-subtitle">Plateforme d'évaluation du risque inondation — Cerema</p>
+        </div>
+        <p class="agirisk-attribution">Fond de carte © IGN — Géoplateforme (Plan IGN v2)</p>
+    </div>
+
     <div class="hover-image" id="hover-polytech">
-        <img src="assets/about_me_images/polytech.png" alt="Polytech Nancy" loading="lazy" decoding="async">
+        <picture>
+            <source srcset="assets/about_me_images/polytech.webp" type="image/webp">
+            <img src="assets/about_me_images/polytech.png" alt="Polytech Nancy" loading="lazy" decoding="async" width="2184" height="698">
+        </picture>
     </div>
     <div class="hover-image" id="hover-diplome">
-        <img src="assets/about_me_images/diplome.png" alt="Double Diplôme" loading="lazy" decoding="async">
+        <picture>
+            <source srcset="assets/about_me_images/diplome.webp" type="image/webp">
+            <img src="assets/about_me_images/diplome.png" alt="Double Diplôme" loading="lazy" decoding="async" width="1290" height="728">
+        </picture>
     </div>
     <div class="hover-image" id="hover-hermine">
-        <img src="assets/about_me_images/hermine.png" alt="HermineIA" loading="lazy" decoding="async">
+        <picture>
+            <source srcset="assets/about_me_images/hermine.webp" type="image/webp">
+            <img src="assets/about_me_images/hermine.png" alt="HermineIA" loading="lazy" decoding="async" width="1924" height="1318">
+        </picture>
     </div>
     <div class="hover-image" id="hover-stationf">
-        <img src="assets/about_me_images/stationf.png" alt="STATION F" loading="lazy" decoding="async">
+        <picture>
+            <source srcset="assets/about_me_images/stationf.webp" type="image/webp">
+            <img src="assets/about_me_images/stationf.png" alt="STATION F" loading="lazy" decoding="async" width="1888" height="1002">
+        </picture>
     </div>
     <div class="hover-image" id="hover-equasens">
-        <img src="assets/about_me_images/equasens.png" alt="Equasens" loading="lazy" decoding="async">
+        <picture>
+            <source srcset="assets/about_me_images/equasens.webp" type="image/webp">
+            <img src="assets/about_me_images/equasens.png" alt="Equasens" loading="lazy" decoding="async" width="1474" height="782">
+        </picture>
     </div>
     
 </body>

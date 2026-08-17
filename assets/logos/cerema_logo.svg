@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" role="img" aria-labelledby="title desc">
+  <title id="title">Cerema</title>
+  <desc id="desc">Logo Cerema pour le curriculum vitae</desc>
+  <rect width="180" height="180" rx="28" fill="#fff"/>
+  <g transform="translate(34 24)">
+    <path d="M56 0a56 56 0 1 0 48.5 84H82.2A36.5 36.5 0 1 1 56 19.5Z" fill="#164f63"/>
+    <path d="M56 19.5a36.5 36.5 0 0 1 31.6 18.2l16.9-9.7A56 56 0 0 0 56 0Z" fill="#ee7d3b"/>
+    <path d="M87.6 37.7A36.5 36.5 0 0 1 92.5 56H112a56 56 0 0 0-7.5-28Z" fill="#e8b53c"/>
+    <path d="M92.5 56a36.5 36.5 0 0 1-10.3 25.4L96 95.2A56 56 0 0 0 112 56Z" fill="#63a66f"/>
+  </g>
+  <text x="90" y="155" text-anchor="middle" fill="#164f63"
+        font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700"
+        letter-spacing=".5">Cerema</text>
+</svg>

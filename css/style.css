@@ -547,18 +547,36 @@ h1, h2, h5, p{
     z-index: 20;
 }
 
+.hero-logo-btn {
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    line-height: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.hero-logo-btn:focus-visible {
+    outline: 2px solid var(--bg-alt);
+    outline-offset: 6px;
+    border-radius: 4px;
+}
+
+/* Borderless on purpose: the logo ships its own alpha channel */
 .hero-logo-img {
-    width: 110px;
+    width: 130px;
     height: auto;
     object-fit: contain;
     transform: rotate(6deg);
-    border: 1px solid #000;
-    border-radius: 10px;
-    transition: transform 0.3s ease;
+    transition: transform 0.35s cubic-bezier(0.25, 0.1, 0.25, 1),
+                filter 0.35s ease;
+    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.12));
 }
 
-.hero-logo-img:hover {
-    transform: rotate(2deg) scale(1.08);
+.hero-logo-btn:hover .hero-logo-img,
+.hero-logo-btn:focus-visible .hero-logo-img {
+    transform: rotate(0deg) scale(1.08);
+    filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.2));
 }
 
 .hero-greeting{
@@ -1032,10 +1050,10 @@ body.terminal-mode .sidebar-term-hint {
     
 
     /* face animation */
-    --tl-1: url(../assets/face-animation-light/tl1.png);
-    --tl-2: url(../assets/face-animation-light/tl2.png);
-    --tl-3: url(../assets/face-animation-light/tl4.png);
-    --tl-4: url(../assets/face-animation-light/tl3.png);
+    --tl-1: url(../assets/face-animation-light/tl1.webp);
+    --tl-2: url(../assets/face-animation-light/tl2.webp);
+    --tl-3: url(../assets/face-animation-light/tl4.webp);
+    --tl-4: url(../assets/face-animation-light/tl3.webp);
 }
 
 /* CHAT LLM SECTION */
@@ -1757,6 +1775,14 @@ body.terminal-mode .download-btn-fixed:hover .cv-download-icon {
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 1px solid rgba(255,255,255,0.2);
+}
+
+.company-logo-img.cerema {
+    object-fit: contain;
+    padding: 3px;
+    background: #fff;
+    border: 0;
+    box-shadow: 0 4px 12px rgba(22, 79, 99, 0.16);
 }
 
 /* Certificats */
@@ -3203,7 +3229,6 @@ body.terminal-mode .dont-click-btn:hover {
   pointer-events: none;
   z-index: 99999999;
   mix-blend-mode: multiply;
-  transition: transform 0.1s ease-out;
   opacity: 0.8;
 }
 
@@ -3948,5 +3973,347 @@ body.terminal-mode .term-section-selected.resource-card {
 
 body.terminal-mode .term-section-selected.contact-icon {
     outline-offset: 3px;
+}
+
+/* ==========================================================================
+   PERFORMANCE HELPERS
+   ========================================================================== */
+
+/* Keeps <picture> out of the box tree so wrapped images stay direct flex/grid items */
+picture {
+    display: contents;
+}
+
+img,
+svg {
+    max-width: 100%;
+}
+
+/* ==========================================================================
+   ANIMATED SIDEBAR ICONS
+   ========================================================================== */
+
+.nav-icon {
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    overflow: visible;
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.sidebar:not(.active) .nav-icon {
+    display: none;
+}
+
+.sidebar.active .nav-icon {
+    opacity: 0.85;
+    transform: translateX(0);
+}
+
+/* Stagger the reveal so the menu unfolds instead of popping */
+.sidebar.active ul li:nth-child(1) .nav-icon { transition-delay: 0.05s; }
+.sidebar.active ul li:nth-child(2) .nav-icon { transition-delay: 0.11s; }
+.sidebar.active ul li:nth-child(3) .nav-icon { transition-delay: 0.17s; }
+.sidebar.active ul li:nth-child(4) .nav-icon { transition-delay: 0.23s; }
+.sidebar.active ul li:nth-child(5) .nav-icon { transition-delay: 0.29s; }
+
+.sidebar.active ul li a {
+    gap: 12px;
+    padding: 0 10px;
+    transition: background-color 0.25s ease, color 0.25s ease, padding-left 0.25s ease;
+}
+
+.sidebar.active ul li a:hover .nav-icon {
+    opacity: 1;
+}
+
+.nav-icon * {
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
+/* About — the head nods and the shoulders lift */
+.nav-icon--about .nav-icon-head {
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.nav-icon--about .nav-icon-body {
+    transition: transform 0.35s ease;
+}
+a:hover .nav-icon--about .nav-icon-head {
+    transform: translateY(-1.5px) scale(1.12);
+}
+a:hover .nav-icon--about .nav-icon-body {
+    transform: translateY(1px);
+}
+
+/* Curriculum — the corner unfolds and the text lines write themselves in */
+.nav-icon--cv .nav-icon-fold {
+    transition: transform 0.35s ease;
+}
+a:hover .nav-icon--cv .nav-icon-fold {
+    transform: translate(1.5px, -1.5px);
+}
+.nav-icon--cv .nav-icon-line {
+    stroke-dasharray: 8;
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 0.3s ease;
+}
+a:hover .nav-icon--cv .nav-icon-line {
+    animation: navLineWrite 0.5s ease forwards;
+}
+a:hover .nav-icon--cv .nav-icon-line--2 { animation-delay: 0.08s; }
+a:hover .nav-icon--cv .nav-icon-line--3 { animation-delay: 0.16s; }
+
+@keyframes navLineWrite {
+    0%   { stroke-dashoffset: 8; }
+    100% { stroke-dashoffset: 0; }
+}
+
+/* Projects — the stack fans out */
+.nav-icon--projects .nav-icon-layer {
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+a:hover .nav-icon--projects .nav-icon-layer--back  { transform: translateY(-2.2px); }
+a:hover .nav-icon--projects .nav-icon-layer--front { transform: translateY(2.2px); }
+
+/* Resources — the compass needle sweeps and the dial breathes */
+.nav-icon--resources .nav-icon-needle {
+    transition: transform 0.6s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+.nav-icon--resources .nav-icon-dial {
+    transition: transform 0.35s ease;
+}
+a:hover .nav-icon--resources .nav-icon-needle {
+    transform: rotate(200deg);
+}
+a:hover .nav-icon--resources .nav-icon-dial {
+    transform: scale(1.06);
+}
+
+/* Contact — the envelope flap opens */
+.nav-icon--contact .nav-icon-flap {
+    transition: transform 0.35s ease;
+}
+.nav-icon--contact .nav-icon-envelope {
+    transition: transform 0.35s ease;
+}
+a:hover .nav-icon--contact .nav-icon-flap {
+    transform: translateY(-2.5px) scaleY(0.55);
+}
+a:hover .nav-icon--contact .nav-icon-envelope {
+    transform: translateY(0.8px);
+}
+
+body.terminal-mode .nav-icon {
+    stroke: #138A36 !important;
+}
+
+/* ==========================================================================
+   AGIRISK SHOWCASE
+   ========================================================================== */
+
+.agirisk-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.agirisk-modal[hidden] {
+    display: none;
+}
+
+.agirisk-modal.is-open {
+    opacity: 1;
+}
+
+/* Single IGN WMS render, slowly drifting to feel alive */
+.agirisk-map {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: #eef3f7;
+    animation: agiriskDrift 40s ease-in-out infinite alternate;
+}
+
+.agirisk-map img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    opacity: 0;
+    filter: saturate(0.88);
+    transition: opacity 0.8s ease;
+}
+
+.agirisk-map img.is-loaded {
+    opacity: 1;
+}
+
+@keyframes agiriskDrift {
+    from { transform: scale(1.06) translate(-1.2%, -1%); }
+    to   { transform: scale(1.12) translate(1.2%, 1%); }
+}
+
+/* Light wash plus a vignette; the map stays readable across the whole frame */
+.agirisk-scrim {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(rgba(255, 254, 250, 0.26), rgba(255, 254, 250, 0.26)),
+        radial-gradient(circle at 50% 50%,
+            rgba(16, 28, 48, 0) 40%,
+            rgba(16, 28, 48, 0.32) 100%);
+}
+
+.agirisk-panel {
+    position: relative;
+    text-align: center;
+    padding: 36px 44px 42px;
+    transform: translateY(14px) scale(0.97);
+    opacity: 0;
+    transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1), opacity 0.5s ease;
+}
+
+/* Halo sized from the panel box, so it hugs the content on any viewport */
+.agirisk-panel::before {
+    content: '';
+    position: absolute;
+    inset: -14% -10%;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(ellipse at center,
+        rgba(255, 254, 250, 0.97) 0%,
+        rgba(255, 254, 250, 0.93) 42%,
+        rgba(255, 254, 250, 0.55) 68%,
+        rgba(255, 254, 250, 0) 100%);
+}
+
+.agirisk-modal.is-open .agirisk-panel {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+    transition-delay: 0.1s;
+}
+
+.agirisk-logo {
+    width: min(460px, 74vw);
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    filter: drop-shadow(0 18px 40px rgba(15, 30, 60, 0.28));
+}
+
+.agirisk-title {
+    margin: 26px 0 6px;
+    font-size: clamp(20px, 3.2vw, 30px);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #1c2b4a;
+}
+
+.agirisk-subtitle {
+    margin: 0;
+    font-size: clamp(13px, 1.6vw, 16px);
+    font-style: italic;
+    color: #3c4a66;
+}
+
+.agirisk-close {
+    position: absolute;
+    top: 22px;
+    right: 26px;
+    width: 46px;
+    height: 46px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 254, 250, 0.9);
+    color: #1c2b4a;
+    font-size: 30px;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+    transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+.agirisk-close:hover {
+    transform: rotate(90deg) scale(1.08);
+    background: #fffefa;
+}
+
+.agirisk-attribution {
+    position: absolute;
+    bottom: 14px;
+    right: 18px;
+    margin: 0;
+    padding: 5px 11px;
+    border-radius: 999px;
+    background: rgba(16, 28, 48, 0.62);
+    font-size: 11px;
+    letter-spacing: 0.2px;
+    color: rgba(255, 255, 255, 0.92);
+}
+
+body.agirisk-open {
+    overflow: hidden;
+}
+
+/* The pointer trail sits above everything, so it steps aside for the showcase */
+body.agirisk-open .circle,
+body.agirisk-open .inverseur-circle,
+body.agirisk-open .cursor-center {
+    display: none !important;
+}
+
+@media (max-width: 768px) {
+    .agirisk-panel {
+        padding: 28px 26px 32px;
+    }
+
+    .agirisk-close {
+        top: 14px;
+        right: 14px;
+        width: 40px;
+        height: 40px;
+        font-size: 26px;
+    }
+
+    .agirisk-attribution {
+        left: 12px;
+        right: 12px;
+        text-align: center;
+        font-size: 10px;
+    }
+}
+
+/* ==========================================================================
+   MOTION PREFERENCES
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .circle,
+    .inverseur-circle,
+    .cursor-center {
+        display: none !important;
+    }
 }
 

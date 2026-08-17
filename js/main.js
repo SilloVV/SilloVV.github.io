@@ -499,121 +499,132 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// Mouse animation 
-const coords = { x: 0, y: 0 };
-const circles = document.querySelectorAll(".circle");
+// ============== CUSTOM CURSOR ==============
+// Everything that follows the pointer runs in a single rAF loop and writes only
+// to `transform`, so the browser stays on the compositor and skips layout.
+(function initCursorEffects() {
+    const canHover = window.matchMedia('(pointer: fine)').matches;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!canHover || reducedMotion) return;
 
-const colors = [
-     "var(--bg)", "var(--bg-alt)"
-];
+    const coords = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+    const circles = Array.from(document.querySelectorAll('.circle'));
+    const inverseurCircle = document.querySelector('.inverseur-circle');
+    const cursorCenter = document.querySelector('.cursor-center');
+    const heroName = document.querySelector('.hero-name');
+    const nomElement = document.getElementById('nom');
+    const sillowElement = document.getElementById('sillow');
 
-circles.forEach(function (circle, index) {
-  circle.x = 0;
-  circle.y = 0;
-  circle.style.backgroundColor = colors[index % colors.length];
-});
+    const colors = ['var(--bg)', 'var(--bg-alt)'];
+    const trail = circles.map((circle, index) => {
+        circle.style.backgroundColor = colors[index % colors.length];
+        circle.style.willChange = 'transform';
+        return { el: circle, x: coords.x, y: coords.y, scale: (circles.length - index) / circles.length };
+    });
 
-window.addEventListener("mousemove", function(e){
-  coords.x = e.clientX;
-  coords.y = e.clientY;
-  
-});
+    // Radius of the reveal lens, matched to .inverseur-circle
+    const LENS_RADIUS = 50;
 
+    // getBoundingClientRect() forces layout, so the hero rect is measured only
+    // when something can actually have moved it.
+    let heroRect = null;
+    let heroRectStale = true;
+    const invalidateHeroRect = () => { heroRectStale = true; };
+    window.addEventListener('resize', invalidateHeroRect, { passive: true });
+    window.addEventListener('scroll', invalidateHeroRect, { passive: true });
 
-function animateCircles() {
-  
-  let x = coords.x;
-  let y = coords.y;
-  
-  circles.forEach(function (circle, index) {
-    circle.style.left = x - 12 + "px";
-    circle.style.top = y - 12 + "px";
-    
-    circle.style.scale = (circles.length - index) / circles.length;
-    
-    circle.x = x;
-    circle.y = y;
+    let lensActive = false;
+    let running = true;
 
-    const nextCircle = circles[index + 1] || circles[0];
-    x += (nextCircle.x - x) * 0.5;
-    y += (nextCircle.y - y) * 0.5;
-  });
- 
-  requestAnimationFrame(animateCircles);
-}
+    window.addEventListener('mousemove', (e) => {
+        coords.x = e.clientX;
+        coords.y = e.clientY;
+    }, { passive: true });
 
-animateCircles();
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            running = false;
+        } else if (!running) {
+            running = true;
+            requestAnimationFrame(frame);
+        }
+    });
 
-// Inverter circle animation
-const inverseurCircle = document.querySelector(".inverseur-circle");
+    // The typing animation below the name can reflow the hero, so the cached
+    // rect also expires on a slow timer rather than on explicit events only.
+    const RECT_TTL = 250;
+    let lastMeasure = 0;
 
-function animateInverseurCircle() {
-  if (inverseurCircle) {
-    inverseurCircle.style.left = coords.x - 50 + "px"; // Center the 100px circle
-    inverseurCircle.style.top = coords.y - 50 + "px";
-  }
-  requestAnimationFrame(animateInverseurCircle);
-}
+    function updateLens() {
+        if (!heroName || !nomElement || !sillowElement) return;
 
-// Central white point animation
-const cursorCenter = document.querySelector(".cursor-center");
+        const now = performance.now();
+        if (heroRectStale || !heroRect || now - lastMeasure > RECT_TTL) {
+            heroRect = heroName.getBoundingClientRect();
+            heroRectStale = false;
+            lastMeasure = now;
+        }
 
-function animateCursorCenter() {
-  if (cursorCenter) {
-    cursorCenter.style.left = coords.x - 2 + "px"; // Center the 4px point
-    cursorCenter.style.top = coords.y - 2 + "px";
-  }
-  requestAnimationFrame(animateCursorCenter);
-}
+        const overlaps =
+            heroRect.width > 0 &&
+            coords.x + LENS_RADIUS >= heroRect.left &&
+            coords.x - LENS_RADIUS <= heroRect.right &&
+            coords.y + LENS_RADIUS >= heroRect.top &&
+            coords.y - LENS_RADIUS <= heroRect.bottom;
 
-animateInverseurCircle();
-animateCursorCenter();
+        if (overlaps) {
+            const relativeX = coords.x - heroRect.left;
+            const relativeY = coords.y - heroRect.top;
+            const mask = `radial-gradient(circle ${LENS_RADIUS}px at ${relativeX}px ${relativeY}px, transparent 0%, transparent ${LENS_RADIUS}px, black ${LENS_RADIUS}px)`;
 
-// Hero name reveal effect - SilloVV appears where cursor is, Wassil NAKIB is masked
-const heroName = document.querySelector('.hero-name');
-const nomElement = document.getElementById('nom');
-const sillowElement = document.getElementById('sillow');
-
-// Circle radius for the reveal effect (matches inverseur-circle size)
-const circleRadius = 50;
-
-function updateHeroNameClipPath() {
-    if (!heroName || !nomElement || !sillowElement) return;
-
-    const rect = heroName.getBoundingClientRect();
-
-    // Check if the circle (not just center) overlaps with the hero-name area
-    // Expand detection by circleRadius in all directions
-    const isCircleOverHeroName = (
-        coords.x + circleRadius >= rect.left &&
-        coords.x - circleRadius <= rect.right &&
-        coords.y + circleRadius >= rect.top &&
-        coords.y - circleRadius <= rect.bottom
-    );
-
-    if (isCircleOverHeroName) {
-        // Calculate relative position within the hero-name element
-        const relativeX = coords.x - rect.left;
-        const relativeY = coords.y - rect.top;
-
-        // Update SilloVV clip-path to show a circle at cursor position
-        sillowElement.style.clipPath = `circle(${circleRadius}px at ${relativeX}px ${relativeY}px)`;
-
-        // Update Wassil NAKIB to hide content at cursor position using CSS mask
-        // We use a radial gradient mask: transparent inside circle, black (visible) outside
-        nomElement.style.maskImage = `radial-gradient(circle ${circleRadius}px at ${relativeX}px ${relativeY}px, transparent 0%, transparent ${circleRadius}px, black ${circleRadius}px)`;
-        nomElement.style.webkitMaskImage = `radial-gradient(circle ${circleRadius}px at ${relativeX}px ${relativeY}px, transparent 0%, transparent ${circleRadius}px, black ${circleRadius}px)`;
-    } else {
-        // Reset when cursor circle leaves the hero-name area
-        sillowElement.style.clipPath = 'circle(0px at 50% 50%)';
-        nomElement.style.maskImage = 'none';
-        nomElement.style.webkitMaskImage = 'none';
+            sillowElement.style.clipPath = `circle(${LENS_RADIUS}px at ${relativeX}px ${relativeY}px)`;
+            nomElement.style.maskImage = mask;
+            nomElement.style.webkitMaskImage = mask;
+            lensActive = true;
+        } else if (lensActive) {
+            // Only reset once on exit instead of on every idle frame
+            sillowElement.style.clipPath = 'circle(0px at 50% 50%)';
+            nomElement.style.maskImage = 'none';
+            nomElement.style.webkitMaskImage = 'none';
+            lensActive = false;
+        }
     }
 
-    requestAnimationFrame(updateHeroNameClipPath);
-}
+    function frame() {
+        if (!running) return;
 
-updateHeroNameClipPath();
+        let x = coords.x;
+        let y = coords.y;
+
+        for (let i = 0; i < trail.length; i++) {
+            const node = trail[i];
+            node.el.style.transform =
+                `translate3d(${x - 12}px, ${y - 12}px, 0) scale(${node.scale})`;
+            node.x = x;
+            node.y = y;
+
+            const next = trail[i + 1] || trail[0];
+            x += (next.x - x) * 0.5;
+            y += (next.y - y) * 0.5;
+        }
+
+        if (inverseurCircle) {
+            inverseurCircle.style.transform = `translate3d(${coords.x - 50}px, ${coords.y - 50}px, 0)`;
+        }
+        if (cursorCenter) {
+            cursorCenter.style.transform = `translate3d(${coords.x - 2}px, ${coords.y - 2}px, 0)`;
+        }
+
+        updateLens();
+        requestAnimationFrame(frame);
+    }
+
+    // The hero is revealed after the loading screen, so re-measure once it lands
+    window.addEventListener('load', invalidateHeroRect);
+    setTimeout(invalidateHeroRect, 1500);
+
+    requestAnimationFrame(frame);
+})();
 
 // redirection au clic
 document.addEventListener('DOMContentLoaded', () => {
@@ -681,6 +692,126 @@ function closeProjectPreview(previewId) {
         }
     }
 }
+
+// ============== AGIRISK SHOWCASE ==============
+// Opens the borderless AgiRisk logo over an IGN "Plan IGN v2" backdrop.
+// The backdrop is a single WMS GetMap call sized to the viewport rather than a
+// tile grid, so the whole thing costs one request and only on first open.
+(function initAgiRiskShowcase() {
+    const GEOPLATEFORME_WMS = 'https://data.geopf.fr/wms-r/wms';
+    // Moselle valley north of Nancy: a flood-prone corridor, on theme for AgiRisk.
+    const CENTER = { lon: 6.1096, lat: 48.8340 };
+    const SPAN_METERS = 26000;
+    // The WMS renders on demand and a cold request costs several seconds, so we
+    // keep the raster small and start fetching before the click lands.
+    const MAX_PIXELS = 1280;
+
+    const trigger = document.getElementById('agirisk-trigger');
+    const modal = document.getElementById('agirisk-modal');
+    const closeBtn = document.getElementById('agirisk-close');
+    const mapHost = document.getElementById('agirisk-map');
+    if (!trigger || !modal || !closeBtn || !mapHost) return;
+
+    let mapLoaded = false;
+    let lastFocused = null;
+
+    // WGS84 -> Web Mercator (EPSG:3857)
+    function toMercator(lon, lat) {
+        const R = 6378137;
+        return {
+            x: (lon * Math.PI / 180) * R,
+            y: Math.log(Math.tan(Math.PI / 4 + (lat * Math.PI / 360))) * R
+        };
+    }
+
+    function buildMapUrl() {
+        const ratio = window.innerWidth / window.innerHeight;
+        const scale = Math.min(1, MAX_PIXELS / Math.max(window.innerWidth, window.innerHeight));
+        const width = Math.round(window.innerWidth * scale);
+        const height = Math.round(window.innerHeight * scale);
+
+        const center = toMercator(CENTER.lon, CENTER.lat);
+        const halfHeight = SPAN_METERS / 2;
+        const halfWidth = halfHeight * ratio;
+
+        const params = new URLSearchParams({
+            SERVICE: 'WMS',
+            VERSION: '1.3.0',
+            REQUEST: 'GetMap',
+            LAYERS: 'GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2',
+            STYLES: '',
+            CRS: 'EPSG:3857',
+            BBOX: [
+                center.x - halfWidth,
+                center.y - halfHeight,
+                center.x + halfWidth,
+                center.y + halfHeight
+            ].map(v => v.toFixed(1)).join(','),
+            WIDTH: String(width),
+            HEIGHT: String(height),
+            FORMAT: 'image/jpeg'
+        });
+
+        return `${GEOPLATEFORME_WMS}?${params.toString()}`;
+    }
+
+    function loadMap() {
+        if (mapLoaded) return;
+        mapLoaded = true;
+
+        const img = new Image();
+        img.alt = '';
+        img.decoding = 'async';
+        img.addEventListener('load', () => img.classList.add('is-loaded'), { once: true });
+        img.addEventListener('error', () => {
+            // Without the map the scrim alone still reads fine, so just drop it.
+            img.remove();
+            mapLoaded = false;
+        }, { once: true });
+        img.src = buildMapUrl();
+        mapHost.appendChild(img);
+    }
+
+    function open() {
+        lastFocused = document.activeElement;
+        loadMap();
+        modal.hidden = false;
+        document.body.classList.add('agirisk-open');
+        requestAnimationFrame(() => modal.classList.add('is-open'));
+        closeBtn.focus();
+    }
+
+    function close() {
+        modal.classList.remove('is-open');
+        document.body.classList.remove('agirisk-open');
+        setTimeout(() => { modal.hidden = true; }, 400);
+        if (lastFocused) lastFocused.focus();
+    }
+
+    const isOpen = () => !modal.hidden;
+
+    trigger.addEventListener('click', open);
+    closeBtn.addEventListener('click', close);
+
+    // Warm the backdrop as soon as the user shows intent
+    trigger.addEventListener('pointerenter', loadMap, { once: true });
+    trigger.addEventListener('focus', loadMap, { once: true });
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal || e.target === mapHost || e.target.classList.contains('agirisk-scrim')) {
+            close();
+        }
+    });
+
+    // Capture phase so Escape closes the modal before the terminal-mode handler
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isOpen()) {
+            e.preventDefault();
+            e.stopPropagation();
+            close();
+        }
+    }, true);
+})();
 
 // ============== EASTER EGGS ==============
 

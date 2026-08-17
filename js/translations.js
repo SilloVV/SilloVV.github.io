@@ -37,11 +37,19 @@ const translations = {
         "cv-projects-title": "Projects",
 
         // CV Profile
-        "cv-profile-text": "DevOps and AI Software Engineer with a strong focus on building <span class=\"highlight\">sustainable, production-grade architectures</span>. My background spans Linux administration, Data Engineering, and AI Agent development. I am deeply interested in software design patterns and best practices that ensure long-term system maintainability. Currently preparing for the <span class=\"highlight\">AWS Solutions Architect Associate</span> certification, I am eager to leverage my Python/ Shell expertise and DevOps experience to build scalable, high-performance solutions in a Cloud-native environment.",
+        "cv-profile-text": "DevOps and AI Software Engineer currently working as <span class=\"highlight\">Freelance Development Manager for AgiRisk at Cerema</span>, a flood-risk prevention platform. My background spans Linux administration, Data Engineering, AI Agent development and the delivery of <span class=\"highlight\">sustainable, production-grade architectures</span>. I apply software design patterns and engineering best practices to build scalable, reliable and maintainable Cloud-native solutions.",
+
+        // CV Experience - Cerema / AgiRisk
+        "exp0-title": "Cerema – Freelance Development Manager, AgiRisk",
+        "exp0-duration": "March 2026 - Present · 5 months",
+        "exp0-li1": "<strong>Development leadership:</strong> Led the development of AgiRisk, a flood-risk prevention and territorial resilience platform.",
+        "exp0-li2": "<strong>Technical delivery:</strong> Coordinated product requirements, technical design and implementation to deliver a reliable, maintainable platform.",
+        "exp0-li3": "<strong>Stakeholder coordination:</strong> Worked with Cerema experts and project stakeholders to translate flood-prevention needs into actionable features.",
+        "exp0-li4": "<strong>Public-interest impact:</strong> Contributed to improving risk awareness and decision support for territories exposed to flooding.",
 
         // CV Experience - HermineIA Data Engineer
         "exp1-title": "HermineIA – Freelance Data Engineer",
-        "exp1-duration": "December 2025 - January 2025",
+        "exp1-duration": "December 2025 - January 2026",
         "exp1-li1": "<strong>Automated ETL Workflow:</strong> Engineered documented Python/SQL scripts to analyze, normalize, and migrate legacy customer databases, ensuring data integrity.",
         "exp1-li2": "<strong>Collaborative Data Mapping:</strong> Translated business needs into visual specifications (Excalidraw/Excel) through iterative reviews with stakeholders.",
         "exp1-li3": "<strong>Client Management:</strong> Supervised the entire project lifecycle, from administrative setup to delivery, ensuring transparency via bi-weekly reporting.",
@@ -456,11 +464,19 @@ const translations = {
         "cv-projects-title": "Projets",
 
         // CV Profile
-        "cv-profile-text": "Ingénieur DevOps et IA avec une forte orientation vers la construction d'<span class=\"highlight\">architectures durables et de qualité production</span>. Mon parcours couvre l'administration Linux, l'ingénierie de données et le développement d'agents IA. Je porte un intérêt profond aux design patterns et aux meilleures pratiques garantissant la maintenabilité à long terme des systèmes. Actuellement en préparation de la certification <span class=\"highlight\">AWS Solutions Architect Associate</span>, je souhaite exploiter mon expertise Python/Shell et mon expérience DevOps pour bâtir des solutions évolutives et performantes dans des environnements Cloud-native.",
+        "cv-profile-text": "Ingénieur DevOps et IA, actuellement <span class=\"highlight\">Responsable de développement freelance d'AgiRisk au Cerema</span>, une plateforme de prévention du risque inondation. Mon parcours couvre l'administration Linux, l'ingénierie de données, le développement d'agents IA et la livraison d'<span class=\"highlight\">architectures durables et de qualité production</span>. J'applique les design patterns et les meilleures pratiques d'ingénierie pour bâtir des solutions Cloud-native évolutives, fiables et maintenables.",
+
+        // CV Experience - Cerema / AgiRisk
+        "exp0-title": "Cerema – Responsable de développement freelance, AgiRisk",
+        "exp0-duration": "Mars 2026 - Aujourd'hui · 5 mois",
+        "exp0-li1": "<strong>Pilotage du développement :</strong> Direction du développement d'AgiRisk, une plateforme de prévention du risque inondation et de résilience territoriale.",
+        "exp0-li2": "<strong>Livraison technique :</strong> Coordination des besoins produit, de la conception technique et de l'implémentation afin de livrer une plateforme fiable et maintenable.",
+        "exp0-li3": "<strong>Coordination des parties prenantes :</strong> Collaboration avec les experts du Cerema et les acteurs du projet pour transformer les besoins de prévention des inondations en fonctionnalités concrètes.",
+        "exp0-li4": "<strong>Impact d'intérêt public :</strong> Contribution à l'amélioration de la sensibilisation au risque et de l'aide à la décision pour les territoires exposés aux inondations.",
 
         // CV Experience - HermineIA Data Engineer
         "exp1-title": "HermineIA – Data Engineer Freelance",
-        "exp1-duration": "Décembre 2025 - Janvier 2025",
+        "exp1-duration": "Décembre 2025 - Janvier 2026",
         "exp1-li1": "<strong>Automatisation ETL :</strong> Conception de scripts Python/SQL documentés pour analyser, normaliser et migrer des bases de données clients, garantissant l'intégrité des données.",
         "exp1-li2": "<strong>Cartographie collaborative :</strong> Traduction des besoins métier en spécifications visuelles (Excalidraw/Excel) via des revues itératives avec les parties prenantes.",
         "exp1-li3": "<strong>Gestion de clientèle :</strong> Supervision du cycle de vie complet du projet, de la mise en place administrative à la livraison, assurant la transparence via des rapports bi-hebdomadaires.",
@@ -934,47 +950,22 @@ function applyTranslations() {
 
     // CV Experiences
     const experiences = document.querySelectorAll('.cv-experience');
-    if (experiences.length >= 3) {
-        // Experience 1 - HermineIA Data Engineer
-        const exp1Title = experiences[0].querySelector('h4');
-        const exp1Duration = experiences[0].querySelector('.cv-duration');
-        const exp1Items = experiences[0].querySelectorAll('li');
-        if (exp1Title) exp1Title.textContent = t['exp1-title'];
-        if (exp1Duration) exp1Duration.textContent = t['exp1-duration'];
-        if (exp1Items.length >= 4) {
-            exp1Items[0].innerHTML = t['exp1-li1'];
-            exp1Items[1].innerHTML = t['exp1-li2'];
-            exp1Items[2].innerHTML = t['exp1-li3'];
-            exp1Items[3].innerHTML = t['exp1-li4'];
-        }
+    const experienceKeys = ['exp0', 'exp1', 'exp2', 'exp3'];
+    experiences.forEach((experience, index) => {
+        const key = experienceKeys[index];
+        if (!key) return;
 
-        // Experience 2 - HermineIA AI Engineer
-        const exp2Title = experiences[1].querySelector('h4');
-        const exp2Duration = experiences[1].querySelector('.cv-duration');
-        const exp2Items = experiences[1].querySelectorAll('li');
-        if (exp2Title) exp2Title.textContent = t['exp2-title'];
-        if (exp2Duration) exp2Duration.textContent = t['exp2-duration'];
-        if (exp2Items.length >= 4) {
-            exp2Items[0].innerHTML = t['exp2-li1'];
-            exp2Items[1].innerHTML = t['exp2-li2'];
-            exp2Items[2].innerHTML = t['exp2-li3'];
-            exp2Items[3].innerHTML = t['exp2-li4'];
-        }
+        const title = experience.querySelector('h4');
+        const duration = experience.querySelector('.cv-duration');
+        const items = experience.querySelectorAll('li');
 
-        // Experience 3 - Equasens
-        const exp3Title = experiences[2].querySelector('h4');
-        const exp3Duration = experiences[2].querySelector('.cv-duration');
-        const exp3Items = experiences[2].querySelectorAll('li');
-        if (exp3Title) exp3Title.textContent = t['exp3-title'];
-        if (exp3Duration) exp3Duration.textContent = t['exp3-duration'];
-        if (exp3Items.length >= 5) {
-            exp3Items[0].innerHTML = t['exp3-li1'];
-            exp3Items[1].innerHTML = t['exp3-li2'];
-            exp3Items[2].innerHTML = t['exp3-li3'];
-            exp3Items[3].innerHTML = t['exp3-li4'];
-            exp3Items[4].innerHTML = t['exp3-li5'];
-        }
-    }
+        if (title) title.textContent = t[`${key}-title`];
+        if (duration) duration.textContent = t[`${key}-duration`];
+        items.forEach((item, itemIndex) => {
+            const translation = t[`${key}-li${itemIndex + 1}`];
+            if (translation) item.innerHTML = translation;
+        });
+    });
 
     // CV Education
     const educations = document.querySelectorAll('.cv-education');
