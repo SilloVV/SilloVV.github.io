@@ -704,9 +704,9 @@ function closeProjectPreview(previewId) {
         + '&LAYER={ignLayer}&STYLE=normal&TILEMATRIXSET=PM&FORMAT={ignFormat}'
         + '&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}';
 
-    // Moselle valley north of Nancy: a flood-prone corridor, on theme for AgiRisk
-    const CENTER = [48.834, 6.1096];
-    const ZOOM = 12;
+    // Deliberately a whole-country view: the map must not point anywhere personal
+    const CENTER = [46.6, 2.4];
+    const ZOOM = 6;
 
     const BASEMAPS = {
         plan: {
@@ -766,7 +766,7 @@ function closeProjectPreview(previewId) {
             ignLayer: config.ignLayer,
             ignFormat: config.ignFormat,
             attribution: config.attribution,
-            minZoom: 6,
+            minZoom: 5,
             maxZoom: 18,
             crossOrigin: true,
             // IGN answers 404 outside a layer's coverage; keep those gaps blank
@@ -789,16 +789,6 @@ function closeProjectPreview(previewId) {
         L.control.zoom({ position: 'bottomright' }).addTo(map);
         L.control.scale({ position: 'bottomleft', imperial: false }).addTo(map);
         map.attributionControl.setPrefix('');
-
-        // Marks the study area without hijacking clicks on the map
-        L.circle(CENTER, {
-            radius: 6000,
-            color: '#1c6ea4',
-            weight: 2,
-            fillColor: '#3d9bd6',
-            fillOpacity: 0.12,
-            interactive: false,
-        }).addTo(map);
 
         map.whenReady(() => {
             if (loader) loader.classList.add('is-done');
