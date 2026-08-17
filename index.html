@@ -26,6 +26,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <!-- IGN tiles are only fetched if the AgiRisk map is opened, so resolve early but don't connect -->
+    <link rel="dns-prefetch" href="https://data.geopf.fr">
 
     <link rel="stylesheet" href="/css/style.css">
 
@@ -1630,22 +1632,58 @@
     
     
     
-    <!-- AgiRisk showcase: transparent logo over an IGN "Plan IGN v2" map backdrop -->
+    <!-- AgiRisk showcase: a pannable IGN map with the project card floating over it -->
     <div class="agirisk-modal" id="agirisk-modal" role="dialog" aria-modal="true"
          aria-labelledby="agirisk-modal-title" hidden>
-        <div class="agirisk-map" id="agirisk-map" aria-hidden="true"></div>
-        <div class="agirisk-scrim"></div>
-        <button type="button" class="agirisk-close" id="agirisk-close" aria-label="Fermer">×</button>
-        <div class="agirisk-panel">
-            <picture>
-                <source srcset="assets/logos/AgiRisk.webp" type="image/webp">
-                <img src="assets/logos/AgiRisk.png" alt="Logo AgiRisk" class="agirisk-logo"
-                     width="637" height="286" decoding="async">
-            </picture>
-            <h2 class="agirisk-title" id="agirisk-modal-title">Responsable de développement</h2>
-            <p class="agirisk-subtitle">Plateforme d'évaluation du risque inondation — Cerema</p>
+        <div class="agirisk-map" id="agirisk-map"></div>
+
+        <div class="agirisk-loader" id="agirisk-loader">
+            <span class="agirisk-spinner" aria-hidden="true"></span>
+            <span>Chargement de la carte IGN…</span>
         </div>
-        <p class="agirisk-attribution">Fond de carte © IGN — Géoplateforme (Plan IGN v2)</p>
+
+        <div class="agirisk-toolbar">
+            <div class="agirisk-layers" role="group" aria-label="Fond de carte">
+                <button type="button" class="agirisk-layer-btn is-active" data-layer="plan" aria-pressed="true">Plan IGN</button>
+                <button type="button" class="agirisk-layer-btn" data-layer="ortho" aria-pressed="false">Satellite</button>
+            </div>
+            <button type="button" class="agirisk-icon-btn" id="agirisk-recenter" title="Recentrer la carte" aria-label="Recentrer la carte">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <circle cx="12" cy="12" r="4.2"/>
+                    <path d="M12 2.6v3.2M12 18.2v3.2M2.6 12h3.2M18.2 12h3.2"/>
+                </svg>
+            </button>
+            <button type="button" class="agirisk-icon-btn agirisk-close" id="agirisk-close" title="Fermer (Échap)" aria-label="Fermer">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="m6.5 6.5 11 11M17.5 6.5l-11 11"/>
+                </svg>
+            </button>
+        </div>
+
+        <aside class="agirisk-card" id="agirisk-card">
+            <div class="agirisk-card-body" id="agirisk-card-body">
+                <picture>
+                    <source srcset="assets/logos/AgiRisk.webp" type="image/webp">
+                    <img src="assets/logos/AgiRisk.png" alt="Logo AgiRisk" class="agirisk-logo"
+                         width="637" height="286" decoding="async">
+                </picture>
+                <h2 class="agirisk-title" id="agirisk-modal-title">Responsable de développement</h2>
+                <p class="agirisk-subtitle">Plateforme d'évaluation du risque inondation — Cerema</p>
+                <dl class="agirisk-meta">
+                    <div><dt>Rôle</dt><dd>Freelance · 5 mois</dd></div>
+                    <div><dt>Terrain</dt><dd>Vallée de la Moselle</dd></div>
+                </dl>
+            </div>
+            <button type="button" class="agirisk-card-toggle" id="agirisk-card-toggle"
+                    aria-expanded="true" aria-controls="agirisk-card-body">
+                <span class="agirisk-card-toggle-label">Masquer</span>
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="m7 10 5 5 5-5"/>
+                </svg>
+            </button>
+        </aside>
+
+        <p class="agirisk-hint" id="agirisk-hint">Glissez pour explorer · molette pour zoomer</p>
     </div>
 
     <div class="hover-image" id="hover-polytech">

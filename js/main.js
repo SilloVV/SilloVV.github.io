@@ -694,97 +694,168 @@ function closeProjectPreview(previewId) {
 }
 
 // ============== AGIRISK SHOWCASE ==============
-// Opens the borderless AgiRisk logo over an IGN "Plan IGN v2" backdrop.
-// The backdrop is a single WMS GetMap call sized to the viewport rather than a
-// tile grid, so the whole thing costs one request and only on first open.
+// A pannable IGN map with the project card floating above it. Leaflet and the
+// IGN tiles are fetched only when the user reaches for the logo, so the initial
+// page load is untouched.
 (function initAgiRiskShowcase() {
-    const GEOPLATEFORME_WMS = 'https://data.geopf.fr/wms-r/wms';
-    // Moselle valley north of Nancy: a flood-prone corridor, on theme for AgiRisk.
-    const CENTER = { lon: 6.1096, lat: 48.8340 };
-    const SPAN_METERS = 26000;
-    // The WMS renders on demand and a cold request costs several seconds, so we
-    // keep the raster small and start fetching before the click lands.
-    const MAX_PIXELS = 1280;
+    const LEAFLET_CSS = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+    const LEAFLET_JS = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+    const WMTS = 'https://data.geopf.fr/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0'
+        + '&LAYER={ignLayer}&STYLE=normal&TILEMATRIXSET=PM&FORMAT={ignFormat}'
+        + '&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}';
 
-    const trigger = document.getElementById('agirisk-trigger');
+    // Moselle valley north of Nancy: a flood-prone corridor, on theme for AgiRisk
+    const CENTER = [48.834, 6.1096];
+    const ZOOM = 12;
+
+    const BASEMAPS = {
+        plan: {
+            ignLayer: 'GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2',
+            ignFormat: 'image/png',
+            attribution: 'Plan IGN v2 &copy; IGN — Géoplateforme',
+        },
+        ortho: {
+            ignLayer: 'ORTHOIMAGERY.ORTHOPHOTOS',
+            ignFormat: 'image/jpeg',
+            attribution: 'Orthophotos &copy; IGN — Géoplateforme',
+        },
+    };
+
     const modal = document.getElementById('agirisk-modal');
+    const trigger = document.getElementById('agirisk-trigger');
     const closeBtn = document.getElementById('agirisk-close');
+    const recenterBtn = document.getElementById('agirisk-recenter');
     const mapHost = document.getElementById('agirisk-map');
-    if (!trigger || !modal || !closeBtn || !mapHost) return;
+    const loader = document.getElementById('agirisk-loader');
+    const hint = document.getElementById('agirisk-hint');
+    const card = document.getElementById('agirisk-card');
+    const cardToggle = document.getElementById('agirisk-card-toggle');
+    const layerButtons = Array.from(document.querySelectorAll('.agirisk-layer-btn'));
+    if (!modal || !trigger || !closeBtn || !mapHost) return;
 
-    let mapLoaded = false;
+    let leafletPromise = null;
+    let map = null;
+    let baseLayer = null;
+    let activeBasemap = 'plan';
     let lastFocused = null;
+    let hintTimer = null;
 
-    // WGS84 -> Web Mercator (EPSG:3857)
-    function toMercator(lon, lat) {
-        const R = 6378137;
-        return {
-            x: (lon * Math.PI / 180) * R,
-            y: Math.log(Math.tan(Math.PI / 4 + (lat * Math.PI / 360))) * R
-        };
+    function loadAsset(tag, attrs) {
+        return new Promise((resolve, reject) => {
+            const el = Object.assign(document.createElement(tag), attrs);
+            el.addEventListener('load', resolve, { once: true });
+            el.addEventListener('error', reject, { once: true });
+            document.head.appendChild(el);
+        });
     }
 
-    function buildMapUrl() {
-        const ratio = window.innerWidth / window.innerHeight;
-        const scale = Math.min(1, MAX_PIXELS / Math.max(window.innerWidth, window.innerHeight));
-        const width = Math.round(window.innerWidth * scale);
-        const height = Math.round(window.innerHeight * scale);
+    // Resolves once window.L is usable; reused across opens.
+    function loadLeaflet() {
+        if (!leafletPromise) {
+            leafletPromise = Promise.all([
+                loadAsset('link', { rel: 'stylesheet', href: LEAFLET_CSS, crossOrigin: 'anonymous' }),
+                loadAsset('script', { src: LEAFLET_JS, async: true, crossOrigin: 'anonymous' }),
+            ]).then(() => window.L);
+        }
+        return leafletPromise;
+    }
 
-        const center = toMercator(CENTER.lon, CENTER.lat);
-        const halfHeight = SPAN_METERS / 2;
-        const halfWidth = halfHeight * ratio;
+    function buildTileLayer(L, key) {
+        const config = BASEMAPS[key];
+        return L.tileLayer(WMTS, {
+            ignLayer: config.ignLayer,
+            ignFormat: config.ignFormat,
+            attribution: config.attribution,
+            minZoom: 6,
+            maxZoom: 18,
+            crossOrigin: true,
+            // IGN answers 404 outside a layer's coverage; keep those gaps blank
+            errorTileUrl: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
+        });
+    }
 
-        const params = new URLSearchParams({
-            SERVICE: 'WMS',
-            VERSION: '1.3.0',
-            REQUEST: 'GetMap',
-            LAYERS: 'GEOGRAPHICALGRIDSYSTEMS.PLANIGNV2',
-            STYLES: '',
-            CRS: 'EPSG:3857',
-            BBOX: [
-                center.x - halfWidth,
-                center.y - halfHeight,
-                center.x + halfWidth,
-                center.y + halfHeight
-            ].map(v => v.toFixed(1)).join(','),
-            WIDTH: String(width),
-            HEIGHT: String(height),
-            FORMAT: 'image/jpeg'
+    function buildMap(L) {
+        map = L.map(mapHost, {
+            center: CENTER,
+            zoom: ZOOM,
+            zoomControl: false,
+            attributionControl: true,
+            // The modal owns Escape, so Leaflet must not swallow it
+            keyboard: true,
         });
 
-        return `${GEOPLATEFORME_WMS}?${params.toString()}`;
+        baseLayer = buildTileLayer(L, activeBasemap).addTo(map);
+
+        L.control.zoom({ position: 'bottomright' }).addTo(map);
+        L.control.scale({ position: 'bottomleft', imperial: false }).addTo(map);
+        map.attributionControl.setPrefix('');
+
+        // Marks the study area without hijacking clicks on the map
+        L.circle(CENTER, {
+            radius: 6000,
+            color: '#1c6ea4',
+            weight: 2,
+            fillColor: '#3d9bd6',
+            fillOpacity: 0.12,
+            interactive: false,
+        }).addTo(map);
+
+        map.whenReady(() => {
+            if (loader) loader.classList.add('is-done');
+        });
     }
 
-    function loadMap() {
-        if (mapLoaded) return;
-        mapLoaded = true;
+    function switchBasemap(key) {
+        if (!map || key === activeBasemap || !BASEMAPS[key]) return;
+        activeBasemap = key;
 
-        const img = new Image();
-        img.alt = '';
-        img.decoding = 'async';
-        img.addEventListener('load', () => img.classList.add('is-loaded'), { once: true });
-        img.addEventListener('error', () => {
-            // Without the map the scrim alone still reads fine, so just drop it.
-            img.remove();
-            mapLoaded = false;
-        }, { once: true });
-        img.src = buildMapUrl();
-        mapHost.appendChild(img);
+        const next = buildTileLayer(window.L, key).addTo(map);
+        if (baseLayer) map.removeLayer(baseLayer);
+        baseLayer = next;
+
+        layerButtons.forEach((btn) => {
+            const isActive = btn.dataset.layer === key;
+            btn.classList.toggle('is-active', isActive);
+            btn.setAttribute('aria-pressed', String(isActive));
+        });
+        modal.classList.toggle('is-ortho', key === 'ortho');
     }
 
-    function open() {
+    function showHint() {
+        if (!hint) return;
+        const touch = window.matchMedia('(hover: none)').matches;
+        hint.textContent = touch
+            ? 'Glissez pour explorer · pincez pour zoomer'
+            : 'Glissez pour explorer · molette pour zoomer';
+        clearTimeout(hintTimer);
+        hint.classList.add('is-visible');
+        hintTimer = setTimeout(() => hint.classList.remove('is-visible'), 4200);
+    }
+
+    async function open() {
         lastFocused = document.activeElement;
-        loadMap();
         modal.hidden = false;
         document.body.classList.add('agirisk-open');
         requestAnimationFrame(() => modal.classList.add('is-open'));
         closeBtn.focus();
+
+        try {
+            const L = await loadLeaflet();
+            if (!map) buildMap(L);
+            // The container was display:none while Leaflet measured it
+            map.invalidateSize();
+            showHint();
+        } catch {
+            if (loader) loader.textContent = 'Carte IGN indisponible pour le moment.';
+        }
     }
 
     function close() {
         modal.classList.remove('is-open');
         document.body.classList.remove('agirisk-open');
-        setTimeout(() => { modal.hidden = true; }, 400);
+        clearTimeout(hintTimer);
+        if (hint) hint.classList.remove('is-visible');
+        setTimeout(() => { modal.hidden = true; }, 350);
         if (lastFocused) lastFocused.focus();
     }
 
@@ -793,15 +864,29 @@ function closeProjectPreview(previewId) {
     trigger.addEventListener('click', open);
     closeBtn.addEventListener('click', close);
 
-    // Warm the backdrop as soon as the user shows intent
-    trigger.addEventListener('pointerenter', loadMap, { once: true });
-    trigger.addEventListener('focus', loadMap, { once: true });
+    // Warm Leaflet and the first tiles as soon as the user shows intent
+    trigger.addEventListener('pointerenter', loadLeaflet, { once: true });
+    trigger.addEventListener('focus', loadLeaflet, { once: true });
 
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal || e.target === mapHost || e.target.classList.contains('agirisk-scrim')) {
-            close();
-        }
+    if (recenterBtn) {
+        recenterBtn.addEventListener('click', () => {
+            if (map) map.flyTo(CENTER, ZOOM, { duration: 0.8 });
+        });
+    }
+
+    layerButtons.forEach((btn) => {
+        btn.addEventListener('click', () => switchBasemap(btn.dataset.layer));
     });
+
+    if (cardToggle && card) {
+        cardToggle.addEventListener('click', () => {
+            const collapsed = card.classList.toggle('is-collapsed');
+            cardToggle.setAttribute('aria-expanded', String(!collapsed));
+            cardToggle.querySelector('.agirisk-card-toggle-label').textContent =
+                collapsed ? 'Détails' : 'Masquer';
+            if (map) setTimeout(() => map.invalidateSize(), 320);
+        });
+    }
 
     // Capture phase so Escape closes the modal before the terminal-mode handler
     document.addEventListener('keydown', (e) => {
@@ -811,6 +896,10 @@ function closeProjectPreview(previewId) {
             close();
         }
     }, true);
+
+    window.addEventListener('resize', () => {
+        if (map && isOpen()) map.invalidateSize();
+    }, { passive: true });
 })();
 
 // ============== EASTER EGGS ==============
