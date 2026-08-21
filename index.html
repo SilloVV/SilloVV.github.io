@@ -490,6 +490,7 @@
         <div class="projects-header">
             <h2>My Projects</h2>
             <p>Discover my technical achievements</p>
+            <div class="projects-header-glow" aria-hidden="true"></div>
         </div>
 
         <div class="project-section">
@@ -932,15 +933,20 @@
         <div id="closeb-about" class="closeb" onclick="closeCurrentSection()">×</div>
 
         <div class="about-inner">
-            <div class="propos">
-                <em>About me </em>
-            </div>
+            <header class="about-header">
+                <p class="about-eyebrow" data-i18n="about-eyebrow">The path so far</p>
+                <div class="propos"><em>About me </em></div>
+                <p class="about-lead" data-i18n="about-lead">Hover a name to peek behind the story.</p>
+            </header>
 
-            <div class="about-images-row" id="about-images-desktop">
-                <div class="about-img-placeholder" id="imga1"></div>
-                <div class="about-img-placeholder" id="imga2"></div>
-                <div class="about-img-placeholder" id="imga3"></div>
-            </div>
+            <nav class="about-milestones" aria-label="Milestones">
+                <button type="button" class="about-chip hover-word" data-image="polytech">Polytech Nancy</button>
+                <button type="button" class="about-chip hover-word" data-image="diplome">Double degree</button>
+                <button type="button" class="about-chip hover-word" data-image="hermine">HermineIA</button>
+                <button type="button" class="about-chip hover-word" data-image="stationf">STATION F</button>
+                <button type="button" class="about-chip hover-word" data-image="equasens">Equasens</button>
+                <button type="button" class="about-chip about-chip--now hover-word" data-image="agirisk">AgiRisk · Cerema</button>
+            </nav>
 
             <div class="about-text">
                 Passionate about Computer Science and building solutions to concrete problems, I have <strong>completed</strong> my Engineering degree at <span class="hover-word" data-image="polytech">Polytech Nancy</span> with a <span class="hover-word" data-image="diplome">double degree</span> in AI (Master II in Vision and Robotics).
@@ -1715,6 +1721,13 @@
             <source srcset="assets/about_me_images/equasens.webp" type="image/webp">
             <img src="assets/about_me_images/equasens.png" alt="Equasens" loading="lazy" decoding="async" width="1474" height="782">
         </picture>
+    </div>
+    <div class="hover-image hover-image--pair" id="hover-agirisk">
+        <picture>
+            <source srcset="assets/logos/AgiRisk.webp" type="image/webp">
+            <img src="assets/logos/AgiRisk.png" alt="Logo AgiRisk" loading="lazy" decoding="async" width="637" height="286">
+        </picture>
+        <img src="assets/logos/cerema_logo.svg" alt="Logo Cerema" loading="lazy" decoding="async" width="180" height="180">
     </div>
     
 </body>

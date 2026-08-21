@@ -17,6 +17,10 @@ const translations = {
 
         // About
         "about-title": "About me",
+        "about-eyebrow": "The path so far",
+        "about-lead": "Hover a name to peek behind the story.",
+        "about-chip-now": "AgiRisk · Cerema",
+        "about-chip-diplome": "Double degree",
         "about-text-1": "Passionate about artificial intelligence and DevOps, I have <strong>completed</strong> my Engineering degree at <span class=\"hover-word\" data-image=\"polytech\">Polytech Nancy</span> with a <span class=\"hover-word\" data-image=\"diplome\">double degree</span> in AI (Master II in Vision and Robotics).",
         "about-text-2": "After my experience at <span class=\"hover-word\" data-image=\"hermine\">HermineIA</span> at <span class=\"hover-word\" data-image=\"stationf\">STATION F</span> as Applied AI Engineer, I developed a multi-agent legal assistant and led ETL automation projects, achieving 90% time savings on client migrations.",
         "about-text-3": "My journey has taken me from creating monitoring tools at <span class=\"hover-word\" data-image=\"equasens\">Equasens</span> to architecting resilient agentic systems, through deep learning and MLOps projects. Currently preparing for the AWS Solutions Architect Associate certification.",
@@ -444,6 +448,10 @@ const translations = {
 
         // About
         "about-title": "À propos de moi",
+        "about-eyebrow": "Le parcours jusqu'ici",
+        "about-lead": "Survolez un nom pour voir l'image derrière l'histoire.",
+        "about-chip-now": "AgiRisk · Cerema",
+        "about-chip-diplome": "Double diplôme",
         "about-text-1": "Passionné d'informatique et de création et gestion de projets qui répondent à un problème concret , j'ai <strong>obtenu</strong> mon diplôme d'ingénieur à <span class=\"hover-word\" data-image=\"polytech\">Polytech Nancy</span> avec un <span class=\"hover-word\" data-image=\"diplome\">double diplôme</span> en IA (Master II Vision et Robotique).",
         "about-text-2": "Après mon expérience chez <span class=\"hover-word\" data-image=\"hermine\">HermineIA</span> à <span class=\"hover-word\" data-image=\"stationf\">STATION F</span>(incubateur de plus de 1000 start ups) en tant qu'Applied AI Engineer, j'ai développé un assistant juridique multi-agents et dirigé des projets d'automatisation ETL, réalisant 90% de gain de temps sur les migrations clients.",
         "about-text-3": "Mon parcours m'a mené de la création d'outils de monitoring chez <span class=\"hover-word\" data-image=\"equasens\">Equasens</span> à l'architecture de systèmes agentiques résilients, en passant par des projets de deep learning et MLOps. Actuellement en préparation de la certification AWS Solutions Architect Associate.",
@@ -904,6 +912,18 @@ function applyTranslations() {
     // About
     const aboutTitle = document.querySelector('.propos em');
     if (aboutTitle) aboutTitle.textContent = t['about-title'] + ' ';
+
+    const aboutEyebrow = document.querySelector('.about-eyebrow');
+    if (aboutEyebrow) aboutEyebrow.textContent = t['about-eyebrow'];
+
+    const aboutLead = document.querySelector('.about-lead');
+    if (aboutLead) aboutLead.textContent = t['about-lead'];
+
+    const aboutChipNow = document.querySelector('.about-chip--now');
+    if (aboutChipNow) aboutChipNow.textContent = t['about-chip-now'];
+
+    const aboutChipDiplome = document.querySelector('.about-chip[data-image="diplome"]');
+    if (aboutChipDiplome) aboutChipDiplome.textContent = t['about-chip-diplome'];
 
     const aboutTexts = document.querySelectorAll('.about-text');
     if (aboutTexts.length > 0) {

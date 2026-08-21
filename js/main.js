@@ -153,6 +153,10 @@ class PageManager {
             if (typeof applyTranslations === 'function') {
                 applyTranslations();
             }
+
+            if (pageName === 'projects' && typeof window.revealProjectCards === 'function') {
+                window.revealProjectCards();
+            }
         }
     }
     
@@ -626,47 +630,124 @@ document.addEventListener('DOMContentLoaded', () => {
     requestAnimationFrame(frame);
 })();
 
-// redirection au clic
+// redirection au clic + tilt réactif sur les cartes projets
 document.addEventListener('DOMContentLoaded', () => {
-    // Sélectionne toutes les cartes qui ont un lien défini
-    const projectCards = document.querySelectorAll('.project-card[data-url]');
-    
+    const projectCards = document.querySelectorAll('.project-card');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     projectCards.forEach(card => {
         card.addEventListener('click', (e) => {
-            // Empêche la propagation si tu as d'autres éléments interactifs dedans
-            e.preventDefault(); 
-            
+            e.preventDefault();
             const url = card.getAttribute('data-url');
-            
-            // Ouvre dans un nouvel onglet
-            if (url) {
-                window.open(url, '_blank');
+            if (url) window.open(url, '_blank');
+        });
+
+        if (reduceMotion) return;
+
+        let frame = 0;
+        let targetX = 0;
+        let targetY = 0;
+        let curX = 0;
+        let curY = 0;
+        let hovering = false;
+
+        const tick = () => {
+            // Light lerp keeps it smooth without feeling laggy
+            curX += (targetX - curX) * 0.28;
+            curY += (targetY - curY) * 0.28;
+            const ry = curX * 11;
+            const rx = -curY * 9;
+            const lift = hovering ? -6 : 0;
+            card.style.transform =
+                `perspective(900px) translate3d(0, ${lift}px, 0) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg)`;
+            card.style.setProperty('--mx', `${50 + curX * 50}%`);
+            card.style.setProperty('--my', `${50 + curY * 50}%`);
+            if (hovering || Math.abs(curX) > 0.002 || Math.abs(curY) > 0.002) {
+                frame = requestAnimationFrame(tick);
+            } else {
+                frame = 0;
+                card.style.transform = '';
+                card.classList.remove('is-live');
             }
+        };
+
+        card.addEventListener('pointerenter', () => {
+            hovering = true;
+            card.classList.add('is-live');
+            if (!frame) frame = requestAnimationFrame(tick);
+        });
+
+        card.addEventListener('pointermove', (e) => {
+            const rect = card.getBoundingClientRect();
+            targetX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+            targetY = ((e.clientY - rect.top) / rect.height) * 2 - 1;
+            // Clamp so edges don't exaggerate
+            targetX = Math.max(-1, Math.min(1, targetX));
+            targetY = Math.max(-1, Math.min(1, targetY));
+            if (!frame) frame = requestAnimationFrame(tick);
+        });
+
+        card.addEventListener('pointerleave', () => {
+            hovering = false;
+            targetX = 0;
+            targetY = 0;
+            if (!frame) frame = requestAnimationFrame(tick);
         });
     });
+
+    window.revealProjectCards = function revealProjectCards() {
+        const cards = document.querySelectorAll('#projectwrapper .project-card');
+        cards.forEach((card) => {
+            card.classList.remove('is-visible', 'is-live');
+            card.style.transform = '';
+        });
+        requestAnimationFrame(() => {
+            cards.forEach((card, i) => {
+                setTimeout(() => card.classList.add('is-visible'), 20 + i * 45);
+            });
+        });
+    };
 });
-    
-    
-    
-    // Hover management for keywords
-    const hoverWords = document.querySelectorAll('.hover-word');
-    
-    hoverWords.forEach(word => {
-        const imageId = word.getAttribute('data-image');
-        const imageElement = document.getElementById(`hover-${imageId}`);
-        
-        if (imageElement) {
-            word.addEventListener('mouseenter', () => {
-                imageElement.style.opacity = '1';
-                imageElement.style.visibility = 'visible';
-            });
-            
-            word.addEventListener('mouseleave', () => {
-                imageElement.style.opacity = '0';
-                imageElement.style.visibility = 'hidden';
-            });
+
+// Hover images: event delegation so translations can rewrite the About text
+(function initHoverWords() {
+    let activeImage = null;
+
+    function showImage(id) {
+        const next = document.getElementById(`hover-${id}`);
+        if (!next) return;
+        if (activeImage && activeImage !== next) {
+            activeImage.classList.remove('is-shown');
         }
+        next.classList.add('is-shown');
+        activeImage = next;
+    }
+
+    function hideImage() {
+        if (!activeImage) return;
+        activeImage.classList.remove('is-shown');
+        activeImage = null;
+    }
+
+    document.addEventListener('pointerover', (e) => {
+        const word = e.target.closest('.hover-word');
+        if (!word) return;
+        const imageId = word.getAttribute('data-image');
+        if (imageId) showImage(imageId);
     });
+
+    document.addEventListener('pointerout', (e) => {
+        const word = e.target.closest('.hover-word');
+        if (!word) return;
+        const related = e.relatedTarget && e.relatedTarget.closest
+            ? e.relatedTarget.closest('.hover-word')
+            : null;
+        if (related && related.getAttribute('data-image') === word.getAttribute('data-image')) {
+            return;
+        }
+        hideImage();
+    });
+})();
 
 
 // Function to close project previews
